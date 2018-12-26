@@ -269,5 +269,147 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.Throws<ArgumentNullException>(() => missing.HasClass(""));
         }
+
+        [Fact]
+        public async Task IsVisible_should_return_true_if_the_element_is_visible()
+        {
+            await Page.SetContentAsync("<html><body><div id='foo'>Foo</div><div id='bar' style='display:none'>Bar</div><div id='baz' style='visibility:hidden'>Baz</div></body></html>");
+
+            var div = await Page.QuerySelectorAsync("#foo");
+            Assert.True(await div.IsVisibleAsync());
+
+            div = await Page.QuerySelectorAsync("#bar");
+            Assert.False(div.IsVisible());
+
+            Assert.True(Page.QuerySelectorAsync("#baz").IsVisible()); // according to the jQuery implementation
+
+            var missing = await Page.QuerySelectorAsync(".missing");
+            Assert.Throws<ArgumentNullException>(() => missing.IsVisible());
+        }
+
+        [Fact]
+        public async Task IsHidden_should_return_false_if_the_element_is_visible()
+        {
+            await Page.SetContentAsync("<html><body><div id='foo'>Foo</div><div id='bar' style='display:none'>Bar</div><div id='baz' style='visibility:hidden'>Baz</div></body></html>");
+
+            var div = await Page.QuerySelectorAsync("#foo");
+            Assert.False(await div.IsHiddenAsync());
+
+            div = await Page.QuerySelectorAsync("#bar");
+            Assert.True(div.IsHidden());
+
+            Assert.False(Page.QuerySelectorAsync("#baz").IsHidden()); // according to the jQuery implementation
+
+            var missing = await Page.QuerySelectorAsync(".missing");
+            Assert.Throws<ArgumentNullException>(() => missing.IsHidden());
+        }
+
+        [Fact]
+        public async Task IsSelected_should_return_true_if_the_element_is_selected()
+        {
+            await Page.SetContentAsync("<html><body><select><option id='foo'>Foo</option><option id='bar'>Bar</option><option id='baz'>Baz</option></select></body></html>");
+
+            var option = await Page.QuerySelectorAsync("#foo");
+            Assert.True(await option.IsSelectedAsync());
+
+            await Page.SelectAsync("select", "Bar");
+            option = await Page.QuerySelectorAsync("#bar");
+            Assert.True(option.IsSelected());
+
+            Assert.False(Page.QuerySelectorAsync("#baz").IsSelected());
+
+            var missing = await Page.QuerySelectorAsync(".missing");
+            Assert.Throws<ArgumentNullException>(() => missing.IsSelected());
+        }
+
+        [Fact]
+        public async Task IsChecked_should_return_true_if_the_element_is_checked()
+        {
+            await Page.SetContentAsync("<html><body><input type='checkbox' id='foo' checked><input type='checkbox' id='bar'><input type='checkbox' id='baz'></body></html>");
+
+            var input = await Page.QuerySelectorAsync("#foo");
+            Assert.True(await input.IsCheckedAsync());
+
+            await Page.ClickAsync("#bar");
+            input = await Page.QuerySelectorAsync("#bar");
+            Assert.True(input.IsChecked());
+
+            Assert.False(Page.QuerySelectorAsync("#baz").IsChecked());
+
+            var missing = await Page.QuerySelectorAsync(".missing");
+            Assert.Throws<ArgumentNullException>(() => missing.IsChecked());
+        }
+
+        [Fact]
+        public async Task IsDisabled_should_return_true_if_the_element_is_disabled()
+        {
+            await Page.SetContentAsync("<html><body><input id='foo' disabled><input id='bar'><input id='baz'></body></html>");
+
+            var input = await Page.QuerySelectorAsync("#foo");
+            Assert.True(await input.IsDisabledAsync());
+
+            await Page.EvaluateExpressionAsync("document.getElementById('bar').disabled = true");
+            input = await Page.QuerySelectorAsync("#bar");
+            Assert.True(input.IsDisabled());
+
+            Assert.False(Page.QuerySelectorAsync("#baz").IsDisabled());
+
+            var missing = await Page.QuerySelectorAsync(".missing");
+            Assert.Throws<ArgumentNullException>(() => missing.IsDisabled());
+        }
+
+        [Fact]
+        public async Task IsEnabled_should_return_false_if_the_element_is_disabled()
+        {
+            await Page.SetContentAsync("<html><body><input id='foo' disabled><input id='bar'><input id='baz'></body></html>");
+
+            var input = await Page.QuerySelectorAsync("#foo");
+            Assert.False(await input.IsEnabledAsync());
+
+            await Page.EvaluateExpressionAsync("document.getElementById('bar').disabled = true");
+            input = await Page.QuerySelectorAsync("#bar");
+            Assert.False(input.IsEnabled());
+
+            Assert.True(Page.QuerySelectorAsync("#baz").IsEnabled());
+
+            var missing = await Page.QuerySelectorAsync(".missing");
+            Assert.Throws<ArgumentNullException>(() => missing.IsEnabled());
+        }
+
+        [Fact]
+        public async Task IsReadOnly_should_return_true_if_the_element_is_readonly()
+        {
+            await Page.SetContentAsync("<html><body><input id='foo' readonly><input id='bar'><input id='baz'></body></html>");
+
+            var input = await Page.QuerySelectorAsync("#foo");
+            Assert.True(await input.IsReadOnlyAsync());
+
+            await Page.EvaluateExpressionAsync("document.getElementById('bar').readOnly = true");
+            input = await Page.QuerySelectorAsync("#bar");
+            Assert.True(input.IsReadOnly());
+
+            Assert.False(Page.QuerySelectorAsync("#baz").IsReadOnly());
+
+            var missing = await Page.QuerySelectorAsync(".missing");
+            Assert.Throws<ArgumentNullException>(() => missing.IsReadOnly());
+        }
+
+        [Fact]
+        public async Task HasFocus_should_return_true_if_the_element_has_focus()
+        {
+            await Page.SetContentAsync("<html><body><input id='foo' autofocus><input id='bar'><input id='baz'></body></html>");
+
+            var input = await Page.QuerySelectorAsync("#foo");
+            Assert.True(await input.HasFocusAsync());
+
+            await Page.FocusAsync("#bar");
+            input = await Page.QuerySelectorAsync("#bar");
+            Assert.True(input.HasFocus());
+
+            Assert.False(Page.QuerySelectorAsync("#baz").HasFocus());
+
+            var missing = await Page.QuerySelectorAsync(".missing");
+            Assert.Throws<ArgumentNullException>(() => missing.HasFocus());
+        }
     }
 }
