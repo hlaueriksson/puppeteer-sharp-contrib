@@ -5,8 +5,8 @@ namespace PuppeteerSharp.Contrib.Tests.Base
 {
     public abstract class PuppeteerPageBaseTest : IAsyncLifetime
     {
-        public Browser Browser { get; private set; }
-        public Page Page { get; private set; }
+        protected Browser Browser { get; private set; }
+        protected Page Page { get; private set; }
 
         public async Task InitializeAsync()
         {
