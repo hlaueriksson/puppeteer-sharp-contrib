@@ -3,11 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PuppeteerSharp.Contrib.Extensions", "src\PuppeteerSharp.Contrib.Extensions\PuppeteerSharp.Contrib.Extensions.csproj", "{452159CF-A71D-4405-8C4F-B5ED011D9F0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PuppeteerSharp.Contrib.Extensions", "src\PuppeteerSharp.Contrib.Extensions\PuppeteerSharp.Contrib.Extensions.csproj", "{452159CF-A71D-4405-8C4F-B5ED011D9F0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PuppeteerSharp.Contrib.Should", "src\PuppeteerSharp.Contrib.Should\PuppeteerSharp.Contrib.Should.csproj", "{38662FAC-F369-4A38-8CA4-8182535E06AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PuppeteerSharp.Contrib.Should", "src\PuppeteerSharp.Contrib.Should\PuppeteerSharp.Contrib.Should.csproj", "{38662FAC-F369-4A38-8CA4-8182535E06AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PuppeteerSharp.Contrib.Tests", "tests\PuppeteerSharp.Contrib.Tests\PuppeteerSharp.Contrib.Tests.csproj", "{ADE33EEE-E1F1-4C3C-AB9E-CE4023DF57B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PuppeteerSharp.Contrib.Tests", "tests\PuppeteerSharp.Contrib.Tests\PuppeteerSharp.Contrib.Tests.csproj", "{ADE33EEE-E1F1-4C3C-AB9E-CE4023DF57B7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{A41500E2-A20C-4532-909F-47A7ECD03D8B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{768BB21B-525A-4D0F-BBA1-7C39BFDD6E44}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A5904D6A-FD9D-4BCB-B9B1-C4BF5D2A4105}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +36,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{452159CF-A71D-4405-8C4F-B5ED011D9F0E} = {768BB21B-525A-4D0F-BBA1-7C39BFDD6E44}
+		{38662FAC-F369-4A38-8CA4-8182535E06AF} = {768BB21B-525A-4D0F-BBA1-7C39BFDD6E44}
+		{ADE33EEE-E1F1-4C3C-AB9E-CE4023DF57B7} = {A5904D6A-FD9D-4BCB-B9B1-C4BF5D2A4105}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {11185329-90DF-450C-B1C9-14699DDEBE39}
