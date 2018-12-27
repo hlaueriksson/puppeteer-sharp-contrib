@@ -7,244 +7,244 @@ namespace PuppeteerSharp.Contrib.Should
     {
         // Exist
 
-        public static void ShouldExist(this ElementHandle handle)
+        public static void ShouldExist(this ElementHandle handle, string message = null)
         {
-            if (!handle.Exists()) throw new ShouldException("Should exist, but did not.");
+            if (!handle.Exists()) Throw.ShouldExist(handle, message);
         }
 
-        public static void ShouldExist(this Task<ElementHandle> task)
+        public static void ShouldExist(this Task<ElementHandle> task, string message = null)
         {
-            if (!task.Exists()) throw new ShouldException("Should exist, but did not.");
+            if (!task.Exists()) Throw.ShouldExist(task, message);
         }
 
-        public static void ShouldNotExist(this ElementHandle handle)
+        public static void ShouldNotExist(this ElementHandle handle, string message = null)
         {
-            if (handle.Exists()) throw new ShouldException("Should not exist, but did.");
+            if (handle.Exists()) Throw.ShouldNotExist(handle, message);
         }
 
-        public static void ShouldNotExist(this Task<ElementHandle> task)
+        public static void ShouldNotExist(this Task<ElementHandle> task, string message = null)
         {
-            if (task.Exists()) throw new ShouldException("Should not exist, but did.");
+            if (task.Exists()) Throw.ShouldNotExist(task, message);
         }
 
         // Value
 
-        public static void ShouldHaveValue(this ElementHandle handle, string value)
+        public static void ShouldHaveValue(this ElementHandle handle, string value, string message = null)
         {
-            if (handle.Value() != value) throw new ShouldException("Should have value, but did not.");
+            if (handle.Value() != value) Throw.ShouldHaveValue(handle, message);
         }
 
-        public static void ShouldHaveValue(this Task<ElementHandle> task, string value)
+        public static void ShouldHaveValue(this Task<ElementHandle> task, string value, string message = null)
         {
-            if (task.Value() != value) throw new ShouldException("Should have value, but did not.");
+            if (task.Value() != value) Throw.ShouldHaveValue(task, message);
         }
 
-        public static void ShouldNotHaveValue(this ElementHandle handle, string value)
+        public static void ShouldNotHaveValue(this ElementHandle handle, string value, string message = null)
         {
-            if (handle.Value() == value) throw new ShouldException("Should not have value, but did.");
+            if (handle.Value() == value) Throw.ShouldNotHaveValue(handle, message);
         }
 
-        public static void ShouldNotHaveValue(this Task<ElementHandle> task, string value)
+        public static void ShouldNotHaveValue(this Task<ElementHandle> task, string value, string message = null)
         {
-            if (task.Value() == value) throw new ShouldException("Should not have value, but did.");
+            if (task.Value() == value) Throw.ShouldNotHaveValue(task, message);
         }
 
         // Attribute
 
-        public static void ShouldHaveAttribute(this ElementHandle handle, string name)
+        public static void ShouldHaveAttribute(this ElementHandle handle, string name, string message = null)
         {
-            if (!handle.HasAttribute(name)) throw new ShouldException("Should have attribute, but did not.");
+            if (!handle.HasAttribute(name)) Throw.ShouldHaveAttribute(handle, message);
         }
 
-        public static void ShouldHaveAttribute(this Task<ElementHandle> task, string name)
+        public static void ShouldHaveAttribute(this Task<ElementHandle> task, string name, string message = null)
         {
-            if (!task.HasAttribute(name)) throw new ShouldException("Should have attribute, but did not.");
+            if (!task.HasAttribute(name)) Throw.ShouldHaveAttribute(task, message);
         }
 
-        public static void ShouldNotHaveAttribute(this ElementHandle handle, string name)
+        public static void ShouldNotHaveAttribute(this ElementHandle handle, string name, string message = null)
         {
-            if (handle.HasAttribute(name)) throw new ShouldException("Should not have attribute, but did.");
+            if (handle.HasAttribute(name)) Throw.ShouldNotHaveAttribute(handle, message);
         }
 
-        public static void ShouldNotHaveAttribute(this Task<ElementHandle> task, string name)
+        public static void ShouldNotHaveAttribute(this Task<ElementHandle> task, string name, string message = null)
         {
-            if (task.HasAttribute(name)) throw new ShouldException("Should not have attribute, but did.");
+            if (task.HasAttribute(name)) Throw.ShouldNotHaveAttribute(task, message);
         }
 
         // Content
 
-        public static void ShouldHaveContent(this ElementHandle handle, string content)
+        public static void ShouldHaveContent(this ElementHandle handle, string content, string message = null)
         {
-            if (!handle.HasContent(content)) throw new ShouldException("Should have content, but did not.");
+            if (!handle.HasContent(content)) Throw.ShouldHaveContent(handle, message);
         }
 
-        public static void ShouldHaveContent(this Task<ElementHandle> task, string content)
+        public static void ShouldHaveContent(this Task<ElementHandle> task, string content, string message = null)
         {
-            if (!task.HasContent(content)) throw new ShouldException("Should have content, but did not.");
+            if (!task.HasContent(content)) Throw.ShouldHaveContent(task, message);
         }
 
-        public static void ShouldNotHaveContent(this ElementHandle handle, string content)
+        public static void ShouldNotHaveContent(this ElementHandle handle, string content, string message = null)
         {
-            if (handle.HasContent(content)) throw new ShouldException("Should not have content, but did.");
+            if (handle.HasContent(content)) Throw.ShouldNotHaveContent(handle, message);
         }
 
-        public static void ShouldNotHaveContent(this Task<ElementHandle> task, string content)
+        public static void ShouldNotHaveContent(this Task<ElementHandle> task, string content, string message = null)
         {
-            if (task.HasContent(content)) throw new ShouldException("Should not have content, but did.");
+            if (task.HasContent(content)) Throw.ShouldNotHaveContent(task, message);
         }
 
         // Class
 
-        public static void ShouldHaveClass(this ElementHandle handle, string className)
+        public static void ShouldHaveClass(this ElementHandle handle, string className, string message = null)
         {
-            if (!handle.HasClass(className)) throw new ShouldException("Should have class, but did not.");
+            if (!handle.HasClass(className)) Throw.ShouldHaveClass(handle, message);
         }
 
-        public static void ShouldHaveClass(this Task<ElementHandle> task, string className)
+        public static void ShouldHaveClass(this Task<ElementHandle> task, string className, string message = null)
         {
-            if (!task.HasClass(className)) throw new ShouldException("Should have class, but did not.");
+            if (!task.HasClass(className)) Throw.ShouldHaveClass(task, message);
         }
 
-        public static void ShouldNotHaveClass(this ElementHandle handle, string className)
+        public static void ShouldNotHaveClass(this ElementHandle handle, string className, string message = null)
         {
-            if (handle.HasClass(className)) throw new ShouldException("Should not have class, but did.");
+            if (handle.HasClass(className)) Throw.ShouldNotHaveClass(handle, message);
         }
 
-        public static void ShouldNotHaveClass(this Task<ElementHandle> task, string className)
+        public static void ShouldNotHaveClass(this Task<ElementHandle> task, string className, string message = null)
         {
-            if (task.HasClass(className)) throw new ShouldException("Should not have class, but did.");
+            if (task.HasClass(className)) Throw.ShouldNotHaveClass(task, message);
         }
 
         // Visible
 
-        public static void ShouldBeVisible(this ElementHandle handle)
+        public static void ShouldBeVisible(this ElementHandle handle, string message = null)
         {
-            if (handle.IsHidden()) throw new ShouldException("Should be visible, but is not.");
+            if (handle.IsHidden()) Throw.ShouldBeVisible(handle, message);
         }
 
-        public static void ShouldBeVisible(this Task<ElementHandle> task)
+        public static void ShouldBeVisible(this Task<ElementHandle> task, string message = null)
         {
-            if (task.IsHidden()) throw new ShouldException("Should be visible, but is not.");
+            if (task.IsHidden()) Throw.ShouldBeVisible(task, message);
         }
 
-        public static void ShouldBeHidden(this ElementHandle handle)
+        public static void ShouldBeHidden(this ElementHandle handle, string message = null)
         {
-            if (handle.IsVisible()) throw new ShouldException("Should be hidden, but is not.");
+            if (handle.IsVisible()) Throw.ShouldBeHidden(handle, message);
         }
 
-        public static void ShouldBeHidden(this Task<ElementHandle> task)
+        public static void ShouldBeHidden(this Task<ElementHandle> task, string message = null)
         {
-            if (task.IsVisible()) throw new ShouldException("Should be hidden, but is not.");
+            if (task.IsVisible()) Throw.ShouldBeHidden(task, message);
         }
 
         // Selected
 
-        public static void ShouldBeSelected(this ElementHandle handle)
+        public static void ShouldBeSelected(this ElementHandle handle, string message = null)
         {
-            if (!handle.IsSelected()) throw new ShouldException("Should be selected, but is not.");
+            if (!handle.IsSelected()) Throw.ShouldBeSelected(handle, message);
         }
 
-        public static void ShouldBeSelected(this Task<ElementHandle> task)
+        public static void ShouldBeSelected(this Task<ElementHandle> task, string message = null)
         {
-            if (!task.IsSelected()) throw new ShouldException("Should be selected, but is not.");
+            if (!task.IsSelected()) Throw.ShouldBeSelected(task, message);
         }
 
-        public static void ShouldNotBeSelected(this ElementHandle handle)
+        public static void ShouldNotBeSelected(this ElementHandle handle, string message = null)
         {
-            if (handle.IsSelected()) throw new ShouldException("Should not be selected, but is.");
+            if (handle.IsSelected()) Throw.ShouldNotBeSelected(handle, message);
         }
 
-        public static void ShouldNotBeSelected(this Task<ElementHandle> task)
+        public static void ShouldNotBeSelected(this Task<ElementHandle> task, string message = null)
         {
-            if (task.IsSelected()) throw new ShouldException("Should not be selected, but is.");
+            if (task.IsSelected()) Throw.ShouldNotBeSelected(task, message);
         }
 
         // Checked
 
-        public static void ShouldBeChecked(this ElementHandle handle)
+        public static void ShouldBeChecked(this ElementHandle handle, string message = null)
         {
-            if (!handle.IsChecked()) throw new ShouldException("Should be checked, but is not.");
+            if (!handle.IsChecked()) Throw.ShouldBeChecked(handle, message);
         }
 
-        public static void ShouldBeChecked(this Task<ElementHandle> task)
+        public static void ShouldBeChecked(this Task<ElementHandle> task, string message = null)
         {
-            if (!task.IsChecked()) throw new ShouldException("Should be checked, but is not.");
+            if (!task.IsChecked()) Throw.ShouldBeChecked(task, message);
         }
 
-        public static void ShouldNotBeChecked(this ElementHandle handle)
+        public static void ShouldNotBeChecked(this ElementHandle handle, string message = null)
         {
-            if (handle.IsChecked()) throw new ShouldException("Should not be checked, but is.");
+            if (handle.IsChecked()) Throw.ShouldNotBeChecked(handle, message);
         }
 
-        public static void ShouldNotBeChecked(this Task<ElementHandle> task)
+        public static void ShouldNotBeChecked(this Task<ElementHandle> task, string message = null)
         {
-            if (task.IsChecked()) throw new ShouldException("Should not be checked, but is.");
+            if (task.IsChecked()) Throw.ShouldNotBeChecked(task, message);
         }
 
         // Disabled
 
-        public static void ShouldBeDisabled(this ElementHandle handle)
+        public static void ShouldBeDisabled(this ElementHandle handle, string message = null)
         {
-            if (handle.IsEnabled()) throw new ShouldException("Should be disabled, but is not.");
+            if (handle.IsEnabled()) Throw.ShouldBeDisabled(handle, message);
         }
 
-        public static void ShouldBeDisabled(this Task<ElementHandle> task)
+        public static void ShouldBeDisabled(this Task<ElementHandle> task, string message = null)
         {
-            if (task.IsEnabled()) throw new ShouldException("Should be disabled, but is not.");
+            if (task.IsEnabled()) Throw.ShouldBeDisabled(task, message);
         }
 
-        public static void ShouldBeEnabled(this ElementHandle handle)
+        public static void ShouldBeEnabled(this ElementHandle handle, string message = null)
         {
-            if (handle.IsDisabled()) throw new ShouldException("Should be enabled, but is not.");
+            if (handle.IsDisabled()) Throw.ShouldBeEnabled(handle, message);
         }
 
-        public static void ShouldBeEnabled(this Task<ElementHandle> task)
+        public static void ShouldBeEnabled(this Task<ElementHandle> task, string message = null)
         {
-            if (task.IsDisabled()) throw new ShouldException("Should be enabled, but is not.");
+            if (task.IsDisabled()) Throw.ShouldBeEnabled(task, message);
         }
 
         // ReadOnly
 
-        public static void ShouldBeReadOnly(this ElementHandle handle)
+        public static void ShouldBeReadOnly(this ElementHandle handle, string message = null)
         {
-            if (!handle.IsReadOnly()) throw new ShouldException("Should be read-only, but is not.");
+            if (!handle.IsReadOnly()) Throw.ShouldBeReadOnly(handle, message);
         }
 
-        public static void ShouldBeReadOnly(this Task<ElementHandle> task)
+        public static void ShouldBeReadOnly(this Task<ElementHandle> task, string message = null)
         {
-            if (!task.IsReadOnly()) throw new ShouldException("Should be read-only, but is not.");
+            if (!task.IsReadOnly()) Throw.ShouldBeReadOnly(task, message);
         }
 
-        public static void ShouldNotBeReadOnly(this ElementHandle handle)
+        public static void ShouldNotBeReadOnly(this ElementHandle handle, string message = null)
         {
-            if (handle.IsReadOnly()) throw new ShouldException("Should not be read-only, but is.");
+            if (handle.IsReadOnly()) Throw.ShouldNotBeReadOnly(handle, message);
         }
 
-        public static void ShouldNotBeReadOnly(this Task<ElementHandle> task)
+        public static void ShouldNotBeReadOnly(this Task<ElementHandle> task, string message = null)
         {
-            if (task.IsReadOnly()) throw new ShouldException("Should not be read-only, but is.");
+            if (task.IsReadOnly()) Throw.ShouldNotBeReadOnly(task, message);
         }
 
         // Focus
 
-        public static void ShouldHaveFocus(this ElementHandle handle)
+        public static void ShouldHaveFocus(this ElementHandle handle, string message = null)
         {
-            if (!handle.HasFocus()) throw new ShouldException("Should have focus, but did not.");
+            if (!handle.HasFocus()) Throw.ShouldHaveFocus(handle, message);
         }
 
-        public static void ShouldHaveFocus(this Task<ElementHandle> task)
+        public static void ShouldHaveFocus(this Task<ElementHandle> task, string message = null)
         {
-            if (!task.HasFocus()) throw new ShouldException("Should have focus, but did not.");
+            if (!task.HasFocus()) Throw.ShouldHaveFocus(task, message);
         }
 
-        public static void ShouldNotHaveFocus(this ElementHandle handle)
+        public static void ShouldNotHaveFocus(this ElementHandle handle, string message = null)
         {
-            if (handle.HasFocus()) throw new ShouldException("Should not have focus, but did.");
+            if (handle.HasFocus()) Throw.ShouldNotHaveFocus(handle, message);
         }
 
-        public static void ShouldNotHaveFocus(this Task<ElementHandle> task)
+        public static void ShouldNotHaveFocus(this Task<ElementHandle> task, string message = null)
         {
-            if (task.HasFocus()) throw new ShouldException("Should not have focus, but did.");
+            if (task.HasFocus()) Throw.ShouldNotHaveFocus(task, message);
         }
     }
 }
