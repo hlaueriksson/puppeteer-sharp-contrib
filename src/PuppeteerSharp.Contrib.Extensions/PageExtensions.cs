@@ -13,7 +13,7 @@ namespace PuppeteerSharp.Contrib.Extensions
                     return Array.prototype.find.call(elements, function(element) {
                         return RegExp(regex).test(element.textContent);
                     });
-                }", selector, regex) as ElementHandle;
+                }", selector, regex).ConfigureAwait(false) as ElementHandle;
 
             return handle;
         }
@@ -27,7 +27,7 @@ namespace PuppeteerSharp.Contrib.Extensions
                     return Array.prototype.filter.call(elements, function(element) {
                         return RegExp(regex).test(element.textContent);
                     });
-                }", selector, regex);
+                }", selector, regex).ConfigureAwait(false);
 
             var properties = await arrayHandle.GetPropertiesAsync().ConfigureAwait(false);
             await arrayHandle.DisposeAsync().ConfigureAwait(false);

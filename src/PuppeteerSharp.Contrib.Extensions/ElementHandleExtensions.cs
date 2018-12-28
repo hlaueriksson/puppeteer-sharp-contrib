@@ -23,7 +23,7 @@ namespace PuppeteerSharp.Contrib.Extensions
 
         public static async Task<string> InnerHtmlAsync(this ElementHandle handle)
         {
-            return await handle.GetPropertyValueAsync("innerHTML");
+            return await handle.GetPropertyValueAsync("innerHTML").ConfigureAwait(false);
         }
 
         public static string InnerHtml(this ElementHandle handle)
@@ -40,7 +40,7 @@ namespace PuppeteerSharp.Contrib.Extensions
 
         public static async Task<string> OuterHtmlAsync(this ElementHandle handle)
         {
-            return await handle.GetPropertyValueAsync("outerHTML");
+            return await handle.GetPropertyValueAsync("outerHTML").ConfigureAwait(false);
         }
 
         public static string OuterHtml(this ElementHandle handle)
@@ -57,7 +57,7 @@ namespace PuppeteerSharp.Contrib.Extensions
 
         public static async Task<string> TextContentAsync(this ElementHandle handle)
         {
-            return await handle.GetPropertyValueAsync("textContent");
+            return await handle.GetPropertyValueAsync("textContent").ConfigureAwait(false);
         }
 
         public static string TextContent(this ElementHandle handle)
@@ -74,7 +74,7 @@ namespace PuppeteerSharp.Contrib.Extensions
 
         public static async Task<string> InnerTextAsync(this ElementHandle handle)
         {
-            return await handle.GetPropertyValueAsync("innerText");
+            return await handle.GetPropertyValueAsync("innerText").ConfigureAwait(false);
         }
 
         public static string InnerText(this ElementHandle handle)
@@ -92,7 +92,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         public static async Task<bool> HasContentAsync(this ElementHandle handle, string content)
         {
             handle.GuardFromNull();
-            return await handle.EvaluateFunctionAsync<bool>("(node, content) => node.textContent.includes(content)", content);
+            return await handle.EvaluateFunctionAsync<bool>("(node, content) => node.textContent.includes(content)", content).ConfigureAwait(false);
         }
 
         public static bool HasContent(this ElementHandle handle, string content)
@@ -110,7 +110,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         public static async Task<string> ClassNameAsync(this ElementHandle handle)
         {
             handle.GuardFromNull();
-            return await handle.EvaluateFunctionAsync<string>("element => element.className");
+            return await handle.EvaluateFunctionAsync<string>("element => element.className").ConfigureAwait(false);
         }
 
         public static string ClassName(this ElementHandle handle)
@@ -128,7 +128,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         public static async Task<string[]> ClassListAsync(this ElementHandle handle)
         {
             handle.GuardFromNull();
-            var json = await handle.EvaluateFunctionAsync<JObject>("element => element.classList");
+            var json = await handle.EvaluateFunctionAsync<JObject>("element => element.classList").ConfigureAwait(false);
             var dictionary = json.ToObject<Dictionary<string, string>>();
             return dictionary.Values.ToArray();
         }
@@ -148,7 +148,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         public static async Task<bool> HasClassAsync(this ElementHandle handle, string className)
         {
             handle.GuardFromNull();
-            return await handle.EvaluateFunctionAsync<bool>("(element, className) => element.classList.contains(className)", className);
+            return await handle.EvaluateFunctionAsync<bool>("(element, className) => element.classList.contains(className)", className).ConfigureAwait(false);
         }
 
         public static bool HasClass(this ElementHandle handle, string className)
@@ -167,7 +167,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         {
             handle.GuardFromNull();
             // https://blog.jquery.com/2009/02/20/jquery-1-3-2-released/#visible-hidden-overhauled
-            return await handle.EvaluateFunctionAsync<bool>("element => element.offsetWidth > 0 && element.offsetHeight > 0");
+            return await handle.EvaluateFunctionAsync<bool>("element => element.offsetWidth > 0 && element.offsetHeight > 0").ConfigureAwait(false);
         }
 
         public static bool IsVisible(this ElementHandle handle)
@@ -184,7 +184,7 @@ namespace PuppeteerSharp.Contrib.Extensions
 
         public static async Task<bool> IsHiddenAsync(this ElementHandle handle)
         {
-            return !await handle.IsVisibleAsync();
+            return !await handle.IsVisibleAsync().ConfigureAwait(false);
         }
 
         public static bool IsHidden(this ElementHandle handle)
@@ -202,7 +202,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         public static async Task<bool> IsSelectedAsync(this ElementHandle handle)
         {
             handle.GuardFromNull();
-            return await handle.EvaluateFunctionAsync<bool>("element => element.selected");
+            return await handle.EvaluateFunctionAsync<bool>("element => element.selected").ConfigureAwait(false);
         }
 
         public static bool IsSelected(this ElementHandle handle)
@@ -220,7 +220,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         public static async Task<bool> IsCheckedAsync(this ElementHandle handle)
         {
             handle.GuardFromNull();
-            return await handle.EvaluateFunctionAsync<bool>("element => element.checked");
+            return await handle.EvaluateFunctionAsync<bool>("element => element.checked").ConfigureAwait(false);
         }
 
         public static bool IsChecked(this ElementHandle handle)
@@ -238,7 +238,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         public static async Task<bool> IsDisabledAsync(this ElementHandle handle)
         {
             handle.GuardFromNull();
-            return await handle.EvaluateFunctionAsync<bool>("element => element.disabled");
+            return await handle.EvaluateFunctionAsync<bool>("element => element.disabled").ConfigureAwait(false);
         }
 
         public static bool IsDisabled(this ElementHandle handle)
@@ -255,7 +255,7 @@ namespace PuppeteerSharp.Contrib.Extensions
 
         public static async Task<bool> IsEnabledAsync(this ElementHandle handle)
         {
-            return !await handle.IsDisabledAsync();
+            return !await handle.IsDisabledAsync().ConfigureAwait(false);
         }
 
         public static bool IsEnabled(this ElementHandle handle)
@@ -273,7 +273,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         public static async Task<bool> IsReadOnlyAsync(this ElementHandle handle)
         {
             handle.GuardFromNull();
-            return await handle.EvaluateFunctionAsync<bool>("element => element.readOnly");
+            return await handle.EvaluateFunctionAsync<bool>("element => element.readOnly").ConfigureAwait(false);
         }
 
         public static bool IsReadOnly(this ElementHandle handle)
@@ -291,7 +291,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         public static async Task<bool> HasFocusAsync(this ElementHandle handle)
         {
             handle.GuardFromNull();
-            return await handle.EvaluateFunctionAsync<bool>("element => element === document.activeElement");
+            return await handle.EvaluateFunctionAsync<bool>("element => element === document.activeElement").ConfigureAwait(false);
         }
 
         public static bool HasFocus(this ElementHandle handle)
@@ -309,8 +309,8 @@ namespace PuppeteerSharp.Contrib.Extensions
         private static async Task<string> GetPropertyValueAsync(this ElementHandle handle, string propertyName)
         {
             handle.GuardFromNull();
-            var property = await handle.GetPropertyAsync(propertyName);
-            return await property.JsonValueAsync<string>();
+            var property = await handle.GetPropertyAsync(propertyName).ConfigureAwait(false);
+            return await property.JsonValueAsync<string>().ConfigureAwait(false);
         }
 
         private static string GetPropertyValue(this ElementHandle handle, string propertyName)
