@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net471</TargetFramework>
+    <RootNamespace>PuppeteerSharp.Contrib.Sample</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.11.0" />
+    <PackageReference Include="PuppeteerSharp" Version="1.11.1" />
+    <PackageReference Include="Shouldly" Version="3.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\PuppeteerSharp.Contrib.Extensions\PuppeteerSharp.Contrib.Extensions.csproj" />
+    <ProjectReference Include="..\..\src\PuppeteerSharp.Contrib.Should\PuppeteerSharp.Contrib.Should.csproj" />
+  </ItemGroup>
+
+</Project>
