@@ -14,10 +14,10 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
         public async Task QuerySelectorWithContentAsync_should_return_the_first_element_that_match_the_selector_and_has_the_content()
         {
             var foo = await Page.QuerySelectorWithContentAsync("div", "Foo");
-            Assert.Equal("foo", foo.GetAttribute("id"));
+            Assert.Equal("foo", foo.Id());
 
             var bar = await Page.QuerySelectorWithContentAsync("div", "Ba.");
-            Assert.Equal("bar", bar.GetAttribute("id"));
+            Assert.Equal("bar", bar.Id());
 
             var missing = await Page.QuerySelectorWithContentAsync("div", "Missing");
             Assert.Null(missing);
@@ -27,10 +27,10 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
         public async Task QuerySelectorAllWithContentAsync_should_return_all_elements_that_match_the_selector_and_has_the_content()
         {
             var divs = await Page.QuerySelectorAllWithContentAsync("div", "Foo");
-            Assert.Equal(new[] { "foo" }, divs.Select(x => x.GetAttribute("id")));
+            Assert.Equal(new[] { "foo" }, divs.Select(x => x.Id()));
 
             divs = await Page.QuerySelectorAllWithContentAsync("div", "Ba.");
-            Assert.Equal(new[] { "bar", "baz" }, divs.Select(x => x.GetAttribute("id")));
+            Assert.Equal(new[] { "bar", "baz" }, divs.Select(x => x.Id()));
 
             var missing = await Page.QuerySelectorAllWithContentAsync("div", "Missing");
             Assert.Empty(missing);

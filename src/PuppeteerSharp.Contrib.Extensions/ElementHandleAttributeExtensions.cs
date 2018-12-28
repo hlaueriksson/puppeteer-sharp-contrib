@@ -4,6 +4,40 @@ namespace PuppeteerSharp.Contrib.Extensions
 {
     public static class ElementHandleAttributeExtensions
     {
+        // Id
+
+        public static async Task<string> IdAsync(this ElementHandle handle)
+        {
+            return await handle.GetAttributeAsync("id");
+        }
+
+        public static string Id(this ElementHandle handle)
+        {
+            return handle.IdAsync().Result();
+        }
+
+        public static string Id(this Task<ElementHandle> task)
+        {
+            return task.Result().Id();
+        }
+
+        // Name
+
+        public static async Task<string> NameAsync(this ElementHandle handle)
+        {
+            return await handle.GetAttributeAsync("name");
+        }
+
+        public static string Name(this ElementHandle handle)
+        {
+            return handle.NameAsync().Result();
+        }
+
+        public static string Name(this Task<ElementHandle> task)
+        {
+            return task.Result().Name();
+        }
+
         // Value
 
         public static async Task<string> ValueAsync(this ElementHandle handle)
