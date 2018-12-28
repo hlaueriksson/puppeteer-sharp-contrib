@@ -3,7 +3,7 @@ using PuppeteerSharp.Contrib.Extensions;
 
 namespace PuppeteerSharp.Contrib.Should
 {
-    public static class ShouldExtensionMethods
+    public static class ShouldExtensions
     {
         // Exist
 

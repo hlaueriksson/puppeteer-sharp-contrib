@@ -6,7 +6,7 @@ using Xunit;
 
 namespace PuppeteerSharp.Contrib.Tests.Should
 {
-    public class ShouldExtensionMethodsTests : PuppeteerPageBaseTest
+    public class ShouldExtensionsTests : PuppeteerPageBaseTest
     {
         protected override async Task SetUp() => await Page.SetContentAsync("<html><body><div class='tweet'><div class='like'>100</div><div class='retweets'>10</div></div></body></html>");
 
