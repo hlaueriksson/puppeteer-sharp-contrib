@@ -8,3 +8,4 @@ build:
   verbosity: minimal
 #test_script:
 #  - ps: "dotnet test .\\tests\\PuppeteerSharp.Contrib.Tests\\PuppeteerSharp.Contrib.Tests.csproj --verbosity normal"
+test: off
