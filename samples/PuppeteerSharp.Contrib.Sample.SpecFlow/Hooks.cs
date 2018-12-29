@@ -21,7 +21,7 @@ namespace PuppeteerSharp.Contrib.Sample
             await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
             Browser = await Puppeteer.LaunchAsync(new LaunchOptions
             {
-                Headless = false
+                Headless = true
             });
             ObjectContainer.RegisterInstanceAs(Browser);
         }
