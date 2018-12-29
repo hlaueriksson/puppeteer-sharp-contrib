@@ -3,19 +3,20 @@ using Xunit;
 
 namespace PuppeteerSharp.Contrib.Tests.Base
 {
-    public abstract class PuppeteerPageBaseTest : IAsyncLifetime
+    public abstract class PuppeteerPageBaseTest : IClassFixture<PuppeteerFixture>, IAsyncLifetime
     {
-        protected Browser Browser { get; private set; }
+        private Browser Browser { get; set; }
+        private BrowserContext Context { get; set; }
         protected Page Page { get; private set; }
 
         public async Task InitializeAsync()
         {
-            await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
             Browser = await Puppeteer.LaunchAsync(new LaunchOptions
             {
                 Headless = true
             });
-            Page = await Browser.NewPageAsync();
+            Context = await Browser.CreateIncognitoBrowserContextAsync();
+            Page = await Context.NewPageAsync();
 
             await SetUp();
         }
