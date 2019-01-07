@@ -8,7 +8,12 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
 {
     public class PageExtensionsTests : PuppeteerPageBaseTest
     {
-        protected override async Task SetUp() => await Page.SetContentAsync("<html><body><div id='foo'>Foo</div><div id='bar'>Bar</div><div id='baz'>Baz</div></body></html>");
+        protected override async Task SetUp() => await Page.SetContentAsync(@"
+<html>
+  <div id='foo'>Foo</div>
+  <div id='bar'>Bar</div>
+  <div id='baz'>Baz</div>
+</html>");
 
         [Fact]
         public async Task QuerySelectorWithContentAsync_should_return_the_first_element_that_match_the_selector_and_has_the_content()

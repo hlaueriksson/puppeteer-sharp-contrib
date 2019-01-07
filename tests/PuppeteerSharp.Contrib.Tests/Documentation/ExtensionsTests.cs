@@ -101,7 +101,6 @@ namespace PuppeteerSharp.Contrib.Tests.Documentation
             Assert.True(div.IsVisible());
         }
 
-
         [Fact]
         public async Task Input()
         {
