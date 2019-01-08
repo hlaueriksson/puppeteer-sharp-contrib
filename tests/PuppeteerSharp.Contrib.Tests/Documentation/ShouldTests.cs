@@ -5,29 +5,8 @@ using Xunit;
 
 namespace PuppeteerSharp.Contrib.Tests.Documentation
 {
-    public class ShouldTests : IAsyncLifetime// : PuppeteerPageBaseTest
+    public class ShouldTests : PuppeteerPageBaseTest
     {
-        private Browser Browser { get; set; }
-        private BrowserContext Context { get; set; }
-        private Page Page { get; set; }
-
-        public async Task InitializeAsync()
-        {
-            await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
-            Browser = await Puppeteer.LaunchAsync(new LaunchOptions
-            {
-                Headless = true
-            });
-            Context = await Browser.CreateIncognitoBrowserContextAsync();
-            Page = await Context.NewPageAsync();
-        }
-
-        public async Task DisposeAsync()
-        {
-            await Page.CloseAsync();
-            await Browser.CloseAsync();
-        }
-
         [Fact]
         public async Task Attributes()
         {
