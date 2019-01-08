@@ -29,47 +29,7 @@ Extensions for `Page`:
 * `QuerySelectorWithContentAsync`
 * `QuerySelectorAllWithContentAsync`
 
-Usage:
-
-```csharp
-public class PageExtensionsTests : PuppeteerPageBaseTest
-{
-    protected override async Task SetUp() => await Page.SetContentAsync(@"
-<html>
-  <div id='foo'>Foo</div>
-  <div id='bar'>Bar</div>
-  <div id='baz'>Baz</div>
-</html>");
-
-    [Fact]
-    public async Task QuerySelectorWithContentAsync_should_return_the_first_element_that_match_the_selector_and_has_the_content()
-    {
-        var foo = await Page.QuerySelectorWithContentAsync("div", "Foo");
-        Assert.Equal("foo", foo.Id());
-
-        var bar = await Page.QuerySelectorWithContentAsync("div", "Ba.");
-        Assert.Equal("bar", bar.Id());
-
-        var missing = await Page.QuerySelectorWithContentAsync("div", "Missing");
-        Assert.Null(missing);
-    }
-
-    [Fact]
-    public async Task QuerySelectorAllWithContentAsync_should_return_all_elements_that_match_the_selector_and_has_the_content()
-    {
-        var divs = await Page.QuerySelectorAllWithContentAsync("div", "Foo");
-        Assert.Equal(new[] { "foo" }, divs.Select(x => x.Id()));
-
-        divs = await Page.QuerySelectorAllWithContentAsync("div", "Ba.");
-        Assert.Equal(new[] { "bar", "baz" }, divs.Select(x => x.Id()));
-
-        var missing = await Page.QuerySelectorAllWithContentAsync("div", "Missing");
-        Assert.Empty(missing);
-    }
-}
-```
-
-Attribute extensions for `ElementHandle`:
+_Attribute_ extensions for `ElementHandle`:
 
 * `GetAttribute`
 * `HasAttribute`
@@ -78,46 +38,6 @@ Attribute extensions for `ElementHandle`:
 * `Name`
 * `Src`
 * `Value`
-
-Usage:
-
-```csharp
-[Fact]
-public async Task Attributes()
-{
-    await Page.SetContentAsync(@"
-<html>
-  <form method='post'>
-      Name: <input type='text' name='name' id='name' required>
-      Email: <input type='email' name='email' id='email' required>
-      <input type='submit' value='Subscribe!'>
-  </form>
-  <img src='unsubscribe.png' />
-  <a href='/unsubscribe/'>Unsubscribe</a>
-</html>");
-
-    var form = await Page.QuerySelectorAsync("form");
-    Assert.Equal("post", form.GetAttribute("method"));
-
-    var input = await Page.QuerySelectorAsync("#name");
-    Assert.True(input.HasAttribute("required"));
-
-    var link = await Page.QuerySelectorAsync("a");
-    Assert.Equal("/unsubscribe/", link.Href());
-
-    input = await Page.QuerySelectorAsync("input[type=email]");
-    Assert.Equal("email", input.Id());
-
-    input = await Page.QuerySelectorAsync("#email");
-    Assert.Equal("email", input.Name());
-
-    var img = await Page.QuerySelectorAsync("img");
-    Assert.Equal("unsubscribe.png", img.Src());
-
-    input = await Page.QuerySelectorAsync("input[type=submit]");
-    Assert.Equal("Subscribe!", input.Value());
-}
-```
 
 Extensions for `ElementHandle`:
 
@@ -142,69 +62,117 @@ Extensions for `ElementHandle`:
 Usage:
 
 ```csharp
-[Fact]
-public async Task Class()
+using System.Linq;
+using System.Threading.Tasks;
+using PuppeteerSharp.Contrib.Extensions;
+using PuppeteerSharp.Contrib.Tests.Base;
+using Xunit;
+
+namespace PuppeteerSharp.Contrib.Tests.Documentation
 {
-    await Page.SetContentAsync("<div class='foo bar' />");
-
-    var div = await Page.QuerySelectorAsync("div");
-    Assert.Equal("foo bar", div.ClassName());
-
-    div = await Page.QuerySelectorAsync("div");
-    Assert.Equal(new[] { "foo", "bar" }, div.ClassList());
-
-    div = await Page.QuerySelectorAsync("div");
-    Assert.True(div.HasClass("bar"));
-}
-
-[Fact]
-public async Task Content()
-{
-    await Page.SetContentAsync(@"
+    public class ExtensionsTests : PuppeteerPageBaseTest
+    {
+        [Fact]
+        public async Task Query()
+        {
+            await Page.SetContentAsync(@"
 <html>
-  <div id='foo'>
+  <div id='foo'>Foo</div>
+  <div id='bar'>Bar</div>
+  <div id='baz'>Baz</div>
+</html>");
+
+            var div = await Page.QuerySelectorWithContentAsync("div", "Ba.");
+            Assert.Equal("bar", div.Id());
+
+            var divs = await Page.QuerySelectorAllWithContentAsync("div", "Ba.");
+            Assert.Equal(new[] { "bar", "baz" }, divs.Select(x => x.Id()));
+        }
+
+        [Fact]
+        public async Task Attributes()
+        {
+            await Page.SetContentAsync(@"
+<html>
+  <form method='post'>
+      Name: <input type='text' name='name' id='name' required>
+      Email: <input type='email' name='email' id='email' required>
+      <input type='submit' value='Subscribe!'>
+  </form>
+  <img src='unsubscribe.png' />
+  <a href='/unsubscribe/'>Unsubscribe</a>
+</html>");
+
+            var form = await Page.QuerySelectorAsync("form");
+            Assert.Equal("post", form.GetAttribute("method"));
+
+            var input = await Page.QuerySelectorAsync("#name");
+            Assert.True(input.HasAttribute("required"));
+
+            var link = await Page.QuerySelectorAsync("a");
+            Assert.Equal("/unsubscribe/", link.Href());
+
+            input = await Page.QuerySelectorAsync("input[type=email]");
+            Assert.Equal("email", input.Id());
+
+            input = await Page.QuerySelectorAsync("#email");
+            Assert.Equal("email", input.Name());
+
+            var img = await Page.QuerySelectorAsync("img");
+            Assert.Equal("unsubscribe.png", img.Src());
+
+            input = await Page.QuerySelectorAsync("input[type=submit]");
+            Assert.Equal("Subscribe!", input.Value());
+        }
+
+        [Fact]
+        public async Task Class()
+        {
+            await Page.SetContentAsync("<div class='foo bar' />");
+
+            var div = await Page.QuerySelectorAsync("div");
+            Assert.Equal("foo bar", div.ClassName());
+            Assert.Equal(new[] { "foo", "bar" }, div.ClassList());
+            Assert.True(div.HasClass("bar"));
+        }
+
+        [Fact]
+        public async Task Content()
+        {
+            await Page.SetContentAsync(@"
+<html>
+  <div>
     Foo
-    <div id='bar'>Bar</div>
+    <span>Bar</span>
   </div>
 </html>
 ");
 
-    var html = await Page.QuerySelectorAsync("html");
-    Assert.True(html.HasContent("Foo"));
+            var html = await Page.QuerySelectorAsync("html");
+            Assert.True(html.HasContent("Foo"));
 
-    var div = await Page.QuerySelectorAsync("#foo");
-    Assert.Equal("\n    Foo\n    <div id=\"bar\">Bar</div>\n  ", div.InnerHtml());
+            var div = await Page.QuerySelectorAsync("div");
+            Assert.Equal("\n    Foo\n    <span>Bar</span>\n  ", div.InnerHtml());
+            Assert.Equal("<div>\n    Foo\n    <span>Bar</span>\n  </div>", div.OuterHtml());
+            Assert.Equal("Foo Bar", div.InnerText());
+            Assert.Equal("\n    Foo\n    Bar\n  ", div.TextContent());
+        }
 
-    div = await Page.QuerySelectorAsync("#foo");
-    Assert.Equal("Foo\nBar", div.InnerText());
+        [Fact]
+        public async Task Visibility()
+        {
+            await Page.SetContentAsync("<div>Foo</div>");
 
-    div = await Page.QuerySelectorAsync("#bar");
-    Assert.Equal("<div id=\"bar\">Bar</div>", div.OuterHtml());
+            var div = await Page.QuerySelectorAsync("div");
+            Assert.True(div.Exists());
+            Assert.False(div.IsHidden());
+            Assert.True(div.IsVisible());
+        }
 
-    div = await Page.QuerySelectorAsync("#foo");
-    Assert.Equal("\n    Foo\n    Bar\n  ", div.TextContent());
-}
-
-[Fact]
-public async Task Visibility()
-{
-    await Page.SetContentAsync("<div>Foo</div>");
-
-    var div = await Page.QuerySelectorAsync("div");
-    Assert.True(div.Exists());
-
-    div = await Page.QuerySelectorAsync("div");
-    Assert.False(div.IsHidden());
-
-    div = await Page.QuerySelectorAsync("div");
-    Assert.True(div.IsVisible());
-}
-
-
-[Fact]
-public async Task Input()
-{
-    await Page.SetContentAsync(@"
+        [Fact]
+        public async Task Input()
+        {
+            await Page.SetContentAsync(@"
 <form>
   <input type='text' autofocus>
   <input type='radio' readonly>
@@ -216,23 +184,21 @@ public async Task Input()
 </form>
 ");
 
-    var input = await Page.QuerySelectorAsync("input[type=text]");
-    Assert.True(input.HasFocus());
+            var input = await Page.QuerySelectorAsync("input[type=text]");
+            Assert.True(input.HasFocus());
 
-    input = await Page.QuerySelectorAsync("input[type=checkbox]");
-    Assert.True(input.IsChecked());
+            input = await Page.QuerySelectorAsync("input[type=checkbox]");
+            Assert.True(input.IsChecked());
 
-    input = await Page.QuerySelectorAsync("input[type=radio]");
-    Assert.False(input.IsDisabled());
+            input = await Page.QuerySelectorAsync("input[type=radio]");
+            Assert.False(input.IsDisabled());
+            Assert.True(input.IsEnabled());
+            Assert.True(input.IsReadOnly());
 
-    input = await Page.QuerySelectorAsync("input[type=radio]");
-    Assert.True(input.IsEnabled());
-
-    input = await Page.QuerySelectorAsync("input[type=radio]");
-    Assert.True(input.IsReadOnly());
-
-    input = await Page.QuerySelectorAsync("#foo");
-    Assert.True(input.IsSelected());
+            input = await Page.QuerySelectorAsync("#foo");
+            Assert.True(input.IsSelected());
+        }
+    }
 }
 ```
 
@@ -278,65 +244,72 @@ Should assertions for `ElementHandle`:
 Usage:
 
 ```csharp
-[Fact]
-public async Task Attributes()
+using System.Threading.Tasks;
+using PuppeteerSharp.Contrib.Should;
+using PuppeteerSharp.Contrib.Tests.Base;
+using Xunit;
+
+namespace PuppeteerSharp.Contrib.Tests.Documentation
 {
-    await Page.SetContentAsync("<div data-foo='bar' />");
+    public class ShouldTests : PuppeteerPageBaseTest
+    {
+        [Fact]
+        public async Task Attributes()
+        {
+            await Page.SetContentAsync("<div data-foo='bar' />");
 
-    var div = await Page.QuerySelectorAsync("div");
-    div.ShouldHaveAttribute("data-foo");
+            var div = await Page.QuerySelectorAsync("div");
+            div
+                .ShouldHaveAttribute("data-foo")
+                .ShouldNotHaveAttribute("data-bar");
+        }
 
-    div = await Page.QuerySelectorAsync("div");
-    div.ShouldNotHaveAttribute("data-bar");
-}
+        [Fact]
+        public async Task Class()
+        {
+            await Page.SetContentAsync("<div class='foo' />");
 
-[Fact]
-public async Task Class()
-{
-    await Page.SetContentAsync("<div class='foo' />");
+            var div = await Page.QuerySelectorAsync("div");
+            div
+                .ShouldHaveClass("foo")
+                .ShouldNotHaveClass("bar");
+        }
 
-    var div = await Page.QuerySelectorAsync("div");
-    div.ShouldHaveClass("foo");
+        [Fact]
+        public async Task Content()
+        {
+            await Page.SetContentAsync("<div>Foo</div>");
 
-    div = await Page.QuerySelectorAsync("div");
-    div.ShouldNotHaveClass("bar");
-}
+            var div = await Page.QuerySelectorAsync("div");
+            div
+                .ShouldHaveContent("Foo")
+                .ShouldNotHaveContent("Bar");
+        }
 
-[Fact]
-public async Task Content()
-{
-    await Page.SetContentAsync("<div>Foo</div>");
-
-    var div = await Page.QuerySelectorAsync("div");
-    div.ShouldHaveContent("Foo");
-
-    div = await Page.QuerySelectorAsync("div");
-    div.ShouldNotHaveContent("Bar");
-}
-
-[Fact]
-public async Task Visibility()
-{
-    await Page.SetContentAsync(@"
+        [Fact]
+        public async Task Visibility()
+        {
+            await Page.SetContentAsync(@"
 <html>
   <div id='foo'>Foo</div>
   <div id='bar' style='display:none'>Bar</div>
 </html>");
 
-    var html = await Page.QuerySelectorAsync("html");
-    html.ShouldExist();
+            var html = await Page.QuerySelectorAsync("html");
+            html.ShouldExist();
 
-    var div = await Page.QuerySelectorAsync("#foo");
-    div.ShouldBeVisible();
+            var div = await Page.QuerySelectorAsync("#foo");
+            div.ShouldBeVisible();
 
-    div = await Page.QuerySelectorAsync("#bar");
-    div.ShouldBeHidden();
-}
+            div = await Page.QuerySelectorAsync("#bar");
+            div.ShouldBeHidden();
+        }
 
-[Fact]
-public async Task Input()
-{
-    await Page.SetContentAsync(@"
+
+        [Fact]
+        public async Task Input()
+        {
+            await Page.SetContentAsync(@"
 <form>
   <input type='text' autofocus value='Foo Bar'>
   <input type='radio' readonly>
@@ -348,23 +321,23 @@ public async Task Input()
 </form>
 ");
 
-    var input = await Page.QuerySelectorAsync("input[type=checkbox]");
-    input.ShouldBeChecked();
+            var input = await Page.QuerySelectorAsync("input[type=checkbox]");
+            input.ShouldBeChecked();
 
-    input = await Page.QuerySelectorAsync("input[type=radio]");
-    input.ShouldBeEnabled();
+            input = await Page.QuerySelectorAsync("input[type=radio]");
+            input
+                .ShouldBeEnabled()
+                .ShouldBeReadOnly();
 
-    input = await Page.QuerySelectorAsync("input[type=radio]");
-    input.ShouldBeReadOnly();
+            input = await Page.QuerySelectorAsync("#foo");
+            input.ShouldBeSelected();
 
-    input = await Page.QuerySelectorAsync("#foo");
-    input.ShouldBeSelected();
-
-    input = await Page.QuerySelectorAsync("input[type=text]");
-    input.ShouldHaveFocus();
-
-    input = await Page.QuerySelectorAsync("input[type=text]");
-    input.ShouldHaveValue("Foo Bar");
+            input = await Page.QuerySelectorAsync("input[type=text]");
+            input
+                .ShouldHaveFocus()
+                .ShouldHaveValue("Foo Bar");
+        }
+    }
 }
 ```
 
