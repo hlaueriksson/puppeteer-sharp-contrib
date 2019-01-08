@@ -5,7 +5,7 @@ using Xunit;
 
 namespace PuppeteerSharp.Contrib.Tests.Documentation
 {
-    public class ShouldTests : PuppeteerPageBaseTest
+    public class ShouldTests : PuppeteerPageBaseTest, IClassFixture<PuppeteerFixture>
     {
         [Fact]
         public async Task Attributes()
