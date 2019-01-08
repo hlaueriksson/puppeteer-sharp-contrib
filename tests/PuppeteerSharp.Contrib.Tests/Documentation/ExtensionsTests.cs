@@ -6,8 +6,28 @@ using Xunit;
 
 namespace PuppeteerSharp.Contrib.Tests.Documentation
 {
-    public class ExtensionsTests : PuppeteerPageBaseTest
+    public class ExtensionsTests : IAsyncLifetime// : PuppeteerPageBaseTest
     {
+        private Browser Browser { get; set; }
+        private BrowserContext Context { get; set; }
+        private Page Page { get; set; }
+
+        public async Task InitializeAsync()
+        {
+            Browser = await Puppeteer.LaunchAsync(new LaunchOptions
+            {
+                Headless = true
+            });
+            Context = await Browser.CreateIncognitoBrowserContextAsync();
+            Page = await Context.NewPageAsync();
+        }
+
+        public async Task DisposeAsync()
+        {
+            await Page.CloseAsync();
+            await Browser.CloseAsync();
+        }
+
         [Fact]
         public async Task Query()
         {
