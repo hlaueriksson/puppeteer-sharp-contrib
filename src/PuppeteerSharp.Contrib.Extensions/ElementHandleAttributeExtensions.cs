@@ -94,7 +94,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         public static async Task<bool> HasAttributeAsync(this ElementHandle handle, string name)
         {
             handle.GuardFromNull();
-            return await handle.EvaluateFunctionAsync<bool>("(element, name) => element.hasAttribute(name)", name).ConfigureAwait(false);
+            return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("(element, name) => element.hasAttribute(name)", name).ConfigureAwait(false);
         }
 
         public static bool HasAttribute(this ElementHandle handle, string name)
@@ -112,7 +112,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         public static async Task<string> GetAttributeAsync(this ElementHandle handle, string name)
         {
             handle.GuardFromNull();
-            return await handle.EvaluateFunctionAsync<string>("(element, name) => element.getAttribute(name)", name).ConfigureAwait(false);
+            return await handle.EvaluateFunctionWithoutDisposeAsync<string>("(element, name) => element.getAttribute(name)", name).ConfigureAwait(false);
         }
 
         public static string GetAttribute(this ElementHandle handle, string name)

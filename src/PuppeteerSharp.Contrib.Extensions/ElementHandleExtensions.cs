@@ -92,7 +92,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         public static async Task<bool> HasContentAsync(this ElementHandle handle, string content)
         {
             handle.GuardFromNull();
-            return await handle.EvaluateFunctionAsync<bool>("(node, content) => node.textContent.includes(content)", content).ConfigureAwait(false);
+            return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("(node, content) => node.textContent.includes(content)", content).ConfigureAwait(false);
         }
 
         public static bool HasContent(this ElementHandle handle, string content)
@@ -110,7 +110,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         public static async Task<string> ClassNameAsync(this ElementHandle handle)
         {
             handle.GuardFromNull();
-            return await handle.EvaluateFunctionAsync<string>("element => element.className").ConfigureAwait(false);
+            return await handle.EvaluateFunctionWithoutDisposeAsync<string>("element => element.className").ConfigureAwait(false);
         }
 
         public static string ClassName(this ElementHandle handle)
@@ -128,7 +128,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         public static async Task<string[]> ClassListAsync(this ElementHandle handle)
         {
             handle.GuardFromNull();
-            var json = await handle.EvaluateFunctionAsync<JObject>("element => element.classList").ConfigureAwait(false);
+            var json = await handle.EvaluateFunctionWithoutDisposeAsync<JObject>("element => element.classList").ConfigureAwait(false);
             var dictionary = json.ToObject<Dictionary<string, string>>();
             return dictionary.Values.ToArray();
         }
@@ -148,7 +148,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         public static async Task<bool> HasClassAsync(this ElementHandle handle, string className)
         {
             handle.GuardFromNull();
-            return await handle.EvaluateFunctionAsync<bool>("(element, className) => element.classList.contains(className)", className).ConfigureAwait(false);
+            return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("(element, className) => element.classList.contains(className)", className).ConfigureAwait(false);
         }
 
         public static bool HasClass(this ElementHandle handle, string className)
@@ -167,7 +167,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         {
             handle.GuardFromNull();
             // https://blog.jquery.com/2009/02/20/jquery-1-3-2-released/#visible-hidden-overhauled
-            return await handle.EvaluateFunctionAsync<bool>("element => element.offsetWidth > 0 && element.offsetHeight > 0").ConfigureAwait(false);
+            return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("element => element.offsetWidth > 0 && element.offsetHeight > 0").ConfigureAwait(false);
         }
 
         public static bool IsVisible(this ElementHandle handle)
@@ -202,7 +202,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         public static async Task<bool> IsSelectedAsync(this ElementHandle handle)
         {
             handle.GuardFromNull();
-            return await handle.EvaluateFunctionAsync<bool>("element => element.selected").ConfigureAwait(false);
+            return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("element => element.selected").ConfigureAwait(false);
         }
 
         public static bool IsSelected(this ElementHandle handle)
@@ -220,7 +220,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         public static async Task<bool> IsCheckedAsync(this ElementHandle handle)
         {
             handle.GuardFromNull();
-            return await handle.EvaluateFunctionAsync<bool>("element => element.checked").ConfigureAwait(false);
+            return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("element => element.checked").ConfigureAwait(false);
         }
 
         public static bool IsChecked(this ElementHandle handle)
@@ -238,7 +238,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         public static async Task<bool> IsDisabledAsync(this ElementHandle handle)
         {
             handle.GuardFromNull();
-            return await handle.EvaluateFunctionAsync<bool>("element => element.disabled").ConfigureAwait(false);
+            return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("element => element.disabled").ConfigureAwait(false);
         }
 
         public static bool IsDisabled(this ElementHandle handle)
@@ -273,7 +273,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         public static async Task<bool> IsReadOnlyAsync(this ElementHandle handle)
         {
             handle.GuardFromNull();
-            return await handle.EvaluateFunctionAsync<bool>("element => element.readOnly").ConfigureAwait(false);
+            return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("element => element.readOnly").ConfigureAwait(false);
         }
 
         public static bool IsReadOnly(this ElementHandle handle)
@@ -291,7 +291,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         public static async Task<bool> HasFocusAsync(this ElementHandle handle)
         {
             handle.GuardFromNull();
-            return await handle.EvaluateFunctionAsync<bool>("element => element === document.activeElement").ConfigureAwait(false);
+            return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("element => element === document.activeElement").ConfigureAwait(false);
         }
 
         public static bool HasFocus(this ElementHandle handle)
