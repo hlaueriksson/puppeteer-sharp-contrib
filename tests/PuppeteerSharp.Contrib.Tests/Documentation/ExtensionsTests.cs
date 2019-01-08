@@ -6,7 +6,8 @@ using Xunit;
 
 namespace PuppeteerSharp.Contrib.Tests.Documentation
 {
-    public class ExtensionsTests : PuppeteerPageBaseTest, IClassFixture<PuppeteerFixture>
+    [Collection(PuppeteerFixture.Name)]
+    public class ExtensionsTests : PuppeteerPageBaseTest
     {
         [Fact]
         public async Task Query()
