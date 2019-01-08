@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using PuppeteerSharp.Contrib.Extensions;
 using PuppeteerSharp.Contrib.Tests.Base;
 using Xunit;
@@ -7,6 +8,23 @@ namespace PuppeteerSharp.Contrib.Tests.Documentation
 {
     public class ExtensionsTests : PuppeteerPageBaseTest
     {
+        [Fact]
+        public async Task Query()
+        {
+            await Page.SetContentAsync(@"
+<html>
+  <div id='foo'>Foo</div>
+  <div id='bar'>Bar</div>
+  <div id='baz'>Baz</div>
+</html>");
+
+            var div = await Page.QuerySelectorWithContentAsync("div", "Ba.");
+            Assert.Equal("bar", div.Id());
+
+            var divs = await Page.QuerySelectorAllWithContentAsync("div", "Ba.");
+            Assert.Equal(new[] { "bar", "baz" }, divs.Select(x => x.Id()));
+        }
+
         [Fact]
         public async Task Attributes()
         {
@@ -50,11 +68,7 @@ namespace PuppeteerSharp.Contrib.Tests.Documentation
 
             var div = await Page.QuerySelectorAsync("div");
             Assert.Equal("foo bar", div.ClassName());
-
-            div = await Page.QuerySelectorAsync("div");
             Assert.Equal(new[] { "foo", "bar" }, div.ClassList());
-
-            div = await Page.QuerySelectorAsync("div");
             Assert.True(div.HasClass("bar"));
         }
 
@@ -63,9 +77,9 @@ namespace PuppeteerSharp.Contrib.Tests.Documentation
         {
             await Page.SetContentAsync(@"
 <html>
-  <div id='foo'>
+  <div>
     Foo
-    <div id='bar'>Bar</div>
+    <span>Bar</span>
   </div>
 </html>
 ");
@@ -73,16 +87,10 @@ namespace PuppeteerSharp.Contrib.Tests.Documentation
             var html = await Page.QuerySelectorAsync("html");
             Assert.True(html.HasContent("Foo"));
 
-            var div = await Page.QuerySelectorAsync("#foo");
-            Assert.Equal("\n    Foo\n    <div id=\"bar\">Bar</div>\n  ", div.InnerHtml());
-
-            div = await Page.QuerySelectorAsync("#foo");
-            Assert.Equal("Foo\nBar", div.InnerText());
-
-            div = await Page.QuerySelectorAsync("#bar");
-            Assert.Equal("<div id=\"bar\">Bar</div>", div.OuterHtml());
-
-            div = await Page.QuerySelectorAsync("#foo");
+            var div = await Page.QuerySelectorAsync("div");
+            Assert.Equal("\n    Foo\n    <span>Bar</span>\n  ", div.InnerHtml());
+            Assert.Equal("<div>\n    Foo\n    <span>Bar</span>\n  </div>", div.OuterHtml());
+            Assert.Equal("Foo Bar", div.InnerText());
             Assert.Equal("\n    Foo\n    Bar\n  ", div.TextContent());
         }
 
@@ -93,11 +101,7 @@ namespace PuppeteerSharp.Contrib.Tests.Documentation
 
             var div = await Page.QuerySelectorAsync("div");
             Assert.True(div.Exists());
-
-            div = await Page.QuerySelectorAsync("div");
             Assert.False(div.IsHidden());
-
-            div = await Page.QuerySelectorAsync("div");
             Assert.True(div.IsVisible());
         }
 
@@ -124,11 +128,7 @@ namespace PuppeteerSharp.Contrib.Tests.Documentation
 
             input = await Page.QuerySelectorAsync("input[type=radio]");
             Assert.False(input.IsDisabled());
-
-            input = await Page.QuerySelectorAsync("input[type=radio]");
             Assert.True(input.IsEnabled());
-
-            input = await Page.QuerySelectorAsync("input[type=radio]");
             Assert.True(input.IsReadOnly());
 
             input = await Page.QuerySelectorAsync("#foo");

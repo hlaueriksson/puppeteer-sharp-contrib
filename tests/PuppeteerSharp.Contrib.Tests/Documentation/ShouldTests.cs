@@ -13,10 +13,9 @@ namespace PuppeteerSharp.Contrib.Tests.Documentation
             await Page.SetContentAsync("<div data-foo='bar' />");
 
             var div = await Page.QuerySelectorAsync("div");
-            div.ShouldHaveAttribute("data-foo");
-
-            div = await Page.QuerySelectorAsync("div");
-            div.ShouldNotHaveAttribute("data-bar");
+            div
+                .ShouldHaveAttribute("data-foo")
+                .ShouldNotHaveAttribute("data-bar");
         }
 
         [Fact]
@@ -25,10 +24,9 @@ namespace PuppeteerSharp.Contrib.Tests.Documentation
             await Page.SetContentAsync("<div class='foo' />");
 
             var div = await Page.QuerySelectorAsync("div");
-            div.ShouldHaveClass("foo");
-
-            div = await Page.QuerySelectorAsync("div");
-            div.ShouldNotHaveClass("bar");
+            div
+                .ShouldHaveClass("foo")
+                .ShouldNotHaveClass("bar");
         }
 
         [Fact]
@@ -37,10 +35,9 @@ namespace PuppeteerSharp.Contrib.Tests.Documentation
             await Page.SetContentAsync("<div>Foo</div>");
 
             var div = await Page.QuerySelectorAsync("div");
-            div.ShouldHaveContent("Foo");
-
-            div = await Page.QuerySelectorAsync("div");
-            div.ShouldNotHaveContent("Bar");
+            div
+                .ShouldHaveContent("Foo")
+                .ShouldNotHaveContent("Bar");
         }
 
         [Fact]
@@ -82,31 +79,17 @@ namespace PuppeteerSharp.Contrib.Tests.Documentation
             input.ShouldBeChecked();
 
             input = await Page.QuerySelectorAsync("input[type=radio]");
-            input.ShouldBeEnabled();
-
-            input = await Page.QuerySelectorAsync("input[type=radio]");
-            input.ShouldBeReadOnly();
+            input
+                .ShouldBeEnabled()
+                .ShouldBeReadOnly();
 
             input = await Page.QuerySelectorAsync("#foo");
             input.ShouldBeSelected();
 
             input = await Page.QuerySelectorAsync("input[type=text]");
-            input.ShouldHaveFocus();
-
-            input = await Page.QuerySelectorAsync("input[type=text]");
-            input.ShouldHaveValue("Foo Bar");
-        }
-
-        [Fact]
-        public async Task Chain_methods()
-        {
-            await Page.SetContentAsync("<div>Foo</div>");
-
-            var div = await Page.QuerySelectorAsync("div");
-            div
-                .ShouldExist()
-                .ShouldBeVisible()
-                .ShouldHaveContent("Foo");
+            input
+                .ShouldHaveFocus()
+                .ShouldHaveValue("Foo Bar");
         }
     }
 }
