@@ -14,6 +14,7 @@
     <PackageProjectUrl>https://github.com/hlaueriksson/puppeteer-sharp-contrib</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/hlaueriksson/puppeteer-sharp-contrib/master/icon.png</PackageIconUrl>
     <PackageTags>headless;chrome;puppeteer;test;testing;automation;assert</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/hlaueriksson/puppeteer-sharp-contrib.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
