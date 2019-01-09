@@ -4,8 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netstandard2.0\PuppeteerSharp.Contrib.Should.xml</DocumentationFile>
+  <PropertyGroup>
+    <DocumentationFile>bin\$(Configuration)\netstandard2.0\PuppeteerSharp.Contrib.Should.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
