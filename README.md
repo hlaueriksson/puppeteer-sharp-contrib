@@ -60,6 +60,8 @@ Extensions for `ElementHandle`:
 * `IsSelected`
 * `IsVisible`
 * `OuterHtml`
+* `QuerySelectorWithContentAsync`
+* `QuerySelectorAllWithContentAsync`
 * `TextContent`
 
 Usage:
@@ -85,10 +87,18 @@ namespace PuppeteerSharp.Contrib.Tests.Documentation
   <div id='baz'>Baz</div>
 </html>");
 
+            var html = await Page.QuerySelectorAsync("html");
+
             var div = await Page.QuerySelectorWithContentAsync("div", "Ba.");
             Assert.Equal("bar", div.Id());
 
+            div = await html.QuerySelectorWithContentAsync("div", "Ba.");
+            Assert.Equal("bar", div.Id());
+
             var divs = await Page.QuerySelectorAllWithContentAsync("div", "Ba.");
+            Assert.Equal(new[] { "bar", "baz" }, divs.Select(x => x.Id()));
+
+            divs = await html.QuerySelectorAllWithContentAsync("div", "Ba.");
             Assert.Equal(new[] { "bar", "baz" }, divs.Select(x => x.Id()));
         }
 

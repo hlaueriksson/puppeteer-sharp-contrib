@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace PuppeteerSharp.Contrib.Extensions
@@ -23,6 +24,27 @@ namespace PuppeteerSharp.Contrib.Extensions
             args.CopyTo(newArgs, 1);
 
             return await arrayHandle.ExecutionContext.EvaluateFunctionAsync<T>(pageFunction, newArgs).ConfigureAwait(false);
+        }
+
+        // EvaluateFunctionHandle
+
+        internal static async Task<JSHandle> EvaluateFunctionHandleAsync(this ElementHandle elementHandle, string script, params object[] args)
+        {
+            var newArgs = new object[args.Length + 1];
+            newArgs[0] = elementHandle ?? throw new SelectorException("Error: failed to find element matching selector");
+            args.CopyTo(newArgs, 1);
+
+            var method = elementHandle.ExecutionContext.GetType().GetMethod("EvaluateFunctionHandleAsync",
+                BindingFlags.NonPublic | BindingFlags.Instance,
+                null,
+                CallingConventions.Any,
+                new Type[] { typeof(string), typeof(object[]) },
+                null);
+            var task = method?.Invoke(elementHandle.ExecutionContext, new object[] { script, newArgs }) as Task<JSHandle>;
+
+            if (task == null) throw new InvalidOperationException("Invocation of EvaluateFunctionHandleAsync failed.");
+
+            return await task.ConfigureAwait(false);
         }
 
         // Guard

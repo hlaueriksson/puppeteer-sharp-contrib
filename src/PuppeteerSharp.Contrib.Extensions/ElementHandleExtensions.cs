@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
@@ -10,6 +11,53 @@ namespace PuppeteerSharp.Contrib.Extensions
     /// </summary>
     public static class ElementHandleExtensions
     {
+        // Query
+
+        /// <summary>
+        /// The method runs <c>element.querySelectorAll</c> and then tests a <c>RegExp</c> against the elements <c>textContent</c>. The first element match is returned. If no element matches the selector and regular expression, the return value resolve to <c>null</c>.
+        /// See also https://stackoverflow.com/a/37098508
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/> to query</param>
+        /// <param name="selector">A selector to query element for</param>
+        /// <param name="regex">A regular expression to test against <c>element.textContent</c></param>
+        /// <returns>Task which resolves to <see cref="ElementHandle"/> pointing to the element</returns>
+        public static async Task<ElementHandle> QuerySelectorWithContentAsync(this ElementHandle handle, string selector, string regex)
+        {
+            return await handle.EvaluateFunctionHandleAsync(
+                @"(element, selector, regex) => {
+                    var elements = element.querySelectorAll(selector);
+                    return Array.prototype.find.call(elements, function(element) {
+                        return RegExp(regex).test(element.textContent);
+                    });
+                }", selector, regex).ConfigureAwait(false) as ElementHandle;
+        }
+
+        /// <summary>
+        /// The method runs <c>element.querySelectorAll</c> and then tests a <c>RegExp</c> against the elements <c>textContent</c>. All element matches are returned. If no element matches the selector and regular expression, the return value resolve to <see cref="System.Array.Empty{T}"/>.
+        /// See also https://stackoverflow.com/a/37098508
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/> to query</param>
+        /// <param name="selector">A selector to query element for</param>
+        /// <param name="regex">A regular expression to test against <c>element.textContent</c></param>
+        /// <returns>Task which resolves to ElementHandles pointing to the elements</returns>
+        public static async Task<ElementHandle[]> QuerySelectorAllWithContentAsync(this ElementHandle handle, string selector, string regex)
+        {
+            var arrayHandle = await handle.EvaluateFunctionHandleAsync(
+                @"(element, selector, regex) => {
+                    var elements = element.querySelectorAll(selector);
+                    return Array.prototype.filter.call(elements, function(element) {
+                        return RegExp(regex).test(element.textContent);
+                    });
+                }", selector, regex).ConfigureAwait(false);
+
+            if (arrayHandle == null) throw new InvalidOperationException("EvaluateFunctionHandleAsync returned null.");
+
+            var properties = await arrayHandle.GetPropertiesAsync().ConfigureAwait(false);
+            await arrayHandle.DisposeAsync().ConfigureAwait(false);
+
+            return properties.Values.OfType<ElementHandle>().ToArray();
+        }
+
         // Exists
 
         /// <summary>
@@ -596,7 +644,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <summary>
         /// Indicates whether the element is required or not.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="task">An <see cref="ElementHandle"/></param>
         /// <remarks><![CDATA[Elements: <input>, <select>, <textarea>]]></remarks>
         /// <returns><c>true</c> if the element is required</returns>
         public static bool IsRequired(this Task<ElementHandle> task)

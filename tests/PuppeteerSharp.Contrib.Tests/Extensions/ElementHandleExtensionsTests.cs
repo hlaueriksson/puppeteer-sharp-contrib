@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using PuppeteerSharp.Contrib.Extensions;
 using PuppeteerSharp.Contrib.Tests.Base;
@@ -10,6 +11,50 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
     public class ElementHandleExtensionsTests : PuppeteerPageBaseTest
     {
         protected override async Task SetUp() => await Page.SetContentAsync("<html><body><div class='tweet'><div class='like'>100</div><div class='retweets'>10</div></div></body></html>");
+
+        [Fact]
+        public async Task QuerySelectorWithContentAsync_should_return_the_first_element_that_match_the_selector_and_has_the_content()
+        {
+            await Page.SetContentAsync(@"
+<html>
+  <div id='foo'>Foo</div>
+  <div id='bar'>Bar</div>
+  <div id='baz'>Baz</div>
+</html>");
+
+            var html = await Page.QuerySelectorAsync("html");
+
+            var foo = await html.QuerySelectorWithContentAsync("div", "Foo");
+            Assert.Equal("foo", foo.Id());
+
+            var bar = await html.QuerySelectorWithContentAsync("div", "Ba.");
+            Assert.Equal("bar", bar.Id());
+
+            var missing = await html.QuerySelectorWithContentAsync("div", "Missing");
+            Assert.Null(missing);
+        }
+
+        [Fact]
+        public async Task QuerySelectorAllWithContentAsync_should_return_all_elements_that_match_the_selector_and_has_the_content()
+        {
+            await Page.SetContentAsync(@"
+<html>
+  <div id='foo'>Foo</div>
+  <div id='bar'>Bar</div>
+  <div id='baz'>Baz</div>
+</html>");
+
+            var html = await Page.QuerySelectorAsync("html");
+
+            var divs = await html.QuerySelectorAllWithContentAsync("div", "Foo");
+            Assert.Equal(new[] { "foo" }, divs.Select(x => x.Id()));
+
+            divs = await html.QuerySelectorAllWithContentAsync("div", "Ba.");
+            Assert.Equal(new[] { "bar", "baz" }, divs.Select(x => x.Id()));
+
+            var missing = await html.QuerySelectorAllWithContentAsync("div", "Missing");
+            Assert.Empty(missing);
+        }
 
         [Fact]
         public async Task Exists_should_return_true_for_existing_element()
