@@ -2,6 +2,8 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/sg69dj3wt7kl2t2h?svg=true)](https://ci.appveyor.com/project/hlaueriksson/puppeteer-sharp-contrib)
 
+> Contributions to the Headless Chrome .NET API 🌐🧪
+
 > Puppeteer Sharp Contributions offers extensions to the Puppeteer Sharp API.
 > It provides a convenient way to write readable and robust browser tests in .NET
 

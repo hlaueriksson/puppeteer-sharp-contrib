@@ -2,6 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>1.0.0</Version>
+    <Authors>Henrik Lau Eriksson</Authors>
+    <Description>
+      Contributions to the Headless Chrome .NET API 🌐🧪
+
+      PuppeteerSharp.Contrib.Should is a should assertion library for the Puppeteer Sharp API.
+      It provides a convenient way to write readable and robust browser tests in .NET
+    </Description>
+    <PackageId>PuppeteerSharp.Contrib.Should</PackageId>
+    <PackageProjectUrl>https://github.com/hlaueriksson/puppeteer-sharp-contrib</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/hlaueriksson/puppeteer-sharp-contrib/master/icon.png</PackageIconUrl>
+    <PackageTags>headless;chrome;puppeteer;test;testing;automation;assert</PackageTags>
+    <RepositoryUrl>https://github.com/hlaueriksson/puppeteer-sharp-contrib.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <PropertyGroup>
