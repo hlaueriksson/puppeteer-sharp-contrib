@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net471</TargetFramework>
     <RootNamespace>PuppeteerSharp.Contrib.Sample</RootNamespace>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
