@@ -1,1 +1,1 @@
-dotnet test .\tests\PuppeteerSharp.Contrib.Tests\PuppeteerSharp.Contrib.Tests.csproj --verbosity normal
+dotnet test .\tests\PuppeteerSharp.Contrib.Tests\PuppeteerSharp.Contrib.Tests.csproj
