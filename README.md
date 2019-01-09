@@ -11,6 +11,18 @@
 
 > [Puppeteer](https://github.com/GoogleChrome/puppeteer) is a Node library which provides a high-level API to control Chrome or Chromium over the DevTools Protocol. Puppeteer runs headless by default, but can be configured to run full (non-headless) Chrome or Chromium.
 
+## Content
+
+1. [Introduction](#introduction)
+2. [Extensions](#extensions)
+3. [Should](#should)
+4. [Samples](#samples)
+    * [Xunit](#xunit)
+    * [NUnit](#nunit)
+    * [Machine.Specifications](#machinespecifications)
+    * [SpecFlow](#specflow)
+5. [Attribution](#attribution)
+
 ## Introduction
 
 `PuppeteerSharp` is a great library to automate the Chrome browser in .NET / C#.
@@ -23,6 +35,8 @@ _Puppeteer Sharp Contributions_ consists of two libraries that helps you write b
 These libraries contains _extension methods_ to the Puppeteer Sharp API and they are test framework agnostic.
 
 ## Extensions
+
+[![NuGet](https://buildstats.info/nuget/PuppeteerSharp.Contrib.Extensions)](https://www.nuget.org/packages/PuppeteerSharp.Contrib.Extensions/)
 
 `PuppeteerSharp.Contrib.Extensions` is a library with convenient extension methods for writing browser tests with the Puppeteer Sharp API.
 
@@ -227,6 +241,8 @@ public static bool HasContent(this Task<ElementHandle> task, string content)
 ```
 
 ## Should
+
+[![NuGet](https://buildstats.info/nuget/PuppeteerSharp.Contrib.Should)](https://www.nuget.org/packages/PuppeteerSharp.Contrib.Should/)
 
 `PuppeteerSharp.Contrib.Should` is a should assertion library for the Puppeteer Sharp API.
 
