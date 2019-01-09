@@ -290,6 +290,24 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
         }
 
         [Fact]
+        public async Task IsRequired_should_return_true_if_the_element_is_required()
+        {
+            await Page.SetContentAsync("<html><body><input id='foo' required><input id='bar'><input id='baz'></body></html>");
+
+            var input = await Page.QuerySelectorAsync("#foo");
+            Assert.True(await input.IsRequiredAsync());
+
+            await Page.EvaluateExpressionAsync("document.getElementById('bar').required = true");
+            input = await Page.QuerySelectorAsync("#bar");
+            Assert.True(input.IsRequired());
+
+            Assert.False(Page.QuerySelectorAsync("#baz").IsRequired());
+
+            var missing = await Page.QuerySelectorAsync(".missing");
+            Assert.Throws<ArgumentNullException>(() => missing.IsRequired());
+        }
+
+        [Fact]
         public async Task HasFocus_should_return_true_if_the_element_has_focus()
         {
             await Page.SetContentAsync("<html><body><input id='foo' autofocus><input id='bar'><input id='baz'></body></html>");

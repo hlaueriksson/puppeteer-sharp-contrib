@@ -56,6 +56,7 @@ Extensions for `ElementHandle`:
 * `IsEnabled`
 * `IsHidden`
 * `IsReadOnly`
+* `IsRequired`
 * `IsSelected`
 * `IsVisible`
 * `OuterHtml`
@@ -176,7 +177,7 @@ namespace PuppeteerSharp.Contrib.Tests.Documentation
         {
             await Page.SetContentAsync(@"
 <form>
-  <input type='text' autofocus>
+  <input type='text' autofocus required>
   <input type='radio' readonly>
   <input type='checkbox' checked>
   <select>
@@ -188,14 +189,15 @@ namespace PuppeteerSharp.Contrib.Tests.Documentation
 
             var input = await Page.QuerySelectorAsync("input[type=text]");
             Assert.True(input.HasFocus());
-
-            input = await Page.QuerySelectorAsync("input[type=checkbox]");
-            Assert.True(input.IsChecked());
+            Assert.True(input.IsRequired());
 
             input = await Page.QuerySelectorAsync("input[type=radio]");
             Assert.False(input.IsDisabled());
             Assert.True(input.IsEnabled());
             Assert.True(input.IsReadOnly());
+
+            input = await Page.QuerySelectorAsync("input[type=checkbox]");
+            Assert.True(input.IsChecked());
 
             input = await Page.QuerySelectorAsync("#foo");
             Assert.True(input.IsSelected());
@@ -225,6 +227,7 @@ Should assertions for `ElementHandle`:
 * `ShouldBeEnabled`
 * `ShouldBeHidden`
 * `ShouldBeReadOnly`
+* `ShouldBeRequired`
 * `ShouldBeSelected`
 * `ShouldBeVisible`
 * `ShouldExist`
@@ -235,6 +238,7 @@ Should assertions for `ElementHandle`:
 * `ShouldHaveValue`
 * `ShouldNotBeChecked`
 * `ShouldNotBeReadOnly`
+* `ShouldNotBeRequired`
 * `ShouldNotBeSelected`
 * `ShouldNotExist`
 * `ShouldNotHaveAttribute`
@@ -307,13 +311,12 @@ namespace PuppeteerSharp.Contrib.Tests.Documentation
             div.ShouldBeHidden();
         }
 
-
         [Fact]
         public async Task Input()
         {
             await Page.SetContentAsync(@"
 <form>
-  <input type='text' autofocus value='Foo Bar'>
+  <input type='text' autofocus required value='Foo Bar'>
   <input type='radio' readonly>
   <input type='checkbox' checked>
   <select>
@@ -323,21 +326,22 @@ namespace PuppeteerSharp.Contrib.Tests.Documentation
 </form>
 ");
 
-            var input = await Page.QuerySelectorAsync("input[type=checkbox]");
-            input.ShouldBeChecked();
+            var input = await Page.QuerySelectorAsync("input[type=text]");
+            input
+                .ShouldHaveFocus()
+                .ShouldBeRequired()
+                .ShouldHaveValue("Foo Bar");
 
             input = await Page.QuerySelectorAsync("input[type=radio]");
             input
                 .ShouldBeEnabled()
                 .ShouldBeReadOnly();
 
+            input = await Page.QuerySelectorAsync("input[type=checkbox]");
+            input.ShouldBeChecked();
+
             input = await Page.QuerySelectorAsync("#foo");
             input.ShouldBeSelected();
-
-            input = await Page.QuerySelectorAsync("input[type=text]");
-            input
-                .ShouldHaveFocus()
-                .ShouldHaveValue("Foo Bar");
         }
     }
 }

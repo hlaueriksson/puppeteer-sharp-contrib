@@ -728,6 +728,80 @@ namespace PuppeteerSharp.Contrib.Should
             if (task.IsReadOnly()) Throw.ShouldNotBeReadOnly(task, message);
         }
 
+        // Required
+
+        /// <summary>
+        /// Asserts that the element is required.
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="message">Optional failure message</param>
+        /// <remarks><![CDATA[Elements: <input>, <select>, <textarea>]]></remarks>
+        public static async Task ShouldBeRequiredAsync(this ElementHandle handle, string message = null)
+        {
+            if (!await handle.IsRequiredAsync().ConfigureAwait(false)) Throw.ShouldBeRequired(handle, message);
+        }
+
+        /// <summary>
+        /// Asserts that the element is required.
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="message">Optional failure message</param>
+        /// <remarks><![CDATA[Elements: <input>, <select>, <textarea>]]></remarks>
+        /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
+        public static ElementHandle ShouldBeRequired(this ElementHandle handle, string message = null)
+        {
+            if (!handle.IsRequired()) Throw.ShouldBeRequired(handle, message);
+
+            return handle;
+        }
+
+        /// <summary>
+        /// Asserts that the element is required.
+        /// </summary>
+        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="message">Optional failure message</param>
+        /// <remarks><![CDATA[Elements: <input>, <select>, <textarea>]]></remarks>
+        public static void ShouldBeRequired(this Task<ElementHandle> task, string message = null)
+        {
+            if (!task.IsRequired()) Throw.ShouldBeRequired(task, message);
+        }
+
+        /// <summary>
+        /// Asserts that the element is not required.
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="message">Optional failure message</param>
+        /// <remarks><![CDATA[Elements: <input>, <select>, <textarea>]]></remarks>
+        public static async Task ShouldNotBeRequiredAsync(this ElementHandle handle, string message = null)
+        {
+            if (await handle.IsRequiredAsync().ConfigureAwait(false)) Throw.ShouldNotBeRequired(handle, message);
+        }
+
+        /// <summary>
+        /// Asserts that the element is not required.
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="message">Optional failure message</param>
+        /// <remarks><![CDATA[Elements: <input>, <select>, <textarea>]]></remarks>
+        /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
+        public static ElementHandle ShouldNotBeRequired(this ElementHandle handle, string message = null)
+        {
+            if (handle.IsRequired()) Throw.ShouldNotBeRequired(handle, message);
+
+            return handle;
+        }
+
+        /// <summary>
+        /// Asserts that the element is not required.
+        /// </summary>
+        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="message">Optional failure message</param>
+        /// <remarks><![CDATA[Elements: <input>, <select>, <textarea>]]></remarks>
+        public static void ShouldNotBeRequired(this Task<ElementHandle> task, string message = null)
+        {
+            if (task.IsRequired()) Throw.ShouldNotBeRequired(task, message);
+        }
+
         // Focus
 
         /// <summary>

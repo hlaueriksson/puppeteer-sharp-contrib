@@ -568,6 +568,42 @@ namespace PuppeteerSharp.Contrib.Extensions
             return task.Result().IsReadOnly();
         }
 
+        // IsRequired
+
+        /// <summary>
+        /// Indicates whether the element is required or not.
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <remarks><![CDATA[Elements: <input>, <select>, <textarea>]]></remarks>
+        /// <returns><c>true</c> if the element is required</returns>
+        public static async Task<bool> IsRequiredAsync(this ElementHandle handle)
+        {
+            handle.GuardFromNull();
+            return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("element => element.required").ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Indicates whether the element is required or not.
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <remarks><![CDATA[Elements: <input>, <select>, <textarea>]]></remarks>
+        /// <returns><c>true</c> if the element is required</returns>
+        public static bool IsRequired(this ElementHandle handle)
+        {
+            return handle.IsRequiredAsync().Result();
+        }
+
+        /// <summary>
+        /// Indicates whether the element is required or not.
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <remarks><![CDATA[Elements: <input>, <select>, <textarea>]]></remarks>
+        /// <returns><c>true</c> if the element is required</returns>
+        public static bool IsRequired(this Task<ElementHandle> task)
+        {
+            return task.Result().IsRequired();
+        }
+
         // HasFocus
 
         /// <summary>

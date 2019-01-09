@@ -393,6 +393,46 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             Assert.Throws<ArgumentNullException>(() => Page.QuerySelectorAsync(".missing").ShouldNotBeReadOnly());
         }
 
+        // Required
+
+        [Fact]
+        public async Task ShouldBeRequired_throws_if_element_is_not_required()
+        {
+            await Page.SetContentAsync("<html><body><input id='foo' required><input id='bar'></body></html>");
+
+            var div = await Page.QuerySelectorAsync("#foo");
+            await div.ShouldBeRequiredAsync();
+
+            div = await Page.QuerySelectorAsync("#foo");
+            div.ShouldBeRequired();
+
+            Page.QuerySelectorAsync("#foo").ShouldBeRequired();
+
+            var ex = Assert.Throws<ShouldException>(() => Page.QuerySelectorAsync("#bar").ShouldBeRequired());
+            Assert.Equal("Should be required, but is not.", ex.Message);
+
+            Assert.Throws<ArgumentNullException>(() => Page.QuerySelectorAsync(".missing").ShouldBeRequired());
+        }
+
+        [Fact]
+        public async Task ShouldNotBeRequired_throws_if_element_is_required()
+        {
+            await Page.SetContentAsync("<html><body><input id='foo' required><input id='bar'></body></html>");
+
+            var div = await Page.QuerySelectorAsync("#bar");
+            await div.ShouldNotBeRequiredAsync();
+
+            div = await Page.QuerySelectorAsync("#bar");
+            div.ShouldNotBeRequired();
+
+            Page.QuerySelectorAsync("#bar").ShouldNotBeRequired();
+
+            var ex = Assert.Throws<ShouldException>(() => Page.QuerySelectorAsync("#foo").ShouldNotBeRequired());
+            Assert.Equal("Should not be required, but is.", ex.Message);
+
+            Assert.Throws<ArgumentNullException>(() => Page.QuerySelectorAsync(".missing").ShouldNotBeRequired());
+        }
+
         // Focus
 
         [Fact]

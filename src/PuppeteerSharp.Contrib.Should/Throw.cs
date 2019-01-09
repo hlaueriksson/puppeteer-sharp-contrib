@@ -204,6 +204,26 @@ namespace PuppeteerSharp.Contrib.Should
             Exception("Should not be read-only, but is.", message);
         }
 
+        public static void ShouldBeRequired(Task<ElementHandle> task, string message)
+        {
+            ShouldBeRequired(task.Result(), message);
+        }
+
+        public static void ShouldBeRequired(ElementHandle handle, string message)
+        {
+            Exception("Should be required, but is not.", message);
+        }
+
+        public static void ShouldNotBeRequired(Task<ElementHandle> task, string message)
+        {
+            ShouldNotBeRequired(task.Result(), message);
+        }
+
+        public static void ShouldNotBeRequired(ElementHandle handle, string message)
+        {
+            Exception("Should not be required, but is.", message);
+        }
+
         public static void ShouldHaveFocus(Task<ElementHandle> task, string message)
         {
             ShouldHaveFocus(task.Result(), message);

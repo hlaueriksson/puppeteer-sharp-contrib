@@ -111,7 +111,7 @@ namespace PuppeteerSharp.Contrib.Tests.Documentation
         {
             await Page.SetContentAsync(@"
 <form>
-  <input type='text' autofocus>
+  <input type='text' autofocus required>
   <input type='radio' readonly>
   <input type='checkbox' checked>
   <select>
@@ -123,14 +123,15 @@ namespace PuppeteerSharp.Contrib.Tests.Documentation
 
             var input = await Page.QuerySelectorAsync("input[type=text]");
             Assert.True(input.HasFocus());
-
-            input = await Page.QuerySelectorAsync("input[type=checkbox]");
-            Assert.True(input.IsChecked());
+            Assert.True(input.IsRequired());
 
             input = await Page.QuerySelectorAsync("input[type=radio]");
             Assert.False(input.IsDisabled());
             Assert.True(input.IsEnabled());
             Assert.True(input.IsReadOnly());
+
+            input = await Page.QuerySelectorAsync("input[type=checkbox]");
+            Assert.True(input.IsChecked());
 
             input = await Page.QuerySelectorAsync("#foo");
             Assert.True(input.IsSelected());

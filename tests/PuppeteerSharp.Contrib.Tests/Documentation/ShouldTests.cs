@@ -60,13 +60,12 @@ namespace PuppeteerSharp.Contrib.Tests.Documentation
             div.ShouldBeHidden();
         }
 
-
         [Fact]
         public async Task Input()
         {
             await Page.SetContentAsync(@"
 <form>
-  <input type='text' autofocus value='Foo Bar'>
+  <input type='text' autofocus required value='Foo Bar'>
   <input type='radio' readonly>
   <input type='checkbox' checked>
   <select>
@@ -76,21 +75,22 @@ namespace PuppeteerSharp.Contrib.Tests.Documentation
 </form>
 ");
 
-            var input = await Page.QuerySelectorAsync("input[type=checkbox]");
-            input.ShouldBeChecked();
+            var input = await Page.QuerySelectorAsync("input[type=text]");
+            input
+                .ShouldHaveFocus()
+                .ShouldBeRequired()
+                .ShouldHaveValue("Foo Bar");
 
             input = await Page.QuerySelectorAsync("input[type=radio]");
             input
                 .ShouldBeEnabled()
                 .ShouldBeReadOnly();
 
+            input = await Page.QuerySelectorAsync("input[type=checkbox]");
+            input.ShouldBeChecked();
+
             input = await Page.QuerySelectorAsync("#foo");
             input.ShouldBeSelected();
-
-            input = await Page.QuerySelectorAsync("input[type=text]");
-            input
-                .ShouldHaveFocus()
-                .ShouldHaveValue("Foo Bar");
         }
     }
 }
