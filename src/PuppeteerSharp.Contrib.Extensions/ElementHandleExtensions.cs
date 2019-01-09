@@ -5,15 +5,28 @@ using Newtonsoft.Json.Linq;
 
 namespace PuppeteerSharp.Contrib.Extensions
 {
+    /// <summary>
+    /// <see cref="ElementHandle"/> extension methods.
+    /// </summary>
     public static class ElementHandleExtensions
     {
         // Exists
 
+        /// <summary>
+        /// Indicates whether the element exists or not. A non null <see cref="ElementHandle"/> is considered existing.
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <returns><c>true</c> if the element exists</returns>
         public static bool Exists(this ElementHandle handle)
         {
             return handle != null;
         }
 
+        /// <summary>
+        /// Indicates whether the element exists or not. A non null <see cref="ElementHandle"/> is considered existing.
+        /// </summary>
+        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <returns><c>true</c> if the element exists</returns>
         public static bool Exists(this Task<ElementHandle> task)
         {
             return task.Result().Exists();
@@ -21,16 +34,34 @@ namespace PuppeteerSharp.Contrib.Extensions
 
         // InnerHtml
 
+        /// <summary>
+        /// InnerHtml of the element.
+        /// See also https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <returns>The element <c>innerHTML</c></returns>
         public static async Task<string> InnerHtmlAsync(this ElementHandle handle)
         {
             return await handle.GetPropertyValueAsync("innerHTML").ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// InnerHtml of the element.
+        /// See also https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <returns>The element <c>innerHTML</c></returns>
         public static string InnerHtml(this ElementHandle handle)
         {
             return handle.InnerHtmlAsync().Result();
         }
 
+        /// <summary>
+        /// InnerHtml of the element.
+        /// See also https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
+        /// </summary>
+        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <returns>The element <c>innerHTML</c></returns>
         public static string InnerHtml(this Task<ElementHandle> task)
         {
             return task.Result().InnerHtml();
@@ -38,16 +69,34 @@ namespace PuppeteerSharp.Contrib.Extensions
 
         // OuterHtml
 
+        /// <summary>
+        /// OuterHtml of the element.
+        /// See also https://developer.mozilla.org/en-US/docs/Web/API/Element/outerHTML
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <returns>The element <c>outerHTML</c></returns>
         public static async Task<string> OuterHtmlAsync(this ElementHandle handle)
         {
             return await handle.GetPropertyValueAsync("outerHTML").ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// OuterHtml of the element.
+        /// See also https://developer.mozilla.org/en-US/docs/Web/API/Element/outerHTML
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <returns>The element <c>outerHTML</c></returns>
         public static string OuterHtml(this ElementHandle handle)
         {
             return handle.OuterHtmlAsync().Result();
         }
 
+        /// <summary>
+        /// OuterHtml of the element.
+        /// See also https://developer.mozilla.org/en-US/docs/Web/API/Element/outerHTML
+        /// </summary>
+        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <returns>The element <c>outerHTML</c></returns>
         public static string OuterHtml(this Task<ElementHandle> task)
         {
             return task.Result().OuterHtml();
@@ -55,16 +104,34 @@ namespace PuppeteerSharp.Contrib.Extensions
 
         // TextContent
 
+        /// <summary>
+        /// TextContent of the element.
+        /// See also https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <returns>The element <c>textContent</c></returns>
         public static async Task<string> TextContentAsync(this ElementHandle handle)
         {
             return await handle.GetPropertyValueAsync("textContent").ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// TextContent of the element.
+        /// See also https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <returns>The element <c>textContent</c></returns>
         public static string TextContent(this ElementHandle handle)
         {
             return handle.TextContentAsync().Result();
         }
 
+        /// <summary>
+        /// TextContent of the element.
+        /// See also https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent
+        /// </summary>
+        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <returns>The element <c>textContent</c></returns>
         public static string TextContent(this Task<ElementHandle> task)
         {
             return task.Result().TextContent();
@@ -72,16 +139,34 @@ namespace PuppeteerSharp.Contrib.Extensions
 
         // InnerText
 
+        /// <summary>
+        /// InnerText of the element.
+        /// See also https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <returns>The element <c>innerText</c></returns>
         public static async Task<string> InnerTextAsync(this ElementHandle handle)
         {
             return await handle.GetPropertyValueAsync("innerText").ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// InnerText of the element.
+        /// See also https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <returns>The element <c>innerText</c></returns>
         public static string InnerText(this ElementHandle handle)
         {
             return handle.InnerTextAsync().Result();
         }
 
+        /// <summary>
+        /// InnerText of the element.
+        /// See also https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText
+        /// </summary>
+        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <returns>The element <c>innerText</c></returns>
         public static string InnerText(this Task<ElementHandle> task)
         {
             return task.Result().InnerText();
@@ -89,17 +174,38 @@ namespace PuppeteerSharp.Contrib.Extensions
 
         // HasContent
 
+        /// <summary>
+        /// Indicates whether the element has the specified content or not.
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="content">The content</param>
+        /// <remarks>Evaluates <c>node.textContent</c></remarks>
+        /// <returns><c>true</c> if the element has the specified content</returns>
         public static async Task<bool> HasContentAsync(this ElementHandle handle, string content)
         {
             handle.GuardFromNull();
             return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("(node, content) => node.textContent.includes(content)", content).ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Indicates whether the element has the specified content or not.
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="content">The content</param>
+        /// <remarks>Evaluates <c>node.textContent</c></remarks>
+        /// <returns><c>true</c> if the element has the specified content</returns>
         public static bool HasContent(this ElementHandle handle, string content)
         {
             return handle.HasContentAsync(content).Result();
         }
 
+        /// <summary>
+        /// Indicates whether the element has the specified content or not.
+        /// </summary>
+        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="content">The content</param>
+        /// <remarks>Evaluates <c>node.textContent</c></remarks>
+        /// <returns><c>true</c> if the element has the specified content</returns>
         public static bool HasContent(this Task<ElementHandle> task, string content)
         {
             return task.Result().HasContent(content);
@@ -107,17 +213,35 @@ namespace PuppeteerSharp.Contrib.Extensions
 
         // ClassName
 
+        /// <summary>
+        /// ClassName of the element.
+        /// See also https://developer.mozilla.org/en-US/docs/Web/API/Element/className
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <returns>The element <c>className</c></returns>
         public static async Task<string> ClassNameAsync(this ElementHandle handle)
         {
             handle.GuardFromNull();
             return await handle.EvaluateFunctionWithoutDisposeAsync<string>("element => element.className").ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// ClassName of the element.
+        /// See also https://developer.mozilla.org/en-US/docs/Web/API/Element/className
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <returns>The element <c>className</c></returns>
         public static string ClassName(this ElementHandle handle)
         {
             return handle.ClassNameAsync().Result();
         }
 
+        /// <summary>
+        /// ClassName of the element.
+        /// See also https://developer.mozilla.org/en-US/docs/Web/API/Element/className
+        /// </summary>
+        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <returns>The element <c>className</c></returns>
         public static string ClassName(this Task<ElementHandle> task)
         {
             return task.Result().ClassName();
@@ -125,6 +249,12 @@ namespace PuppeteerSharp.Contrib.Extensions
 
         // ClassList
 
+        /// <summary>
+        /// ClassList of the element.
+        /// See also https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <returns>The element <c>classList</c></returns>
         public static async Task<string[]> ClassListAsync(this ElementHandle handle)
         {
             handle.GuardFromNull();
@@ -133,11 +263,23 @@ namespace PuppeteerSharp.Contrib.Extensions
             return dictionary.Values.ToArray();
         }
 
+        /// <summary>
+        /// ClassList of the element.
+        /// See also https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <returns>The element <c>classList</c></returns>
         public static string[] ClassList(this ElementHandle handle)
         {
             return handle.ClassListAsync().Result();
         }
 
+        /// <summary>
+        /// ClassList of the element.
+        /// See also https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
+        /// </summary>
+        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <returns>The element <c>classList</c></returns>
         public static string[] ClassList(this Task<ElementHandle> task)
         {
             return task.Result().ClassList();
@@ -145,17 +287,35 @@ namespace PuppeteerSharp.Contrib.Extensions
 
         // HasClass
 
+        /// <summary>
+        /// Indicates whether the element has the specified class or not.
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="className">The class name</param>
+        /// <returns><c>true</c> if the element has the specified class</returns>
         public static async Task<bool> HasClassAsync(this ElementHandle handle, string className)
         {
             handle.GuardFromNull();
             return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("(element, className) => element.classList.contains(className)", className).ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Indicates whether the element has the specified class or not.
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="className">The class name</param>
+        /// <returns><c>true</c> if the element has the specified class</returns>
         public static bool HasClass(this ElementHandle handle, string className)
         {
             return handle.HasClassAsync(className).Result();
         }
 
+        /// <summary>
+        /// Indicates whether the element has the specified class or not.
+        /// </summary>
+        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="className">The class name</param>
+        /// <returns><c>true</c> if the element has the specified class</returns>
         public static bool HasClass(this Task<ElementHandle> task, string className)
         {
             return task.Result().HasClass(className);
@@ -163,18 +323,35 @@ namespace PuppeteerSharp.Contrib.Extensions
 
         // IsVisible
 
+        /// <summary>
+        /// Indicates whether the element is visible or not.
+        /// See also https://blog.jquery.com/2009/02/20/jquery-1-3-2-released/#visible-hidden-overhauled
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <returns><c>true</c> if the element is visible</returns>
         public static async Task<bool> IsVisibleAsync(this ElementHandle handle)
         {
             handle.GuardFromNull();
-            // https://blog.jquery.com/2009/02/20/jquery-1-3-2-released/#visible-hidden-overhauled
             return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("element => element.offsetWidth > 0 && element.offsetHeight > 0").ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Indicates whether the element is visible or not.
+        /// See also https://blog.jquery.com/2009/02/20/jquery-1-3-2-released/#visible-hidden-overhauled
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <returns><c>true</c> if the element is visible</returns>
         public static bool IsVisible(this ElementHandle handle)
         {
             return handle.IsVisibleAsync().Result();
         }
 
+        /// <summary>
+        /// Indicates whether the element is visible or not.
+        /// See also https://blog.jquery.com/2009/02/20/jquery-1-3-2-released/#visible-hidden-overhauled
+        /// </summary>
+        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <returns><c>true</c> if the element is visible</returns>
         public static bool IsVisible(this Task<ElementHandle> task)
         {
             return task.Result().IsVisible();
@@ -182,16 +359,31 @@ namespace PuppeteerSharp.Contrib.Extensions
 
         // IsHidden
 
+        /// <summary>
+        /// Indicates whether the element is hidden or not. This is the logical negation of <see cref="IsVisibleAsync"/>.
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <returns><c>true</c> if the element is hidden</returns>
         public static async Task<bool> IsHiddenAsync(this ElementHandle handle)
         {
             return !await handle.IsVisibleAsync().ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Indicates whether the element is hidden or not. This is the logical negation of <see cref="IsVisibleAsync"/>.
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <returns><c>true</c> if the element is hidden</returns>
         public static bool IsHidden(this ElementHandle handle)
         {
             return handle.IsHiddenAsync().Result();
         }
 
+        /// <summary>
+        /// Indicates whether the element is hidden or not. This is the logical negation of <see cref="IsVisibleAsync"/>.
+        /// </summary>
+        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <returns><c>true</c> if the element is hidden</returns>
         public static bool IsHidden(this Task<ElementHandle> task)
         {
             return task.Result().IsHidden();
@@ -199,17 +391,35 @@ namespace PuppeteerSharp.Contrib.Extensions
 
         // IsSelected
 
+        /// <summary>
+        /// Indicates whether the element is selected or not.
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <remarks><![CDATA[Elements: <option>]]></remarks>
+        /// <returns><c>true</c> if the element is selected</returns>
         public static async Task<bool> IsSelectedAsync(this ElementHandle handle)
         {
             handle.GuardFromNull();
             return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("element => element.selected").ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Indicates whether the element is selected or not.
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <remarks><![CDATA[Elements: <option>]]></remarks>
+        /// <returns><c>true</c> if the element is selected</returns>
         public static bool IsSelected(this ElementHandle handle)
         {
             return handle.IsSelectedAsync().Result();
         }
 
+        /// <summary>
+        /// Indicates whether the element is selected or not.
+        /// </summary>
+        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <remarks><![CDATA[Elements: <option>]]></remarks>
+        /// <returns><c>true</c> if the element is selected</returns>
         public static bool IsSelected(this Task<ElementHandle> task)
         {
             return task.Result().IsSelected();
@@ -217,17 +427,35 @@ namespace PuppeteerSharp.Contrib.Extensions
 
         // IsChecked
 
+        /// <summary>
+        /// Indicates whether the element is checked or not.
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <remarks><![CDATA[Elements: <command>, <input>]]></remarks>
+        /// <returns><c>true</c> if the element is checked</returns>
         public static async Task<bool> IsCheckedAsync(this ElementHandle handle)
         {
             handle.GuardFromNull();
             return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("element => element.checked").ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Indicates whether the element is checked or not.
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <remarks><![CDATA[Elements: <command>, <input>]]></remarks>
+        /// <returns><c>true</c> if the element is checked</returns>
         public static bool IsChecked(this ElementHandle handle)
         {
             return handle.IsCheckedAsync().Result();
         }
 
+        /// <summary>
+        /// Indicates whether the element is checked or not.
+        /// </summary>
+        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <remarks><![CDATA[Elements: <command>, <input>]]></remarks>
+        /// <returns><c>true</c> if the element is checked</returns>
         public static bool IsChecked(this Task<ElementHandle> task)
         {
             return task.Result().IsChecked();
@@ -235,17 +463,35 @@ namespace PuppeteerSharp.Contrib.Extensions
 
         // IsDisabled
 
+        /// <summary>
+        /// Indicates whether the element is disabled or not.
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <remarks><![CDATA[Elements: <button>, <command>, <fieldset>, <input>, <keygen>, <optgroup>, <option>, <select>, <textarea>]]></remarks>
+        /// <returns><c>true</c> if the element is disabled</returns>
         public static async Task<bool> IsDisabledAsync(this ElementHandle handle)
         {
             handle.GuardFromNull();
             return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("element => element.disabled").ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Indicates whether the element is disabled or not.
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <remarks><![CDATA[Elements: <button>, <command>, <fieldset>, <input>, <keygen>, <optgroup>, <option>, <select>, <textarea>]]></remarks>
+        /// <returns><c>true</c> if the element is disabled</returns>
         public static bool IsDisabled(this ElementHandle handle)
         {
             return handle.IsDisabledAsync().Result();
         }
 
+        /// <summary>
+        /// Indicates whether the element is disabled or not.
+        /// </summary>
+        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <remarks><![CDATA[Elements: <button>, <command>, <fieldset>, <input>, <keygen>, <optgroup>, <option>, <select>, <textarea>]]></remarks>
+        /// <returns><c>true</c> if the element is disabled</returns>
         public static bool IsDisabled(this Task<ElementHandle> task)
         {
             return task.Result().IsDisabled();
@@ -253,16 +499,34 @@ namespace PuppeteerSharp.Contrib.Extensions
 
         // IsEnabled
 
+        /// <summary>
+        /// Indicates whether the element is enabled or not. This is the logical negation of <see cref="IsDisabledAsync"/>.
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <remarks><![CDATA[Elements: <button>, <command>, <fieldset>, <input>, <keygen>, <optgroup>, <option>, <select>, <textarea>]]></remarks>
+        /// <returns><c>true</c> if the element is enabled</returns>
         public static async Task<bool> IsEnabledAsync(this ElementHandle handle)
         {
             return !await handle.IsDisabledAsync().ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Indicates whether the element is enabled or not. This is the logical negation of <see cref="IsDisabledAsync"/>.
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <remarks><![CDATA[Elements: <button>, <command>, <fieldset>, <input>, <keygen>, <optgroup>, <option>, <select>, <textarea>]]></remarks>
+        /// <returns><c>true</c> if the element is enabled</returns>
         public static bool IsEnabled(this ElementHandle handle)
         {
             return handle.IsEnabledAsync().Result();
         }
 
+        /// <summary>
+        /// Indicates whether the element is enabled or not. This is the logical negation of <see cref="IsDisabledAsync"/>.
+        /// </summary>
+        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <remarks><![CDATA[Elements: <button>, <command>, <fieldset>, <input>, <keygen>, <optgroup>, <option>, <select>, <textarea>]]></remarks>
+        /// <returns><c>true</c> if the element is enabled</returns>
         public static bool IsEnabled(this Task<ElementHandle> task)
         {
             return task.Result().IsEnabled();
@@ -270,17 +534,35 @@ namespace PuppeteerSharp.Contrib.Extensions
 
         // IsReadOnly
 
+        /// <summary>
+        /// Indicates whether the element is read-only or not.
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <remarks><![CDATA[Elements: <input>, <textarea>]]></remarks>
+        /// <returns><c>true</c> if the element is read-only</returns>
         public static async Task<bool> IsReadOnlyAsync(this ElementHandle handle)
         {
             handle.GuardFromNull();
             return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("element => element.readOnly").ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Indicates whether the element is read-only or not.
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <remarks><![CDATA[Elements: <input>, <textarea>]]></remarks>
+        /// <returns><c>true</c> if the element is read-only</returns>
         public static bool IsReadOnly(this ElementHandle handle)
         {
             return handle.IsReadOnlyAsync().Result();
         }
 
+        /// <summary>
+        /// Indicates whether the element is read-only or not.
+        /// </summary>
+        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <remarks><![CDATA[Elements: <input>, <textarea>]]></remarks>
+        /// <returns><c>true</c> if the element is read-only</returns>
         public static bool IsReadOnly(this Task<ElementHandle> task)
         {
             return task.Result().IsReadOnly();
@@ -288,17 +570,38 @@ namespace PuppeteerSharp.Contrib.Extensions
 
         // HasFocus
 
+        /// <summary>
+        /// Indicates whether the element has focus or not.
+        /// See also https://developer.mozilla.org/en-US/docs/Web/API/DocumentOrShadowRoot/activeElement
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <remarks><![CDATA[Elements: <button>, <input>, <keygen>, <select>, <textarea>]]></remarks>
+        /// <returns><c>true</c> if the element has focus</returns>
         public static async Task<bool> HasFocusAsync(this ElementHandle handle)
         {
             handle.GuardFromNull();
             return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("element => element === document.activeElement").ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Indicates whether the element has focus or not.
+        /// See also https://developer.mozilla.org/en-US/docs/Web/API/DocumentOrShadowRoot/activeElement
+        /// </summary>
+        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <remarks><![CDATA[Elements: <button>, <input>, <keygen>, <select>, <textarea>]]></remarks>
+        /// <returns><c>true</c> if the element has focus</returns>
         public static bool HasFocus(this ElementHandle handle)
         {
             return handle.HasFocusAsync().Result();
         }
 
+        /// <summary>
+        /// Indicates whether the element has focus or not.
+        /// See also https://developer.mozilla.org/en-US/docs/Web/API/DocumentOrShadowRoot/activeElement
+        /// </summary>
+        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <remarks><![CDATA[Elements: <button>, <input>, <keygen>, <select>, <textarea>]]></remarks>
+        /// <returns><c>true</c> if the element has focus</returns>
         public static bool HasFocus(this Task<ElementHandle> task)
         {
             return task.Result().HasFocus();

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace PuppeteerSharp.Contrib.Extensions
 {
-    public static class InternalExtensions
+    internal static class InternalExtensions
     {
         // EvaluateFunction
 
@@ -16,7 +16,7 @@ namespace PuppeteerSharp.Contrib.Extensions
             return await elementHandle.ExecutionContext.EvaluateFunctionAsync<T>(pageFunction, newArgs).ConfigureAwait(false);
         }
 
-        public static async Task<T> EvaluateFunctionWithoutDisposeAsync<T>(this JSHandle arrayHandle, string pageFunction, params object[] args)
+        internal static async Task<T> EvaluateFunctionWithoutDisposeAsync<T>(this JSHandle arrayHandle, string pageFunction, params object[] args)
         {
             var newArgs = new object[args.Length + 1];
             newArgs[0] = arrayHandle;
