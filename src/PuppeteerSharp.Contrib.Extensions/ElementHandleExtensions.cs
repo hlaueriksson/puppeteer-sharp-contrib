@@ -23,7 +23,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns>Task which resolves to <see cref="ElementHandle"/> pointing to the element</returns>
         public static async Task<ElementHandle> QuerySelectorWithContentAsync(this ElementHandle handle, string selector, string regex)
         {
-            return await handle.EvaluateFunctionHandleAsync(
+            return await handle.EvaluateFunctionHandleViaReflectionAsync(
                 @"(element, selector, regex) => {
                     var elements = element.querySelectorAll(selector);
                     return Array.prototype.find.call(elements, function(element) {
@@ -42,7 +42,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns>Task which resolves to ElementHandles pointing to the elements</returns>
         public static async Task<ElementHandle[]> QuerySelectorAllWithContentAsync(this ElementHandle handle, string selector, string regex)
         {
-            var arrayHandle = await handle.EvaluateFunctionHandleAsync(
+            var arrayHandle = await handle.EvaluateFunctionHandleViaReflectionAsync(
                 @"(element, selector, regex) => {
                     var elements = element.querySelectorAll(selector);
                     return Array.prototype.filter.call(elements, function(element) {

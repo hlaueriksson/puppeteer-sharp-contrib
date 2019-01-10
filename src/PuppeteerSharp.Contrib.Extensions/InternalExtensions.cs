@@ -28,7 +28,7 @@ namespace PuppeteerSharp.Contrib.Extensions
 
         // EvaluateFunctionHandle
 
-        internal static async Task<JSHandle> EvaluateFunctionHandleAsync(this ElementHandle elementHandle, string script, params object[] args)
+        internal static async Task<JSHandle> EvaluateFunctionHandleViaReflectionAsync(this ElementHandle elementHandle, string script, params object[] args)
         {
             var newArgs = new object[args.Length + 1];
             newArgs[0] = elementHandle ?? throw new SelectorException("Error: failed to find element matching selector");
