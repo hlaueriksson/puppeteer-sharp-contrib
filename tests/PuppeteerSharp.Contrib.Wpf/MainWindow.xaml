@@ -1,0 +1,15 @@
+﻿<Window x:Class="PuppeteerSharp.Contrib.Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PuppeteerSharp.Contrib.Wpf"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TextBox Name="Url" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="https://github.com/kblok/puppeteer-sharp" VerticalAlignment="Top" Width="774" />
+        <TextBox Name="Selector" HorizontalAlignment="Left" Height="23" Margin="10,38,0,0" TextWrapping="Wrap" Text="h1 &gt; a" VerticalAlignment="Top" Width="774" />
+        <Button Content="Click me" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Width="774" Click="Button_Click"/>
+        <TextBox Name="TextBox" HorizontalAlignment="Left" Height="321" Margin="10,89,0,0" TextWrapping="Wrap" Text="Will it freeze of hang?" VerticalAlignment="Top" Width="774"/>
+    </Grid>
+</Window>
