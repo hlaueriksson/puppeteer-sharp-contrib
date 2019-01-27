@@ -1,6 +1,10 @@
 # Puppeteer Sharp Contributions
 
 [![Build status](https://ci.appveyor.com/api/projects/status/sg69dj3wt7kl2t2h?svg=true)](https://ci.appveyor.com/project/hlaueriksson/puppeteer-sharp-contrib)
+[![CodeFactor](https://www.codefactor.io/repository/github/hlaueriksson/puppeteer-sharp-contrib/badge)](https://www.codefactor.io/repository/github/hlaueriksson/puppeteer-sharp-contrib)
+
+[![PuppeteerSharp.Contrib.Extensions](https://img.shields.io/nuget/v/PuppeteerSharp.Contrib.Extensions.svg?label=PuppeteerSharp.Contrib.Extensions)](https://www.nuget.org/packages/PuppeteerSharp.Contrib.Extensions)
+[![PuppeteerSharp.Contrib.Should](https://img.shields.io/nuget/v/PuppeteerSharp.Contrib.Should.svg?label=PuppeteerSharp.Contrib.Should)](https://www.nuget.org/packages/PuppeteerSharp.Contrib.Should)
 
 > Contributions to the Headless Chrome .NET API 🌐🧪
 
