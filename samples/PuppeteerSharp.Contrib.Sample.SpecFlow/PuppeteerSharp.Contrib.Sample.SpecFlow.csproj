@@ -7,10 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentAssertions" Version="5.5.3" />
+    <PackageReference Include="FluentAssertions" Version="5.7.0" />
     <PackageReference Include="PuppeteerSharp" Version="1.11.1" />
     <PackageReference Include="PuppeteerSharp.Contrib.Should" Version="1.0.0" />
-    <PackageReference Include="SpecFlow.xUnit" Version="2.4.1" />
+    <PackageReference Include="SpecFlow.xUnit" Version="3.0.225" />
   </ItemGroup>
 
   <ItemGroup>
