@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Machine.Specifications" Version="1.0.0" />
     <PackageReference Include="Machine.Specifications.Should" Version="1.0.0" />
-    <PackageReference Include="PuppeteerSharp" Version="1.11.1" />
+    <PackageReference Include="PuppeteerSharp" Version="1.18.0" />
     <PackageReference Include="PuppeteerSharp.Contrib.Should" Version="1.0.0" />
   </ItemGroup>
 
