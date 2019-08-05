@@ -1,5 +1,4 @@
 # Puppeteer Sharp Contributions
-https://www.nuget.org/packages/PuppeteerSharp.Contrib.Should/
 
 [![Build status](https://ci.appveyor.com/api/projects/status/sg69dj3wt7kl2t2h?svg=true)](https://ci.appveyor.com/project/hlaueriksson/puppeteer-sharp-contrib)
 [![CodeFactor](https://www.codefactor.io/repository/github/hlaueriksson/puppeteer-sharp-contrib/badge)](https://www.codefactor.io/repository/github/hlaueriksson/puppeteer-sharp-contrib)
@@ -44,6 +43,12 @@ These libraries contains _extension methods_ to the Puppeteer Sharp API and they
 [![NuGet](https://buildstats.info/nuget/PuppeteerSharp.Contrib.Extensions)](https://www.nuget.org/packages/PuppeteerSharp.Contrib.Extensions/)
 
 `PuppeteerSharp.Contrib.Extensions` is a library with convenient extension methods for writing browser tests with the Puppeteer Sharp API.
+
+Install via [NuGet](https://www.nuget.org/packages/PuppeteerSharp.Contrib.Extensions/):
+
+`PM>` `Install-Package PuppeteerSharp.Contrib.Extensions`
+
+`>` `dotnet add package PuppeteerSharp.Contrib.Extensions`
 
 Extensions for `Page`:
 
@@ -250,6 +255,12 @@ public static bool HasContent(this Task<ElementHandle> task, string content)
 [![NuGet](https://buildstats.info/nuget/PuppeteerSharp.Contrib.Should)](https://www.nuget.org/packages/PuppeteerSharp.Contrib.Should/)
 
 `PuppeteerSharp.Contrib.Should` is a should assertion library for the Puppeteer Sharp API.
+
+Install via [NuGet](https://www.nuget.org/packages/PuppeteerSharp.Contrib.Should/):
+
+`PM>` `Install-Package PuppeteerSharp.Contrib.Should`
+
+`>` `dotnet add package PuppeteerSharp.Contrib.Should`
 
 Should assertions for `ElementHandle`:
 
