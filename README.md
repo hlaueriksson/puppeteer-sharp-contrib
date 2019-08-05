@@ -55,6 +55,22 @@ Extensions for `Page`:
 * `QuerySelectorWithContentAsync`
 * `QuerySelectorAllWithContentAsync`
 
+Extensions for `ElementHandle`:
+
+* `ClassList`
+* `ClassName`
+* `Exists`
+* `HasClass`
+* `HasFocus`
+* `IsChecked`
+* `IsDisabled`
+* `IsEnabled`
+* `IsHidden`
+* `IsReadOnly`
+* `IsRequired`
+* `IsSelected`
+* `IsVisible`
+
 _Attribute_ extensions for `ElementHandle`:
 
 * `GetAttribute`
@@ -65,28 +81,18 @@ _Attribute_ extensions for `ElementHandle`:
 * `Src`
 * `Value`
 
-Extensions for `ElementHandle`:
+_Content_ extensions for `ElementHandle`:
 
-* `ClassList`
-* `ClassName`
-* `Exists`
-* `HasClass`
 * `HasContent`
-* `HasFocus`
 * `InnerHtml`
 * `InnerText`
-* `IsChecked`
-* `IsDisabled`
-* `IsEnabled`
-* `IsHidden`
-* `IsReadOnly`
-* `IsRequired`
-* `IsSelected`
-* `IsVisible`
 * `OuterHtml`
+* `TextContent`
+
+_Query_ extensions for `ElementHandle`:
+
 * `QuerySelectorWithContentAsync`
 * `QuerySelectorAllWithContentAsync`
-* `TextContent`
 
 Usage:
 
