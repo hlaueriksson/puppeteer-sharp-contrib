@@ -52,8 +52,8 @@ namespace PuppeteerSharp.Contrib.Sample
             await link.ClickAsync();
             await page.WaitForNavigationAsync();
 
-            h1 = await page.QuerySelectorAsync("h1");
-            await h1.ShouldHaveContentAsync("kblok/puppeteer-sharp");
+            h1 = await page.QuerySelectorAsync("article > h1");
+            await h1.ShouldHaveContentAsync("Puppeteer Sharp");
             page.Url.ShouldBe("https://github.com/kblok/puppeteer-sharp");
         }
 

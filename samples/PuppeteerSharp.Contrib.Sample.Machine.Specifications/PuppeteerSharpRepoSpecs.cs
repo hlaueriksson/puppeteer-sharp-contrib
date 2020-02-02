@@ -44,7 +44,7 @@ namespace PuppeteerSharp.Contrib.Sample
                 link.ClickAsync().Await();
                 page.WaitForNavigationAsync().Await();
 
-                page.QuerySelectorAsync("h1").ShouldHaveContent("kblok/puppeteer-sharp");
+                page.QuerySelectorAsync("article > h1").ShouldHaveContent("Puppeteer Sharp");
                 page.Url.ShouldEqual("https://github.com/kblok/puppeteer-sharp");
             };
         }

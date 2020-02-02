@@ -49,7 +49,7 @@ namespace PuppeteerSharp.Contrib.Sample
             await link.ClickAsync();
             await page.WaitForNavigationAsync();
 
-            page.QuerySelectorAsync("h1").ShouldHaveContent("kblok/puppeteer-sharp");
+            page.QuerySelectorAsync("article > h1").ShouldHaveContent("Puppeteer Sharp");
             page.Url.ShouldBe("https://github.com/kblok/puppeteer-sharp");
         }
 
