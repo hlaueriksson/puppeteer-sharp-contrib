@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.168
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PuppeteerSharp.Contrib.Extensions", "src\PuppeteerSharp.Contrib.Extensions\PuppeteerSharp.Contrib.Extensions.csproj", "{452159CF-A71D-4405-8C4F-B5ED011D9F0E}"
 EndProject
@@ -22,6 +22,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PuppeteerSharp.Contrib.Sample.Machine.Specifications", "samples\PuppeteerSharp.Contrib.Sample.Machine.Specifications\PuppeteerSharp.Contrib.Sample.Machine.Specifications.csproj", "{AB0B12B5-5DFC-4EFD-A09E-CDC94F6E0DCC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PuppeteerSharp.Contrib.Sample.SpecFlow", "samples\PuppeteerSharp.Contrib.Sample.SpecFlow\PuppeteerSharp.Contrib.Sample.SpecFlow.csproj", "{AFC9E7BC-EBF1-4F83-869E-015F6229CECD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PuppeteerSharp.Contrib.PageObjects", "src\PuppeteerSharp.Contrib.PageObjects\PuppeteerSharp.Contrib.PageObjects.csproj", "{C6119D5E-9A8C-484A-A624-DA5A658F0AF6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{AFC9E7BC-EBF1-4F83-869E-015F6229CECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFC9E7BC-EBF1-4F83-869E-015F6229CECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFC9E7BC-EBF1-4F83-869E-015F6229CECD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6119D5E-9A8C-484A-A624-DA5A658F0AF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6119D5E-9A8C-484A-A624-DA5A658F0AF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6119D5E-9A8C-484A-A624-DA5A658F0AF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6119D5E-9A8C-484A-A624-DA5A658F0AF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,6 +75,7 @@ Global
 		{FAD49C0D-FEB1-4DD6-9A50-006C25600143} = {A41500E2-A20C-4532-909F-47A7ECD03D8B}
 		{AB0B12B5-5DFC-4EFD-A09E-CDC94F6E0DCC} = {A41500E2-A20C-4532-909F-47A7ECD03D8B}
 		{AFC9E7BC-EBF1-4F83-869E-015F6229CECD} = {A41500E2-A20C-4532-909F-47A7ECD03D8B}
+		{C6119D5E-9A8C-484A-A624-DA5A658F0AF6} = {768BB21B-525A-4D0F-BBA1-7C39BFDD6E44}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {11185329-90DF-450C-B1C9-14699DDEBE39}
