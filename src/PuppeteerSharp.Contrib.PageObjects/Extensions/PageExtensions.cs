@@ -68,7 +68,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
 
         public static async Task<T> WaitForXPathAsync<T>(this Page page, string xpath, WaitForSelectorOptions options = null) where T : ElementObject
         {
-            var elementHandle = await page.WaitForSelectorAsync(xpath, options);
+            var elementHandle = await page.WaitForXPathAsync(xpath, options);
 
             return ProxyFactory.ElementObject<T>(page, elementHandle);
         }
