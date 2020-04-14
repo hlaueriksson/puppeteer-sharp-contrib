@@ -56,5 +56,16 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             result = subject.SelectInterceptors(null, methodInfo, interceptors);
             Assert.IsType<XPathInterceptor>(result.Single());
         }
+
+        [Fact]
+        public void SelectInterceptors_returns_other_interceptors_for_properties_not_marked_with_Selector_or_XPath_attribute()
+        {
+            var subject = new InterceptorSelector();
+            var interceptors = new IInterceptor[] { new SelectorInterceptor(), new XPathInterceptor(), new StandardInterceptor() };
+
+            var methodInfo = typeof(string).GetMethod(nameof(string.GetTypeCode));
+            var result = subject.SelectInterceptors(null, methodInfo, interceptors);
+            Assert.Same(interceptors.Last(), result.Single());
+        }
     }
 }

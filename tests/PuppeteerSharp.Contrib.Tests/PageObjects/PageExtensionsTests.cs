@@ -29,24 +29,18 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             result = await Page.GoToAsync<FakePageObject>("about:blank");
             Assert.NotNull(result);
             Assert.IsAssignableFrom<FakePageObject>(result);
+
+            result = await Page.GoToAsync<FakePageObject>("https://github.com/kblok/puppeteer-sharp");
+            Assert.NotNull(result.Page);
+            Assert.NotNull(result.Response);
         }
 
-        [Fact(Skip = "Needs navigation")]
+        [Fact]
         public async Task WaitForNavigationAsync_returns_proxy_of_type()
         {
+            await Page.GoToAsync("https://github.com/kblok/puppeteer-sharp");
+            await Page.ClickAsync("h1 > strong > a");
             var result = await Page.WaitForNavigationAsync<FakePageObject>(new NavigationOptions());
-            Assert.NotNull(result);
-            Assert.IsAssignableFrom<FakePageObject>(result);
-        }
-
-        [Fact(Skip = "Needs response")]
-        public async Task WaitForResponseAsync_returns_proxy_of_type()
-        {
-            var result = await Page.WaitForResponseAsync<FakePageObject>(response => response.Ok, new WaitForOptions());
-            Assert.NotNull(result);
-            Assert.IsAssignableFrom<FakePageObject>(result);
-
-            result = await Page.WaitForResponseAsync<FakePageObject>("about:blank", new WaitForOptions());
             Assert.NotNull(result);
             Assert.IsAssignableFrom<FakePageObject>(result);
         }

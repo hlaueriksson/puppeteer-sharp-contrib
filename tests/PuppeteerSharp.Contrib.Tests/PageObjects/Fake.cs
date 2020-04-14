@@ -22,8 +22,20 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         [Selector(".retweets")]
         public virtual Task<FakeElementObject> SelectorForElementObject { get; }
 
+        [Selector(".tweet")]
+        public virtual Task<object> SelectorForWrongReturnType { get; }
+
+        [Selector(".tweet")]
+        public virtual ElementHandle SelectorForNonTaskReturnType { get; }
+
         [XPath("//div")]
         public virtual Task<ElementHandle[]> XPathForElementHandleArray { get; }
+
+        [XPath("//div")]
+        public virtual Task<object[]> XPathForWrongReturnType { get; }
+
+        [XPath("//div")]
+        public virtual ElementHandle[] XPathForNonTaskReturnType { get; }
     }
 
     public class FakeElementObject : ElementObject
@@ -36,6 +48,27 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
         [Selector(".retweets")]
         public virtual Task<FakeElementObject> SelectorForElementObject { get; }
+
+        [Selector(".tweet")]
+        public virtual Task<object> SelectorForWrongReturnType { get; }
+
+        [Selector(".tweet")]
+        public virtual ElementHandle SelectorForNonTaskReturnType { get; }
+
+        [XPath("//div")]
+        public virtual Task<ElementHandle[]> XPathForElementHandleArray { get; }
+
+        [XPath("//div")]
+        public virtual Task<object[]> XPathForWrongReturnType { get; }
+
+        [XPath("//div")]
+        public virtual ElementHandle[] XPathForNonTaskReturnType { get; }
+    }
+
+    public class FakeObjectWithNoBaseClass
+    {
+        [Selector(".tweet")]
+        public virtual Task<ElementHandle> SelectorForElementHandle { get; }
 
         [XPath("//div")]
         public virtual Task<ElementHandle[]> XPathForElementHandleArray { get; }

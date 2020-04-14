@@ -64,6 +64,28 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             Assert.IsAssignableFrom<FakeElementObject>(result);
         }
 
+        [Fact]
+        public void Intercept_sets_the_ReturnValue_to_null_for_property_on_PageObject_marked_with_SelectorAttribute_but_wrong_return_type()
+        {
+            var methodInfo = _pageObject.GetType().GetProperty(nameof(FakePageObject.SelectorForWrongReturnType)).GetMethod;
+            var invocation = new FakeInvocation(methodInfo, _pageObject);
+
+            _subject.Intercept(invocation);
+
+            Assert.Null(invocation.ReturnValue);
+        }
+
+        [Fact]
+        public void Intercept_sets_the_ReturnValue_to_null_for_property_on_PageObject_marked_with_SelectorAttribute_but_non_Task_return_type()
+        {
+            var methodInfo = _pageObject.GetType().GetProperty(nameof(FakePageObject.SelectorForNonTaskReturnType)).GetMethod;
+            var invocation = new FakeInvocation(methodInfo, _pageObject);
+
+            _subject.Intercept(invocation);
+
+            Assert.Null(invocation.ReturnValue);
+        }
+
         // ElementObject
 
         [Fact]
@@ -103,6 +125,42 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             Assert.NotNull(result);
             Assert.IsAssignableFrom<FakeElementObject>(result);
+        }
+
+        [Fact]
+        public void Intercept_sets_the_ReturnValue_to_null_for_property_on_ElementObject_marked_with_SelectorAttribute_but_wrong_return_type()
+        {
+            var methodInfo = _elementObject.GetType().GetProperty(nameof(FakeElementObject.SelectorForWrongReturnType)).GetMethod;
+            var invocation = new FakeInvocation(methodInfo, _elementObject);
+
+            _subject.Intercept(invocation);
+
+            Assert.Null(invocation.ReturnValue);
+        }
+
+        [Fact]
+        public void Intercept_sets_the_ReturnValue_to_null_for_property_on_ElementObject_marked_with_SelectorAttribute_but_non_Task_return_type()
+        {
+            var methodInfo = _elementObject.GetType().GetProperty(nameof(FakeElementObject.SelectorForNonTaskReturnType)).GetMethod;
+            var invocation = new FakeInvocation(methodInfo, _elementObject);
+
+            _subject.Intercept(invocation);
+
+            Assert.Null(invocation.ReturnValue);
+        }
+
+        // Unknown
+
+        [Fact]
+        public void Intercept_sets_the_ReturnValue_to_null_for_property_on_unknown_object_marked_with_SelectorAttribute()
+        {
+            var objectWithNoBaseClass = new FakeObjectWithNoBaseClass();
+            var methodInfo = objectWithNoBaseClass.GetType().GetProperty(nameof(FakeObjectWithNoBaseClass.SelectorForElementHandle)).GetMethod;
+            var invocation = new FakeInvocation(methodInfo, objectWithNoBaseClass);
+
+            _subject.Intercept(invocation);
+
+            Assert.Null(invocation.ReturnValue);
         }
     }
 }

@@ -44,5 +44,38 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             methodInfo = typeof(FakeElementObject).GetProperty(nameof(FakeElementObject.XPathForElementHandleArray)).GetMethod;
             Assert.True(subject.ShouldInterceptMethod(null, methodInfo));
         }
+
+        [Fact]
+        public void ShouldInterceptMethod_returns_false_for_properties_not_marked_with_Selector_or_XPath_attribute()
+        {
+            var subject = new ProxyGenerationHook();
+
+            var methodInfo = typeof(string).GetProperty(nameof(string.Length)).GetMethod;
+            Assert.False(subject.ShouldInterceptMethod(null, methodInfo));
+        }
+
+        [Fact]
+        public void ShouldInterceptMethod_returns_false_for_properties_marked_with_Selector_or_XPath_attribute_but_has_non_Task_return_type()
+        {
+            var subject = new ProxyGenerationHook();
+
+            var methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.SelectorForNonTaskReturnType)).GetMethod;
+            Assert.False(subject.ShouldInterceptMethod(null, methodInfo));
+
+            methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.XPathForNonTaskReturnType)).GetMethod;
+            Assert.False(subject.ShouldInterceptMethod(null, methodInfo));
+        }
+
+        [Fact]
+        public void caching_should_work()
+        {
+            var subject = new ProxyGenerationHook();
+
+            Assert.True(subject.Equals(new ProxyGenerationHook()));
+
+            var hashCode = subject.GetHashCode();
+
+            Assert.Equal(new ProxyGenerationHook().GetHashCode(), hashCode);
+        }
     }
 }

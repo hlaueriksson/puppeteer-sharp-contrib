@@ -38,6 +38,28 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             Assert.IsType<ElementHandle[]>(result);
         }
 
+        [Fact]
+        public void Intercept_sets_the_ReturnValue_to_null_for_property_on_PageObject_marked_with_XPathAttribute_but_wrong_return_type()
+        {
+            var methodInfo = _pageObject.GetType().GetProperty(nameof(FakePageObject.XPathForWrongReturnType)).GetMethod;
+            var invocation = new FakeInvocation(methodInfo, _pageObject);
+
+            _subject.Intercept(invocation);
+
+            Assert.Null(invocation.ReturnValue);
+        }
+        
+        [Fact]
+        public void Intercept_sets_the_ReturnValue_to_null_for_property_on_PageObject_marked_with_XPathAttribute_but_non_Task_return_type()
+        {
+            var methodInfo = _pageObject.GetType().GetProperty(nameof(FakePageObject.XPathForNonTaskReturnType)).GetMethod;
+            var invocation = new FakeInvocation(methodInfo, _pageObject);
+
+            _subject.Intercept(invocation);
+
+            Assert.Null(invocation.ReturnValue);
+        }
+
         // ElementObject
 
         [Fact]
@@ -51,6 +73,42 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             Assert.NotNull(result);
             Assert.IsType<ElementHandle[]>(result);
+        }
+
+        [Fact]
+        public void Intercept_sets_the_ReturnValue_to_null_for_property_on_ElementObject_marked_with_XPathAttribute_but_wrong_return_type()
+        {
+            var methodInfo = _elementObject.GetType().GetProperty(nameof(FakeElementObject.XPathForWrongReturnType)).GetMethod;
+            var invocation = new FakeInvocation(methodInfo, _elementObject);
+
+            _subject.Intercept(invocation);
+
+            Assert.Null(invocation.ReturnValue);
+        }
+
+        [Fact]
+        public void Intercept_sets_the_ReturnValue_to_null_for_property_on_ElementObject_marked_with_XPathAttribute_but_non_Task_return_type()
+        {
+            var methodInfo = _elementObject.GetType().GetProperty(nameof(FakeElementObject.XPathForNonTaskReturnType)).GetMethod;
+            var invocation = new FakeInvocation(methodInfo, _elementObject);
+
+            _subject.Intercept(invocation);
+
+            Assert.Null(invocation.ReturnValue);
+        }
+
+        // Unknown
+
+        [Fact]
+        public void Intercept_sets_the_ReturnValue_to_null_for_property_on_unknown_object_marked_with_XPathAttribute()
+        {
+            var objectWithNoBaseClass = new FakeObjectWithNoBaseClass();
+            var methodInfo = objectWithNoBaseClass.GetType().GetProperty(nameof(FakeObjectWithNoBaseClass.XPathForElementHandleArray)).GetMethod;
+            var invocation = new FakeInvocation(methodInfo, objectWithNoBaseClass);
+
+            _subject.Intercept(invocation);
+
+            Assert.Null(invocation.ReturnValue);
         }
     }
 }
