@@ -11,7 +11,6 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
         public static bool IsGetterPropertyWithAttribute<T>(this MethodInfo methodInfo) where T : Attribute
         {
             if (!methodInfo.IsGetter()) return false;
-            if (!methodInfo.IsCompilerGenerated()) return false;
 
             var property = methodInfo.DeclaringType.GetProperty(methodInfo);
 
@@ -20,7 +19,7 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
 
         public static bool IsGetter(this MethodInfo methodInfo)
         {
-            return methodInfo.IsSpecialName && methodInfo.Name.StartsWith("get_", StringComparison.OrdinalIgnoreCase);
+            return methodInfo.IsSpecialName && methodInfo.IsCompilerGenerated() && methodInfo.Name.StartsWith("get_", StringComparison.OrdinalIgnoreCase);
         }
 
         public static bool HasAttribute<T>(this PropertyInfo propertyInfo) where T : Attribute

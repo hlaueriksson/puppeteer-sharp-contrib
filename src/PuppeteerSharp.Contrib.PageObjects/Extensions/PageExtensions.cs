@@ -36,20 +36,6 @@ namespace PuppeteerSharp.Contrib.PageObjects
             return ProxyFactory.PageObject<T>(page, response);
         }
 
-        public static async Task<T> WaitForResponseAsync<T>(this Page page, Func<Response, bool> predicate, WaitForOptions options = null) where T : PageObject
-        {
-            var response = await page.WaitForResponseAsync(predicate, options);
-
-            return ProxyFactory.PageObject<T>(page, response);
-        }
-
-        public static async Task<T> WaitForResponseAsync<T>(this Page page, string url, WaitForOptions options = null) where T : PageObject
-        {
-            var response = await page.WaitForResponseAsync(url, options);
-
-            return ProxyFactory.PageObject<T>(page, response);
-        }
-
         // ElementObject
 
         public static async Task<T> QuerySelectorAsync<T>(this Page page, string selector) where T : ElementObject

@@ -6,6 +6,13 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
 {
     internal static class InvocationExtensions
     {
+        public static bool HasValidReturnType(this IInvocation invocation)
+        {
+            var returnType = invocation.Method.ReturnType;
+
+            return typeof(Task).IsAssignableFrom(returnType) && returnType.IsGenericType;
+        }
+
         public static bool IsGetterPropertyWithAttribute<T>(this IInvocation invocation) where T : Attribute
         {
             if (!invocation.Method.IsGetter()) return false;
