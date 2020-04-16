@@ -51,19 +51,19 @@ namespace PuppeteerSharp.Contrib.Sample.StepDefinitions
             var repository = repositories.First();
             var link = await repository.QuerySelectorAsync("a");
             var text = await repository.QuerySelectorAsync("p");
-            repository.ShouldHaveContent("kblok/puppeteer-sharp");
+            repository.ShouldHaveContent("hardkoded/puppeteer-sharp");
             text.ShouldHaveContent("Headless Chrome .NET API");
             await link.ClickAsync();
             await Page.WaitForNavigationAsync();
 
             Page.QuerySelectorAsync("article > h1").ShouldHaveContent("Puppeteer Sharp");
-            Page.Url.Should().Be("https://github.com/kblok/puppeteer-sharp");
+            Page.Url.Should().Be("https://github.com/hardkoded/puppeteer-sharp");
         }
 
         [Given(@"I go to the Puppeteer Sharp repo on GitHub")]
         public async Task GivenIGoToThePuppeteerSharpRepoOnGitHub()
         {
-            await Page.GoToAsync("https://github.com/kblok/puppeteer-sharp");
+            await Page.GoToAsync("https://github.com/hardkoded/puppeteer-sharp");
         }
 
         [When(@"I check the build status on the master branch")]
@@ -107,7 +107,7 @@ namespace PuppeteerSharp.Contrib.Sample.StepDefinitions
         [Then(@"the latest release version should be up to date with Puppeteer")]
         public void ThenTheLatestReleaseVersionShouldBeUpToDateWithPuppeteer()
         {
-            var puppeteerSharpVersion = LatestReleaseVersion["https://github.com/kblok/puppeteer-sharp/releases"];
+            var puppeteerSharpVersion = LatestReleaseVersion["https://github.com/hardkoded/puppeteer-sharp/releases"];
             var puppeteerVersion = LatestReleaseVersion["https://github.com/GoogleChrome/puppeteer/releases"];
 
             puppeteerSharpVersion.Should().Be(puppeteerVersion);

@@ -39,13 +39,13 @@ namespace PuppeteerSharp.Contrib.Sample
                 var repository = repositories.First();
                 var link = repository.QuerySelectorAsync("a").Result();
                 var text = repository.QuerySelectorAsync("p").Result();
-                repository.ShouldHaveContent("kblok/puppeteer-sharp");
+                repository.ShouldHaveContent("hardkoded/puppeteer-sharp");
                 text.ShouldHaveContent("Headless Chrome .NET API");
                 link.ClickAsync().Await();
                 page.WaitForNavigationAsync().Await();
 
                 page.QuerySelectorAsync("article > h1").ShouldHaveContent("Puppeteer Sharp");
-                page.Url.ShouldEqual("https://github.com/kblok/puppeteer-sharp");
+                page.Url.ShouldEqual("https://github.com/hardkoded/puppeteer-sharp");
             };
         }
 
@@ -55,7 +55,7 @@ namespace PuppeteerSharp.Contrib.Sample
             {
                 var page = Browser.NewPageAsync().Result();
 
-                page.GoToAsync("https://github.com/kblok/puppeteer-sharp").Await();
+                page.GoToAsync("https://github.com/hardkoded/puppeteer-sharp").Await();
 
                 var build = page.QuerySelectorAsync("img[alt='Build status']").Result();
                 build.ClickAsync().Await();
@@ -70,7 +70,7 @@ namespace PuppeteerSharp.Contrib.Sample
             {
                 var page = Browser.NewPageAsync().Result();
 
-                page.GoToAsync("https://github.com/kblok/puppeteer-sharp").Await();
+                page.GoToAsync("https://github.com/hardkoded/puppeteer-sharp").Await();
                 var puppeteerSharpVersion = GetLatestReleaseVersion();
 
                 page.GoToAsync("https://github.com/GoogleChrome/puppeteer").Await();

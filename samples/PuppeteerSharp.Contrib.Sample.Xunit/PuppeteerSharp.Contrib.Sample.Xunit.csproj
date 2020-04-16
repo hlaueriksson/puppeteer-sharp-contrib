@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="PuppeteerSharp" Version="2.0.0" />
+    <PackageReference Include="PuppeteerSharp" Version="2.0.3" />
     <PackageReference Include="PuppeteerSharp.Contrib.Should" Version="1.0.0" />
     <PackageReference Include="Shouldly" Version="3.0.2" />
     <PackageReference Include="xunit" Version="2.4.1" />
