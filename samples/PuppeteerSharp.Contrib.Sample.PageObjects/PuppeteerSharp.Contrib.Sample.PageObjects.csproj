@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <RootNamespace>PuppeteerSharp.Contrib.Sample</RootNamespace>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.12.0" />
+    <PackageReference Include="Shouldly" Version="3.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\PuppeteerSharp.Contrib.Extensions\PuppeteerSharp.Contrib.Extensions.csproj" />
+    <ProjectReference Include="..\..\src\PuppeteerSharp.Contrib.PageObjects\PuppeteerSharp.Contrib.PageObjects.csproj" />
+    <ProjectReference Include="..\..\src\PuppeteerSharp.Contrib.Should\PuppeteerSharp.Contrib.Should.csproj" />
+  </ItemGroup>
+
+</Project>
