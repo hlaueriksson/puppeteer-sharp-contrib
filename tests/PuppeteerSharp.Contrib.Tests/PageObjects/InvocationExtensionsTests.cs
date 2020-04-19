@@ -60,11 +60,43 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         }
 
         [Fact]
+        public void IsReturning_returns_false_for_invocation_of_method_that_does_not_return_Task_of_given_type()
+        {
+            var methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.SelectorForNonTaskReturnType)).GetMethod;
+            var invocation = new FakeInvocation(methodInfo);
+            Assert.False(invocation.IsReturning<ElementHandle>());
+        }
+
+        [Fact]
         public void IsReturningElementObject_returns_true_for_invocation_of_method_that_returns_Task_of_ElementObject_subclass()
         {
             var methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.SelectorForElementObject)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
             Assert.True(invocation.IsReturningElementObject());
+        }
+
+        [Fact]
+        public void IsReturningElementObject_returns_false_for_invocation_of_method_that_does_not_return_Task_of_ElementObject_subclass()
+        {
+            var methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.SelectorForElementObjectWithNonTaskReturnType)).GetMethod;
+            var invocation = new FakeInvocation(methodInfo);
+            Assert.False(invocation.IsReturningElementObject());
+        }
+
+        [Fact]
+        public void IsReturningElementObjectArray_returns_true_for_invocation_of_method_that_returns_Task_of_ElementObject_subclass_array()
+        {
+            var methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.SelectorForElementObjectArray)).GetMethod;
+            var invocation = new FakeInvocation(methodInfo);
+            Assert.True(invocation.IsReturningElementObjectArray());
+        }
+
+        [Fact]
+        public void IsReturningElementObjectArray_returns_false_for_invocation_of_method_that_does_not_return_Task_of_ElementObject_subclass_array()
+        {
+            var methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.SelectorForElementObjectArrayWithNonTaskReturnType)).GetMethod;
+            var invocation = new FakeInvocation(methodInfo);
+            Assert.False(invocation.IsReturningElementObjectArray());
         }
 
         // PageObject
@@ -109,6 +141,20 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             Assert.NotNull(result);
             Assert.IsAssignableFrom<FakeElementObject>(result);
+        }
+
+        [Fact]
+        public async Task GetReturnValue_returns_ElementObject_array_for_property_on_PageObject_marked_with_SelectorAttribute()
+        {
+            var pageObject = new FakePageObject();
+            pageObject.Initialize(Page, null);
+            var methodInfo = pageObject.GetType().GetProperty(nameof(FakePageObject.SelectorForElementObjectArray)).GetMethod;
+            var invocation = new FakeInvocation(methodInfo);
+
+            var result = await invocation.GetReturnValue(pageObject, new SelectorAttribute("div"));
+
+            Assert.NotNull(result);
+            Assert.IsAssignableFrom<FakeElementObject[]>(result);
         }
 
         [Fact]
@@ -184,6 +230,21 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         }
 
         [Fact]
+        public async Task GetReturnValue_returns_ElementObject_array_for_property_on_ElementObject_marked_with_SelectorAttribute()
+        {
+            var elementHandle = await Page.QuerySelectorAsync("html");
+            var elementObject = new FakeElementObject();
+            elementObject.Initialize(Page, elementHandle);
+            var methodInfo = elementObject.GetType().GetProperty(nameof(FakeElementObject.SelectorForElementObjectArray)).GetMethod;
+            var invocation = new FakeInvocation(methodInfo);
+
+            var result = await invocation.GetReturnValue(elementObject, new SelectorAttribute("div"));
+
+            Assert.NotNull(result);
+            Assert.IsAssignableFrom<FakeElementObject[]>(result);
+        }
+
+        [Fact]
         public async Task GetReturnValue_returns_null_for_property_on_ElementObject_marked_with_SelectorAttribute_when_Page_is_null()
         {
             var elementObject = new FakeElementObject();
@@ -226,6 +287,20 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         }
 
         [Fact]
+        public async Task GetReturnValue_returns_ElementObject_array_for_property_on_PageObject_marked_with_XPathAttribute()
+        {
+            var pageObject = new FakePageObject();
+            pageObject.Initialize(Page, null);
+            var methodInfo = pageObject.GetType().GetProperty(nameof(FakePageObject.XPathForElementObjectArray)).GetMethod;
+            var invocation = new FakeInvocation(methodInfo);
+
+            var result = await invocation.GetReturnValue(pageObject, new XPathAttribute("//div"));
+
+            Assert.NotNull(result);
+            Assert.IsAssignableFrom<FakeElementObject[]>(result);
+        }
+
+        [Fact]
         public async Task GetReturnValue_returns_null_for_property_on_PageObject_marked_with_XPathAttribute_when_Page_is_null()
         {
             var pageObject = new FakePageObject();
@@ -265,6 +340,21 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             Assert.NotNull(result);
             Assert.IsType<ElementHandle[]>(result);
+        }
+
+        [Fact]
+        public async Task GetReturnValue_returns_ElementObject_array_for_property_on_ElementObject_marked_with_XPathAttribute()
+        {
+            var elementHandle = await Page.QuerySelectorAsync("html");
+            var elementObject = new FakeElementObject();
+            elementObject.Initialize(Page, elementHandle);
+            var methodInfo = elementObject.GetType().GetProperty(nameof(FakeElementObject.XPathForElementObjectArray)).GetMethod;
+            var invocation = new FakeInvocation(methodInfo);
+
+            var result = await invocation.GetReturnValue(elementObject, new XPathAttribute("//div"));
+
+            Assert.NotNull(result);
+            Assert.IsAssignableFrom<FakeElementObject[]>(result);
         }
 
         [Fact]

@@ -22,14 +22,28 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         [Selector(".retweets")]
         public virtual Task<FakeElementObject> SelectorForElementObject { get; }
 
+        [Selector("div")]
+        public virtual Task<FakeElementObject[]> SelectorForElementObjectArray { get; }
+
+        [XPath("//div")]
+        public virtual Task<ElementHandle[]> XPathForElementHandleArray { get; }
+
+        [XPath("//div")]
+        public virtual Task<FakeElementObject[]> XPathForElementObjectArray { get; }
+
+        // Fail
+
         [Selector(".tweet")]
         public virtual Task<object> SelectorForWrongReturnType { get; }
 
         [Selector(".tweet")]
         public virtual ElementHandle SelectorForNonTaskReturnType { get; }
 
-        [XPath("//div")]
-        public virtual Task<ElementHandle[]> XPathForElementHandleArray { get; }
+        [Selector(".retweets")]
+        public virtual FakeElementObject SelectorForElementObjectWithNonTaskReturnType { get; }
+
+        [Selector("div")]
+        public virtual FakeElementObject[] SelectorForElementObjectArrayWithNonTaskReturnType { get; }
 
         [XPath("//div")]
         public virtual Task<object[]> XPathForWrongReturnType { get; }
@@ -49,14 +63,22 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         [Selector(".retweets")]
         public virtual Task<FakeElementObject> SelectorForElementObject { get; }
 
+        [Selector("div")]
+        public virtual Task<FakeElementObject[]> SelectorForElementObjectArray { get; }
+
+        [XPath("//div")]
+        public virtual Task<ElementHandle[]> XPathForElementHandleArray { get; }
+
+        [XPath("//div")]
+        public virtual Task<FakeElementObject[]> XPathForElementObjectArray { get; }
+
+        // Fail
+
         [Selector(".tweet")]
         public virtual Task<object> SelectorForWrongReturnType { get; }
 
         [Selector(".tweet")]
         public virtual ElementHandle SelectorForNonTaskReturnType { get; }
-
-        [XPath("//div")]
-        public virtual Task<ElementHandle[]> XPathForElementHandleArray { get; }
 
         [XPath("//div")]
         public virtual Task<object[]> XPathForWrongReturnType { get; }

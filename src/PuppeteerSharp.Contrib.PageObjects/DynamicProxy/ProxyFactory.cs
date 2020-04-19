@@ -31,5 +31,17 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
 
             return proxy;
         }
+
+        public static Array ElementObjectArray(Type proxyType, Page page, ElementHandle[] elementHandles)
+        {
+            var array = Array.CreateInstance(proxyType, elementHandles.Length);
+            for (var i = 0; i < elementHandles.Length; i++)
+            {
+                var elementHandle = elementHandles[i];
+                array.SetValue(ElementObject(proxyType, page, elementHandle), i);
+            }
+
+            return array;
+        }
     }
 }

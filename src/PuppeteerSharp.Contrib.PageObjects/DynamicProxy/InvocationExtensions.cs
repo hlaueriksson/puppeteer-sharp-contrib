@@ -41,6 +41,13 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
                    typeof(ElementObject).IsAssignableFrom(invocation.Method.ReturnType.GetGenericArguments()[0]);
         }
 
+        public static bool IsReturningElementObjectArray(this IInvocation invocation)
+        {
+            return invocation.Method.ReturnType.IsGenericType &&
+                   invocation.Method.ReturnType.GetGenericTypeDefinition() == typeof(Task<>) &&
+                   typeof(ElementObject[]).IsAssignableFrom(invocation.Method.ReturnType.GetGenericArguments()[0]);
+        }
+
         public static async Task<object> GetReturnValue(this IInvocation invocation, PageObject pageObject, SelectorAttribute attribute)
         {
             var page = pageObject.Page;
@@ -63,6 +70,15 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
                 var elementHandle = await page.QuerySelectorAsync(attribute.Selector).ConfigureAwait(false);
 
                 return ProxyFactory.ElementObject(proxyType, page, elementHandle);
+            }
+
+            if (invocation.IsReturningElementObjectArray())
+            {
+                var arrayType = invocation.Method.ReturnType.GetGenericArguments()[0];
+                var proxyType = arrayType.GetElementType();
+                var elementHandles = await page.QuerySelectorAllAsync(attribute.Selector).ConfigureAwait(false);
+
+                return ProxyFactory.ElementObjectArray(proxyType, page, elementHandles);
             }
 
             return null;
@@ -92,6 +108,15 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
                 return ProxyFactory.ElementObject(proxyType, elementObject.Page, elementHandle);
             }
 
+            if (invocation.IsReturningElementObjectArray())
+            {
+                var arrayType = invocation.Method.ReturnType.GetGenericArguments()[0];
+                var proxyType = arrayType.GetElementType();
+                var elementHandles = await element.QuerySelectorAllAsync(attribute.Selector).ConfigureAwait(false);
+
+                return ProxyFactory.ElementObjectArray(proxyType, elementObject.Page, elementHandles);
+            }
+
             return null;
         }
 
@@ -106,6 +131,15 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
                 return await page.XPathAsync(attribute.Expression).ConfigureAwait(false);
             }
 
+            if (invocation.IsReturningElementObjectArray())
+            {
+                var arrayType = invocation.Method.ReturnType.GetGenericArguments()[0];
+                var proxyType = arrayType.GetElementType();
+                var elementHandles = await page.XPathAsync(attribute.Expression).ConfigureAwait(false);
+
+                return ProxyFactory.ElementObjectArray(proxyType, page, elementHandles);
+            }
+
             return null;
         }
 
@@ -118,6 +152,15 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
             if (invocation.IsReturning<ElementHandle[]>())
             {
                 return await element.XPathAsync(attribute.Expression).ConfigureAwait(false);
+            }
+
+            if (invocation.IsReturningElementObjectArray())
+            {
+                var arrayType = invocation.Method.ReturnType.GetGenericArguments()[0];
+                var proxyType = arrayType.GetElementType();
+                var elementHandles = await element.XPathAsync(attribute.Expression).ConfigureAwait(false);
+
+                return ProxyFactory.ElementObjectArray(proxyType, elementObject.Page, elementHandles);
             }
 
             return null;

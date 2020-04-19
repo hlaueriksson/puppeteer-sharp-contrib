@@ -1,4 +1,7 @@
-﻿using PuppeteerSharp.Contrib.PageObjects.DynamicProxy;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using PuppeteerSharp.Contrib.PageObjects;
+using PuppeteerSharp.Contrib.PageObjects.DynamicProxy;
 using PuppeteerSharp.Contrib.Tests.Base;
 using Xunit;
 
@@ -7,6 +10,11 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
     [Collection(PuppeteerFixture.Name)]
     public class ProxyFactoryTests : PuppeteerPageBaseTest
     {
+        protected override async Task SetUp()
+        {
+            await Page.SetContentAsync(Fake.Html);
+        }
+
         [Fact]
         public void PageObject_returns_proxy_of_type()
         {
@@ -32,6 +40,17 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             Assert.NotNull(result);
             Assert.IsAssignableFrom<FakeElementObject>(result);
+        }
+        
+        [Fact]
+        public async Task ElementObjectArray_returns_proxy_of_given_type()
+        {
+            var elementHandles = await Page.QuerySelectorAllAsync("div");
+
+            var result = ProxyFactory.ElementObjectArray(typeof(FakeElementObject), Page, elementHandles);
+
+            Assert.NotEmpty(result);
+            Assert.All(result.Cast<ElementObject>(), x => Assert.IsAssignableFrom<FakeElementObject>(x));
         }
     }
 }

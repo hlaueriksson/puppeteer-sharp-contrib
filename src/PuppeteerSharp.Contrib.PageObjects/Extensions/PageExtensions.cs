@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using PuppeteerSharp.Contrib.PageObjects.DynamicProxy;
 
@@ -38,6 +38,13 @@ namespace PuppeteerSharp.Contrib.PageObjects
 
         // ElementObject
 
+        public static async Task<T[]> QuerySelectorAllAsync<T>(this Page page, string selector) where T : ElementObject
+        {
+            var elementHandles = await page.QuerySelectorAllAsync(selector);
+
+            return elementHandles.Select(x => ProxyFactory.ElementObject<T>(page, x)).ToArray();
+        }
+
         public static async Task<T> QuerySelectorAsync<T>(this Page page, string selector) where T : ElementObject
         {
             var elementHandle = await page.QuerySelectorAsync(selector);
@@ -57,6 +64,13 @@ namespace PuppeteerSharp.Contrib.PageObjects
             var elementHandle = await page.WaitForXPathAsync(xpath, options);
 
             return ProxyFactory.ElementObject<T>(page, elementHandle);
+        }
+
+        public static async Task<T[]> XPathAsync<T>(this Page page, string expression) where T : ElementObject
+        {
+            var elementHandles = await page.XPathAsync(expression);
+
+            return elementHandles.Select(x => ProxyFactory.ElementObject<T>(page, x)).ToArray();
         }
     }
 }
