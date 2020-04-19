@@ -40,37 +40,37 @@ namespace PuppeteerSharp.Contrib.PageObjects
 
         public static async Task<T[]> QuerySelectorAllAsync<T>(this Page page, string selector) where T : ElementObject
         {
-            var elementHandles = await page.QuerySelectorAllAsync(selector);
+            var results = await page.QuerySelectorAllAsync(selector);
 
-            return elementHandles.Select(x => ProxyFactory.ElementObject<T>(page, x)).ToArray();
+            return results.Select(x => ProxyFactory.ElementObject<T>(page, x)).ToArray();
         }
 
         public static async Task<T> QuerySelectorAsync<T>(this Page page, string selector) where T : ElementObject
         {
-            var elementHandle = await page.QuerySelectorAsync(selector);
+            var result = await page.QuerySelectorAsync(selector);
 
-            return ProxyFactory.ElementObject<T>(page, elementHandle);
+            return ProxyFactory.ElementObject<T>(page, result);
         }
 
         public static async Task<T> WaitForSelectorAsync<T>(this Page page, string selector, WaitForSelectorOptions options = null) where T : ElementObject
         {
-            var elementHandle = await page.WaitForSelectorAsync(selector, options);
+            var result = await page.WaitForSelectorAsync(selector, options);
 
-            return ProxyFactory.ElementObject<T>(page, elementHandle);
+            return ProxyFactory.ElementObject<T>(page, result);
         }
 
         public static async Task<T> WaitForXPathAsync<T>(this Page page, string xpath, WaitForSelectorOptions options = null) where T : ElementObject
         {
-            var elementHandle = await page.WaitForXPathAsync(xpath, options);
+            var result = await page.WaitForXPathAsync(xpath, options);
 
-            return ProxyFactory.ElementObject<T>(page, elementHandle);
+            return ProxyFactory.ElementObject<T>(page, result);
         }
 
         public static async Task<T[]> XPathAsync<T>(this Page page, string expression) where T : ElementObject
         {
-            var elementHandles = await page.XPathAsync(expression);
+            var results = await page.XPathAsync(expression);
 
-            return elementHandles.Select(x => ProxyFactory.ElementObject<T>(page, x)).ToArray();
+            return results.Select(x => ProxyFactory.ElementObject<T>(page, x)).ToArray();
         }
     }
 }

@@ -55,6 +55,9 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var result = await Page.QuerySelectorAllAsync<FakeElementObject>("div");
             Assert.NotEmpty(result);
             Assert.All(result, x => Assert.IsAssignableFrom<FakeElementObject>(x));
+
+            result = await Page.QuerySelectorAllAsync<FakeElementObject>(".missing");
+            Assert.Empty(result);
         }
 
         [Fact]
@@ -63,6 +66,9 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var result = await Page.QuerySelectorAsync<FakeElementObject>(".tweet");
             Assert.NotNull(result);
             Assert.IsAssignableFrom<FakeElementObject>(result);
+
+            result = await Page.QuerySelectorAsync<FakeElementObject>(".missing");
+            Assert.Null(result);
         }
 
         [Fact]
@@ -95,6 +101,9 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var result = await Page.XPathAsync<FakeElementObject>("//div");
             Assert.NotEmpty(result);
             Assert.All(result, x => Assert.IsAssignableFrom<FakeElementObject>(x));
+
+            result = await Page.XPathAsync<FakeElementObject>("//missing");
+            Assert.Empty(result);
         }
     }
 }

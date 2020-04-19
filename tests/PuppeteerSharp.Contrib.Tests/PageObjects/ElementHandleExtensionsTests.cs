@@ -23,6 +23,9 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             Assert.NotEmpty(result);
             Assert.All(result, x => Assert.IsAssignableFrom<FakeElementObject>(x));
             Assert.All(result, x => Assert.NotNull(x.Page));
+
+            result = await _elementHandle.QuerySelectorAllAsync<FakeElementObject>(".missing");
+            Assert.Empty(result);
         }
 
         [Fact]
@@ -32,6 +35,9 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             Assert.NotNull(result);
             Assert.IsAssignableFrom<FakeElementObject>(result);
             Assert.NotNull(result.Page);
+
+            result = await _elementHandle.QuerySelectorAsync<FakeElementObject>(".missing");
+            Assert.Null(result);
         }
 
         [Fact]
@@ -41,6 +47,9 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             Assert.NotEmpty(result);
             Assert.All(result, x => Assert.IsAssignableFrom<FakeElementObject>(x));
             Assert.All(result, x => Assert.NotNull(x.Page));
+
+            result = await _elementHandle.XPathAsync<FakeElementObject>("//missing");
+            Assert.Empty(result);
         }
     }
 }
