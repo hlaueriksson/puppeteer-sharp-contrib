@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using PuppeteerSharp.Contrib.PageObjects.DynamicProxy;
@@ -21,7 +22,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// <seealso cref="ElementHandle.QuerySelectorAllAsync(string)"/>
         public static async Task<T[]> QuerySelectorAllAsync<T>(this ElementHandle elementHandle, string selector) where T : ElementObject
         {
-            var results = await elementHandle.QuerySelectorAllAsync(selector);
+            var results = await elementHandle.GuardFromNull().QuerySelectorAllAsync(selector).ConfigureAwait(false);
 
             return results.Select(x => ProxyFactory.ElementObject<T>(x.GetPage(), x)).ToArray();
         }
@@ -37,7 +38,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// <seealso cref="ElementHandle.QuerySelectorAsync(string)"/>
         public static async Task<T> QuerySelectorAsync<T>(this ElementHandle elementHandle, string selector) where T : ElementObject
         {
-            var result = await elementHandle.QuerySelectorAsync(selector);
+            var result = await elementHandle.GuardFromNull().QuerySelectorAsync(selector).ConfigureAwait(false);
 
             return ProxyFactory.ElementObject<T>(elementHandle.GetPage(), result);
         }
@@ -53,7 +54,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// <seealso cref="ElementHandle.XPathAsync(string)"/>
         public static async Task<T[]> XPathAsync<T>(this ElementHandle elementHandle, string expression) where T : ElementObject
         {
-            var results = await elementHandle.XPathAsync(expression);
+            var results = await elementHandle.GuardFromNull().XPathAsync(expression).ConfigureAwait(false);
 
             return results.Select(x => ProxyFactory.ElementObject<T>(x.GetPage(), x)).ToArray();
         }
@@ -64,6 +65,13 @@ namespace PuppeteerSharp.Contrib.PageObjects
             var methodInfo = propertyInfo?.GetGetMethod(nonPublic: true);
 
             return methodInfo?.Invoke(elementHandle, null) as Page;
+        }
+
+        private static ElementHandle GuardFromNull(this ElementHandle elementHandle)
+        {
+            if (elementHandle == null) throw new ArgumentNullException(nameof(elementHandle));
+
+            return elementHandle;
         }
     }
 }

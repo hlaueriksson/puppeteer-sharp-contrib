@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using PuppeteerSharp.Contrib.PageObjects.DynamicProxy;
 
@@ -22,7 +23,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// <seealso cref="Page.GoToAsync(string, NavigationOptions)"/>
         public static async Task<T> GoToAsync<T>(this Page page, string url, NavigationOptions options) where T : PageObject
         {
-            var response = await page.GoToAsync(url, options);
+            var response = await page.GuardFromNull().GoToAsync(url, options).ConfigureAwait(false);
 
             return ProxyFactory.PageObject<T>(page, response);
         }
@@ -38,7 +39,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// <seealso cref="Page.GoToAsync(string, WaitUntilNavigation)"/>
         public static async Task<T> GoToAsync<T>(this Page page, string url, WaitUntilNavigation waitUntil) where T : PageObject
         {
-            var response = await page.GoToAsync(url, waitUntil);
+            var response = await page.GuardFromNull().GoToAsync(url, waitUntil).ConfigureAwait(false);
 
             return ProxyFactory.PageObject<T>(page, response);
         }
@@ -55,7 +56,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// <seealso cref="Page.GoToAsync(string, int?, WaitUntilNavigation[])"/>
         public static async Task<T> GoToAsync<T>(this Page page, string url, int? timeout = null, WaitUntilNavigation[] waitUntil = null) where T : PageObject
         {
-            var response = await page.GoToAsync(url, timeout, waitUntil);
+            var response = await page.GuardFromNull().GoToAsync(url, timeout, waitUntil).ConfigureAwait(false);
 
             return ProxyFactory.PageObject<T>(page, response);
         }
@@ -75,7 +76,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// <seealso cref="Page.WaitForNavigationAsync(NavigationOptions)"/>
         public static async Task<T> WaitForNavigationAsync<T>(this Page page, NavigationOptions options = null) where T : PageObject
         {
-            var response = await page.WaitForNavigationAsync(options);
+            var response = await page.GuardFromNull().WaitForNavigationAsync(options).ConfigureAwait(false);
 
             return ProxyFactory.PageObject<T>(page, response);
         }
@@ -93,7 +94,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// <seealso cref="Page.QuerySelectorAllAsync(string)"/>
         public static async Task<T[]> QuerySelectorAllAsync<T>(this Page page, string selector) where T : ElementObject
         {
-            var results = await page.QuerySelectorAllAsync(selector);
+            var results = await page.GuardFromNull().QuerySelectorAllAsync(selector).ConfigureAwait(false);
 
             return results.Select(x => ProxyFactory.ElementObject<T>(page, x)).ToArray();
         }
@@ -109,7 +110,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// <seealso cref="Page.QuerySelectorAsync(string)"/>
         public static async Task<T> QuerySelectorAsync<T>(this Page page, string selector) where T : ElementObject
         {
-            var result = await page.QuerySelectorAsync(selector);
+            var result = await page.GuardFromNull().QuerySelectorAsync(selector).ConfigureAwait(false);
 
             return ProxyFactory.ElementObject<T>(page, result);
         }
@@ -125,7 +126,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// <seealso cref="Page.WaitForSelectorAsync(string, WaitForSelectorOptions)"/>
         public static async Task<T> WaitForSelectorAsync<T>(this Page page, string selector, WaitForSelectorOptions options = null) where T : ElementObject
         {
-            var result = await page.WaitForSelectorAsync(selector, options);
+            var result = await page.GuardFromNull().WaitForSelectorAsync(selector, options).ConfigureAwait(false);
 
             return ProxyFactory.ElementObject<T>(page, result);
         }
@@ -141,7 +142,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// <seealso cref="Page.WaitForXPathAsync(string, WaitForSelectorOptions)"/>
         public static async Task<T> WaitForXPathAsync<T>(this Page page, string xpath, WaitForSelectorOptions options = null) where T : ElementObject
         {
-            var result = await page.WaitForXPathAsync(xpath, options);
+            var result = await page.GuardFromNull().WaitForXPathAsync(xpath, options).ConfigureAwait(false);
 
             return ProxyFactory.ElementObject<T>(page, result);
         }
@@ -157,9 +158,16 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// <seealso cref="Page.XPathAsync(string)"/>
         public static async Task<T[]> XPathAsync<T>(this Page page, string expression) where T : ElementObject
         {
-            var results = await page.XPathAsync(expression);
+            var results = await page.GuardFromNull().XPathAsync(expression).ConfigureAwait(false);
 
             return results.Select(x => ProxyFactory.ElementObject<T>(page, x)).ToArray();
+        }
+
+        private static Page GuardFromNull(this Page page)
+        {
+            if (page == null) throw new ArgumentNullException(nameof(page));
+
+            return page;
         }
     }
 }
