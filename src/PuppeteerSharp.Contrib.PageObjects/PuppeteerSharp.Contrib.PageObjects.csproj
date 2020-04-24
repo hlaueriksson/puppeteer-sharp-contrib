@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Castle.Core" Version="4.4.0" />
-    <PackageReference Include="PuppeteerSharp" Version="2.0.3" />
+    <PackageReference Include="PuppeteerSharp" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
