@@ -127,7 +127,7 @@ namespace PuppeteerSharp.Contrib.Tests.Documentation
     <option id='bar'>Bar</option>
   </select>
 </form>
-");
+", new NavigationOptions { WaitUntil = new[] { WaitUntilNavigation.Networkidle0 } });
 
             var input = await Page.QuerySelectorAsync("input[type=text]");
             Assert.True(input.HasFocus());

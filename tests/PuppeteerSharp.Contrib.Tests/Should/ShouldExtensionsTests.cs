@@ -438,7 +438,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
         [Fact]
         public async Task ShouldHaveFocus_throws_if_element_does_not_have_focus()
         {
-            await Page.SetContentAsync("<html><body><input id='foo' autofocus><input id='bar'></body></html>");
+            await Page.SetContentAsync("<html><body><input id='foo' autofocus><input id='bar'></body></html>", new NavigationOptions { WaitUntil = new[] { WaitUntilNavigation.Networkidle0 } });
 
             var div = await Page.QuerySelectorAsync("#foo");
             await div.ShouldHaveFocusAsync();
@@ -457,7 +457,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
         [Fact]
         public async Task ShouldNotHaveFocus_throws_if_element_has_focus()
         {
-            await Page.SetContentAsync("<html><body><input id='foo' autofocus><input id='bar'></body></html>");
+            await Page.SetContentAsync("<html><body><input id='foo' autofocus><input id='bar'></body></html>", new NavigationOptions { WaitUntil = new[] { WaitUntilNavigation.Networkidle0 } });
 
             var div = await Page.QuerySelectorAsync("#bar");
             await div.ShouldNotHaveFocusAsync();
