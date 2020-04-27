@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 
 namespace PuppeteerSharp.Contrib.PageObjects
 {
     /// <summary>
     /// Represents a selector for a property on a <see cref="PageObject" /> or <see cref="ElementObject" />.
-    /// 
+    ///
     /// Properties decorated with a <see cref="SelectorAttribute" /> must be:
     /// <list type="bullet">
     /// <item><description>public</description></item>
@@ -24,13 +24,13 @@ namespace PuppeteerSharp.Contrib.PageObjects
     /// <![CDATA[
     /// [Selector("#foo")]
     /// public virtual Task<ElementHandle> SelectorForElementHandle { get; }
-    /// 
+    ///
     /// [Selector(".bar")]
     /// public virtual Task<ElementHandle[]> SelectorForElementHandleArray { get; }
     ///
     /// [Selector("#foo")]
     /// public virtual Task<FooElementObject> SelectorForElementObject { get; }
-    /// 
+    ///
     /// [Selector(".bar")]
     /// public virtual Task<BarElementObject[]> SelectorForElementObjectArray { get; }
     /// ]]>

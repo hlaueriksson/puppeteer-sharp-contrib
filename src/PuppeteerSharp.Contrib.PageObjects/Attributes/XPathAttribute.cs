@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 
 namespace PuppeteerSharp.Contrib.PageObjects
 {
     /// <summary>
     /// Represents an XPath expression for a property on a <see cref="PageObject" /> or <see cref="ElementObject" />.
-    /// 
+    ///
     /// Properties decorated with a <see cref="XPathAttribute" /> must be:
     /// <list type="bullet">
     /// <item><description>public</description></item>
@@ -22,7 +22,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
     /// <![CDATA[
     /// [XPath("//div")]
     /// public virtual Task<ElementHandle[]> XPathForElementHandleArray { get; }
-    /// 
+    ///
     /// [XPath("//div")]
     /// public virtual Task<FooElementObject[]> XPathForElementObjectArray { get; }
     /// ]]>

@@ -1,4 +1,4 @@
-﻿namespace PuppeteerSharp.Contrib.PageObjects
+namespace PuppeteerSharp.Contrib.PageObjects
 {
     /// <summary>
     /// Base class for element objects.
@@ -13,19 +13,19 @@
     /// {
     ///     [Selector("#foo")]
     ///     public virtual Task<ElementHandle> SelectorForElementHandle { get; }
-    ///     
+    ///
     ///     [Selector(".bar")]
     ///     public virtual Task<ElementHandle[]> SelectorForElementHandleArray { get; }
     ///
     ///     [Selector("#foo")]
     ///     public virtual Task<FooElementObject> SelectorForElementObject { get; }
-    ///     
+    ///
     ///     [Selector(".bar")]
     ///     public virtual Task<BarElementObject[]> SelectorForElementObjectArray { get; }
-    /// 
+    ///
     ///     [XPath("//div")]
     ///     public virtual Task<ElementHandle[]> XPathForElementHandleArray { get; }
-    /// 
+    ///
     ///     [XPath("//div")]
     ///     public virtual Task<FooElementObject[]> XPathForElementObjectArray { get; }
     /// }
