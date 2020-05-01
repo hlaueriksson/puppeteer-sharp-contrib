@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace PuppeteerSharp.Contrib.Tests.Base
+namespace PuppeteerSharp.Contrib.Tests
 {
     [CollectionDefinition(PuppeteerFixture.Name)]
     public class PuppeteerFixtureCollection : ICollectionFixture<PuppeteerFixture>

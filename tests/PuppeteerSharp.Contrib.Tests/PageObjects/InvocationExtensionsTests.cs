@@ -1,7 +1,6 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using PuppeteerSharp.Contrib.PageObjects;
 using PuppeteerSharp.Contrib.PageObjects.DynamicProxy;
-using PuppeteerSharp.Contrib.Tests.Base;
 using Xunit;
 
 namespace PuppeteerSharp.Contrib.Tests.PageObjects
