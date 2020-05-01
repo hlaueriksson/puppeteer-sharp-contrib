@@ -5,12 +5,13 @@ namespace PuppeteerSharp.Contrib.PageObjects
     /// <summary>
     /// Represents a selector for a property on a <see cref="PageObject" /> or <see cref="ElementObject" />.
     ///
-    /// Properties decorated with a <see cref="SelectorAttribute" /> must be:
+    /// Properties decorated with a <see cref="SelectorAttribute" /> must be a:
     /// <list type="bullet">
     /// <item><description>public</description></item>
     /// <item><description>virtual</description></item>
+    /// <item><description>getter</description></item>
     /// </list>
-    /// and return <see cref="System.Threading.Tasks.Task{TResult}" /> of:
+    /// that returns a <see cref="System.Threading.Tasks.Task{TResult}" /> of:
     /// <list type="bullet">
     /// <item><description><see cref="ElementHandle" />,</description></item>
     /// <item><description><see cref="ElementHandle" />[],</description></item>
