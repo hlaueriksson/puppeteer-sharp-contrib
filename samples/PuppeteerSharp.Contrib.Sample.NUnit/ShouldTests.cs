@@ -1,47 +1,62 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
+using NUnit.Framework;
 using PuppeteerSharp.Contrib.Should;
-using PuppeteerSharp.Contrib.Tests.Base;
-using Xunit;
 
-namespace PuppeteerSharp.Contrib.Tests.Documentation
+namespace PuppeteerSharp.Contrib.Sample
 {
-    [Collection(PuppeteerFixture.Name)]
-    public class ShouldTests : PuppeteerPageBaseTest
+    public class ShouldTests
     {
-        [Fact]
+        Browser Browser { get; set; }
+        Page Page { get; set; }
+
+        [SetUp]
+        public async Task SetUp()
+        {
+            await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
+            Browser = await Puppeteer.LaunchAsync(new LaunchOptions
+            {
+                Headless = true
+            });
+            Page = await Browser.NewPageAsync();
+        }
+
+        [TearDown]
+        public async Task TearDown()
+        {
+            await Browser.CloseAsync();
+        }
+
+        [Test]
         public async Task Attributes()
         {
             await Page.SetContentAsync("<div data-foo='bar' />");
 
             var div = await Page.QuerySelectorAsync("div");
-            div
-                .ShouldHaveAttribute("data-foo")
-                .ShouldNotHaveAttribute("data-bar");
+            await div.ShouldHaveAttributeAsync("data-foo");
+            await div.ShouldNotHaveAttributeAsync("data-bar");
         }
 
-        [Fact]
+        [Test]
         public async Task Class()
         {
             await Page.SetContentAsync("<div class='foo' />");
 
             var div = await Page.QuerySelectorAsync("div");
-            div
-                .ShouldHaveClass("foo")
-                .ShouldNotHaveClass("bar");
+            await div.ShouldHaveClassAsync("foo");
+            await div.ShouldNotHaveClassAsync("bar");
         }
 
-        [Fact]
+        [Test]
         public async Task Content()
         {
             await Page.SetContentAsync("<div>Foo</div>");
 
             var div = await Page.QuerySelectorAsync("div");
-            div
-                .ShouldHaveContent("Foo")
-                .ShouldNotHaveContent("Bar");
+            await div.ShouldHaveContentAsync("Foo");
+            await div.ShouldNotHaveContentAsync("Bar");
         }
 
-        [Fact]
+        [Test]
         public async Task Visibility()
         {
             await Page.SetContentAsync(@"
@@ -54,13 +69,13 @@ namespace PuppeteerSharp.Contrib.Tests.Documentation
             html.ShouldExist();
 
             var div = await Page.QuerySelectorAsync("#foo");
-            div.ShouldBeVisible();
+            await div.ShouldBeVisibleAsync();
 
             div = await Page.QuerySelectorAsync("#bar");
-            div.ShouldBeHidden();
+            await div.ShouldBeHiddenAsync();
         }
 
-        [Fact]
+        [Test]
         public async Task Input()
         {
             await Page.SetContentAsync(@"
@@ -76,21 +91,19 @@ namespace PuppeteerSharp.Contrib.Tests.Documentation
 ", new NavigationOptions { WaitUntil = new[] { WaitUntilNavigation.Networkidle0 } });
 
             var input = await Page.QuerySelectorAsync("input[type=text]");
-            input
-                .ShouldHaveFocus()
-                .ShouldBeRequired()
-                .ShouldHaveValue("Foo Bar");
+            await input.ShouldHaveFocusAsync();
+            await input.ShouldBeRequiredAsync();
+            await input.ShouldHaveValueAsync("Foo Bar");
 
             input = await Page.QuerySelectorAsync("input[type=radio]");
-            input
-                .ShouldBeEnabled()
-                .ShouldBeReadOnly();
+            await input.ShouldBeEnabledAsync();
+            await input.ShouldBeReadOnlyAsync();
 
             input = await Page.QuerySelectorAsync("input[type=checkbox]");
-            input.ShouldBeChecked();
+            await input.ShouldBeCheckedAsync();
 
             input = await Page.QuerySelectorAsync("#foo");
-            input.ShouldBeSelected();
+            await input.ShouldBeSelectedAsync();
         }
     }
 }
