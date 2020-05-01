@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Machine.Specifications;
 using PuppeteerSharp.Contrib.Extensions;
 using PuppeteerSharp.Contrib.Should;
@@ -8,6 +8,8 @@ namespace PuppeteerSharp.Contrib.Sample
     [Subject("PuppeteerSharp")]
     public class PuppeteerSharpRepoSpecs
     {
+        static Browser Browser;
+
         Establish context = () =>
         {
             new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision).Await();
@@ -23,22 +25,22 @@ namespace PuppeteerSharp.Contrib.Sample
         {
             It should_be_the_first_search_result = () =>
             {
-                var page = Browser.NewPageAsync().Result();
+                Page page = Browser.NewPageAsync().Await();
 
                 page.GoToAsync("https://github.com/").Await();
                 page.QuerySelectorAsync("h1").ShouldHaveContent("Built for developers");
 
-                var input = page.QuerySelectorAsync("input.header-search-input").Result();
+                ElementHandle input = page.QuerySelectorAsync("input.header-search-input").Await();
                 if (input.IsHidden()) page.ClickAsync(".octicon-three-bars").Await();
                 page.TypeAsync("input.header-search-input", "Puppeteer Sharp").Await();
                 page.Keyboard.PressAsync("Enter").Await();
                 page.WaitForNavigationAsync().Await();
 
-                var repositories = page.QuerySelectorAllAsync(".repo-list-item").Result();
+                ElementHandle[] repositories = page.QuerySelectorAllAsync(".repo-list-item").Await();
                 repositories.Length.ShouldBeGreaterThan(0);
                 var repository = repositories.First();
-                var link = repository.QuerySelectorAsync("a").Result();
-                var text = repository.QuerySelectorAsync("p").Result();
+                ElementHandle link = repository.QuerySelectorAsync("a").Await();
+                ElementHandle text = repository.QuerySelectorAsync("p").Await();
                 repository.ShouldHaveContent("hardkoded/puppeteer-sharp");
                 text.ShouldHaveContent("Headless Chrome .NET API");
                 link.ClickAsync().Await();
@@ -53,22 +55,21 @@ namespace PuppeteerSharp.Contrib.Sample
         {
             It should_have_successful_build_status = () =>
             {
-                var page = Browser.NewPageAsync().Result();
+                Page page = Browser.NewPageAsync().Await();
 
                 page.GoToAsync("https://github.com/hardkoded/puppeteer-sharp").Await();
 
-                var build = page.QuerySelectorAsync("img[alt='Build status']").Result();
+                ElementHandle build = page.QuerySelectorAsync("img[alt='Build status']").Await();
                 build.ClickAsync().Await();
-                page.WaitForNavigationAsync(
-                    new NavigationOptions { WaitUntil = new[] { WaitUntilNavigation.Networkidle0 } }).Await();
+                page.WaitForNavigationAsync(new NavigationOptions { WaitUntil = new[] { WaitUntilNavigation.Networkidle0 } }).Await();
 
-                var success = page.QuerySelectorAsync(".project-build.project-build-status.success").Result();
+                ElementHandle success = page.QuerySelectorAsync(".project-build.project-build-status.success").Await();
                 success.ShouldExist();
             };
 
             It should_be_up_to_date_with_the_Puppeteer_version = () =>
             {
-                var page = Browser.NewPageAsync().Result();
+                Page page = Browser.NewPageAsync().Await();
 
                 page.GoToAsync("https://github.com/hardkoded/puppeteer-sharp").Await();
                 var puppeteerSharpVersion = GetLatestReleaseVersion();
@@ -80,11 +81,11 @@ namespace PuppeteerSharp.Contrib.Sample
 
                 string GetLatestReleaseVersion()
                 {
-                    var releases = page.QuerySelectorWithContentAsync("a", "releases").Result();
+                    ElementHandle releases = page.QuerySelectorWithContentAsync("a", "releases").Await();
                     releases.ClickAsync().Await();
                     page.WaitForNavigationAsync().Await();
 
-                    var latest = page.QuerySelectorAsync(".release .release-header a").Result();
+                    ElementHandle latest = page.QuerySelectorAsync(".release .release-header a").Await();
                     return VersionWithoutPatch(latest.TextContent());
 
                     string VersionWithoutPatch(string version)
@@ -95,7 +96,5 @@ namespace PuppeteerSharp.Contrib.Sample
                 }
             };
         }
-
-        static Browser Browser;
     }
 }
