@@ -1,8 +1,7 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Threading.Tasks;
 using PuppeteerSharp.Contrib.Extensions;
 using PuppeteerSharp.Contrib.Should;
-using Shouldly;
 using Xunit;
 
 namespace PuppeteerSharp.Contrib.Sample
@@ -40,7 +39,7 @@ namespace PuppeteerSharp.Contrib.Sample
             await page.WaitForNavigationAsync();
 
             var repositories = await page.QuerySelectorAllAsync(".repo-list-item");
-            repositories.Length.ShouldBeGreaterThan(0);
+            Assert.NotEmpty(repositories);
             var repository = repositories.First();
             var link = await repository.QuerySelectorAsync("a");
             var text = await repository.QuerySelectorAsync("p");
@@ -50,7 +49,7 @@ namespace PuppeteerSharp.Contrib.Sample
             await page.WaitForNavigationAsync();
 
             page.QuerySelectorAsync("article > h1").ShouldHaveContent("Puppeteer Sharp");
-            page.Url.ShouldBe("https://github.com/hardkoded/puppeteer-sharp");
+            Assert.Equal("https://github.com/hardkoded/puppeteer-sharp", page.Url);
         }
 
         [Fact]
@@ -79,7 +78,7 @@ namespace PuppeteerSharp.Contrib.Sample
             await page.GoToAsync("https://github.com/GoogleChrome/puppeteer");
             var puppeteerVersion = await GetLatestReleaseVersion();
 
-            puppeteerSharpVersion.ShouldBe(puppeteerVersion);
+            Assert.Equal(puppeteerVersion, puppeteerSharpVersion);
 
             async Task<string> GetLatestReleaseVersion()
             {
