@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Threading.Tasks;
 using PuppeteerSharp.Contrib.Extensions;
 using PuppeteerSharp.Contrib.PageObjects;
@@ -10,7 +10,7 @@ namespace PuppeteerSharp.Contrib.Sample
     {
         [Selector("h1")]
         public virtual Task<ElementHandle> Heading { get; }
-        
+
         [Selector(".HeaderMenu")]
         public virtual Task<GitHubHeaderMenu> HeaderMenu { get; }
     }
@@ -34,14 +34,23 @@ namespace PuppeteerSharp.Contrib.Sample
     public class GitHubSearchPage : PageObject
     {
         [Selector(".repo-list-item")]
-        public virtual Task<ElementHandle[]> Results { get; }
+        public virtual Task<GitHubRepoListItem[]> RepoListItems { get; }
     }
-    
+
+    public class GitHubRepoListItem : ElementObject
+    {
+        [Selector("a")]
+        public virtual Task<ElementHandle> Link { get; }
+
+        [Selector("p")]
+        public virtual Task<ElementHandle> Text { get; }
+    }
+
     public class GitHubRepoPage : PageObject
     {
         [Selector("article > h1")]
         public virtual Task<ElementHandle> Heading { get; }
-        
+
         [Selector("img[alt='Build status']")]
         public virtual Task<ElementHandle> BuildStatusBadge { get; }
 
@@ -61,7 +70,7 @@ namespace PuppeteerSharp.Contrib.Sample
             }
         }
     }
-    
+
     public class AppVeyorBuildPage : PageObject
     {
         public async Task<bool> Success()

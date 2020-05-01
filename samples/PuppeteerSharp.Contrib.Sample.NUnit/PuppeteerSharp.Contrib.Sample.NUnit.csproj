@@ -12,4 +12,8 @@
     <PackageReference Include="PuppeteerSharp.Contrib.Should" Version="1.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\PuppeteerSharp.Contrib.PageObjects\PuppeteerSharp.Contrib.PageObjects.csproj" />
+  </ItemGroup>
+
 </Project>
