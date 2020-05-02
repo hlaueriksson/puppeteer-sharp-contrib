@@ -9,11 +9,8 @@
   <ItemGroup>
     <PackageReference Include="NUnit" Version="3.12.0" />
     <PackageReference Include="PuppeteerSharp" Version="2.0.3" />
+    <PackageReference Include="PuppeteerSharp.Contrib.PageObjects" Version="1.0.0" />
     <PackageReference Include="PuppeteerSharp.Contrib.Should" Version="1.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\PuppeteerSharp.Contrib.PageObjects\PuppeteerSharp.Contrib.PageObjects.csproj" />
   </ItemGroup>
 
 </Project>
