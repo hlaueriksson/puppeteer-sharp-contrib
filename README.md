@@ -56,7 +56,7 @@ These libraries contains _extension methods_ to the Puppeteer Sharp API and they
 
 ## PuppeteerSharp.Contrib.PageObjects
 
-TODO
+[![NuGet](https://buildstats.info/nuget/PuppeteerSharp.Contrib.PageObjects)](https://www.nuget.org/packages/PuppeteerSharp.Contrib.PageObjects/)
 
 `PuppeteerSharp.Contrib.PageObjects` is a library for writing browser tests using the _page object pattern_ with the Puppeteer Sharp API.
 
