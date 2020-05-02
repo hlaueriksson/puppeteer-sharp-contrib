@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Xunit;
 
-namespace PuppeteerSharp.Contrib.Tests.Base
+namespace PuppeteerSharp.Contrib.Tests
 {
     public abstract class PuppeteerPageBaseTest : IAsyncLifetime
     {

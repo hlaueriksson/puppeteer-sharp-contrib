@@ -1,16 +1,18 @@
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PuppeteerSharp.Contrib.Extensions;
 using PuppeteerSharp.Contrib.Should;
-using Xunit;
 
 namespace PuppeteerSharp.Contrib.Sample
 {
-    public class PuppeteerSharpRepoTests : IAsyncLifetime
+    [TestClass]
+    public class PuppeteerSharpRepoTests
     {
         private Browser Browser { get; set; }
 
-        public async Task InitializeAsync()
+        [TestInitialize]
+        public async Task TestInitialize()
         {
             await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
             Browser = await Puppeteer.LaunchAsync(new LaunchOptions
@@ -19,40 +21,43 @@ namespace PuppeteerSharp.Contrib.Sample
             });
         }
 
-        public async Task DisposeAsync()
+        [TestCleanup]
+        public async Task TestCleanup()
         {
             await Browser.CloseAsync();
         }
 
-        [Fact]
+        [TestMethod]
         public async Task Should_be_first_search_result_on_GitHub()
         {
             var page = await Browser.NewPageAsync();
 
             await page.GoToAsync("https://github.com/");
-            page.QuerySelectorAsync("h1").ShouldHaveContent("Built for developers");
+            var h1 = await page.QuerySelectorAsync("h1");
+            await h1.ShouldHaveContentAsync("Built for developers");
 
             var input = await page.QuerySelectorAsync("input.header-search-input");
-            if (input.IsHidden()) await page.ClickAsync(".octicon-three-bars");
+            if (await input.IsHiddenAsync()) await page.ClickAsync(".octicon-three-bars");
             await page.TypeAsync("input.header-search-input", "Puppeteer Sharp");
             await page.Keyboard.PressAsync("Enter");
             await page.WaitForNavigationAsync();
 
             var repositories = await page.QuerySelectorAllAsync(".repo-list-item");
-            Assert.NotEmpty(repositories);
+            Assert.IsTrue(repositories.Length > 0);
             var repository = repositories.First();
             var link = await repository.QuerySelectorAsync("a");
             var text = await repository.QuerySelectorAsync("p");
-            repository.ShouldHaveContent("hardkoded/puppeteer-sharp");
-            text.ShouldHaveContent("Headless Chrome .NET API");
+            await repository.ShouldHaveContentAsync("hardkoded/puppeteer-sharp");
+            await text.ShouldHaveContentAsync("Headless Chrome .NET API");
             await link.ClickAsync();
             await page.WaitForNavigationAsync();
 
-            page.QuerySelectorAsync("article > h1").ShouldHaveContent("Puppeteer Sharp");
-            Assert.Equal("https://github.com/hardkoded/puppeteer-sharp", page.Url);
+            h1 = await page.QuerySelectorAsync("article > h1");
+            await h1.ShouldHaveContentAsync("Puppeteer Sharp");
+            Assert.AreEqual("https://github.com/hardkoded/puppeteer-sharp", page.Url);
         }
 
-        [Fact]
+        [TestMethod]
         public async Task Should_have_successful_build_status()
         {
             var page = await Browser.NewPageAsync();
@@ -67,7 +72,7 @@ namespace PuppeteerSharp.Contrib.Sample
             success.ShouldExist();
         }
 
-        [Fact]
+        [TestMethod]
         public async Task Should_be_up_to_date_with_the_Puppeteer_version()
         {
             var page = await Browser.NewPageAsync();
@@ -78,7 +83,7 @@ namespace PuppeteerSharp.Contrib.Sample
             await page.GoToAsync("https://github.com/GoogleChrome/puppeteer");
             var puppeteerVersion = await GetLatestReleaseVersion();
 
-            Assert.Equal(puppeteerVersion, puppeteerSharpVersion);
+            Assert.AreEqual(puppeteerVersion, puppeteerSharpVersion);
 
             async Task<string> GetLatestReleaseVersion()
             {
@@ -87,7 +92,7 @@ namespace PuppeteerSharp.Contrib.Sample
                 await page.WaitForNavigationAsync();
 
                 var latest = await page.QuerySelectorAsync(".release .release-header a");
-                return VersionWithoutPatch(latest.TextContent());
+                return VersionWithoutPatch(await latest.TextContentAsync());
 
                 string VersionWithoutPatch(string version)
                 {

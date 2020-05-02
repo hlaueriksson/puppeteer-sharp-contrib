@@ -1,7 +1,6 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Threading.Tasks;
 using PuppeteerSharp.Contrib.Extensions;
-using PuppeteerSharp.Contrib.Tests.Base;
 using Xunit;
 
 namespace PuppeteerSharp.Contrib.Tests.Extensions

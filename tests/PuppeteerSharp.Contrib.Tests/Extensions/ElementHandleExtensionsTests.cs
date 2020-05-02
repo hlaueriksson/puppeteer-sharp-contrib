@@ -1,8 +1,7 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using PuppeteerSharp.Contrib.Extensions;
-using PuppeteerSharp.Contrib.Tests.Base;
 using Xunit;
 
 namespace PuppeteerSharp.Contrib.Tests.Extensions
@@ -355,7 +354,7 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
         [Fact]
         public async Task HasFocus_should_return_true_if_the_element_has_focus()
         {
-            await Page.SetContentAsync("<html><body><input id='foo' autofocus><input id='bar'><input id='baz'></body></html>");
+            await Page.SetContentAsync("<html><body><input id='foo' autofocus><input id='bar'><input id='baz'></body></html>", new NavigationOptions { WaitUntil = new[] { WaitUntilNavigation.Networkidle0 } });
 
             var input = await Page.QuerySelectorAsync("#foo");
             Assert.True(await input.HasFocusAsync());

@@ -1,9 +1,8 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using PuppeteerSharp.Contrib.Extensions;
 using PuppeteerSharp.Contrib.Should;
-using Shouldly;
 
 namespace PuppeteerSharp.Contrib.Sample
 {
@@ -43,18 +42,18 @@ namespace PuppeteerSharp.Contrib.Sample
             await page.WaitForNavigationAsync();
 
             var repositories = await page.QuerySelectorAllAsync(".repo-list-item");
-            repositories.Length.ShouldBeGreaterThan(0);
+            Assert.IsNotEmpty(repositories);
             var repository = repositories.First();
             var link = await repository.QuerySelectorAsync("a");
             var text = await repository.QuerySelectorAsync("p");
-            await repository.ShouldHaveContentAsync("kblok/puppeteer-sharp");
+            await repository.ShouldHaveContentAsync("hardkoded/puppeteer-sharp");
             await text.ShouldHaveContentAsync("Headless Chrome .NET API");
             await link.ClickAsync();
             await page.WaitForNavigationAsync();
 
             h1 = await page.QuerySelectorAsync("article > h1");
             await h1.ShouldHaveContentAsync("Puppeteer Sharp");
-            page.Url.ShouldBe("https://github.com/kblok/puppeteer-sharp");
+            Assert.AreEqual("https://github.com/hardkoded/puppeteer-sharp", page.Url);
         }
 
         [Test]
@@ -62,7 +61,7 @@ namespace PuppeteerSharp.Contrib.Sample
         {
             var page = await Browser.NewPageAsync();
 
-            await page.GoToAsync("https://github.com/kblok/puppeteer-sharp");
+            await page.GoToAsync("https://github.com/hardkoded/puppeteer-sharp");
 
             var build = await page.QuerySelectorAsync("img[alt='Build status']");
             await build.ClickAsync();
@@ -77,13 +76,13 @@ namespace PuppeteerSharp.Contrib.Sample
         {
             var page = await Browser.NewPageAsync();
 
-            await page.GoToAsync("https://github.com/kblok/puppeteer-sharp");
+            await page.GoToAsync("https://github.com/hardkoded/puppeteer-sharp");
             var puppeteerSharpVersion = await GetLatestReleaseVersion();
 
             await page.GoToAsync("https://github.com/GoogleChrome/puppeteer");
             var puppeteerVersion = await GetLatestReleaseVersion();
 
-            puppeteerSharpVersion.ShouldBe(puppeteerVersion);
+            Assert.AreEqual(puppeteerVersion, puppeteerSharpVersion);
 
             async Task<string> GetLatestReleaseVersion()
             {
