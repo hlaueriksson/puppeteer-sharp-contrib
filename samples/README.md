@@ -26,7 +26,7 @@ All projects runs the following scenarios:
 
 ## Machine.Specifications
 
-* [`PuppeteerSharpRepoSpecs.cs`](/PuppeteerSharp.Contrib.Sample.Machine.Specifications/PuppeteerSharpRepoSpecs.cs) contains specs using the `PuppeteerSharp.Contrib.Extensions` + `PuppeteerSharp.Contrib.Should` libraries
+* [`PuppeteerSharpRepoSpecs.cs`](/samples/PuppeteerSharp.Contrib.Sample.Machine.Specifications/PuppeteerSharpRepoSpecs.cs) contains specs using the `PuppeteerSharp.Contrib.Extensions` + `PuppeteerSharp.Contrib.Should` libraries
 
 Machine.Specifications **does not** support `async` / `await`.
 
@@ -36,7 +36,7 @@ You can work around this limitation with the [`Await`](https://github.com/machin
 
 ## MSTest
 
-* [`PuppeteerSharpRepoTests.cs`](/PuppeteerSharp.Contrib.Sample.MSTest/PuppeteerSharpRepoTests.cs) contains tests using the `PuppeteerSharp.Contrib.Extensions` + `PuppeteerSharp.Contrib.Should` libraries
+* [`PuppeteerSharpRepoTests.cs`](/samples/PuppeteerSharp.Contrib.Sample.MSTest/PuppeteerSharpRepoTests.cs) contains tests using the `PuppeteerSharp.Contrib.Extensions` + `PuppeteerSharp.Contrib.Should` libraries
 
 MSTest supports `async` / `await`.
 
@@ -44,8 +44,8 @@ MSTest supports `async` / `await`.
 
 ## NUnit
 
-* [`PuppeteerSharpRepoTests.cs`](/PuppeteerSharp.Contrib.Sample.NUnit/PuppeteerSharpRepoTests.cs) contains tests using the `PuppeteerSharp.Contrib.Extensions` + `PuppeteerSharp.Contrib.Should` libraries
-* [`PageObjects.cs`](/PuppeteerSharp.Contrib.Sample.NUnit/PageObjects.cs) and [`PuppeteerSharpRepoPageObjectTests.cs`](/PuppeteerSharp.Contrib.Sample.NUnit/PuppeteerSharpRepoTests.cs) contains tests using the page object pattern with `PuppeteerSharp.Contrib.PageObjects`
+* [`PuppeteerSharpRepoTests.cs`](/samples/PuppeteerSharp.Contrib.Sample.NUnit/PuppeteerSharpRepoTests.cs) contains tests using the `PuppeteerSharp.Contrib.Extensions` + `PuppeteerSharp.Contrib.Should` libraries
+* [`PageObjects.cs`](/samples/PuppeteerSharp.Contrib.Sample.NUnit/PageObjects.cs) and [`PuppeteerSharpRepoPageObjectTests.cs`](/samples/PuppeteerSharp.Contrib.Sample.NUnit/PuppeteerSharpRepoTests.cs) contains tests using the page object pattern with `PuppeteerSharp.Contrib.PageObjects`
 
 NUnit supports `async` / `await`.
 
@@ -53,7 +53,7 @@ NUnit supports `async` / `await`.
 
 ## SpecFlow
 
-* [`PuppeteerSharpRepoSteps.cs`](/PuppeteerSharp.Contrib.Sample.SpecFlow/StepDefinitions/PuppeteerSharpRepoSteps.cs) contains step definitions using the `PuppeteerSharp.Contrib.Extensions` + `PuppeteerSharp.Contrib.Should` libraries
+* [`PuppeteerSharpRepoSteps.cs`](/samples/PuppeteerSharp.Contrib.Sample.SpecFlow/StepDefinitions/PuppeteerSharpRepoSteps.cs) contains step definitions using the `PuppeteerSharp.Contrib.Extensions` + `PuppeteerSharp.Contrib.Should` libraries
 
 SpecFlow supports `async` / `await`.
 
@@ -61,7 +61,7 @@ SpecFlow supports `async` / `await`.
 
 ## Xunit
 
-* [`PuppeteerSharpRepoTests.cs`](/PuppeteerSharp.Contrib.Sample.Xunit/PuppeteerSharpRepoTests.cs) contains tests using the `PuppeteerSharp.Contrib.Extensions` + `PuppeteerSharp.Contrib.Should` libraries
+* [`PuppeteerSharpRepoTests.cs`](/samples/PuppeteerSharp.Contrib.Sample.Xunit/PuppeteerSharpRepoTests.cs) contains tests using the `PuppeteerSharp.Contrib.Extensions` + `PuppeteerSharp.Contrib.Should` libraries
 
 Xunit supports `async` / `await`.
 
