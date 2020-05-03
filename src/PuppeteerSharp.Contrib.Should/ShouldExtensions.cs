@@ -13,47 +13,47 @@ namespace PuppeteerSharp.Contrib.Should
         /// <summary>
         /// Asserts that the element exists.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
-        public static ElementHandle ShouldExist(this ElementHandle handle, string message = null)
+        public static ElementHandle ShouldExist(this ElementHandle elementHandle, string message = null)
         {
-            if (!handle.Exists()) Throw.ShouldExist(handle, message);
+            if (!elementHandle.Exists()) Throw.ShouldExist(elementHandle, message);
 
-            return handle;
+            return elementHandle;
         }
 
         /// <summary>
         /// Asserts that the element exists.
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
-        public static void ShouldExist(this Task<ElementHandle> task, string message = null)
+        public static void ShouldExist(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (!task.Exists()) Throw.ShouldExist(task, message);
+            if (!elementHandleTask.Exists()) Throw.ShouldExist(elementHandleTask, message);
         }
 
         /// <summary>
         /// Asserts that the element does not exist.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
-        public static ElementHandle ShouldNotExist(this ElementHandle handle, string message = null)
+        public static ElementHandle ShouldNotExist(this ElementHandle elementHandle, string message = null)
         {
-            if (handle.Exists()) Throw.ShouldNotExist(handle, message);
+            if (elementHandle.Exists()) Throw.ShouldNotExist(elementHandle, message);
 
-            return handle;
+            return elementHandle;
         }
 
         /// <summary>
         /// Asserts that the element does not exist.
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
-        public static void ShouldNotExist(this Task<ElementHandle> task, string message = null)
+        public static void ShouldNotExist(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (task.Exists()) Throw.ShouldNotExist(task, message);
+            if (elementHandleTask.Exists()) Throw.ShouldNotExist(elementHandleTask, message);
         }
 
         // Value
@@ -61,81 +61,81 @@ namespace PuppeteerSharp.Contrib.Should
         /// <summary>
         /// Asserts that the element has the specified value.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="value">The value</param>
         /// <param name="message">Optional failure message</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <button>, <option>, <input>, <li>, <meter>, <progress>, <param>]]></remarks>
-        public static async Task ShouldHaveValueAsync(this ElementHandle handle, string value, string message = null)
+        public static async Task ShouldHaveValueAsync(this ElementHandle elementHandle, string value, string message = null)
         {
-            if (await handle.ValueAsync().ConfigureAwait(false) != value) Throw.ShouldHaveValue(handle, message);
+            if (await elementHandle.ValueAsync().ConfigureAwait(false) != value) Throw.ShouldHaveValue(elementHandle, message);
         }
 
         /// <summary>
         /// Asserts that the element has the specified value.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="value">The value</param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <button>, <option>, <input>, <li>, <meter>, <progress>, <param>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
-        public static ElementHandle ShouldHaveValue(this ElementHandle handle, string value, string message = null)
+        public static ElementHandle ShouldHaveValue(this ElementHandle elementHandle, string value, string message = null)
         {
-            if (handle.Value() != value) Throw.ShouldHaveValue(handle, message);
+            if (elementHandle.Value() != value) Throw.ShouldHaveValue(elementHandle, message);
 
-            return handle;
+            return elementHandle;
         }
 
         /// <summary>
         /// Asserts that the element has the specified value.
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <param name="value">The value</param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <button>, <option>, <input>, <li>, <meter>, <progress>, <param>]]></remarks>
-        public static void ShouldHaveValue(this Task<ElementHandle> task, string value, string message = null)
+        public static void ShouldHaveValue(this Task<ElementHandle> elementHandleTask, string value, string message = null)
         {
-            if (task.Value() != value) Throw.ShouldHaveValue(task, message);
+            if (elementHandleTask.Value() != value) Throw.ShouldHaveValue(elementHandleTask, message);
         }
 
         /// <summary>
         /// Asserts that the element does not have the specified value.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="value">The value</param>
         /// <param name="message">Optional failure message</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <button>, <option>, <input>, <li>, <meter>, <progress>, <param>]]></remarks>
-        public static async Task ShouldNotHaveValueAsync(this ElementHandle handle, string value, string message = null)
+        public static async Task ShouldNotHaveValueAsync(this ElementHandle elementHandle, string value, string message = null)
         {
-            if (await handle.ValueAsync().ConfigureAwait(false) == value) Throw.ShouldNotHaveValue(handle, message);
+            if (await elementHandle.ValueAsync().ConfigureAwait(false) == value) Throw.ShouldNotHaveValue(elementHandle, message);
         }
 
         /// <summary>
         /// Asserts that the element does not have the specified value.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="value">The value</param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <button>, <option>, <input>, <li>, <meter>, <progress>, <param>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
-        public static ElementHandle ShouldNotHaveValue(this ElementHandle handle, string value, string message = null)
+        public static ElementHandle ShouldNotHaveValue(this ElementHandle elementHandle, string value, string message = null)
         {
-            if (handle.Value() == value) Throw.ShouldNotHaveValue(handle, message);
+            if (elementHandle.Value() == value) Throw.ShouldNotHaveValue(elementHandle, message);
 
-            return handle;
+            return elementHandle;
         }
 
         /// <summary>
         /// Asserts that the element does not have the specified value.
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <param name="value">The value</param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <button>, <option>, <input>, <li>, <meter>, <progress>, <param>]]></remarks>
-        public static void ShouldNotHaveValue(this Task<ElementHandle> task, string value, string message = null)
+        public static void ShouldNotHaveValue(this Task<ElementHandle> elementHandleTask, string value, string message = null)
         {
-            if (task.Value() == value) Throw.ShouldNotHaveValue(task, message);
+            if (elementHandleTask.Value() == value) Throw.ShouldNotHaveValue(elementHandleTask, message);
         }
 
         // Attribute
@@ -143,75 +143,75 @@ namespace PuppeteerSharp.Contrib.Should
         /// <summary>
         /// Asserts that the element has the specified attribute.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="name">The attribute name</param>
         /// <param name="message">Optional failure message</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public static async Task ShouldHaveAttributeAsync(this ElementHandle handle, string name, string message = null)
+        public static async Task ShouldHaveAttributeAsync(this ElementHandle elementHandle, string name, string message = null)
         {
-            if (!await handle.HasAttributeAsync(name).ConfigureAwait(false)) Throw.ShouldHaveAttribute(handle, message);
+            if (!await elementHandle.HasAttributeAsync(name).ConfigureAwait(false)) Throw.ShouldHaveAttribute(elementHandle, message);
         }
 
         /// <summary>
         /// Asserts that the element has the specified attribute.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="name">The attribute name</param>
         /// <param name="message">Optional failure message</param>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
-        public static ElementHandle ShouldHaveAttribute(this ElementHandle handle, string name, string message = null)
+        public static ElementHandle ShouldHaveAttribute(this ElementHandle elementHandle, string name, string message = null)
         {
-            if (!handle.HasAttribute(name)) Throw.ShouldHaveAttribute(handle, message);
+            if (!elementHandle.HasAttribute(name)) Throw.ShouldHaveAttribute(elementHandle, message);
 
-            return handle;
+            return elementHandle;
         }
 
         /// <summary>
         /// Asserts that the element has the specified attribute.
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <param name="name">The attribute name</param>
         /// <param name="message">Optional failure message</param>
-        public static void ShouldHaveAttribute(this Task<ElementHandle> task, string name, string message = null)
+        public static void ShouldHaveAttribute(this Task<ElementHandle> elementHandleTask, string name, string message = null)
         {
-            if (!task.HasAttribute(name)) Throw.ShouldHaveAttribute(task, message);
+            if (!elementHandleTask.HasAttribute(name)) Throw.ShouldHaveAttribute(elementHandleTask, message);
         }
 
         /// <summary>
         /// Asserts that the element does not have the specified attribute.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="name">The attribute name</param>
         /// <param name="message">Optional failure message</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public static async Task ShouldNotHaveAttributeAsync(this ElementHandle handle, string name, string message = null)
+        public static async Task ShouldNotHaveAttributeAsync(this ElementHandle elementHandle, string name, string message = null)
         {
-            if (await handle.HasAttributeAsync(name).ConfigureAwait(false)) Throw.ShouldNotHaveAttribute(handle, message);
+            if (await elementHandle.HasAttributeAsync(name).ConfigureAwait(false)) Throw.ShouldNotHaveAttribute(elementHandle, message);
         }
 
         /// <summary>
         /// Asserts that the element does not have the specified attribute.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="name">The attribute name</param>
         /// <param name="message">Optional failure message</param>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
-        public static ElementHandle ShouldNotHaveAttribute(this ElementHandle handle, string name, string message = null)
+        public static ElementHandle ShouldNotHaveAttribute(this ElementHandle elementHandle, string name, string message = null)
         {
-            if (handle.HasAttribute(name)) Throw.ShouldNotHaveAttribute(handle, message);
+            if (elementHandle.HasAttribute(name)) Throw.ShouldNotHaveAttribute(elementHandle, message);
 
-            return handle;
+            return elementHandle;
         }
 
         /// <summary>
         /// Asserts that the element does not have the specified attribute.
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <param name="name">The attribute name</param>
         /// <param name="message">Optional failure message</param>
-        public static void ShouldNotHaveAttribute(this Task<ElementHandle> task, string name, string message = null)
+        public static void ShouldNotHaveAttribute(this Task<ElementHandle> elementHandleTask, string name, string message = null)
         {
-            if (task.HasAttribute(name)) Throw.ShouldNotHaveAttribute(task, message);
+            if (elementHandleTask.HasAttribute(name)) Throw.ShouldNotHaveAttribute(elementHandleTask, message);
         }
 
         // Content
@@ -219,81 +219,81 @@ namespace PuppeteerSharp.Contrib.Should
         /// <summary>
         /// Asserts that the element has the specified content.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="content">The content</param>
         /// <param name="message">Optional failure message</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks>Evaluates <c>node.textContent</c></remarks>
-        public static async Task ShouldHaveContentAsync(this ElementHandle handle, string content, string message = null)
+        public static async Task ShouldHaveContentAsync(this ElementHandle elementHandle, string content, string message = null)
         {
-            if (!await handle.HasContentAsync(content).ConfigureAwait(false)) Throw.ShouldHaveContent(handle, message);
+            if (!await elementHandle.HasContentAsync(content).ConfigureAwait(false)) Throw.ShouldHaveContent(elementHandle, message);
         }
 
         /// <summary>
         /// Asserts that the element has the specified content.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="content">The content</param>
         /// <param name="message">Optional failure message</param>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
         /// <remarks>Evaluates <c>node.textContent</c></remarks>
-        public static ElementHandle ShouldHaveContent(this ElementHandle handle, string content, string message = null)
+        public static ElementHandle ShouldHaveContent(this ElementHandle elementHandle, string content, string message = null)
         {
-            if (!handle.HasContent(content)) Throw.ShouldHaveContent(handle, message);
+            if (!elementHandle.HasContent(content)) Throw.ShouldHaveContent(elementHandle, message);
 
-            return handle;
+            return elementHandle;
         }
 
         /// <summary>
         /// Asserts that the element has the specified content.
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <param name="content">The content</param>
         /// <param name="message">Optional failure message</param>
         /// <remarks>Evaluates <c>node.textContent</c></remarks>
-        public static void ShouldHaveContent(this Task<ElementHandle> task, string content, string message = null)
+        public static void ShouldHaveContent(this Task<ElementHandle> elementHandleTask, string content, string message = null)
         {
-            if (!task.HasContent(content)) Throw.ShouldHaveContent(task, message);
+            if (!elementHandleTask.HasContent(content)) Throw.ShouldHaveContent(elementHandleTask, message);
         }
 
         /// <summary>
         /// Asserts that the element does not have the specified content.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="content">The content</param>
         /// <param name="message">Optional failure message</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks>Evaluates <c>node.textContent</c></remarks>
-        public static async Task ShouldNotHaveContentAsync(this ElementHandle handle, string content, string message = null)
+        public static async Task ShouldNotHaveContentAsync(this ElementHandle elementHandle, string content, string message = null)
         {
-            if (await handle.HasContentAsync(content).ConfigureAwait(false)) Throw.ShouldNotHaveContent(handle, message);
+            if (await elementHandle.HasContentAsync(content).ConfigureAwait(false)) Throw.ShouldNotHaveContent(elementHandle, message);
         }
 
         /// <summary>
         /// Asserts that the element does not have the specified content.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="content">The content</param>
         /// <param name="message">Optional failure message</param>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
         /// <remarks>Evaluates <c>node.textContent</c></remarks>
-        public static ElementHandle ShouldNotHaveContent(this ElementHandle handle, string content, string message = null)
+        public static ElementHandle ShouldNotHaveContent(this ElementHandle elementHandle, string content, string message = null)
         {
-            if (handle.HasContent(content)) Throw.ShouldNotHaveContent(handle, message);
+            if (elementHandle.HasContent(content)) Throw.ShouldNotHaveContent(elementHandle, message);
 
-            return handle;
+            return elementHandle;
         }
 
         /// <summary>
         /// Asserts that the element does not have the specified content.
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <param name="content">The content</param>
         /// <param name="message">Optional failure message</param>
         /// <remarks>Evaluates <c>node.textContent</c></remarks>
-        public static void ShouldNotHaveContent(this Task<ElementHandle> task, string content, string message = null)
+        public static void ShouldNotHaveContent(this Task<ElementHandle> elementHandleTask, string content, string message = null)
         {
-            if (task.HasContent(content)) Throw.ShouldNotHaveContent(task, message);
+            if (elementHandleTask.HasContent(content)) Throw.ShouldNotHaveContent(elementHandleTask, message);
         }
 
         // Class
@@ -301,75 +301,75 @@ namespace PuppeteerSharp.Contrib.Should
         /// <summary>
         /// Asserts that the element has the specified class.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="className">The class name</param>
         /// <param name="message">Optional failure message</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public static async Task ShouldHaveClassAsync(this ElementHandle handle, string className, string message = null)
+        public static async Task ShouldHaveClassAsync(this ElementHandle elementHandle, string className, string message = null)
         {
-            if (!await handle.HasClassAsync(className).ConfigureAwait(false)) Throw.ShouldHaveClass(handle, message);
+            if (!await elementHandle.HasClassAsync(className).ConfigureAwait(false)) Throw.ShouldHaveClass(elementHandle, message);
         }
 
         /// <summary>
         /// Asserts that the element has the specified class.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="className">The class name</param>
         /// <param name="message">Optional failure message</param>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
-        public static ElementHandle ShouldHaveClass(this ElementHandle handle, string className, string message = null)
+        public static ElementHandle ShouldHaveClass(this ElementHandle elementHandle, string className, string message = null)
         {
-            if (!handle.HasClass(className)) Throw.ShouldHaveClass(handle, message);
+            if (!elementHandle.HasClass(className)) Throw.ShouldHaveClass(elementHandle, message);
 
-            return handle;
+            return elementHandle;
         }
 
         /// <summary>
         /// Asserts that the element has the specified class.
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <param name="className">The class name</param>
         /// <param name="message">Optional failure message</param>
-        public static void ShouldHaveClass(this Task<ElementHandle> task, string className, string message = null)
+        public static void ShouldHaveClass(this Task<ElementHandle> elementHandleTask, string className, string message = null)
         {
-            if (!task.HasClass(className)) Throw.ShouldHaveClass(task, message);
+            if (!elementHandleTask.HasClass(className)) Throw.ShouldHaveClass(elementHandleTask, message);
         }
 
         /// <summary>
         /// Asserts that the element does not have the specified class.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="className">The class name</param>
         /// <param name="message">Optional failure message</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public static async Task ShouldNotHaveClassAsync(this ElementHandle handle, string className, string message = null)
+        public static async Task ShouldNotHaveClassAsync(this ElementHandle elementHandle, string className, string message = null)
         {
-            if (await handle.HasClassAsync(className).ConfigureAwait(false)) Throw.ShouldNotHaveClass(handle, message);
+            if (await elementHandle.HasClassAsync(className).ConfigureAwait(false)) Throw.ShouldNotHaveClass(elementHandle, message);
         }
 
         /// <summary>
         /// Asserts that the element does not have the specified class.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="className">The class name</param>
         /// <param name="message">Optional failure message</param>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
-        public static ElementHandle ShouldNotHaveClass(this ElementHandle handle, string className, string message = null)
+        public static ElementHandle ShouldNotHaveClass(this ElementHandle elementHandle, string className, string message = null)
         {
-            if (handle.HasClass(className)) Throw.ShouldNotHaveClass(handle, message);
+            if (elementHandle.HasClass(className)) Throw.ShouldNotHaveClass(elementHandle, message);
 
-            return handle;
+            return elementHandle;
         }
 
         /// <summary>
         /// Asserts that the element does not have the specified class.
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <param name="className">The class name</param>
         /// <param name="message">Optional failure message</param>
-        public static void ShouldNotHaveClass(this Task<ElementHandle> task, string className, string message = null)
+        public static void ShouldNotHaveClass(this Task<ElementHandle> elementHandleTask, string className, string message = null)
         {
-            if (task.HasClass(className)) Throw.ShouldNotHaveClass(task, message);
+            if (elementHandleTask.HasClass(className)) Throw.ShouldNotHaveClass(elementHandleTask, message);
         }
 
         // Visible
@@ -377,69 +377,69 @@ namespace PuppeteerSharp.Contrib.Should
         /// <summary>
         /// Asserts that the element is visible.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public static async Task ShouldBeVisibleAsync(this ElementHandle handle, string message = null)
+        public static async Task ShouldBeVisibleAsync(this ElementHandle elementHandle, string message = null)
         {
-            if (await handle.IsHiddenAsync().ConfigureAwait(false)) Throw.ShouldBeVisible(handle, message);
+            if (await elementHandle.IsHiddenAsync().ConfigureAwait(false)) Throw.ShouldBeVisible(elementHandle, message);
         }
 
         /// <summary>
         /// Asserts that the element is visible.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
-        public static ElementHandle ShouldBeVisible(this ElementHandle handle, string message = null)
+        public static ElementHandle ShouldBeVisible(this ElementHandle elementHandle, string message = null)
         {
-            if (handle.IsHidden()) Throw.ShouldBeVisible(handle, message);
+            if (elementHandle.IsHidden()) Throw.ShouldBeVisible(elementHandle, message);
 
-            return handle;
+            return elementHandle;
         }
 
         /// <summary>
         /// Asserts that the element is visible.
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
-        public static void ShouldBeVisible(this Task<ElementHandle> task, string message = null)
+        public static void ShouldBeVisible(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (task.IsHidden()) Throw.ShouldBeVisible(task, message);
+            if (elementHandleTask.IsHidden()) Throw.ShouldBeVisible(elementHandleTask, message);
         }
 
         /// <summary>
         /// Asserts that the element is hidden.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public static async Task ShouldBeHiddenAsync(this ElementHandle handle, string message = null)
+        public static async Task ShouldBeHiddenAsync(this ElementHandle elementHandle, string message = null)
         {
-            if (await handle.IsVisibleAsync().ConfigureAwait(false)) Throw.ShouldBeHidden(handle, message);
+            if (await elementHandle.IsVisibleAsync().ConfigureAwait(false)) Throw.ShouldBeHidden(elementHandle, message);
         }
 
         /// <summary>
         /// Asserts that the element is hidden.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
-        public static ElementHandle ShouldBeHidden(this ElementHandle handle, string message = null)
+        public static ElementHandle ShouldBeHidden(this ElementHandle elementHandle, string message = null)
         {
-            if (handle.IsVisible()) Throw.ShouldBeHidden(handle, message);
+            if (elementHandle.IsVisible()) Throw.ShouldBeHidden(elementHandle, message);
 
-            return handle;
+            return elementHandle;
         }
 
         /// <summary>
         /// Asserts that the element is hidden.
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
-        public static void ShouldBeHidden(this Task<ElementHandle> task, string message = null)
+        public static void ShouldBeHidden(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (task.IsVisible()) Throw.ShouldBeHidden(task, message);
+            if (elementHandleTask.IsVisible()) Throw.ShouldBeHidden(elementHandleTask, message);
         }
 
         // Selected
@@ -447,75 +447,75 @@ namespace PuppeteerSharp.Contrib.Should
         /// <summary>
         /// Asserts that the element is selected.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <option>]]></remarks>
-        public static async Task ShouldBeSelectedAsync(this ElementHandle handle, string message = null)
+        public static async Task ShouldBeSelectedAsync(this ElementHandle elementHandle, string message = null)
         {
-            if (!await handle.IsSelectedAsync().ConfigureAwait(false)) Throw.ShouldBeSelected(handle, message);
+            if (!await elementHandle.IsSelectedAsync().ConfigureAwait(false)) Throw.ShouldBeSelected(elementHandle, message);
         }
 
         /// <summary>
         /// Asserts that the element is selected.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <option>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
-        public static ElementHandle ShouldBeSelected(this ElementHandle handle, string message = null)
+        public static ElementHandle ShouldBeSelected(this ElementHandle elementHandle, string message = null)
         {
-            if (!handle.IsSelected()) Throw.ShouldBeSelected(handle, message);
+            if (!elementHandle.IsSelected()) Throw.ShouldBeSelected(elementHandle, message);
 
-            return handle;
+            return elementHandle;
         }
 
         /// <summary>
         /// Asserts that the element is selected.
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <option>]]></remarks>
-        public static void ShouldBeSelected(this Task<ElementHandle> task, string message = null)
+        public static void ShouldBeSelected(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (!task.IsSelected()) Throw.ShouldBeSelected(task, message);
+            if (!elementHandleTask.IsSelected()) Throw.ShouldBeSelected(elementHandleTask, message);
         }
 
         /// <summary>
         /// Asserts that the element is not selected.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <option>]]></remarks>
-        public static async Task ShouldNotBeSelectedAsync(this ElementHandle handle, string message = null)
+        public static async Task ShouldNotBeSelectedAsync(this ElementHandle elementHandle, string message = null)
         {
-            if (await handle.IsSelectedAsync().ConfigureAwait(false)) Throw.ShouldNotBeSelected(handle, message);
+            if (await elementHandle.IsSelectedAsync().ConfigureAwait(false)) Throw.ShouldNotBeSelected(elementHandle, message);
         }
 
         /// <summary>
         /// Asserts that the element is not selected.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <option>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
-        public static ElementHandle ShouldNotBeSelected(this ElementHandle handle, string message = null)
+        public static ElementHandle ShouldNotBeSelected(this ElementHandle elementHandle, string message = null)
         {
-            if (handle.IsSelected()) Throw.ShouldNotBeSelected(handle, message);
+            if (elementHandle.IsSelected()) Throw.ShouldNotBeSelected(elementHandle, message);
 
-            return handle;
+            return elementHandle;
         }
 
         /// <summary>
         /// Asserts that the element is not selected.
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <option>]]></remarks>
-        public static void ShouldNotBeSelected(this Task<ElementHandle> task, string message = null)
+        public static void ShouldNotBeSelected(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (task.IsSelected()) Throw.ShouldNotBeSelected(task, message);
+            if (elementHandleTask.IsSelected()) Throw.ShouldNotBeSelected(elementHandleTask, message);
         }
 
         // Checked
@@ -523,75 +523,75 @@ namespace PuppeteerSharp.Contrib.Should
         /// <summary>
         /// Asserts that the element is checked.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <command>, <input>]]></remarks>
-        public static async Task ShouldBeCheckedAsync(this ElementHandle handle, string message = null)
+        public static async Task ShouldBeCheckedAsync(this ElementHandle elementHandle, string message = null)
         {
-            if (!await handle.IsCheckedAsync().ConfigureAwait(false)) Throw.ShouldBeChecked(handle, message);
+            if (!await elementHandle.IsCheckedAsync().ConfigureAwait(false)) Throw.ShouldBeChecked(elementHandle, message);
         }
 
         /// <summary>
         /// Asserts that the element is checked.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <command>, <input>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
-        public static ElementHandle ShouldBeChecked(this ElementHandle handle, string message = null)
+        public static ElementHandle ShouldBeChecked(this ElementHandle elementHandle, string message = null)
         {
-            if (!handle.IsChecked()) Throw.ShouldBeChecked(handle, message);
+            if (!elementHandle.IsChecked()) Throw.ShouldBeChecked(elementHandle, message);
 
-            return handle;
+            return elementHandle;
         }
 
         /// <summary>
         /// Asserts that the element is checked.
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <command>, <input>]]></remarks>
-        public static void ShouldBeChecked(this Task<ElementHandle> task, string message = null)
+        public static void ShouldBeChecked(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (!task.IsChecked()) Throw.ShouldBeChecked(task, message);
+            if (!elementHandleTask.IsChecked()) Throw.ShouldBeChecked(elementHandleTask, message);
         }
 
         /// <summary>
         /// Asserts that the element is not checked.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <command>, <input>]]></remarks>
-        public static async Task ShouldNotBeCheckedAsync(this ElementHandle handle, string message = null)
+        public static async Task ShouldNotBeCheckedAsync(this ElementHandle elementHandle, string message = null)
         {
-            if (await handle.IsCheckedAsync().ConfigureAwait(false)) Throw.ShouldNotBeChecked(handle, message);
+            if (await elementHandle.IsCheckedAsync().ConfigureAwait(false)) Throw.ShouldNotBeChecked(elementHandle, message);
         }
 
         /// <summary>
         /// Asserts that the element is not checked.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <command>, <input>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
-        public static ElementHandle ShouldNotBeChecked(this ElementHandle handle, string message = null)
+        public static ElementHandle ShouldNotBeChecked(this ElementHandle elementHandle, string message = null)
         {
-            if (handle.IsChecked()) Throw.ShouldNotBeChecked(handle, message);
+            if (elementHandle.IsChecked()) Throw.ShouldNotBeChecked(elementHandle, message);
 
-            return handle;
+            return elementHandle;
         }
 
         /// <summary>
         /// Asserts that the element is not checked.
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <command>, <input>]]></remarks>
-        public static void ShouldNotBeChecked(this Task<ElementHandle> task, string message = null)
+        public static void ShouldNotBeChecked(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (task.IsChecked()) Throw.ShouldNotBeChecked(task, message);
+            if (elementHandleTask.IsChecked()) Throw.ShouldNotBeChecked(elementHandleTask, message);
         }
 
         // Disabled
@@ -599,75 +599,75 @@ namespace PuppeteerSharp.Contrib.Should
         /// <summary>
         /// Asserts that the element is disabled.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <button>, <command>, <fieldset>, <input>, <keygen>, <optgroup>, <option>, <select>, <textarea>]]></remarks>
-        public static async Task ShouldBeDisabledAsync(this ElementHandle handle, string message = null)
+        public static async Task ShouldBeDisabledAsync(this ElementHandle elementHandle, string message = null)
         {
-            if (await handle.IsEnabledAsync().ConfigureAwait(false)) Throw.ShouldBeDisabled(handle, message);
+            if (await elementHandle.IsEnabledAsync().ConfigureAwait(false)) Throw.ShouldBeDisabled(elementHandle, message);
         }
 
         /// <summary>
         /// Asserts that the element is disabled.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <button>, <command>, <fieldset>, <input>, <keygen>, <optgroup>, <option>, <select>, <textarea>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
-        public static ElementHandle ShouldBeDisabled(this ElementHandle handle, string message = null)
+        public static ElementHandle ShouldBeDisabled(this ElementHandle elementHandle, string message = null)
         {
-            if (handle.IsEnabled()) Throw.ShouldBeDisabled(handle, message);
+            if (elementHandle.IsEnabled()) Throw.ShouldBeDisabled(elementHandle, message);
 
-            return handle;
+            return elementHandle;
         }
 
         /// <summary>
         /// Asserts that the element is disabled.
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <button>, <command>, <fieldset>, <input>, <keygen>, <optgroup>, <option>, <select>, <textarea>]]></remarks>
-        public static void ShouldBeDisabled(this Task<ElementHandle> task, string message = null)
+        public static void ShouldBeDisabled(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (task.IsEnabled()) Throw.ShouldBeDisabled(task, message);
+            if (elementHandleTask.IsEnabled()) Throw.ShouldBeDisabled(elementHandleTask, message);
         }
 
         /// <summary>
         /// Asserts that the element is enabled.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <button>, <command>, <fieldset>, <input>, <keygen>, <optgroup>, <option>, <select>, <textarea>]]></remarks>
-        public static async Task ShouldBeEnabledAsync(this ElementHandle handle, string message = null)
+        public static async Task ShouldBeEnabledAsync(this ElementHandle elementHandle, string message = null)
         {
-            if (await handle.IsDisabledAsync().ConfigureAwait(false)) Throw.ShouldBeEnabled(handle, message);
+            if (await elementHandle.IsDisabledAsync().ConfigureAwait(false)) Throw.ShouldBeEnabled(elementHandle, message);
         }
 
         /// <summary>
         /// Asserts that the element is enabled.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <button>, <command>, <fieldset>, <input>, <keygen>, <optgroup>, <option>, <select>, <textarea>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
-        public static ElementHandle ShouldBeEnabled(this ElementHandle handle, string message = null)
+        public static ElementHandle ShouldBeEnabled(this ElementHandle elementHandle, string message = null)
         {
-            if (handle.IsDisabled()) Throw.ShouldBeEnabled(handle, message);
+            if (elementHandle.IsDisabled()) Throw.ShouldBeEnabled(elementHandle, message);
 
-            return handle;
+            return elementHandle;
         }
 
         /// <summary>
         /// Asserts that the element is enabled.
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <button>, <command>, <fieldset>, <input>, <keygen>, <optgroup>, <option>, <select>, <textarea>]]></remarks>
-        public static void ShouldBeEnabled(this Task<ElementHandle> task, string message = null)
+        public static void ShouldBeEnabled(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (task.IsDisabled()) Throw.ShouldBeEnabled(task, message);
+            if (elementHandleTask.IsDisabled()) Throw.ShouldBeEnabled(elementHandleTask, message);
         }
 
         // ReadOnly
@@ -675,75 +675,75 @@ namespace PuppeteerSharp.Contrib.Should
         /// <summary>
         /// Asserts that the element is read-only.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <input>, <textarea>]]></remarks>
-        public static async Task ShouldBeReadOnlyAsync(this ElementHandle handle, string message = null)
+        public static async Task ShouldBeReadOnlyAsync(this ElementHandle elementHandle, string message = null)
         {
-            if (!await handle.IsReadOnlyAsync().ConfigureAwait(false)) Throw.ShouldBeReadOnly(handle, message);
+            if (!await elementHandle.IsReadOnlyAsync().ConfigureAwait(false)) Throw.ShouldBeReadOnly(elementHandle, message);
         }
 
         /// <summary>
         /// Asserts that the element is read-only.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <input>, <textarea>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
-        public static ElementHandle ShouldBeReadOnly(this ElementHandle handle, string message = null)
+        public static ElementHandle ShouldBeReadOnly(this ElementHandle elementHandle, string message = null)
         {
-            if (!handle.IsReadOnly()) Throw.ShouldBeReadOnly(handle, message);
+            if (!elementHandle.IsReadOnly()) Throw.ShouldBeReadOnly(elementHandle, message);
 
-            return handle;
+            return elementHandle;
         }
 
         /// <summary>
         /// Asserts that the element is read-only.
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <input>, <textarea>]]></remarks>
-        public static void ShouldBeReadOnly(this Task<ElementHandle> task, string message = null)
+        public static void ShouldBeReadOnly(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (!task.IsReadOnly()) Throw.ShouldBeReadOnly(task, message);
+            if (!elementHandleTask.IsReadOnly()) Throw.ShouldBeReadOnly(elementHandleTask, message);
         }
 
         /// <summary>
         /// Asserts that the element is not read-only.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <input>, <textarea>]]></remarks>
-        public static async Task ShouldNotBeReadOnlyAsync(this ElementHandle handle, string message = null)
+        public static async Task ShouldNotBeReadOnlyAsync(this ElementHandle elementHandle, string message = null)
         {
-            if (await handle.IsReadOnlyAsync().ConfigureAwait(false)) Throw.ShouldNotBeReadOnly(handle, message);
+            if (await elementHandle.IsReadOnlyAsync().ConfigureAwait(false)) Throw.ShouldNotBeReadOnly(elementHandle, message);
         }
 
         /// <summary>
         /// Asserts that the element is not read-only.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <input>, <textarea>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
-        public static ElementHandle ShouldNotBeReadOnly(this ElementHandle handle, string message = null)
+        public static ElementHandle ShouldNotBeReadOnly(this ElementHandle elementHandle, string message = null)
         {
-            if (handle.IsReadOnly()) Throw.ShouldNotBeReadOnly(handle, message);
+            if (elementHandle.IsReadOnly()) Throw.ShouldNotBeReadOnly(elementHandle, message);
 
-            return handle;
+            return elementHandle;
         }
 
         /// <summary>
         /// Asserts that the element is not read-only.
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <input>, <textarea>]]></remarks>
-        public static void ShouldNotBeReadOnly(this Task<ElementHandle> task, string message = null)
+        public static void ShouldNotBeReadOnly(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (task.IsReadOnly()) Throw.ShouldNotBeReadOnly(task, message);
+            if (elementHandleTask.IsReadOnly()) Throw.ShouldNotBeReadOnly(elementHandleTask, message);
         }
 
         // Required
@@ -751,75 +751,75 @@ namespace PuppeteerSharp.Contrib.Should
         /// <summary>
         /// Asserts that the element is required.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <input>, <select>, <textarea>]]></remarks>
-        public static async Task ShouldBeRequiredAsync(this ElementHandle handle, string message = null)
+        public static async Task ShouldBeRequiredAsync(this ElementHandle elementHandle, string message = null)
         {
-            if (!await handle.IsRequiredAsync().ConfigureAwait(false)) Throw.ShouldBeRequired(handle, message);
+            if (!await elementHandle.IsRequiredAsync().ConfigureAwait(false)) Throw.ShouldBeRequired(elementHandle, message);
         }
 
         /// <summary>
         /// Asserts that the element is required.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <input>, <select>, <textarea>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
-        public static ElementHandle ShouldBeRequired(this ElementHandle handle, string message = null)
+        public static ElementHandle ShouldBeRequired(this ElementHandle elementHandle, string message = null)
         {
-            if (!handle.IsRequired()) Throw.ShouldBeRequired(handle, message);
+            if (!elementHandle.IsRequired()) Throw.ShouldBeRequired(elementHandle, message);
 
-            return handle;
+            return elementHandle;
         }
 
         /// <summary>
         /// Asserts that the element is required.
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <input>, <select>, <textarea>]]></remarks>
-        public static void ShouldBeRequired(this Task<ElementHandle> task, string message = null)
+        public static void ShouldBeRequired(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (!task.IsRequired()) Throw.ShouldBeRequired(task, message);
+            if (!elementHandleTask.IsRequired()) Throw.ShouldBeRequired(elementHandleTask, message);
         }
 
         /// <summary>
         /// Asserts that the element is not required.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <input>, <select>, <textarea>]]></remarks>
-        public static async Task ShouldNotBeRequiredAsync(this ElementHandle handle, string message = null)
+        public static async Task ShouldNotBeRequiredAsync(this ElementHandle elementHandle, string message = null)
         {
-            if (await handle.IsRequiredAsync().ConfigureAwait(false)) Throw.ShouldNotBeRequired(handle, message);
+            if (await elementHandle.IsRequiredAsync().ConfigureAwait(false)) Throw.ShouldNotBeRequired(elementHandle, message);
         }
 
         /// <summary>
         /// Asserts that the element is not required.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <input>, <select>, <textarea>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
-        public static ElementHandle ShouldNotBeRequired(this ElementHandle handle, string message = null)
+        public static ElementHandle ShouldNotBeRequired(this ElementHandle elementHandle, string message = null)
         {
-            if (handle.IsRequired()) Throw.ShouldNotBeRequired(handle, message);
+            if (elementHandle.IsRequired()) Throw.ShouldNotBeRequired(elementHandle, message);
 
-            return handle;
+            return elementHandle;
         }
 
         /// <summary>
         /// Asserts that the element is not required.
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <input>, <select>, <textarea>]]></remarks>
-        public static void ShouldNotBeRequired(this Task<ElementHandle> task, string message = null)
+        public static void ShouldNotBeRequired(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (task.IsRequired()) Throw.ShouldNotBeRequired(task, message);
+            if (elementHandleTask.IsRequired()) Throw.ShouldNotBeRequired(elementHandleTask, message);
         }
 
         // Focus
@@ -827,75 +827,75 @@ namespace PuppeteerSharp.Contrib.Should
         /// <summary>
         /// Asserts that the element has focus.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <button>, <input>, <keygen>, <select>, <textarea>]]></remarks>
-        public static async Task ShouldHaveFocusAsync(this ElementHandle handle, string message = null)
+        public static async Task ShouldHaveFocusAsync(this ElementHandle elementHandle, string message = null)
         {
-            if (!await handle.HasFocusAsync().ConfigureAwait(false)) Throw.ShouldHaveFocus(handle, message);
+            if (!await elementHandle.HasFocusAsync().ConfigureAwait(false)) Throw.ShouldHaveFocus(elementHandle, message);
         }
 
         /// <summary>
         /// Asserts that the element has focus.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <button>, <input>, <keygen>, <select>, <textarea>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
-        public static ElementHandle ShouldHaveFocus(this ElementHandle handle, string message = null)
+        public static ElementHandle ShouldHaveFocus(this ElementHandle elementHandle, string message = null)
         {
-            if (!handle.HasFocus()) Throw.ShouldHaveFocus(handle, message);
+            if (!elementHandle.HasFocus()) Throw.ShouldHaveFocus(elementHandle, message);
 
-            return handle;
+            return elementHandle;
         }
 
         /// <summary>
         /// Asserts that the element has focus.
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <button>, <input>, <keygen>, <select>, <textarea>]]></remarks>
-        public static void ShouldHaveFocus(this Task<ElementHandle> task, string message = null)
+        public static void ShouldHaveFocus(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (!task.HasFocus()) Throw.ShouldHaveFocus(task, message);
+            if (!elementHandleTask.HasFocus()) Throw.ShouldHaveFocus(elementHandleTask, message);
         }
 
         /// <summary>
         /// Asserts that the element does not have focus.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <button>, <input>, <keygen>, <select>, <textarea>]]></remarks>
-        public static async Task ShouldNotHaveFocusAsync(this ElementHandle handle, string message = null)
+        public static async Task ShouldNotHaveFocusAsync(this ElementHandle elementHandle, string message = null)
         {
-            if (await handle.HasFocusAsync().ConfigureAwait(false)) Throw.ShouldNotHaveFocus(handle, message);
+            if (await elementHandle.HasFocusAsync().ConfigureAwait(false)) Throw.ShouldNotHaveFocus(elementHandle, message);
         }
 
         /// <summary>
         /// Asserts that the element does not have focus.
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <button>, <input>, <keygen>, <select>, <textarea>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
-        public static ElementHandle ShouldNotHaveFocus(this ElementHandle handle, string message = null)
+        public static ElementHandle ShouldNotHaveFocus(this ElementHandle elementHandle, string message = null)
         {
-            if (handle.HasFocus()) Throw.ShouldNotHaveFocus(handle, message);
+            if (elementHandle.HasFocus()) Throw.ShouldNotHaveFocus(elementHandle, message);
 
-            return handle;
+            return elementHandle;
         }
 
         /// <summary>
         /// Asserts that the element does not have focus.
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
         /// <remarks><![CDATA[Elements: <button>, <input>, <keygen>, <select>, <textarea>]]></remarks>
-        public static void ShouldNotHaveFocus(this Task<ElementHandle> task, string message = null)
+        public static void ShouldNotHaveFocus(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (task.HasFocus()) Throw.ShouldNotHaveFocus(task, message);
+            if (elementHandleTask.HasFocus()) Throw.ShouldNotHaveFocus(elementHandleTask, message);
         }
     }
 }
