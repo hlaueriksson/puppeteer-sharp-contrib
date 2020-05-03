@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace PuppeteerSharp.Contrib.Should
 {
@@ -7,6 +7,13 @@ namespace PuppeteerSharp.Contrib.Should
     /// </summary>
     public class ShouldException : Exception
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShouldException"/> class.
+        /// </summary>
+        public ShouldException()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ShouldException"/> class.
         /// </summary>

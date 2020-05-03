@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using PuppeteerSharp.Contrib.Extensions;
 
 namespace PuppeteerSharp.Contrib.Should
@@ -64,6 +64,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <param name="handle">An <see cref="ElementHandle"/></param>
         /// <param name="value">The value</param>
         /// <param name="message">Optional failure message</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <button>, <option>, <input>, <li>, <meter>, <progress>, <param>]]></remarks>
         public static async Task ShouldHaveValueAsync(this ElementHandle handle, string value, string message = null)
         {
@@ -103,6 +104,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <param name="handle">An <see cref="ElementHandle"/></param>
         /// <param name="value">The value</param>
         /// <param name="message">Optional failure message</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <button>, <option>, <input>, <li>, <meter>, <progress>, <param>]]></remarks>
         public static async Task ShouldNotHaveValueAsync(this ElementHandle handle, string value, string message = null)
         {
@@ -144,6 +146,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <param name="handle">An <see cref="ElementHandle"/></param>
         /// <param name="name">The attribute name</param>
         /// <param name="message">Optional failure message</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static async Task ShouldHaveAttributeAsync(this ElementHandle handle, string name, string message = null)
         {
             if (!await handle.HasAttributeAsync(name).ConfigureAwait(false)) Throw.ShouldHaveAttribute(handle, message);
@@ -180,6 +183,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <param name="handle">An <see cref="ElementHandle"/></param>
         /// <param name="name">The attribute name</param>
         /// <param name="message">Optional failure message</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static async Task ShouldNotHaveAttributeAsync(this ElementHandle handle, string name, string message = null)
         {
             if (await handle.HasAttributeAsync(name).ConfigureAwait(false)) Throw.ShouldNotHaveAttribute(handle, message);
@@ -218,6 +222,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <param name="handle">An <see cref="ElementHandle"/></param>
         /// <param name="content">The content</param>
         /// <param name="message">Optional failure message</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks>Evaluates <c>node.textContent</c></remarks>
         public static async Task ShouldHaveContentAsync(this ElementHandle handle, string content, string message = null)
         {
@@ -257,6 +262,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <param name="handle">An <see cref="ElementHandle"/></param>
         /// <param name="content">The content</param>
         /// <param name="message">Optional failure message</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks>Evaluates <c>node.textContent</c></remarks>
         public static async Task ShouldNotHaveContentAsync(this ElementHandle handle, string content, string message = null)
         {
@@ -298,6 +304,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <param name="handle">An <see cref="ElementHandle"/></param>
         /// <param name="className">The class name</param>
         /// <param name="message">Optional failure message</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static async Task ShouldHaveClassAsync(this ElementHandle handle, string className, string message = null)
         {
             if (!await handle.HasClassAsync(className).ConfigureAwait(false)) Throw.ShouldHaveClass(handle, message);
@@ -334,6 +341,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <param name="handle">An <see cref="ElementHandle"/></param>
         /// <param name="className">The class name</param>
         /// <param name="message">Optional failure message</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static async Task ShouldNotHaveClassAsync(this ElementHandle handle, string className, string message = null)
         {
             if (await handle.HasClassAsync(className).ConfigureAwait(false)) Throw.ShouldNotHaveClass(handle, message);
@@ -371,6 +379,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="handle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static async Task ShouldBeVisibleAsync(this ElementHandle handle, string message = null)
         {
             if (await handle.IsHiddenAsync().ConfigureAwait(false)) Throw.ShouldBeVisible(handle, message);
@@ -404,6 +413,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="handle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static async Task ShouldBeHiddenAsync(this ElementHandle handle, string message = null)
         {
             if (await handle.IsVisibleAsync().ConfigureAwait(false)) Throw.ShouldBeHidden(handle, message);
@@ -439,6 +449,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="handle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <option>]]></remarks>
         public static async Task ShouldBeSelectedAsync(this ElementHandle handle, string message = null)
         {
@@ -475,6 +486,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="handle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <option>]]></remarks>
         public static async Task ShouldNotBeSelectedAsync(this ElementHandle handle, string message = null)
         {
@@ -513,6 +525,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="handle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <command>, <input>]]></remarks>
         public static async Task ShouldBeCheckedAsync(this ElementHandle handle, string message = null)
         {
@@ -549,6 +562,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="handle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <command>, <input>]]></remarks>
         public static async Task ShouldNotBeCheckedAsync(this ElementHandle handle, string message = null)
         {
@@ -587,6 +601,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="handle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <button>, <command>, <fieldset>, <input>, <keygen>, <optgroup>, <option>, <select>, <textarea>]]></remarks>
         public static async Task ShouldBeDisabledAsync(this ElementHandle handle, string message = null)
         {
@@ -623,6 +638,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="handle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <button>, <command>, <fieldset>, <input>, <keygen>, <optgroup>, <option>, <select>, <textarea>]]></remarks>
         public static async Task ShouldBeEnabledAsync(this ElementHandle handle, string message = null)
         {
@@ -661,6 +677,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="handle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <input>, <textarea>]]></remarks>
         public static async Task ShouldBeReadOnlyAsync(this ElementHandle handle, string message = null)
         {
@@ -697,6 +714,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="handle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <input>, <textarea>]]></remarks>
         public static async Task ShouldNotBeReadOnlyAsync(this ElementHandle handle, string message = null)
         {
@@ -735,6 +753,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="handle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <input>, <select>, <textarea>]]></remarks>
         public static async Task ShouldBeRequiredAsync(this ElementHandle handle, string message = null)
         {
@@ -771,6 +790,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="handle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <input>, <select>, <textarea>]]></remarks>
         public static async Task ShouldNotBeRequiredAsync(this ElementHandle handle, string message = null)
         {
@@ -809,6 +829,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="handle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <button>, <input>, <keygen>, <select>, <textarea>]]></remarks>
         public static async Task ShouldHaveFocusAsync(this ElementHandle handle, string message = null)
         {
@@ -845,6 +866,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="handle">An <see cref="ElementHandle"/></param>
         /// <param name="message">Optional failure message</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <button>, <input>, <keygen>, <select>, <textarea>]]></remarks>
         public static async Task ShouldNotHaveFocusAsync(this ElementHandle handle, string message = null)
         {

@@ -1,8 +1,9 @@
-﻿namespace PuppeteerSharp.Contrib.Should
+namespace PuppeteerSharp.Contrib.Should
 {
     internal class ShouldMessage
     {
         private string Message { get; }
+
         private string CustomMessage { get; }
 
         public ShouldMessage(string message, string customMessage)

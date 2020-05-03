@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 
 namespace PuppeteerSharp.Contrib.Should
 {
@@ -244,14 +244,10 @@ namespace PuppeteerSharp.Contrib.Should
             Exception("Should not have focus, but did.", message);
         }
 
-        // Result
-
         private static T Result<T>(this Task<T> task)
         {
             return task.GetAwaiter().GetResult();
         }
-
-        // Throw
 
         private static void Exception(string message, string customMessage)
         {

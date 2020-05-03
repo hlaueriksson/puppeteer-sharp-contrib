@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -21,6 +21,8 @@
   <PropertyGroup>
     <DocumentationFile>bin\$(Configuration)\netstandard2.0\PuppeteerSharp.Contrib.Should.xml</DocumentationFile>
   </PropertyGroup>
+
+  <Import Project="../../Analyzers.props" />
 
   <ItemGroup>
     <PackageReference Include="PuppeteerSharp" Version="2.0.0" />
