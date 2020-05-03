@@ -13,31 +13,31 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <summary>
         /// Id of the element
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <returns>The element <c>id</c>, or <c>null</c> if the attribute is missing.</returns>
-        public static async Task<string> IdAsync(this ElementHandle handle)
+        public static async Task<string> IdAsync(this ElementHandle elementHandle)
         {
-            return await handle.GetAttributeAsync("id").ConfigureAwait(false);
+            return await elementHandle.GetAttributeAsync("id").ConfigureAwait(false);
         }
 
         /// <summary>
         /// Id of the element
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <returns>The element <c>id</c>, or <c>null</c> if the attribute is missing.</returns>
-        public static string Id(this ElementHandle handle)
+        public static string Id(this ElementHandle elementHandle)
         {
-            return handle.IdAsync().Result();
+            return elementHandle.IdAsync().Result();
         }
 
         /// <summary>
         /// Id of the element
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <returns>The element <c>id</c>, or <c>null</c> if the attribute is missing.</returns>
-        public static string Id(this Task<ElementHandle> task)
+        public static string Id(this Task<ElementHandle> elementHandleTask)
         {
-            return task.GuardFromNull().Result().Id();
+            return elementHandleTask.GuardFromNull().Result().Id();
         }
 
         // Name
@@ -45,34 +45,34 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <summary>
         /// Name of the element
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <remarks><![CDATA[Elements: <button>, <form>, <fieldset>, <iframe>, <input>, <keygen>, <object>, <output>, <select>, <textarea>, <map>, <meta>, <param>]]></remarks>
         /// <returns>The element <c>name</c>, or <c>null</c> if the attribute is missing.</returns>
-        public static async Task<string> NameAsync(this ElementHandle handle)
+        public static async Task<string> NameAsync(this ElementHandle elementHandle)
         {
-            return await handle.GetAttributeAsync("name").ConfigureAwait(false);
+            return await elementHandle.GetAttributeAsync("name").ConfigureAwait(false);
         }
 
         /// <summary>
         /// Name of the element
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <remarks><![CDATA[Elements: <button>, <form>, <fieldset>, <iframe>, <input>, <keygen>, <object>, <output>, <select>, <textarea>, <map>, <meta>, <param>]]></remarks>
         /// <returns>The element <c>name</c>, or <c>null</c> if the attribute is missing.</returns>
-        public static string Name(this ElementHandle handle)
+        public static string Name(this ElementHandle elementHandle)
         {
-            return handle.NameAsync().Result();
+            return elementHandle.NameAsync().Result();
         }
 
         /// <summary>
         /// Name of the element
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <remarks><![CDATA[Elements: <button>, <form>, <fieldset>, <iframe>, <input>, <keygen>, <object>, <output>, <select>, <textarea>, <map>, <meta>, <param>]]></remarks>
         /// <returns>The element <c>name</c>, or <c>null</c> if the attribute is missing.</returns>
-        public static string Name(this Task<ElementHandle> task)
+        public static string Name(this Task<ElementHandle> elementHandleTask)
         {
-            return task.GuardFromNull().Result().Name();
+            return elementHandleTask.GuardFromNull().Result().Name();
         }
 
         // Value
@@ -80,34 +80,34 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <summary>
         /// Value of the element
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <remarks><![CDATA[Elements: <button>, <option>, <input>, <li>, <meter>, <progress>, <param>]]></remarks>
         /// <returns>The element <c>value</c>, or <c>null</c> if the attribute is missing.</returns>
-        public static async Task<string> ValueAsync(this ElementHandle handle)
+        public static async Task<string> ValueAsync(this ElementHandle elementHandle)
         {
-            return await handle.GetAttributeAsync("value").ConfigureAwait(false);
+            return await elementHandle.GetAttributeAsync("value").ConfigureAwait(false);
         }
 
         /// <summary>
         /// Value of the element
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <remarks><![CDATA[Elements: <button>, <option>, <input>, <li>, <meter>, <progress>, <param>]]></remarks>
         /// <returns>The element <c>value</c>, or <c>null</c> if the attribute is missing.</returns>
-        public static string Value(this ElementHandle handle)
+        public static string Value(this ElementHandle elementHandle)
         {
-            return handle.ValueAsync().Result();
+            return elementHandle.ValueAsync().Result();
         }
 
         /// <summary>
         /// Value of the element
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <remarks><![CDATA[Elements: <button>, <option>, <input>, <li>, <meter>, <progress>, <param>]]></remarks>
         /// <returns>The element <c>value</c>, or <c>null</c> if the attribute is missing.</returns>
-        public static string Value(this Task<ElementHandle> task)
+        public static string Value(this Task<ElementHandle> elementHandleTask)
         {
-            return task.GuardFromNull().Result().Value();
+            return elementHandleTask.GuardFromNull().Result().Value();
         }
 
         // Href
@@ -115,34 +115,34 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <summary>
         /// Href of the element
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <remarks><![CDATA[Elements: <a>, <area>, <base>, <link>]]></remarks>
         /// <returns>The element <c>href</c>, or <c>null</c> if the attribute is missing.</returns>
-        public static async Task<string> HrefAsync(this ElementHandle handle)
+        public static async Task<string> HrefAsync(this ElementHandle elementHandle)
         {
-            return await handle.GetAttributeAsync("href").ConfigureAwait(false);
+            return await elementHandle.GetAttributeAsync("href").ConfigureAwait(false);
         }
 
         /// <summary>
         /// Href of the element
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <remarks><![CDATA[Elements: <a>, <area>, <base>, <link>]]></remarks>
         /// <returns>The element <c>href</c>, or <c>null</c> if the attribute is missing.</returns>
-        public static string Href(this ElementHandle handle)
+        public static string Href(this ElementHandle elementHandle)
         {
-            return handle.HrefAsync().Result();
+            return elementHandle.HrefAsync().Result();
         }
 
         /// <summary>
         /// Href of the element
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <remarks><![CDATA[Elements: <a>, <area>, <base>, <link>]]></remarks>
         /// <returns>The element <c>href</c>, or <c>null</c> if the attribute is missing.</returns>
-        public static string Href(this Task<ElementHandle> task)
+        public static string Href(this Task<ElementHandle> elementHandleTask)
         {
-            return task.GuardFromNull().Result().Href();
+            return elementHandleTask.GuardFromNull().Result().Href();
         }
 
         // Src
@@ -150,34 +150,34 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <summary>
         /// Src of the element
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <remarks><![CDATA[Elements: <audio>, <embed>, <iframe>, <img>, <input>, <script>, <source>, <track>, <video>]]></remarks>
         /// <returns>The element <c>src</c>, or <c>null</c> if the attribute is missing.</returns>
-        public static async Task<string> SrcAsync(this ElementHandle handle)
+        public static async Task<string> SrcAsync(this ElementHandle elementHandle)
         {
-            return await handle.GetAttributeAsync("src").ConfigureAwait(false);
+            return await elementHandle.GetAttributeAsync("src").ConfigureAwait(false);
         }
 
         /// <summary>
         /// Src of the element
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <remarks><![CDATA[Elements: <audio>, <embed>, <iframe>, <img>, <input>, <script>, <source>, <track>, <video>]]></remarks>
         /// <returns>The element <c>src</c>, or <c>null</c> if the attribute is missing.</returns>
-        public static string Src(this ElementHandle handle)
+        public static string Src(this ElementHandle elementHandle)
         {
-            return handle.SrcAsync().Result();
+            return elementHandle.SrcAsync().Result();
         }
 
         /// <summary>
         /// Src of the element
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <remarks><![CDATA[Elements: <audio>, <embed>, <iframe>, <img>, <input>, <script>, <source>, <track>, <video>]]></remarks>
         /// <returns>The element <c>src</c>, or <c>null</c> if the attribute is missing.</returns>
-        public static string Src(this Task<ElementHandle> task)
+        public static string Src(this Task<ElementHandle> elementHandleTask)
         {
-            return task.GuardFromNull().Result().Src();
+            return elementHandleTask.GuardFromNull().Result().Src();
         }
 
         // HasAttribute
@@ -186,36 +186,36 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// Indicates whether the element has the specified attribute or not.
         /// See also https://developer.mozilla.org/en-US/docs/Web/API/Element/hasAttribute
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="name">The attribute name</param>
         /// <returns><c>true</c> if the element has the specified attribute</returns>
-        public static async Task<bool> HasAttributeAsync(this ElementHandle handle, string name)
+        public static async Task<bool> HasAttributeAsync(this ElementHandle elementHandle, string name)
         {
-            return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("(element, name) => element.hasAttribute(name)", name).ConfigureAwait(false);
+            return await elementHandle.EvaluateFunctionWithoutDisposeAsync<bool>("(element, name) => element.hasAttribute(name)", name).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Indicates whether the element has the specified attribute or not.
         /// See also https://developer.mozilla.org/en-US/docs/Web/API/Element/hasAttribute
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="name">The attribute name</param>
         /// <returns><c>true</c> if the element has the specified attribute</returns>
-        public static bool HasAttribute(this ElementHandle handle, string name)
+        public static bool HasAttribute(this ElementHandle elementHandle, string name)
         {
-            return handle.HasAttributeAsync(name).Result();
+            return elementHandle.HasAttributeAsync(name).Result();
         }
 
         /// <summary>
         /// Indicates whether the element has the specified attribute or not.
         /// See also https://developer.mozilla.org/en-US/docs/Web/API/Element/hasAttribute
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <param name="name">The attribute name</param>
         /// <returns><c>true</c> if the element has the specified attribute</returns>
-        public static bool HasAttribute(this Task<ElementHandle> task, string name)
+        public static bool HasAttribute(this Task<ElementHandle> elementHandleTask, string name)
         {
-            return task.GuardFromNull().Result().HasAttribute(name);
+            return elementHandleTask.GuardFromNull().Result().HasAttribute(name);
         }
 
         // GetAttribute
@@ -224,36 +224,36 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// The value of a specified attribute on the element.
         /// See also https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="name">The attribute name</param>
         /// <returns>The attribute value</returns>
-        public static async Task<string> GetAttributeAsync(this ElementHandle handle, string name)
+        public static async Task<string> GetAttributeAsync(this ElementHandle elementHandle, string name)
         {
-            return await handle.EvaluateFunctionWithoutDisposeAsync<string>("(element, name) => element.getAttribute(name)", name).ConfigureAwait(false);
+            return await elementHandle.EvaluateFunctionWithoutDisposeAsync<string>("(element, name) => element.getAttribute(name)", name).ConfigureAwait(false);
         }
 
         /// <summary>
         /// The value of a specified attribute on the element.
         /// See also https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute
         /// </summary>
-        /// <param name="handle">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="name">The attribute name</param>
         /// <returns>The attribute value</returns>
-        public static string GetAttribute(this ElementHandle handle, string name)
+        public static string GetAttribute(this ElementHandle elementHandle, string name)
         {
-            return handle.GetAttributeAsync(name).Result();
+            return elementHandle.GetAttributeAsync(name).Result();
         }
 
         /// <summary>
         /// The value of a specified attribute on the element.
         /// See also https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute
         /// </summary>
-        /// <param name="task">An <see cref="ElementHandle"/></param>
+        /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <param name="name">The attribute name</param>
         /// <returns>The attribute value</returns>
-        public static string GetAttribute(this Task<ElementHandle> task, string name)
+        public static string GetAttribute(this Task<ElementHandle> elementHandleTask, string name)
         {
-            return task.GuardFromNull().Result().GetAttribute(name);
+            return elementHandleTask.GuardFromNull().Result().GetAttribute(name);
         }
     }
 }

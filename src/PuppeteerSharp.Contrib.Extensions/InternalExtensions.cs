@@ -17,18 +17,18 @@ namespace PuppeteerSharp.Contrib.Extensions
             return page;
         }
 
-        internal static ElementHandle GuardFromNull(this ElementHandle handle)
+        internal static ElementHandle GuardFromNull(this ElementHandle elementHandle)
         {
-            if (handle == null) throw new ArgumentNullException(nameof(handle));
+            if (elementHandle == null) throw new ArgumentNullException(nameof(elementHandle));
 
-            return handle;
+            return elementHandle;
         }
 
-        internal static Task<ElementHandle> GuardFromNull(this Task<ElementHandle> task)
+        internal static Task<ElementHandle> GuardFromNull(this Task<ElementHandle> elementHandleTask)
         {
-            if (task == null) throw new ArgumentNullException(nameof(task));
+            if (elementHandleTask == null) throw new ArgumentNullException(nameof(elementHandleTask));
 
-            return task;
+            return elementHandleTask;
         }
 
         internal static T Result<T>(this Task<T> task)
