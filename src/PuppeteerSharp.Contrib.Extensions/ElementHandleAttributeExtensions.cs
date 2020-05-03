@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 
 namespace PuppeteerSharp.Contrib.Extensions
 {
@@ -37,7 +37,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns>The element <c>id</c>, or <c>null</c> if the attribute is missing.</returns>
         public static string Id(this Task<ElementHandle> task)
         {
-            return task.Result().Id();
+            return task.GuardFromNull().Result().Id();
         }
 
         // Name
@@ -72,7 +72,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns>The element <c>name</c>, or <c>null</c> if the attribute is missing.</returns>
         public static string Name(this Task<ElementHandle> task)
         {
-            return task.Result().Name();
+            return task.GuardFromNull().Result().Name();
         }
 
         // Value
@@ -107,7 +107,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns>The element <c>value</c>, or <c>null</c> if the attribute is missing.</returns>
         public static string Value(this Task<ElementHandle> task)
         {
-            return task.Result().Value();
+            return task.GuardFromNull().Result().Value();
         }
 
         // Href
@@ -142,7 +142,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns>The element <c>href</c>, or <c>null</c> if the attribute is missing.</returns>
         public static string Href(this Task<ElementHandle> task)
         {
-            return task.Result().Href();
+            return task.GuardFromNull().Result().Href();
         }
 
         // Src
@@ -177,7 +177,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns>The element <c>src</c>, or <c>null</c> if the attribute is missing.</returns>
         public static string Src(this Task<ElementHandle> task)
         {
-            return task.Result().Src();
+            return task.GuardFromNull().Result().Src();
         }
 
         // HasAttribute
@@ -191,7 +191,6 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns><c>true</c> if the element has the specified attribute</returns>
         public static async Task<bool> HasAttributeAsync(this ElementHandle handle, string name)
         {
-            handle.GuardFromNull();
             return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("(element, name) => element.hasAttribute(name)", name).ConfigureAwait(false);
         }
 
@@ -216,7 +215,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns><c>true</c> if the element has the specified attribute</returns>
         public static bool HasAttribute(this Task<ElementHandle> task, string name)
         {
-            return task.Result().HasAttribute(name);
+            return task.GuardFromNull().Result().HasAttribute(name);
         }
 
         // GetAttribute
@@ -230,7 +229,6 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns>The attribute value</returns>
         public static async Task<string> GetAttributeAsync(this ElementHandle handle, string name)
         {
-            handle.GuardFromNull();
             return await handle.EvaluateFunctionWithoutDisposeAsync<string>("(element, name) => element.getAttribute(name)", name).ConfigureAwait(false);
         }
 
@@ -255,7 +253,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns>The attribute value</returns>
         public static string GetAttribute(this Task<ElementHandle> task, string name)
         {
-            return task.Result().GetAttribute(name);
+            return task.GuardFromNull().Result().GetAttribute(name);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PuppeteerSharp.Contrib.Extensions
@@ -20,7 +20,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns>Task which resolves to <see cref="ElementHandle"/> pointing to the frame element</returns>
         public static async Task<ElementHandle> QuerySelectorWithContentAsync(this Page page, string selector, string regex)
         {
-            var handle = await page.EvaluateFunctionHandleAsync(
+            var handle = await page.GuardFromNull().EvaluateFunctionHandleAsync(
                 @"(selector, regex) => {
                     var elements = document.querySelectorAll(selector);
                     return Array.prototype.find.call(elements, function(element) {
@@ -41,7 +41,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns>Task which resolves to ElementHandles pointing to the frame elements</returns>
         public static async Task<ElementHandle[]> QuerySelectorAllWithContentAsync(this Page page, string selector, string regex)
         {
-            var arrayHandle = await page.EvaluateFunctionHandleAsync(
+            var arrayHandle = await page.GuardFromNull().EvaluateFunctionHandleAsync(
                 @"(selector, regex) => {
                     var elements = document.querySelectorAll(selector);
                     return Array.prototype.filter.call(elements, function(element) {

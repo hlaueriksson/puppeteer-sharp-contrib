@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,7 +23,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns>Task which resolves to <see cref="ElementHandle"/> pointing to the element</returns>
         public static async Task<ElementHandle> QuerySelectorWithContentAsync(this ElementHandle handle, string selector, string regex)
         {
-            return await handle.EvaluateFunctionHandleViaReflectionAsync(
+            return await handle.GuardFromNull().EvaluateFunctionHandleAsync(
                 @"(element, selector, regex) => {
                     var elements = element.querySelectorAll(selector);
                     return Array.prototype.find.call(elements, function(element) {
@@ -42,7 +42,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns>Task which resolves to ElementHandles pointing to the elements</returns>
         public static async Task<ElementHandle[]> QuerySelectorAllWithContentAsync(this ElementHandle handle, string selector, string regex)
         {
-            var arrayHandle = await handle.EvaluateFunctionHandleViaReflectionAsync(
+            var arrayHandle = await handle.GuardFromNull().EvaluateFunctionHandleAsync(
                 @"(element, selector, regex) => {
                     var elements = element.querySelectorAll(selector);
                     return Array.prototype.filter.call(elements, function(element) {
@@ -77,7 +77,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns><c>true</c> if the element exists</returns>
         public static bool Exists(this Task<ElementHandle> task)
         {
-            return task.Result().Exists();
+            return task.GuardFromNull().Result().Exists();
         }
 
         // InnerHtml
@@ -112,7 +112,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns>The element <c>innerHTML</c></returns>
         public static string InnerHtml(this Task<ElementHandle> task)
         {
-            return task.Result().InnerHtml();
+            return task.GuardFromNull().Result().InnerHtml();
         }
 
         // OuterHtml
@@ -147,7 +147,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns>The element <c>outerHTML</c></returns>
         public static string OuterHtml(this Task<ElementHandle> task)
         {
-            return task.Result().OuterHtml();
+            return task.GuardFromNull().Result().OuterHtml();
         }
 
         // TextContent
@@ -182,7 +182,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns>The element <c>textContent</c></returns>
         public static string TextContent(this Task<ElementHandle> task)
         {
-            return task.Result().TextContent();
+            return task.GuardFromNull().Result().TextContent();
         }
 
         // InnerText
@@ -217,7 +217,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns>The element <c>innerText</c></returns>
         public static string InnerText(this Task<ElementHandle> task)
         {
-            return task.Result().InnerText();
+            return task.GuardFromNull().Result().InnerText();
         }
 
         // HasContent
@@ -231,7 +231,6 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns><c>true</c> if the element has the specified content</returns>
         public static async Task<bool> HasContentAsync(this ElementHandle handle, string content)
         {
-            handle.GuardFromNull();
             return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("(node, content) => node.textContent.includes(content)", content).ConfigureAwait(false);
         }
 
@@ -256,7 +255,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns><c>true</c> if the element has the specified content</returns>
         public static bool HasContent(this Task<ElementHandle> task, string content)
         {
-            return task.Result().HasContent(content);
+            return task.GuardFromNull().Result().HasContent(content);
         }
 
         // ClassName
@@ -269,7 +268,6 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns>The element <c>className</c></returns>
         public static async Task<string> ClassNameAsync(this ElementHandle handle)
         {
-            handle.GuardFromNull();
             return await handle.EvaluateFunctionWithoutDisposeAsync<string>("element => element.className").ConfigureAwait(false);
         }
 
@@ -292,7 +290,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns>The element <c>className</c></returns>
         public static string ClassName(this Task<ElementHandle> task)
         {
-            return task.Result().ClassName();
+            return task.GuardFromNull().Result().ClassName();
         }
 
         // ClassList
@@ -305,7 +303,6 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns>The element <c>classList</c></returns>
         public static async Task<string[]> ClassListAsync(this ElementHandle handle)
         {
-            handle.GuardFromNull();
             var json = await handle.EvaluateFunctionWithoutDisposeAsync<JObject>("element => element.classList").ConfigureAwait(false);
             var dictionary = json.ToObject<Dictionary<string, string>>();
             return dictionary.Values.ToArray();
@@ -330,7 +327,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns>The element <c>classList</c></returns>
         public static string[] ClassList(this Task<ElementHandle> task)
         {
-            return task.Result().ClassList();
+            return task.GuardFromNull().Result().ClassList();
         }
 
         // HasClass
@@ -343,7 +340,6 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns><c>true</c> if the element has the specified class</returns>
         public static async Task<bool> HasClassAsync(this ElementHandle handle, string className)
         {
-            handle.GuardFromNull();
             return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("(element, className) => element.classList.contains(className)", className).ConfigureAwait(false);
         }
 
@@ -366,7 +362,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns><c>true</c> if the element has the specified class</returns>
         public static bool HasClass(this Task<ElementHandle> task, string className)
         {
-            return task.Result().HasClass(className);
+            return task.GuardFromNull().Result().HasClass(className);
         }
 
         // IsVisible
@@ -379,7 +375,6 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns><c>true</c> if the element is visible</returns>
         public static async Task<bool> IsVisibleAsync(this ElementHandle handle)
         {
-            handle.GuardFromNull();
             return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("element => element.offsetWidth > 0 && element.offsetHeight > 0").ConfigureAwait(false);
         }
 
@@ -402,7 +397,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns><c>true</c> if the element is visible</returns>
         public static bool IsVisible(this Task<ElementHandle> task)
         {
-            return task.Result().IsVisible();
+            return task.GuardFromNull().Result().IsVisible();
         }
 
         // IsHidden
@@ -434,7 +429,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns><c>true</c> if the element is hidden</returns>
         public static bool IsHidden(this Task<ElementHandle> task)
         {
-            return task.Result().IsHidden();
+            return task.GuardFromNull().Result().IsHidden();
         }
 
         // IsSelected
@@ -447,7 +442,6 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns><c>true</c> if the element is selected</returns>
         public static async Task<bool> IsSelectedAsync(this ElementHandle handle)
         {
-            handle.GuardFromNull();
             return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("element => element.selected").ConfigureAwait(false);
         }
 
@@ -470,7 +464,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns><c>true</c> if the element is selected</returns>
         public static bool IsSelected(this Task<ElementHandle> task)
         {
-            return task.Result().IsSelected();
+            return task.GuardFromNull().Result().IsSelected();
         }
 
         // IsChecked
@@ -483,7 +477,6 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns><c>true</c> if the element is checked</returns>
         public static async Task<bool> IsCheckedAsync(this ElementHandle handle)
         {
-            handle.GuardFromNull();
             return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("element => element.checked").ConfigureAwait(false);
         }
 
@@ -506,7 +499,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns><c>true</c> if the element is checked</returns>
         public static bool IsChecked(this Task<ElementHandle> task)
         {
-            return task.Result().IsChecked();
+            return task.GuardFromNull().Result().IsChecked();
         }
 
         // IsDisabled
@@ -519,7 +512,6 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns><c>true</c> if the element is disabled</returns>
         public static async Task<bool> IsDisabledAsync(this ElementHandle handle)
         {
-            handle.GuardFromNull();
             return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("element => element.disabled").ConfigureAwait(false);
         }
 
@@ -542,7 +534,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns><c>true</c> if the element is disabled</returns>
         public static bool IsDisabled(this Task<ElementHandle> task)
         {
-            return task.Result().IsDisabled();
+            return task.GuardFromNull().Result().IsDisabled();
         }
 
         // IsEnabled
@@ -577,7 +569,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns><c>true</c> if the element is enabled</returns>
         public static bool IsEnabled(this Task<ElementHandle> task)
         {
-            return task.Result().IsEnabled();
+            return task.GuardFromNull().Result().IsEnabled();
         }
 
         // IsReadOnly
@@ -590,7 +582,6 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns><c>true</c> if the element is read-only</returns>
         public static async Task<bool> IsReadOnlyAsync(this ElementHandle handle)
         {
-            handle.GuardFromNull();
             return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("element => element.readOnly").ConfigureAwait(false);
         }
 
@@ -613,7 +604,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns><c>true</c> if the element is read-only</returns>
         public static bool IsReadOnly(this Task<ElementHandle> task)
         {
-            return task.Result().IsReadOnly();
+            return task.GuardFromNull().Result().IsReadOnly();
         }
 
         // IsRequired
@@ -626,7 +617,6 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns><c>true</c> if the element is required</returns>
         public static async Task<bool> IsRequiredAsync(this ElementHandle handle)
         {
-            handle.GuardFromNull();
             return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("element => element.required").ConfigureAwait(false);
         }
 
@@ -649,7 +639,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns><c>true</c> if the element is required</returns>
         public static bool IsRequired(this Task<ElementHandle> task)
         {
-            return task.Result().IsRequired();
+            return task.GuardFromNull().Result().IsRequired();
         }
 
         // HasFocus
@@ -663,7 +653,6 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns><c>true</c> if the element has focus</returns>
         public static async Task<bool> HasFocusAsync(this ElementHandle handle)
         {
-            handle.GuardFromNull();
             return await handle.EvaluateFunctionWithoutDisposeAsync<bool>("element => element === document.activeElement").ConfigureAwait(false);
         }
 
@@ -688,26 +677,13 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns><c>true</c> if the element has focus</returns>
         public static bool HasFocus(this Task<ElementHandle> task)
         {
-            return task.Result().HasFocus();
+            return task.GuardFromNull().Result().HasFocus();
         }
-
-        // GetPropertyValue
 
         private static async Task<string> GetPropertyValueAsync(this ElementHandle handle, string propertyName)
         {
-            handle.GuardFromNull();
-            var property = await handle.GetPropertyAsync(propertyName).ConfigureAwait(false);
+            var property = await handle.GuardFromNull().GetPropertyAsync(propertyName).ConfigureAwait(false);
             return await property.JsonValueAsync<string>().ConfigureAwait(false);
-        }
-
-        private static string GetPropertyValue(this ElementHandle handle, string propertyName)
-        {
-            return handle.GetPropertyValueAsync(propertyName).Result();
-        }
-
-        private static string GetPropertyValue(this Task<ElementHandle> task, string propertyName)
-        {
-            return task.Result().GetPropertyValue(propertyName);
         }
     }
 }
