@@ -4,6 +4,30 @@ namespace PuppeteerSharp.Contrib.Should
 {
     internal static class Throw
     {
+        /* Page */
+
+        public static void ShouldHaveContent(Page page, string message)
+        {
+            Exception("Should have content, but did not.", message);
+        }
+
+        public static void ShouldNotHaveContent(Page page, string message)
+        {
+            Exception("Should not have content, but did.", message);
+        }
+
+        public static void ShouldHaveTitle(Page page, string message)
+        {
+            Exception("Should have title, but did not.", message);
+        }
+
+        public static void ShouldNotHaveTitle(Page page, string message)
+        {
+            Exception("Should not have title, but did.", message);
+        }
+
+        /* ElementHandle */
+
         public static void ShouldExist(Task<ElementHandle> elementHandleTask, string message)
         {
             ShouldExist(elementHandleTask.Result(), message);

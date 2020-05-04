@@ -40,5 +40,26 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
             var missing = await Page.QuerySelectorAllWithContentAsync("div", "Missing");
             Assert.Empty(missing);
         }
+
+        [Fact]
+        public async Task HasContentAsync_should_return_true_if_page_has_the_content()
+        {
+            Assert.True(await Page.HasContentAsync("Ba."));
+            Assert.False(await Page.HasContentAsync("Missing"));
+        }
+
+        [Fact]
+        public async Task HasTitleAsync_should_return_true_if_page_has_the_title()
+        {
+            await Page.SetContentAsync(@"
+<html>
+ <head>
+  <title>Foo Bar Baz</title>
+ </head>
+</html>");
+
+            Assert.True(await Page.HasTitleAsync("Ba."));
+            Assert.False(await Page.HasTitleAsync("Missing"));
+        }
     }
 }
