@@ -6,7 +6,7 @@ namespace PuppeteerSharp.Contrib.Should
     /// <summary>
     /// Unsafe should assertions for <see cref="ElementHandle"/>.
     /// </summary>
-    public static class ShouldExtensions
+    public static class ElementHandleShouldExtensions
     {
         // Exist
 
