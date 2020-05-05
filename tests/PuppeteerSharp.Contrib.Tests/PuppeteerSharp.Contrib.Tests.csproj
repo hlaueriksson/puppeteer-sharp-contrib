@@ -14,8 +14,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\PuppeteerSharp.Contrib.Extensions.Unsafe\PuppeteerSharp.Contrib.Extensions.Unsafe.csproj" />
     <ProjectReference Include="..\..\src\PuppeteerSharp.Contrib.Extensions\PuppeteerSharp.Contrib.Extensions.csproj" />
     <ProjectReference Include="..\..\src\PuppeteerSharp.Contrib.PageObjects\PuppeteerSharp.Contrib.PageObjects.csproj" />
+    <ProjectReference Include="..\..\src\PuppeteerSharp.Contrib.Should.Unsafe\PuppeteerSharp.Contrib.Should.Unsafe.csproj" />
     <ProjectReference Include="..\..\src\PuppeteerSharp.Contrib.Should\PuppeteerSharp.Contrib.Should.csproj" />
   </ItemGroup>
 

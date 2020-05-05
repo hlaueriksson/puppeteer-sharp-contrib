@@ -1,5 +1,8 @@
 using System;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+
+[assembly: InternalsVisibleTo("PuppeteerSharp.Contrib.Extensions.Unsafe")]
 
 namespace PuppeteerSharp.Contrib.Extensions
 {
@@ -22,18 +25,6 @@ namespace PuppeteerSharp.Contrib.Extensions
             if (elementHandle == null) throw new ArgumentNullException(nameof(elementHandle));
 
             return elementHandle;
-        }
-
-        internal static Task<ElementHandle> GuardFromNull(this Task<ElementHandle> elementHandleTask)
-        {
-            if (elementHandleTask == null) throw new ArgumentNullException(nameof(elementHandleTask));
-
-            return elementHandleTask;
-        }
-
-        internal static T Result<T>(this Task<T> task)
-        {
-            return task.GetAwaiter().GetResult();
         }
     }
 }
