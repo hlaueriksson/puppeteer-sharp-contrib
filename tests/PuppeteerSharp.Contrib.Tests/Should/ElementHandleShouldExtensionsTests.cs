@@ -18,9 +18,8 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             var tweet = await Page.QuerySelectorAsync(".tweet");
             tweet.ShouldExist();
 
-            Page.QuerySelectorAsync(".tweet").ShouldExist();
-
-            var ex = Assert.Throws<ShouldException>(() => Page.QuerySelectorAsync(".missing").ShouldExist());
+            var missing = await Page.QuerySelectorAsync(".missing");
+            var ex = Assert.Throws<ShouldException>(() => missing.ShouldExist());
             Assert.Equal("Should exist, but did not.", ex.Message);
         }
 
@@ -30,446 +29,371 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             var missing = await Page.QuerySelectorAsync(".missing");
             missing.ShouldNotExist();
 
-            Page.QuerySelectorAsync(".missing").ShouldNotExist();
-
-            var ex = Assert.Throws<ShouldException>(() => Page.QuerySelectorAsync(".tweet").ShouldNotExist());
+            var tweet = await Page.QuerySelectorAsync(".tweet");
+            var ex = Assert.Throws<ShouldException>(() => tweet.ShouldNotExist());
             Assert.Equal("Should not exist, but did.", ex.Message);
         }
 
         // Value
 
         [Fact]
-        public async Task ShouldHaveValue_throws_if_element_does_not_have_the_value()
+        public async Task ShouldHaveValueAsync_throws_if_element_does_not_have_the_value()
         {
             await Page.SetContentAsync("<html><body><input value='input' /><button value='button' /></body></html>");
 
             var input = await Page.QuerySelectorAsync("input");
             await input.ShouldHaveValueAsync("input");
 
-            input = await Page.QuerySelectorAsync("input");
-            input.ShouldHaveValue("input");
-
-            Page.QuerySelectorAsync("input").ShouldHaveValue("input");
-
-            var ex = Assert.Throws<ShouldException>(() => Page.QuerySelectorAsync("input").ShouldHaveValue("button"));
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => input.ShouldHaveValueAsync("button"));
             Assert.Equal("Should have value, but did not.", ex.Message);
 
-            Assert.Throws<ArgumentNullException>(() => Page.QuerySelectorAsync(".missing").ShouldHaveValue(""));
+            var missing = await Page.QuerySelectorAsync(".missing");
+            await Assert.ThrowsAsync<ArgumentNullException>(() => missing.ShouldHaveValueAsync(""));
         }
 
         [Fact]
-        public async Task ShouldNotHaveValue_throws_if_element_has_the_value()
+        public async Task ShouldNotHaveValueAsync_throws_if_element_has_the_value()
         {
             await Page.SetContentAsync("<html><body><input value='input' /><button value='button' /></body></html>");
 
             var input = await Page.QuerySelectorAsync("input");
             await input.ShouldNotHaveValueAsync("button");
 
-            input = await Page.QuerySelectorAsync("input");
-            input.ShouldNotHaveValue("button");
-
-            Page.QuerySelectorAsync("input").ShouldNotHaveValue("button");
-
-            var ex = Assert.Throws<ShouldException>(() => Page.QuerySelectorAsync("input").ShouldNotHaveValue("input"));
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => input.ShouldNotHaveValueAsync("input"));
             Assert.Equal("Should not have value, but did.", ex.Message);
 
-            Assert.Throws<ArgumentNullException>(() => Page.QuerySelectorAsync(".missing").ShouldNotHaveValue(""));
+            var missing = await Page.QuerySelectorAsync(".missing");
+            await Assert.ThrowsAsync<ArgumentNullException>(() => missing.ShouldNotHaveValueAsync(""));
         }
 
         // Attribute
 
         [Fact]
-        public async Task ShouldHaveAttribute_throws_if_element_does_not_have_the_attribute()
+        public async Task ShouldHaveAttributeAsync_throws_if_element_does_not_have_the_attribute()
         {
             await Page.SetContentAsync("<html><body><div class='class' data-foo='bar' /></body></html>");
 
             var div = await Page.QuerySelectorAsync("div");
             await div.ShouldHaveAttributeAsync("class");
 
-            div = await Page.QuerySelectorAsync("div");
-            div.ShouldHaveAttribute("class");
-
-            Page.QuerySelectorAsync("div").ShouldHaveAttribute("data-foo");
-
-            var ex = Assert.Throws<ShouldException>(() => Page.QuerySelectorAsync("div").ShouldHaveAttribute("id"));
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => div.ShouldHaveAttributeAsync("id"));
             Assert.Equal("Should have attribute, but did not.", ex.Message);
 
-            Assert.Throws<ArgumentNullException>(() => Page.QuerySelectorAsync(".missing").ShouldHaveAttribute(""));
+            var missing = await Page.QuerySelectorAsync(".missing");
+            await Assert.ThrowsAsync<ArgumentNullException>(() => missing.ShouldHaveAttributeAsync(""));
         }
 
         [Fact]
-        public async Task ShouldNotHaveAttribute_throws_if_element_has_the_attribute()
+        public async Task ShouldNotHaveAttributeAsync_throws_if_element_has_the_attribute()
         {
             await Page.SetContentAsync("<html><body><div class='class' data-foo='bar' /></body></html>");
 
             var div = await Page.QuerySelectorAsync("div");
             await div.ShouldNotHaveAttributeAsync("id");
 
-            div = await Page.QuerySelectorAsync("div");
-            div.ShouldNotHaveAttribute("id");
-
-            Page.QuerySelectorAsync("div").ShouldNotHaveAttribute("data-bar");
-
-            var ex = Assert.Throws<ShouldException>(() => Page.QuerySelectorAsync("div").ShouldNotHaveAttribute("class"));
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => div.ShouldNotHaveAttributeAsync("class"));
             Assert.Equal("Should not have attribute, but did.", ex.Message);
 
-            Assert.Throws<ArgumentNullException>(() => Page.QuerySelectorAsync(".missing").ShouldNotHaveAttribute(""));
+            var missing = await Page.QuerySelectorAsync(".missing");
+            await Assert.ThrowsAsync<ArgumentNullException>(() => missing.ShouldNotHaveAttributeAsync(""));
         }
 
         // Content
 
         [Fact]
-        public async Task ShouldHaveContent_throws_if_element_does_not_have_the_content()
+        public async Task ShouldHaveContentAsync_throws_if_element_does_not_have_the_content()
         {
             var like = await Page.QuerySelectorAsync(".like");
             await like.ShouldHaveContentAsync("100");
 
-            like = await Page.QuerySelectorAsync(".like");
-            like.ShouldHaveContent("100");
-
-            Page.QuerySelectorAsync(".like").ShouldHaveContent("100");
-
-            var ex = Assert.Throws<ShouldException>(() => Page.QuerySelectorAsync(".like").ShouldHaveContent("200"));
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => like.ShouldHaveContentAsync("200"));
             Assert.Equal("Should have content, but did not.", ex.Message);
 
-            Assert.Throws<ArgumentNullException>(() => Page.QuerySelectorAsync(".missing").ShouldHaveContent(""));
+            var missing = await Page.QuerySelectorAsync(".missing");
+            await Assert.ThrowsAsync<ArgumentNullException>(() => missing.ShouldHaveContentAsync(""));
         }
 
         [Fact]
-        public async Task ShouldNotHaveContent_throws_if_element_has_the_content()
+        public async Task ShouldNotHaveContentAsync_throws_if_element_has_the_content()
         {
             var like = await Page.QuerySelectorAsync(".like");
             await like.ShouldNotHaveContentAsync("200");
 
-            like = await Page.QuerySelectorAsync(".like");
-            like.ShouldNotHaveContent("200");
-
-            Page.QuerySelectorAsync(".like").ShouldNotHaveContent("200");
-
-            var ex = Assert.Throws<ShouldException>(() => Page.QuerySelectorAsync(".like").ShouldNotHaveContent("100"));
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => like.ShouldNotHaveContentAsync("100"));
             Assert.Equal("Should not have content, but did.", ex.Message);
 
-            Assert.Throws<ArgumentNullException>(() => Page.QuerySelectorAsync(".missing").ShouldNotHaveContent(""));
+            var missing = await Page.QuerySelectorAsync(".missing");
+            await Assert.ThrowsAsync<ArgumentNullException>(() => missing.ShouldNotHaveContentAsync(""));
         }
 
         // Class
 
         [Fact]
-        public async Task ShouldHaveClass_throws_if_element_does_not_have_the_class()
+        public async Task ShouldHaveClassAsync_throws_if_element_does_not_have_the_class()
         {
             await Page.SetContentAsync("<html><body><div class='foo bar' /></body></html>");
 
             var div = await Page.QuerySelectorAsync("div");
             await div.ShouldHaveClassAsync("foo");
 
-            div = await Page.QuerySelectorAsync("div");
-            div.ShouldHaveClass("foo");
-
-            Page.QuerySelectorAsync("div").ShouldHaveClass("bar");
-
-            var ex = Assert.Throws<ShouldException>(() => Page.QuerySelectorAsync("div").ShouldHaveClass("baz"));
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => div.ShouldHaveClassAsync("baz"));
             Assert.Equal("Should have class, but did not.", ex.Message);
 
-            Assert.Throws<ArgumentNullException>(() => Page.QuerySelectorAsync(".missing").ShouldHaveClass(""));
+            var missing = await Page.QuerySelectorAsync(".missing");
+            await Assert.ThrowsAsync<ArgumentNullException>(() => missing.ShouldHaveClassAsync(""));
         }
 
         [Fact]
-        public async Task ShouldNotHaveClass_throws_if_element_has_the_class()
+        public async Task ShouldNotHaveClassAsync_throws_if_element_has_the_class()
         {
             await Page.SetContentAsync("<html><body><div class='foo bar' /></body></html>");
 
             var div = await Page.QuerySelectorAsync("div");
             await div.ShouldNotHaveClassAsync("baz");
 
-            div = await Page.QuerySelectorAsync("div");
-            div.ShouldNotHaveClass("baz");
-
-            Page.QuerySelectorAsync("div").ShouldNotHaveClass("qux");
-
-            var ex = Assert.Throws<ShouldException>(() => Page.QuerySelectorAsync("div").ShouldNotHaveClass("foo"));
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => div.ShouldNotHaveClassAsync("foo"));
             Assert.Equal("Should not have class, but did.", ex.Message);
 
-            Assert.Throws<ArgumentNullException>(() => Page.QuerySelectorAsync(".missing").ShouldNotHaveClass(""));
+            var missing = await Page.QuerySelectorAsync(".missing");
+            await Assert.ThrowsAsync<ArgumentNullException>(() => missing.ShouldNotHaveClassAsync(""));
         }
 
         // Visible
 
         [Fact]
-        public async Task ShouldBeVisible_throws_if_element_is_hidden()
+        public async Task ShouldBeVisibleAsync_throws_if_element_is_hidden()
         {
             await Page.SetContentAsync("<html><body><div id='foo'>Foo</div><div id='bar' style='display:none'>Bar</div></body></html>");
 
             var div = await Page.QuerySelectorAsync("#foo");
             await div.ShouldBeVisibleAsync();
 
-            div = await Page.QuerySelectorAsync("#foo");
-            div.ShouldBeVisible();
-
-            Page.QuerySelectorAsync("#foo").ShouldBeVisible();
-
-            var ex = Assert.Throws<ShouldException>(() => Page.QuerySelectorAsync("#bar").ShouldBeVisible());
+            div = await Page.QuerySelectorAsync("#bar");
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => div.ShouldBeVisibleAsync());
             Assert.Equal("Should be visible, but is not.", ex.Message);
 
-            Assert.Throws<ArgumentNullException>(() => Page.QuerySelectorAsync(".missing").ShouldBeVisible());
+            var missing = await Page.QuerySelectorAsync(".missing");
+            await Assert.ThrowsAsync<ArgumentNullException>(() => missing.ShouldBeVisibleAsync());
         }
 
         [Fact]
-        public async Task ShouldBeHidden_throws_if_element_is_visible()
+        public async Task ShouldBeHiddenAsync_throws_if_element_is_visible()
         {
             await Page.SetContentAsync("<html><body><div id='foo'>Foo</div><div id='bar' style='display:none'>Bar</div></body></html>");
 
             var div = await Page.QuerySelectorAsync("#bar");
             await div.ShouldBeHiddenAsync();
 
-            div = await Page.QuerySelectorAsync("#bar");
-            div.ShouldBeHidden();
-
-            Page.QuerySelectorAsync("#bar").ShouldBeHidden();
-
-            var ex = Assert.Throws<ShouldException>(() => Page.QuerySelectorAsync("#foo").ShouldBeHidden());
+            div = await Page.QuerySelectorAsync("#foo");
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => div.ShouldBeHiddenAsync());
             Assert.Equal("Should be hidden, but is not.", ex.Message);
 
-            Assert.Throws<ArgumentNullException>(() => Page.QuerySelectorAsync(".missing").ShouldBeHidden());
+            var missing = await Page.QuerySelectorAsync(".missing");
+            await Assert.ThrowsAsync<ArgumentNullException>(() => missing.ShouldBeHiddenAsync());
         }
 
         // Selected
 
         [Fact]
-        public async Task ShouldBeSelected_throws_if_element_is_not_selected()
+        public async Task ShouldBeSelectedAsync_throws_if_element_is_not_selected()
         {
             await Page.SetContentAsync("<html><body><select><option id='foo'>Foo</option><option id='bar'>Bar</option></select></body></html>");
 
             var div = await Page.QuerySelectorAsync("#foo");
             await div.ShouldBeSelectedAsync();
 
-            div = await Page.QuerySelectorAsync("#foo");
-            div.ShouldBeSelected();
-
-            Page.QuerySelectorAsync("#foo").ShouldBeSelected();
-
-            var ex = Assert.Throws<ShouldException>(() => Page.QuerySelectorAsync("#bar").ShouldBeSelected());
+            div = await Page.QuerySelectorAsync("#bar");
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => div.ShouldBeSelectedAsync());
             Assert.Equal("Should be selected, but is not.", ex.Message);
 
-            Assert.Throws<ArgumentNullException>(() => Page.QuerySelectorAsync(".missing").ShouldBeSelected());
+            var missing = await Page.QuerySelectorAsync(".missing");
+            await Assert.ThrowsAsync<ArgumentNullException>(() => missing.ShouldBeSelectedAsync());
         }
 
         [Fact]
-        public async Task ShouldNotBeSelected_throws_if_element_is_selected()
+        public async Task ShouldNotBeSelectedAsync_throws_if_element_is_selected()
         {
             await Page.SetContentAsync("<html><body><select><option id='foo'>Foo</option><option id='bar'>Bar</option></select></body></html>");
 
             var div = await Page.QuerySelectorAsync("#bar");
             await div.ShouldNotBeSelectedAsync();
 
-            div = await Page.QuerySelectorAsync("#bar");
-            div.ShouldNotBeSelected();
-
-            Page.QuerySelectorAsync("#bar").ShouldNotBeSelected();
-
-            var ex = Assert.Throws<ShouldException>(() => Page.QuerySelectorAsync("#foo").ShouldNotBeSelected());
+            div = await Page.QuerySelectorAsync("#foo");
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => div.ShouldNotBeSelectedAsync());
             Assert.Equal("Should not be selected, but is.", ex.Message);
 
-            Assert.Throws<ArgumentNullException>(() => Page.QuerySelectorAsync(".missing").ShouldNotBeSelected());
+            var missing = await Page.QuerySelectorAsync(".missing");
+            await Assert.ThrowsAsync<ArgumentNullException>(() => missing.ShouldNotBeSelectedAsync());
         }
 
         // Checked
 
         [Fact]
-        public async Task ShouldBeChecked_throws_if_element_is_not_checked()
+        public async Task ShouldBeCheckedAsync_throws_if_element_is_not_checked()
         {
             await Page.SetContentAsync("<html><body><input type='checkbox' id='foo' checked><input type='checkbox' id='bar'></body></html>");
 
             var div = await Page.QuerySelectorAsync("#foo");
             await div.ShouldBeCheckedAsync();
 
-            div = await Page.QuerySelectorAsync("#foo");
-            div.ShouldBeChecked();
-
-            Page.QuerySelectorAsync("#foo").ShouldBeChecked();
-
-            var ex = Assert.Throws<ShouldException>(() => Page.QuerySelectorAsync("#bar").ShouldBeChecked());
+            div = await Page.QuerySelectorAsync("#bar");
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => div.ShouldBeCheckedAsync());
             Assert.Equal("Should be checked, but is not.", ex.Message);
 
-            Assert.Throws<ArgumentNullException>(() => Page.QuerySelectorAsync(".missing").ShouldBeChecked());
+            var missing = await Page.QuerySelectorAsync(".missing");
+            await Assert.ThrowsAsync<ArgumentNullException>(() => missing.ShouldBeCheckedAsync());
         }
 
         [Fact]
-        public async Task ShouldNotBeChecked_throws_if_element_is_checked()
+        public async Task ShouldNotBeCheckedAsync_throws_if_element_is_checked()
         {
             await Page.SetContentAsync("<html><body><input type='checkbox' id='foo' checked><input type='checkbox' id='bar'></body></html>");
 
             var div = await Page.QuerySelectorAsync("#bar");
             await div.ShouldNotBeCheckedAsync();
 
-            div = await Page.QuerySelectorAsync("#bar");
-            div.ShouldNotBeChecked();
-
-            Page.QuerySelectorAsync("#bar").ShouldNotBeChecked();
-
-            var ex = Assert.Throws<ShouldException>(() => Page.QuerySelectorAsync("#foo").ShouldNotBeChecked());
+            div = await Page.QuerySelectorAsync("#foo");
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => div.ShouldNotBeCheckedAsync());
             Assert.Equal("Should not be checked, but is.", ex.Message);
 
-            Assert.Throws<ArgumentNullException>(() => Page.QuerySelectorAsync(".missing").ShouldNotBeChecked());
+            var missing = await Page.QuerySelectorAsync(".missing");
+            await Assert.ThrowsAsync<ArgumentNullException>(() => missing.ShouldNotBeCheckedAsync());
         }
 
         // Disabled
 
         [Fact]
-        public async Task ShouldBeDisabled_throws_if_element_is_enabled()
+        public async Task ShouldBeDisabledAsync_throws_if_element_is_enabled()
         {
             await Page.SetContentAsync("<html><body><input id='foo' disabled><input id='bar'></body></html>");
 
             var div = await Page.QuerySelectorAsync("#foo");
             await div.ShouldBeDisabledAsync();
 
-            div = await Page.QuerySelectorAsync("#foo");
-            div.ShouldBeDisabled();
-
-            Page.QuerySelectorAsync("#foo").ShouldBeDisabled();
-
-            var ex = Assert.Throws<ShouldException>(() => Page.QuerySelectorAsync("#bar").ShouldBeDisabled());
+            div = await Page.QuerySelectorAsync("#bar");
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => div.ShouldBeDisabledAsync());
             Assert.Equal("Should be disabled, but is not.", ex.Message);
 
-            Assert.Throws<ArgumentNullException>(() => Page.QuerySelectorAsync(".missing").ShouldBeDisabled());
+            var missing = await Page.QuerySelectorAsync(".missing");
+            await Assert.ThrowsAsync<ArgumentNullException>(() => missing.ShouldBeDisabledAsync());
         }
 
         [Fact]
-        public async Task ShouldBeEnabled_throws_if_element_is_disabled()
+        public async Task ShouldBeEnabledAsync_throws_if_element_is_disabled()
         {
             await Page.SetContentAsync("<html><body><input id='foo' disabled><input id='bar'></body></html>");
 
             var div = await Page.QuerySelectorAsync("#bar");
             await div.ShouldBeEnabledAsync();
 
-            div = await Page.QuerySelectorAsync("#bar");
-            div.ShouldBeEnabled();
-
-            Page.QuerySelectorAsync("#bar").ShouldBeEnabled();
-
-            var ex = Assert.Throws<ShouldException>(() => Page.QuerySelectorAsync("#foo").ShouldBeEnabled());
+            div = await Page.QuerySelectorAsync("#foo");
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => div.ShouldBeEnabledAsync());
             Assert.Equal("Should be enabled, but is not.", ex.Message);
 
-            Assert.Throws<ArgumentNullException>(() => Page.QuerySelectorAsync(".missing").ShouldBeEnabled());
+            var missing = await Page.QuerySelectorAsync(".missing");
+            await Assert.ThrowsAsync<ArgumentNullException>(() => missing.ShouldBeEnabledAsync());
         }
 
         // ReadOnly
 
         [Fact]
-        public async Task ShouldBeReadOnly_throws_if_element_is_not_read_only()
+        public async Task ShouldBeReadOnlyAsync_throws_if_element_is_not_read_only()
         {
             await Page.SetContentAsync("<html><body><input id='foo' readonly><input id='bar'></body></html>");
 
             var div = await Page.QuerySelectorAsync("#foo");
             await div.ShouldBeReadOnlyAsync();
 
-            div = await Page.QuerySelectorAsync("#foo");
-            div.ShouldBeReadOnly();
-
-            Page.QuerySelectorAsync("#foo").ShouldBeReadOnly();
-
-            var ex = Assert.Throws<ShouldException>(() => Page.QuerySelectorAsync("#bar").ShouldBeReadOnly());
+            div = await Page.QuerySelectorAsync("#bar");
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => div.ShouldBeReadOnlyAsync());
             Assert.Equal("Should be read-only, but is not.", ex.Message);
 
-            Assert.Throws<ArgumentNullException>(() => Page.QuerySelectorAsync(".missing").ShouldBeReadOnly());
+            var missing = await Page.QuerySelectorAsync(".missing");
+            await Assert.ThrowsAsync<ArgumentNullException>(() => missing.ShouldBeReadOnlyAsync());
         }
 
         [Fact]
-        public async Task ShouldNotBeReadOnly_throws_if_element_is_read_only()
+        public async Task ShouldNotBeReadOnlyAsync_throws_if_element_is_read_only()
         {
             await Page.SetContentAsync("<html><body><input id='foo' readonly><input id='bar'></body></html>");
 
             var div = await Page.QuerySelectorAsync("#bar");
             await div.ShouldNotBeReadOnlyAsync();
 
-            div = await Page.QuerySelectorAsync("#bar");
-            div.ShouldNotBeReadOnly();
-
-            Page.QuerySelectorAsync("#bar").ShouldNotBeReadOnly();
-
-            var ex = Assert.Throws<ShouldException>(() => Page.QuerySelectorAsync("#foo").ShouldNotBeReadOnly());
+            div = await Page.QuerySelectorAsync("#foo");
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => div.ShouldNotBeReadOnlyAsync());
             Assert.Equal("Should not be read-only, but is.", ex.Message);
 
-            Assert.Throws<ArgumentNullException>(() => Page.QuerySelectorAsync(".missing").ShouldNotBeReadOnly());
+            var missing = await Page.QuerySelectorAsync(".missing");
+            await Assert.ThrowsAsync<ArgumentNullException>(() => missing.ShouldNotBeReadOnlyAsync());
         }
 
         // Required
 
         [Fact]
-        public async Task ShouldBeRequired_throws_if_element_is_not_required()
+        public async Task ShouldBeRequiredAsync_throws_if_element_is_not_required()
         {
             await Page.SetContentAsync("<html><body><input id='foo' required><input id='bar'></body></html>");
 
             var div = await Page.QuerySelectorAsync("#foo");
             await div.ShouldBeRequiredAsync();
 
-            div = await Page.QuerySelectorAsync("#foo");
-            div.ShouldBeRequired();
-
-            Page.QuerySelectorAsync("#foo").ShouldBeRequired();
-
-            var ex = Assert.Throws<ShouldException>(() => Page.QuerySelectorAsync("#bar").ShouldBeRequired());
+            div = await Page.QuerySelectorAsync("#bar");
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => div.ShouldBeRequiredAsync());
             Assert.Equal("Should be required, but is not.", ex.Message);
 
-            Assert.Throws<ArgumentNullException>(() => Page.QuerySelectorAsync(".missing").ShouldBeRequired());
+            var missing = await Page.QuerySelectorAsync(".missing");
+            await Assert.ThrowsAsync<ArgumentNullException>(() => missing.ShouldBeRequiredAsync());
         }
 
         [Fact]
-        public async Task ShouldNotBeRequired_throws_if_element_is_required()
+        public async Task ShouldNotBeRequiredAsync_throws_if_element_is_required()
         {
             await Page.SetContentAsync("<html><body><input id='foo' required><input id='bar'></body></html>");
 
             var div = await Page.QuerySelectorAsync("#bar");
             await div.ShouldNotBeRequiredAsync();
 
-            div = await Page.QuerySelectorAsync("#bar");
-            div.ShouldNotBeRequired();
-
-            Page.QuerySelectorAsync("#bar").ShouldNotBeRequired();
-
-            var ex = Assert.Throws<ShouldException>(() => Page.QuerySelectorAsync("#foo").ShouldNotBeRequired());
+            div = await Page.QuerySelectorAsync("#foo");
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => div.ShouldNotBeRequiredAsync());
             Assert.Equal("Should not be required, but is.", ex.Message);
 
-            Assert.Throws<ArgumentNullException>(() => Page.QuerySelectorAsync(".missing").ShouldNotBeRequired());
+            var missing = await Page.QuerySelectorAsync(".missing");
+            await Assert.ThrowsAsync<ArgumentNullException>(() => missing.ShouldNotBeRequiredAsync());
         }
 
         // Focus
 
         [Fact]
-        public async Task ShouldHaveFocus_throws_if_element_does_not_have_focus()
+        public async Task ShouldHaveFocusAsync_throws_if_element_does_not_have_focus()
         {
             await Page.SetContentAsync("<html><body><input id='foo' autofocus><input id='bar'></body></html>", new NavigationOptions { WaitUntil = new[] { WaitUntilNavigation.Networkidle0 } });
 
             var div = await Page.QuerySelectorAsync("#foo");
             await div.ShouldHaveFocusAsync();
 
-            div = await Page.QuerySelectorAsync("#foo");
-            div.ShouldHaveFocus();
-
-            Page.QuerySelectorAsync("#foo").ShouldHaveFocus();
-
-            var ex = Assert.Throws<ShouldException>(() => Page.QuerySelectorAsync("#bar").ShouldHaveFocus());
+            div = await Page.QuerySelectorAsync("#bar");
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => div.ShouldHaveFocusAsync());
             Assert.Equal("Should have focus, but did not.", ex.Message);
 
-            Assert.Throws<ArgumentNullException>(() => Page.QuerySelectorAsync(".missing").ShouldHaveFocus());
+            var missing = await Page.QuerySelectorAsync(".missing");
+            await Assert.ThrowsAsync<ArgumentNullException>(() => missing.ShouldHaveFocusAsync());
         }
 
         [Fact]
-        public async Task ShouldNotHaveFocus_throws_if_element_has_focus()
+        public async Task ShouldNotHaveFocusAsync_throws_if_element_has_focus()
         {
             await Page.SetContentAsync("<html><body><input id='foo' autofocus><input id='bar'></body></html>", new NavigationOptions { WaitUntil = new[] { WaitUntilNavigation.Networkidle0 } });
 
             var div = await Page.QuerySelectorAsync("#bar");
             await div.ShouldNotHaveFocusAsync();
 
-            div = await Page.QuerySelectorAsync("#bar");
-            div.ShouldNotHaveFocus();
-
-            Page.QuerySelectorAsync("#bar").ShouldNotHaveFocus();
-
-            var ex = Assert.Throws<ShouldException>(() => Page.QuerySelectorAsync("#foo").ShouldNotHaveFocus());
+            div = await Page.QuerySelectorAsync("#foo");
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => div.ShouldNotHaveFocusAsync());
             Assert.Equal("Should not have focus, but did.", ex.Message);
 
-            Assert.Throws<ArgumentNullException>(() => Page.QuerySelectorAsync(".missing").ShouldNotHaveFocus());
+            var missing = await Page.QuerySelectorAsync(".missing");
+            await Assert.ThrowsAsync<ArgumentNullException>(() => missing.ShouldNotHaveFocusAsync());
         }
     }
 }
