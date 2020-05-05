@@ -4,7 +4,7 @@ using PuppeteerSharp.Contrib.Extensions;
 namespace PuppeteerSharp.Contrib.Should
 {
     /// <summary>
-    /// <see cref="ElementHandle"/> extension methods for should assertions.
+    /// Unsafe should assertions for <see cref="ElementHandle"/>.
     /// </summary>
     public static class ShouldExtensions
     {
