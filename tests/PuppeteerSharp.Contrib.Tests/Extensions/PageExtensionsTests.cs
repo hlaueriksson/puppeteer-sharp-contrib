@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using PuppeteerSharp.Contrib.Extensions;
@@ -26,6 +27,8 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
 
             var missing = await Page.QuerySelectorWithContentAsync("div", "Missing");
             Assert.Null(missing);
+
+            await Assert.ThrowsAsync<ArgumentNullException>(() => ((Page)null).QuerySelectorWithContentAsync("", ""));
         }
 
         [Fact]
@@ -39,6 +42,8 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
 
             var missing = await Page.QuerySelectorAllWithContentAsync("div", "Missing");
             Assert.Empty(missing);
+
+            await Assert.ThrowsAsync<ArgumentNullException>(() => ((Page)null).QuerySelectorAllWithContentAsync("", ""));
         }
 
         [Fact]
@@ -46,6 +51,7 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
         {
             Assert.True(await Page.HasContentAsync("Ba."));
             Assert.False(await Page.HasContentAsync("Missing"));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => ((Page)null).HasContentAsync(""));
         }
 
         [Fact]
@@ -60,6 +66,7 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
 
             Assert.True(await Page.HasTitleAsync("Ba."));
             Assert.False(await Page.HasTitleAsync("Missing"));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => ((Page)null).HasTitleAsync(""));
         }
     }
 }
