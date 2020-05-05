@@ -1,7 +1,6 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Nito.AsyncEx.Synchronous;
 
 [assembly: InternalsVisibleTo("PuppeteerSharp.Contrib.Should.Unsafe")]
 
@@ -18,7 +17,7 @@ namespace PuppeteerSharp.Contrib.Extensions
 
         internal static T Result<T>(this Task<T> task)
         {
-            return task.WaitAndUnwrapException();
+            return AsyncUtil.RunSync(() => task);
         }
     }
 }
