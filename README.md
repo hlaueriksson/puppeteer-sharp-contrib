@@ -5,6 +5,9 @@
 
 [![PuppeteerSharp.Contrib.Extensions](https://img.shields.io/nuget/v/PuppeteerSharp.Contrib.Extensions.svg?label=PuppeteerSharp.Contrib.Extensions)](https://www.nuget.org/packages/PuppeteerSharp.Contrib.Extensions)
 [![PuppeteerSharp.Contrib.Should](https://img.shields.io/nuget/v/PuppeteerSharp.Contrib.Should.svg?label=PuppeteerSharp.Contrib.Should)](https://www.nuget.org/packages/PuppeteerSharp.Contrib.Should)
+[![PuppeteerSharp.Contrib.PageObjects](https://img.shields.io/nuget/v/PuppeteerSharp.Contrib.PageObjects.svg?label=PuppeteerSharp.Contrib.PageObjects)](https://www.nuget.org/packages/PuppeteerSharp.Contrib.PageObjects)
+
+TODO
 
 Contributions to the Headless Chrome .NET API 🌐🧪
 
@@ -23,6 +26,8 @@ It provides a convenient way to write readable and robust browser tests in .NET
   - [PuppeteerSharp.Contrib.Extensions](#puppeteersharpcontribextensions)
   - [PuppeteerSharp.Contrib.Should](#puppeteersharpcontribshould)
   - [PuppeteerSharp.Contrib.PageObjects](#puppeteersharpcontribpageobjects)
+  - [PuppeteerSharp.Contrib.Extensions.Unsafe](#puppeteersharpcontribextensionsunsafe)
+  - [PuppeteerSharp.Contrib.Should.Unsafe](#puppeteersharpcontribshouldunsafe)
   - [Samples](#samples)
   - [Attribution](#attribution)
 
@@ -30,11 +35,13 @@ It provides a convenient way to write readable and robust browser tests in .NET
 
 `PuppeteerSharp` is a great library to automate the Chrome browser in .NET / C#.
 
-_Puppeteer Sharp Contributions_ consists of three libraries that helps you write browser automation tests:
+_Puppeteer Sharp Contributions_ consists of a few libraries that helps you write browser automation tests:
 
 * `PuppeteerSharp.Contrib.Extensions`
 * `PuppeteerSharp.Contrib.Should`
 * `PuppeteerSharp.Contrib.PageObjects`
+* `PuppeteerSharp.Contrib.Extensions.Unsafe`
+* `PuppeteerSharp.Contrib.Should.Unsafe`
 
 These libraries contains _extension methods_ to the Puppeteer Sharp API and they are test framework agnostic.
 
@@ -46,6 +53,8 @@ These libraries contains _extension methods_ to the Puppeteer Sharp API and they
 
 :book: README: [PuppeteerSharp.Contrib.Extensions.md](PuppeteerSharp.Contrib.Extensions.md)
 
+:boom: The _sync over async_ versions of the extension methods has been moved to the [unsafe](#puppeteersharpcontribextensionsunsafe) package.
+
 ## PuppeteerSharp.Contrib.Should
 
 [![NuGet](https://buildstats.info/nuget/PuppeteerSharp.Contrib.Should)](https://www.nuget.org/packages/PuppeteerSharp.Contrib.Should/)
@@ -54,6 +63,8 @@ These libraries contains _extension methods_ to the Puppeteer Sharp API and they
 
 :book: README: [PuppeteerSharp.Contrib.Should.md](PuppeteerSharp.Contrib.Should.md)
 
+:boom: The _sync over async_ versions of the extension methods has been moved to the [unsafe](#puppeteersharpcontribshouldunsafe) package.
+
 ## PuppeteerSharp.Contrib.PageObjects
 
 [![NuGet](https://buildstats.info/nuget/PuppeteerSharp.Contrib.PageObjects)](https://www.nuget.org/packages/PuppeteerSharp.Contrib.PageObjects/)
@@ -61,6 +72,22 @@ These libraries contains _extension methods_ to the Puppeteer Sharp API and they
 `PuppeteerSharp.Contrib.PageObjects` is a library for writing browser tests using the _page object pattern_ with the Puppeteer Sharp API.
 
 :book: README: [PuppeteerSharp.Contrib.PageObjects.md](PuppeteerSharp.Contrib.PageObjects.md)
+
+## PuppeteerSharp.Contrib.Extensions.Unsafe
+
+TODO
+
+`PuppeteerSharp.Contrib.Extensions.Unsafe` contains _sync over async_ versions of the extension methods from the [safe](#puppeteersharpcontribextensions) package.
+
+:book: README: [PuppeteerSharp.Contrib.Extensions.Unsafe.md](PuppeteerSharp.Contrib.Extensions.Unsafe.md)
+
+## PuppeteerSharp.Contrib.Should.Unsafe
+
+TODO
+
+`PuppeteerSharp.Contrib.Should.Unsafe` contains _sync over async_ versions of the extension methods from the [safe](#puppeteersharpcontribshould) package.
+
+:book: README: [PuppeteerSharp.Contrib.Should.Unsafe.md](PuppeteerSharp.Contrib.Should.Unsafe.md)
 
 ## Samples
 

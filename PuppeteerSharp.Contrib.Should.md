@@ -2,11 +2,14 @@
 
 `PuppeteerSharp.Contrib.Should` is a should assertion library for the Puppeteer Sharp API.
 
+:boom: The _sync over async_ versions of the extension methods has been moved to the [PuppeteerSharp.Contrib.Should.Unsafe](PuppeteerSharp.Contrib.Should.Unsafe.md) package.
+
 ## Content
 
 - [PuppeteerSharp.Contrib.Should](#puppeteersharpcontribshould)
   - [Content](#content)
   - [Installation](#installation)
+  - [Should assertions for `Page`](#should-assertions-for-page)
   - [Should assertions for `ElementHandle`](#should-assertions-for-elementhandle)
   - [Samples](#samples)
 
@@ -21,6 +24,13 @@
 
 [1]: https://img.shields.io/nuget/v/PuppeteerSharp.Contrib.Should.svg?label=PuppeteerSharp.Contrib.Should
 [2]: https://www.nuget.org/packages/PuppeteerSharp.Contrib.Should
+
+## Should assertions for `Page`
+
+* `ShouldHaveContentAsync`
+* `ShouldHaveTitleAsync`
+* `ShouldNotHaveContentAsync`
+* `ShouldNotHaveTitleAsync`
 
 ## Should assertions for `ElementHandle`
 

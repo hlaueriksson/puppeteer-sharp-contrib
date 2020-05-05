@@ -2,6 +2,8 @@
 
 `PuppeteerSharp.Contrib.Extensions` is a library with convenient extension methods for writing browser tests with the Puppeteer Sharp API.
 
+:boom: The _sync over async_ versions of the extension methods has been moved to the [PuppeteerSharp.Contrib.Extensions.Unsafe](PuppeteerSharp.Contrib.Extensions.Unsafe.md) package.
+
 ## Content
 
 - [PuppeteerSharp.Contrib.Extensions](#puppeteersharpcontribextensions)
@@ -29,6 +31,11 @@ Query:
 
 * `QuerySelectorWithContentAsync`
 * `QuerySelectorAllWithContentAsync`
+
+Evaluation:
+
+* `HasContentAsync`
+* `HasTitleAsync`
 
 ## Extensions for `ElementHandle`
 
