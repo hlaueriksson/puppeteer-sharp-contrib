@@ -1,22 +1,41 @@
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("PuppeteerSharp.Contrib.Tests")]
+
 namespace PuppeteerSharp.Contrib.Should
 {
     internal class ShouldMessage
     {
-        private string Message { get; }
+        private string Expected { get; }
 
-        private string CustomMessage { get; }
+        private string Because { get; set; }
 
-        public ShouldMessage(string message, string customMessage)
+        private string Actual { get; }
+
+        public ShouldMessage(string expected, string because, string actual)
         {
-            Message = message;
-            CustomMessage = customMessage;
+            Expected = expected;
+            Because = because;
+            Actual = actual;
         }
 
         public override string ToString()
         {
-            if (CustomMessage == null) return Message;
+            if (string.IsNullOrWhiteSpace(Actual)) return $"{Expected}{BecausePhrase()}.";
 
-            return Message + "\nAdditional Info: " + CustomMessage;
+            return $"{Expected}{BecausePhrase()}, {Actual}.";
+        }
+
+        private string BecausePhrase()
+        {
+            if (string.IsNullOrWhiteSpace(Because)) return string.Empty;
+
+            const string prefix = "because";
+            const string space = " ";
+
+            Because = Because.Trim();
+            if (!Because.StartsWith(prefix)) Because = prefix + space + Because;
+            return space + Because;
         }
     }
 }

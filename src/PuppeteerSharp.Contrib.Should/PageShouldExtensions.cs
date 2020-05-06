@@ -17,7 +17,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static async Task ShouldHaveContentAsync(this Page page, string regex, string message = null)
         {
-            if (!await page.HasContentAsync(regex).ConfigureAwait(false)) Throw.ShouldHaveContent(page, message);
+            if (!await page.HasContentAsync(regex).ConfigureAwait(false)) Throw.ShouldHaveContent(page, regex, message);
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static async Task ShouldNotHaveContentAsync(this Page page, string regex, string message = null)
         {
-            if (await page.HasContentAsync(regex).ConfigureAwait(false)) Throw.ShouldNotHaveContent(page, message);
+            if (await page.HasContentAsync(regex).ConfigureAwait(false)) Throw.ShouldNotHaveContent(page, regex, message);
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static async Task ShouldHaveTitleAsync(this Page page, string regex, string message = null)
         {
-            if (!await page.HasTitleAsync(regex).ConfigureAwait(false)) Throw.ShouldHaveTitle(page, message);
+            if (!await page.HasTitleAsync(regex).ConfigureAwait(false)) Throw.ShouldHaveTitle(page, regex, await page.GuardFromNull().GetTitleAsync().ConfigureAwait(false), message);
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static async Task ShouldNotHaveTitleAsync(this Page page, string regex, string message = null)
         {
-            if (await page.HasTitleAsync(regex).ConfigureAwait(false)) Throw.ShouldNotHaveTitle(page, message);
+            if (await page.HasTitleAsync(regex).ConfigureAwait(false)) Throw.ShouldNotHaveTitle(page, regex, message);
         }
     }
 }

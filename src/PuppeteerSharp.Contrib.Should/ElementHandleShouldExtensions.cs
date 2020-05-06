@@ -43,12 +43,14 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="value">The value</param>
-        /// <param name="message">Optional failure message</param>
+        /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         /// <remarks><![CDATA[Elements: <button>, <option>, <input>, <li>, <meter>, <progress>, <param>]]></remarks>
-        public static async Task ShouldHaveValueAsync(this ElementHandle elementHandle, string value, string message = null)
+        public static async Task ShouldHaveValueAsync(this ElementHandle elementHandle, string value, string because = null)
         {
-            if (await elementHandle.ValueAsync().ConfigureAwait(false) != value) Throw.ShouldHaveValue(elementHandle, message);
+            var actual = await elementHandle.ValueAsync().ConfigureAwait(false);
+
+            if (actual != value) Throw.ShouldHaveValue(elementHandle, value, actual, because);
         }
 
         /// <summary>
@@ -61,7 +63,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <button>, <option>, <input>, <li>, <meter>, <progress>, <param>]]></remarks>
         public static async Task ShouldNotHaveValueAsync(this ElementHandle elementHandle, string value, string message = null)
         {
-            if (await elementHandle.ValueAsync().ConfigureAwait(false) == value) Throw.ShouldNotHaveValue(elementHandle, message);
+            if (await elementHandle.ValueAsync().ConfigureAwait(false) == value) Throw.ShouldNotHaveValue(elementHandle, value, message);
         }
 
         // Attribute
@@ -75,7 +77,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static async Task ShouldHaveAttributeAsync(this ElementHandle elementHandle, string name, string message = null)
         {
-            if (!await elementHandle.HasAttributeAsync(name).ConfigureAwait(false)) Throw.ShouldHaveAttribute(elementHandle, message);
+            if (!await elementHandle.HasAttributeAsync(name).ConfigureAwait(false)) Throw.ShouldHaveAttribute(elementHandle, name, message);
         }
 
         /// <summary>
@@ -87,7 +89,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static async Task ShouldNotHaveAttributeAsync(this ElementHandle elementHandle, string name, string message = null)
         {
-            if (await elementHandle.HasAttributeAsync(name).ConfigureAwait(false)) Throw.ShouldNotHaveAttribute(elementHandle, message);
+            if (await elementHandle.HasAttributeAsync(name).ConfigureAwait(false)) Throw.ShouldNotHaveAttribute(elementHandle, name, message);
         }
 
         // Content
@@ -102,7 +104,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks>Evaluates <c>node.textContent</c></remarks>
         public static async Task ShouldHaveContentAsync(this ElementHandle elementHandle, string content, string message = null)
         {
-            if (!await elementHandle.HasContentAsync(content).ConfigureAwait(false)) Throw.ShouldHaveContent(elementHandle, message);
+            if (!await elementHandle.HasContentAsync(content).ConfigureAwait(false)) Throw.ShouldHaveContent(elementHandle, content, message);
         }
 
         /// <summary>
@@ -115,7 +117,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks>Evaluates <c>node.textContent</c></remarks>
         public static async Task ShouldNotHaveContentAsync(this ElementHandle elementHandle, string content, string message = null)
         {
-            if (await elementHandle.HasContentAsync(content).ConfigureAwait(false)) Throw.ShouldNotHaveContent(elementHandle, message);
+            if (await elementHandle.HasContentAsync(content).ConfigureAwait(false)) Throw.ShouldNotHaveContent(elementHandle, content, message);
         }
 
         // Class
@@ -129,7 +131,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static async Task ShouldHaveClassAsync(this ElementHandle elementHandle, string className, string message = null)
         {
-            if (!await elementHandle.HasClassAsync(className).ConfigureAwait(false)) Throw.ShouldHaveClass(elementHandle, message);
+            if (!await elementHandle.HasClassAsync(className).ConfigureAwait(false)) Throw.ShouldHaveClass(elementHandle, className, message);
         }
 
         /// <summary>
@@ -141,7 +143,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static async Task ShouldNotHaveClassAsync(this ElementHandle elementHandle, string className, string message = null)
         {
-            if (await elementHandle.HasClassAsync(className).ConfigureAwait(false)) Throw.ShouldNotHaveClass(elementHandle, message);
+            if (await elementHandle.HasClassAsync(className).ConfigureAwait(false)) Throw.ShouldNotHaveClass(elementHandle, className, message);
         }
 
         // Visible

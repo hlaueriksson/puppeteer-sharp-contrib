@@ -16,7 +16,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             await Page.ShouldHaveContentAsync("10.");
 
             var ex = await Assert.ThrowsAsync<ShouldException>(() => Page.ShouldHaveContentAsync("20."));
-            Assert.Equal("Should have content, but did not.", ex.Message);
+            Assert.Equal("Expected page to have content \"20.\", but it did not.", ex.Message);
         }
 
         [Fact]
@@ -25,7 +25,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             await Page.ShouldNotHaveContentAsync("20.");
 
             var ex = await Assert.ThrowsAsync<ShouldException>(() => Page.ShouldNotHaveContentAsync("10."));
-            Assert.Equal("Should not have content, but did.", ex.Message);
+            Assert.Equal("Expected page not to have content \"10.\".", ex.Message);
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             await Page.ShouldHaveTitleAsync("10.");
 
             var ex = await Assert.ThrowsAsync<ShouldException>(() => Page.ShouldHaveTitleAsync("20."));
-            Assert.Equal("Should have title, but did not.", ex.Message);
+            Assert.Equal("Expected page to have title \"20.\", but found \"100\".", ex.Message);
         }
 
         [Fact]
@@ -47,7 +47,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             await Page.ShouldNotHaveTitleAsync("20.");
 
             var ex = await Assert.ThrowsAsync<ShouldException>(() => Page.ShouldNotHaveTitleAsync("10."));
-            Assert.Equal("Should not have title, but did.", ex.Message);
+            Assert.Equal("Expected page not to have title \"10.\".", ex.Message);
         }
     }
 }

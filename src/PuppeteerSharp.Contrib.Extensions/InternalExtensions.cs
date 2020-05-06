@@ -1,8 +1,5 @@
 using System;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-
-[assembly: InternalsVisibleTo("PuppeteerSharp.Contrib.Extensions.Unsafe")]
 
 namespace PuppeteerSharp.Contrib.Extensions
 {
