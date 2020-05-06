@@ -13,11 +13,11 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="page">A <see cref="Page"/></param>
         /// <param name="regex">A regular expression to test against <c>document.documentElement.textContent</c></param>
-        /// <param name="message">Optional failure message</param>
+        /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public static async Task ShouldHaveContentAsync(this Page page, string regex, string message = null)
+        public static async Task ShouldHaveContentAsync(this Page page, string regex, string because = null)
         {
-            if (!await page.HasContentAsync(regex).ConfigureAwait(false)) Throw.ShouldHaveContent(page, regex, message);
+            if (!await page.HasContentAsync(regex).ConfigureAwait(false)) Throw.ShouldHaveContent(page, regex, because);
         }
 
         /// <summary>
@@ -25,11 +25,11 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="page">A <see cref="Page"/></param>
         /// <param name="regex">A regular expression to test against <c>document.documentElement.textContent</c></param>
-        /// <param name="message">Optional failure message</param>
+        /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public static async Task ShouldNotHaveContentAsync(this Page page, string regex, string message = null)
+        public static async Task ShouldNotHaveContentAsync(this Page page, string regex, string because = null)
         {
-            if (await page.HasContentAsync(regex).ConfigureAwait(false)) Throw.ShouldNotHaveContent(page, regex, message);
+            if (await page.HasContentAsync(regex).ConfigureAwait(false)) Throw.ShouldNotHaveContent(page, regex, because);
         }
 
         /// <summary>
@@ -37,11 +37,11 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="page">A <see cref="Page"/></param>
         /// <param name="regex">A regular expression to test against <c>document.title</c></param>
-        /// <param name="message">Optional failure message</param>
+        /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public static async Task ShouldHaveTitleAsync(this Page page, string regex, string message = null)
+        public static async Task ShouldHaveTitleAsync(this Page page, string regex, string because = null)
         {
-            if (!await page.HasTitleAsync(regex).ConfigureAwait(false)) Throw.ShouldHaveTitle(page, regex, await page.GuardFromNull().GetTitleAsync().ConfigureAwait(false), message);
+            if (!await page.HasTitleAsync(regex).ConfigureAwait(false)) Throw.ShouldHaveTitle(page, regex, await page.GuardFromNull().GetTitleAsync().ConfigureAwait(false), because);
         }
 
         /// <summary>
@@ -49,11 +49,11 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="page">A <see cref="Page"/></param>
         /// <param name="regex">A regular expression to test against <c>document.title</c></param>
-        /// <param name="message">Optional failure message</param>
+        /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public static async Task ShouldNotHaveTitleAsync(this Page page, string regex, string message = null)
+        public static async Task ShouldNotHaveTitleAsync(this Page page, string regex, string because = null)
         {
-            if (await page.HasTitleAsync(regex).ConfigureAwait(false)) Throw.ShouldNotHaveTitle(page, regex, message);
+            if (await page.HasTitleAsync(regex).ConfigureAwait(false)) Throw.ShouldNotHaveTitle(page, regex, because);
         }
     }
 }
