@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PuppeteerSharp.Contrib.Extensions.Unsafe\PuppeteerSharp.Contrib.Extensions.Unsafe.csproj" />
     <ProjectReference Include="..\PuppeteerSharp.Contrib.Should\PuppeteerSharp.Contrib.Should.csproj" />
   </ItemGroup>
 

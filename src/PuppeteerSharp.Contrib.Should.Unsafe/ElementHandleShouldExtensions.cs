@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using PuppeteerSharp.Contrib.Extensions;
 
 namespace PuppeteerSharp.Contrib.Should
 {
@@ -17,7 +16,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <param name="message">Optional failure message</param>
         public static void ShouldExist(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (!elementHandleTask.Exists()) Throw.ShouldExist(elementHandleTask.Result(), message);
+            elementHandleTask.Result().ShouldExist(message);
         }
 
         /// <summary>
@@ -27,7 +26,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <param name="message">Optional failure message</param>
         public static void ShouldNotExist(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (elementHandleTask.Exists()) Throw.ShouldNotExist(elementHandleTask.Result(), message);
+            elementHandleTask.Result().ShouldNotExist(message);
         }
 
         // Value
@@ -42,7 +41,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
         public static ElementHandle ShouldHaveValue(this ElementHandle elementHandle, string value, string message = null)
         {
-            if (elementHandle.Value() != value) Throw.ShouldHaveValue(elementHandle, message);
+            elementHandle.ShouldHaveValueAsync(value, message).Result();
 
             return elementHandle;
         }
@@ -56,7 +55,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <button>, <option>, <input>, <li>, <meter>, <progress>, <param>]]></remarks>
         public static void ShouldHaveValue(this Task<ElementHandle> elementHandleTask, string value, string message = null)
         {
-            if (elementHandleTask.Value() != value) Throw.ShouldHaveValue(elementHandleTask.Result(), message);
+            elementHandleTask.Result().ShouldHaveValueAsync(value, message).Result();
         }
 
         /// <summary>
@@ -69,7 +68,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
         public static ElementHandle ShouldNotHaveValue(this ElementHandle elementHandle, string value, string message = null)
         {
-            if (elementHandle.Value() == value) Throw.ShouldNotHaveValue(elementHandle, message);
+            elementHandle.ShouldNotHaveValueAsync(value, message).Result();
 
             return elementHandle;
         }
@@ -83,7 +82,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <button>, <option>, <input>, <li>, <meter>, <progress>, <param>]]></remarks>
         public static void ShouldNotHaveValue(this Task<ElementHandle> elementHandleTask, string value, string message = null)
         {
-            if (elementHandleTask.Value() == value) Throw.ShouldNotHaveValue(elementHandleTask.Result(), message);
+            elementHandleTask.Result().ShouldNotHaveValueAsync(value, message).Result();
         }
 
         // Attribute
@@ -97,7 +96,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
         public static ElementHandle ShouldHaveAttribute(this ElementHandle elementHandle, string name, string message = null)
         {
-            if (!elementHandle.HasAttribute(name)) Throw.ShouldHaveAttribute(elementHandle, message);
+            elementHandle.ShouldHaveAttributeAsync(name, message).Result();
 
             return elementHandle;
         }
@@ -110,7 +109,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <param name="message">Optional failure message</param>
         public static void ShouldHaveAttribute(this Task<ElementHandle> elementHandleTask, string name, string message = null)
         {
-            if (!elementHandleTask.HasAttribute(name)) Throw.ShouldHaveAttribute(elementHandleTask.Result(), message);
+            elementHandleTask.Result().ShouldHaveAttributeAsync(name, message).Result();
         }
 
         /// <summary>
@@ -122,7 +121,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
         public static ElementHandle ShouldNotHaveAttribute(this ElementHandle elementHandle, string name, string message = null)
         {
-            if (elementHandle.HasAttribute(name)) Throw.ShouldNotHaveAttribute(elementHandle, message);
+            elementHandle.ShouldNotHaveAttributeAsync(name, message).Result();
 
             return elementHandle;
         }
@@ -135,7 +134,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <param name="message">Optional failure message</param>
         public static void ShouldNotHaveAttribute(this Task<ElementHandle> elementHandleTask, string name, string message = null)
         {
-            if (elementHandleTask.HasAttribute(name)) Throw.ShouldNotHaveAttribute(elementHandleTask.Result(), message);
+            elementHandleTask.Result().ShouldNotHaveAttributeAsync(name, message).Result();
         }
 
         // Content
@@ -150,7 +149,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks>Evaluates <c>node.textContent</c></remarks>
         public static ElementHandle ShouldHaveContent(this ElementHandle elementHandle, string content, string message = null)
         {
-            if (!elementHandle.HasContent(content)) Throw.ShouldHaveContent(elementHandle, message);
+            elementHandle.ShouldHaveContentAsync(content, message).Result();
 
             return elementHandle;
         }
@@ -164,7 +163,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks>Evaluates <c>node.textContent</c></remarks>
         public static void ShouldHaveContent(this Task<ElementHandle> elementHandleTask, string content, string message = null)
         {
-            if (!elementHandleTask.HasContent(content)) Throw.ShouldHaveContent(elementHandleTask.Result(), message);
+            elementHandleTask.Result().ShouldHaveContentAsync(content, message).Result();
         }
 
         /// <summary>
@@ -177,7 +176,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks>Evaluates <c>node.textContent</c></remarks>
         public static ElementHandle ShouldNotHaveContent(this ElementHandle elementHandle, string content, string message = null)
         {
-            if (elementHandle.HasContent(content)) Throw.ShouldNotHaveContent(elementHandle, message);
+            elementHandle.ShouldNotHaveContentAsync(content, message).Result();
 
             return elementHandle;
         }
@@ -191,7 +190,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks>Evaluates <c>node.textContent</c></remarks>
         public static void ShouldNotHaveContent(this Task<ElementHandle> elementHandleTask, string content, string message = null)
         {
-            if (elementHandleTask.HasContent(content)) Throw.ShouldNotHaveContent(elementHandleTask.Result(), message);
+            elementHandleTask.Result().ShouldNotHaveContentAsync(content, message).Result();
         }
 
         // Class
@@ -205,7 +204,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
         public static ElementHandle ShouldHaveClass(this ElementHandle elementHandle, string className, string message = null)
         {
-            if (!elementHandle.HasClass(className)) Throw.ShouldHaveClass(elementHandle, message);
+            elementHandle.ShouldHaveClassAsync(className, message).Result();
 
             return elementHandle;
         }
@@ -218,7 +217,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <param name="message">Optional failure message</param>
         public static void ShouldHaveClass(this Task<ElementHandle> elementHandleTask, string className, string message = null)
         {
-            if (!elementHandleTask.HasClass(className)) Throw.ShouldHaveClass(elementHandleTask.Result(), message);
+            elementHandleTask.Result().ShouldHaveClassAsync(className, message).Result();
         }
 
         /// <summary>
@@ -230,7 +229,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
         public static ElementHandle ShouldNotHaveClass(this ElementHandle elementHandle, string className, string message = null)
         {
-            if (elementHandle.HasClass(className)) Throw.ShouldNotHaveClass(elementHandle, message);
+            elementHandle.ShouldNotHaveClassAsync(className, message).Result();
 
             return elementHandle;
         }
@@ -243,7 +242,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <param name="message">Optional failure message</param>
         public static void ShouldNotHaveClass(this Task<ElementHandle> elementHandleTask, string className, string message = null)
         {
-            if (elementHandleTask.HasClass(className)) Throw.ShouldNotHaveClass(elementHandleTask.Result(), message);
+            elementHandleTask.Result().ShouldNotHaveClassAsync(className, message).Result();
         }
 
         // Visible
@@ -256,7 +255,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
         public static ElementHandle ShouldBeVisible(this ElementHandle elementHandle, string message = null)
         {
-            if (elementHandle.IsHidden()) Throw.ShouldBeVisible(elementHandle, message);
+            elementHandle.ShouldBeVisibleAsync(message).Result();
 
             return elementHandle;
         }
@@ -268,7 +267,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <param name="message">Optional failure message</param>
         public static void ShouldBeVisible(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (elementHandleTask.IsHidden()) Throw.ShouldBeVisible(elementHandleTask.Result(), message);
+            elementHandleTask.Result().ShouldBeVisibleAsync(message).Result();
         }
 
         /// <summary>
@@ -279,7 +278,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
         public static ElementHandle ShouldBeHidden(this ElementHandle elementHandle, string message = null)
         {
-            if (elementHandle.IsVisible()) Throw.ShouldBeHidden(elementHandle, message);
+            elementHandle.ShouldBeHiddenAsync(message).Result();
 
             return elementHandle;
         }
@@ -291,7 +290,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <param name="message">Optional failure message</param>
         public static void ShouldBeHidden(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (elementHandleTask.IsVisible()) Throw.ShouldBeHidden(elementHandleTask.Result(), message);
+            elementHandleTask.Result().ShouldBeHiddenAsync(message).Result();
         }
 
         // Selected
@@ -305,7 +304,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
         public static ElementHandle ShouldBeSelected(this ElementHandle elementHandle, string message = null)
         {
-            if (!elementHandle.IsSelected()) Throw.ShouldBeSelected(elementHandle, message);
+            elementHandle.ShouldBeSelectedAsync(message).Result();
 
             return elementHandle;
         }
@@ -318,7 +317,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <option>]]></remarks>
         public static void ShouldBeSelected(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (!elementHandleTask.IsSelected()) Throw.ShouldBeSelected(elementHandleTask.Result(), message);
+            elementHandleTask.Result().ShouldBeSelectedAsync(message).Result();
         }
 
         /// <summary>
@@ -330,7 +329,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
         public static ElementHandle ShouldNotBeSelected(this ElementHandle elementHandle, string message = null)
         {
-            if (elementHandle.IsSelected()) Throw.ShouldNotBeSelected(elementHandle, message);
+            elementHandle.ShouldNotBeSelectedAsync(message).Result();
 
             return elementHandle;
         }
@@ -343,7 +342,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <option>]]></remarks>
         public static void ShouldNotBeSelected(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (elementHandleTask.IsSelected()) Throw.ShouldNotBeSelected(elementHandleTask.Result(), message);
+            elementHandleTask.Result().ShouldNotBeSelectedAsync(message).Result();
         }
 
         // Checked
@@ -357,7 +356,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
         public static ElementHandle ShouldBeChecked(this ElementHandle elementHandle, string message = null)
         {
-            if (!elementHandle.IsChecked()) Throw.ShouldBeChecked(elementHandle, message);
+            elementHandle.ShouldBeCheckedAsync(message).Result();
 
             return elementHandle;
         }
@@ -370,7 +369,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <command>, <input>]]></remarks>
         public static void ShouldBeChecked(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (!elementHandleTask.IsChecked()) Throw.ShouldBeChecked(elementHandleTask.Result(), message);
+            elementHandleTask.Result().ShouldBeCheckedAsync(message).Result();
         }
 
         /// <summary>
@@ -382,7 +381,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
         public static ElementHandle ShouldNotBeChecked(this ElementHandle elementHandle, string message = null)
         {
-            if (elementHandle.IsChecked()) Throw.ShouldNotBeChecked(elementHandle, message);
+            elementHandle.ShouldNotBeCheckedAsync(message).Result();
 
             return elementHandle;
         }
@@ -395,7 +394,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <command>, <input>]]></remarks>
         public static void ShouldNotBeChecked(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (elementHandleTask.IsChecked()) Throw.ShouldNotBeChecked(elementHandleTask.Result(), message);
+            elementHandleTask.Result().ShouldNotBeCheckedAsync(message).Result();
         }
 
         // Disabled
@@ -409,7 +408,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
         public static ElementHandle ShouldBeDisabled(this ElementHandle elementHandle, string message = null)
         {
-            if (elementHandle.IsEnabled()) Throw.ShouldBeDisabled(elementHandle, message);
+            elementHandle.ShouldBeDisabledAsync(message).Result();
 
             return elementHandle;
         }
@@ -422,7 +421,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <button>, <command>, <fieldset>, <input>, <keygen>, <optgroup>, <option>, <select>, <textarea>]]></remarks>
         public static void ShouldBeDisabled(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (elementHandleTask.IsEnabled()) Throw.ShouldBeDisabled(elementHandleTask.Result(), message);
+            elementHandleTask.Result().ShouldBeDisabledAsync(message).Result();
         }
 
         /// <summary>
@@ -434,7 +433,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
         public static ElementHandle ShouldBeEnabled(this ElementHandle elementHandle, string message = null)
         {
-            if (elementHandle.IsDisabled()) Throw.ShouldBeEnabled(elementHandle, message);
+            elementHandle.ShouldBeEnabledAsync(message).Result();
 
             return elementHandle;
         }
@@ -447,7 +446,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <button>, <command>, <fieldset>, <input>, <keygen>, <optgroup>, <option>, <select>, <textarea>]]></remarks>
         public static void ShouldBeEnabled(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (elementHandleTask.IsDisabled()) Throw.ShouldBeEnabled(elementHandleTask.Result(), message);
+            elementHandleTask.Result().ShouldBeEnabledAsync(message).Result();
         }
 
         // ReadOnly
@@ -461,7 +460,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
         public static ElementHandle ShouldBeReadOnly(this ElementHandle elementHandle, string message = null)
         {
-            if (!elementHandle.IsReadOnly()) Throw.ShouldBeReadOnly(elementHandle, message);
+            elementHandle.ShouldBeReadOnlyAsync(message).Result();
 
             return elementHandle;
         }
@@ -474,7 +473,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <input>, <textarea>]]></remarks>
         public static void ShouldBeReadOnly(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (!elementHandleTask.IsReadOnly()) Throw.ShouldBeReadOnly(elementHandleTask.Result(), message);
+            elementHandleTask.Result().ShouldBeReadOnlyAsync(message).Result();
         }
 
         /// <summary>
@@ -486,7 +485,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
         public static ElementHandle ShouldNotBeReadOnly(this ElementHandle elementHandle, string message = null)
         {
-            if (elementHandle.IsReadOnly()) Throw.ShouldNotBeReadOnly(elementHandle, message);
+            elementHandle.ShouldNotBeReadOnlyAsync(message).Result();
 
             return elementHandle;
         }
@@ -499,7 +498,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <input>, <textarea>]]></remarks>
         public static void ShouldNotBeReadOnly(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (elementHandleTask.IsReadOnly()) Throw.ShouldNotBeReadOnly(elementHandleTask.Result(), message);
+            elementHandleTask.Result().ShouldNotBeReadOnlyAsync(message).Result();
         }
 
         // Required
@@ -513,7 +512,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
         public static ElementHandle ShouldBeRequired(this ElementHandle elementHandle, string message = null)
         {
-            if (!elementHandle.IsRequired()) Throw.ShouldBeRequired(elementHandle, message);
+            elementHandle.ShouldBeRequiredAsync(message).Result();
 
             return elementHandle;
         }
@@ -526,7 +525,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <input>, <select>, <textarea>]]></remarks>
         public static void ShouldBeRequired(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (!elementHandleTask.IsRequired()) Throw.ShouldBeRequired(elementHandleTask.Result(), message);
+            elementHandleTask.Result().ShouldBeRequiredAsync(message).Result();
         }
 
         /// <summary>
@@ -538,7 +537,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
         public static ElementHandle ShouldNotBeRequired(this ElementHandle elementHandle, string message = null)
         {
-            if (elementHandle.IsRequired()) Throw.ShouldNotBeRequired(elementHandle, message);
+            elementHandle.ShouldNotBeRequiredAsync(message).Result();
 
             return elementHandle;
         }
@@ -551,7 +550,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <input>, <select>, <textarea>]]></remarks>
         public static void ShouldNotBeRequired(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (elementHandleTask.IsRequired()) Throw.ShouldNotBeRequired(elementHandleTask.Result(), message);
+            elementHandleTask.Result().ShouldNotBeRequiredAsync(message).Result();
         }
 
         // Focus
@@ -565,7 +564,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
         public static ElementHandle ShouldHaveFocus(this ElementHandle elementHandle, string message = null)
         {
-            if (!elementHandle.HasFocus()) Throw.ShouldHaveFocus(elementHandle, message);
+            elementHandle.ShouldHaveFocusAsync(message).Result();
 
             return elementHandle;
         }
@@ -578,7 +577,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <button>, <input>, <keygen>, <select>, <textarea>]]></remarks>
         public static void ShouldHaveFocus(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (!elementHandleTask.HasFocus()) Throw.ShouldHaveFocus(elementHandleTask.Result(), message);
+            elementHandleTask.Result().ShouldHaveFocusAsync(message).Result();
         }
 
         /// <summary>
@@ -590,7 +589,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
         public static ElementHandle ShouldNotHaveFocus(this ElementHandle elementHandle, string message = null)
         {
-            if (elementHandle.HasFocus()) Throw.ShouldNotHaveFocus(elementHandle, message);
+            elementHandle.ShouldNotHaveFocusAsync(message).Result();
 
             return elementHandle;
         }
@@ -603,7 +602,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <button>, <input>, <keygen>, <select>, <textarea>]]></remarks>
         public static void ShouldNotHaveFocus(this Task<ElementHandle> elementHandleTask, string message = null)
         {
-            if (elementHandleTask.HasFocus()) Throw.ShouldNotHaveFocus(elementHandleTask.Result(), message);
+            elementHandleTask.Result().ShouldNotHaveFocusAsync(message).Result();
         }
     }
 }
