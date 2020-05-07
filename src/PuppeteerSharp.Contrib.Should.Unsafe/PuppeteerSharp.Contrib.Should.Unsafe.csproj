@@ -5,6 +5,8 @@
     <RootNamespace>PuppeteerSharp.Contrib.Should</RootNamespace>
   </PropertyGroup>
 
+  <Import Project="../../Analyzers.props" />
+
   <ItemGroup>
     <ProjectReference Include="..\PuppeteerSharp.Contrib.Should\PuppeteerSharp.Contrib.Should.csproj" />
   </ItemGroup>

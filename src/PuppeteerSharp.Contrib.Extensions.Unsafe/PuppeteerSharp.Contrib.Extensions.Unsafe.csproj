@@ -5,6 +5,8 @@
     <RootNamespace>PuppeteerSharp.Contrib.Extensions</RootNamespace>
   </PropertyGroup>
 
+  <Import Project="../../Analyzers.props" />
+
   <ItemGroup>
     <ProjectReference Include="..\PuppeteerSharp.Contrib.Extensions\PuppeteerSharp.Contrib.Extensions.csproj" />
   </ItemGroup>

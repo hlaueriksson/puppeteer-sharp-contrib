@@ -12,7 +12,8 @@ namespace PuppeteerSharp.Contrib.Extensions
     internal static class AsyncUtil
     {
         private static readonly TaskFactory _taskFactory = new
-            TaskFactory(CancellationToken.None,
+            TaskFactory(
+                CancellationToken.None,
                 TaskCreationOptions.None,
                 TaskContinuationOptions.None,
                 TaskScheduler.Default);
@@ -25,8 +26,10 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <param name="task">Task<T> method to execute</param>
         /// <returns></returns>
         public static TResult RunSync<TResult>(Func<Task<TResult>> task)
+#pragma warning disable CA2008 // Do not create tasks without passing a TaskScheduler
             => _taskFactory
                 .StartNew(task)
+#pragma warning restore CA2008 // Do not create tasks without passing a TaskScheduler
                 .Unwrap()
                 .GetAwaiter()
                 .GetResult();
