@@ -3,7 +3,33 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>PuppeteerSharp.Contrib.Should</RootNamespace>
+    <Version>1.0.0</Version>
+    <Authors>Henrik Lau Eriksson</Authors>
+    <Description>Contributions to the Headless Chrome .NET API 🌐🧪
+
+✔️ PuppeteerSharp.Contrib.Should.Unsafe is a should assertion library for the Puppeteer Sharp API.
+✔️ It provides a convenient way to write readable and robust browser tests in .NET
+📄 https://hlaueriksson.me/PuppeteerSharp.Contrib.Should.Unsafe/
+
+⚠️ These extension methods are the sync over async versions of the originals from the PuppeteerSharp.Contrib.Should package. They may be convenient, but can be considered unsafe since you run the risk of a deadlock.
+
+✔️ Works with:
+
+◼️ Machine.Specifications
+◼️ SpecFlow.xUnit
+◼️ xunit
+    </Description>
+    <PackageId>PuppeteerSharp.Contrib.Should.Unsafe</PackageId>
+    <PackageProjectUrl>https://github.com/hlaueriksson/puppeteer-sharp-contrib</PackageProjectUrl>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageTags>headless;chrome;puppeteer;test;testing;automation;assert</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\icon.png" Link="icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
   <Import Project="../../Analyzers.props" />
 

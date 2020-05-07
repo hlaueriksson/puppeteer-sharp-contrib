@@ -8,19 +8,19 @@
 
 ✔️ PuppeteerSharp.Contrib.Extensions is a library with extension methods for writing tests with the Puppeteer Sharp API.
 ✔️ It provides a convenient way to write readable and robust browser tests in .NET
+📄 https://hlaueriksson.me/PuppeteerSharp.Contrib.Extensions/
     </Description>
     <PackageId>PuppeteerSharp.Contrib.Extensions</PackageId>
     <PackageProjectUrl>https://github.com/hlaueriksson/puppeteer-sharp-contrib</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/hlaueriksson/puppeteer-sharp-contrib/master/icon.png</PackageIconUrl>
+    <PackageIcon>icon.png</PackageIcon>
     <PackageTags>headless;chrome;puppeteer;test;testing;automation</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <RepositoryUrl>https://github.com/hlaueriksson/puppeteer-sharp-contrib.git</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <DocumentationFile>bin\$(Configuration)\netstandard2.0\PuppeteerSharp.Contrib.Extensions.xml</DocumentationFile>
-  </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\..\icon.png" Link="icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
   <Import Project="../../Analyzers.props" />
 
