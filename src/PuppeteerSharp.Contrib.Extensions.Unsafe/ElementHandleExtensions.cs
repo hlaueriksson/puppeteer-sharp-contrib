@@ -240,7 +240,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         // IsHidden
 
         /// <summary>
-        /// Indicates whether the element is hidden or not. This is the logical negation of <see cref="IsVisibleAsync"/>.
+        /// Indicates whether the element is hidden or not. This is the logical negation of <see cref="IsVisible(ElementHandle)"/>.
         /// </summary>
         /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <returns><c>true</c> if the element is hidden</returns>
@@ -250,7 +250,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         }
 
         /// <summary>
-        /// Indicates whether the element is hidden or not. This is the logical negation of <see cref="IsVisibleAsync"/>.
+        /// Indicates whether the element is hidden or not. This is the logical negation of <see cref="IsVisible(Task{ElementHandle})"/>.
         /// </summary>
         /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <returns><c>true</c> if the element is hidden</returns>
@@ -334,7 +334,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         // IsEnabled
 
         /// <summary>
-        /// Indicates whether the element is enabled or not. This is the logical negation of <see cref="IsDisabledAsync"/>.
+        /// Indicates whether the element is enabled or not. This is the logical negation of <see cref="IsDisabled(ElementHandle)"/>.
         /// </summary>
         /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <returns><c>true</c> if the element is enabled</returns>
@@ -345,7 +345,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         }
 
         /// <summary>
-        /// Indicates whether the element is enabled or not. This is the logical negation of <see cref="IsDisabledAsync"/>.
+        /// Indicates whether the element is enabled or not. This is the logical negation of <see cref="IsDisabled(Task{ElementHandle})"/>.
         /// </summary>
         /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
         /// <returns><c>true</c> if the element is enabled</returns>
