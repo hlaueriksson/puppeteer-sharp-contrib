@@ -37,8 +37,8 @@ namespace PuppeteerSharp.Contrib.Should
         /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="value">The value</param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
-        /// <remarks><![CDATA[Elements: <button>, <option>, <input>, <li>, <meter>, <progress>, <param>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
+        /// <remarks><![CDATA[Elements: <button>, <option>, <input>, <li>, <meter>, <progress>, <param>]]></remarks>
         public static ElementHandle ShouldHaveValue(this ElementHandle elementHandle, string value, string because = null)
         {
             elementHandle.ShouldHaveValueAsync(value, because).Result();
@@ -64,8 +64,8 @@ namespace PuppeteerSharp.Contrib.Should
         /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="value">The value</param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
-        /// <remarks><![CDATA[Elements: <button>, <option>, <input>, <li>, <meter>, <progress>, <param>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
+        /// <remarks><![CDATA[Elements: <button>, <option>, <input>, <li>, <meter>, <progress>, <param>]]></remarks>
         public static ElementHandle ShouldNotHaveValue(this ElementHandle elementHandle, string value, string because = null)
         {
             elementHandle.ShouldNotHaveValueAsync(value, because).Result();
@@ -300,8 +300,8 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
-        /// <remarks><![CDATA[Elements: <option>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
+        /// <remarks><![CDATA[Elements: <option>]]></remarks>
         public static ElementHandle ShouldBeSelected(this ElementHandle elementHandle, string because = null)
         {
             elementHandle.ShouldBeSelectedAsync(because).Result();
@@ -325,8 +325,8 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
-        /// <remarks><![CDATA[Elements: <option>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
+        /// <remarks><![CDATA[Elements: <option>]]></remarks>
         public static ElementHandle ShouldNotBeSelected(this ElementHandle elementHandle, string because = null)
         {
             elementHandle.ShouldNotBeSelectedAsync(because).Result();
@@ -352,8 +352,8 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
-        /// <remarks><![CDATA[Elements: <command>, <input>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
+        /// <remarks><![CDATA[Elements: <command>, <input>]]></remarks>
         public static ElementHandle ShouldBeChecked(this ElementHandle elementHandle, string because = null)
         {
             elementHandle.ShouldBeCheckedAsync(because).Result();
@@ -377,8 +377,8 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
-        /// <remarks><![CDATA[Elements: <command>, <input>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
+        /// <remarks><![CDATA[Elements: <command>, <input>]]></remarks>
         public static ElementHandle ShouldNotBeChecked(this ElementHandle elementHandle, string because = null)
         {
             elementHandle.ShouldNotBeCheckedAsync(because).Result();
@@ -404,8 +404,8 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
-        /// <remarks><![CDATA[Elements: <button>, <command>, <fieldset>, <input>, <keygen>, <optgroup>, <option>, <select>, <textarea>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
+        /// <remarks><![CDATA[Elements: <button>, <command>, <fieldset>, <input>, <keygen>, <optgroup>, <option>, <select>, <textarea>]]></remarks>
         public static ElementHandle ShouldBeDisabled(this ElementHandle elementHandle, string because = null)
         {
             elementHandle.ShouldBeDisabledAsync(because).Result();
@@ -429,8 +429,8 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
-        /// <remarks><![CDATA[Elements: <button>, <command>, <fieldset>, <input>, <keygen>, <optgroup>, <option>, <select>, <textarea>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
+        /// <remarks><![CDATA[Elements: <button>, <command>, <fieldset>, <input>, <keygen>, <optgroup>, <option>, <select>, <textarea>]]></remarks>
         public static ElementHandle ShouldBeEnabled(this ElementHandle elementHandle, string because = null)
         {
             elementHandle.ShouldBeEnabledAsync(because).Result();
@@ -456,8 +456,8 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
-        /// <remarks><![CDATA[Elements: <input>, <textarea>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
+        /// <remarks><![CDATA[Elements: <input>, <textarea>]]></remarks>
         public static ElementHandle ShouldBeReadOnly(this ElementHandle elementHandle, string because = null)
         {
             elementHandle.ShouldBeReadOnlyAsync(because).Result();
@@ -481,8 +481,8 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
-        /// <remarks><![CDATA[Elements: <input>, <textarea>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
+        /// <remarks><![CDATA[Elements: <input>, <textarea>]]></remarks>
         public static ElementHandle ShouldNotBeReadOnly(this ElementHandle elementHandle, string because = null)
         {
             elementHandle.ShouldNotBeReadOnlyAsync(because).Result();
@@ -508,8 +508,8 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
-        /// <remarks><![CDATA[Elements: <input>, <select>, <textarea>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
+        /// <remarks><![CDATA[Elements: <input>, <select>, <textarea>]]></remarks>
         public static ElementHandle ShouldBeRequired(this ElementHandle elementHandle, string because = null)
         {
             elementHandle.ShouldBeRequiredAsync(because).Result();
@@ -533,8 +533,8 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
-        /// <remarks><![CDATA[Elements: <input>, <select>, <textarea>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
+        /// <remarks><![CDATA[Elements: <input>, <select>, <textarea>]]></remarks>
         public static ElementHandle ShouldNotBeRequired(this ElementHandle elementHandle, string because = null)
         {
             elementHandle.ShouldNotBeRequiredAsync(because).Result();
@@ -560,8 +560,8 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
-        /// <remarks><![CDATA[Elements: <button>, <input>, <keygen>, <select>, <textarea>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
+        /// <remarks><![CDATA[Elements: <button>, <input>, <keygen>, <select>, <textarea>]]></remarks>
         public static ElementHandle ShouldHaveFocus(this ElementHandle elementHandle, string because = null)
         {
             elementHandle.ShouldHaveFocusAsync(because).Result();
@@ -585,8 +585,8 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
-        /// <remarks><![CDATA[Elements: <button>, <input>, <keygen>, <select>, <textarea>]]></remarks>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
+        /// <remarks><![CDATA[Elements: <button>, <input>, <keygen>, <select>, <textarea>]]></remarks>
         public static ElementHandle ShouldNotHaveFocus(this ElementHandle elementHandle, string because = null)
         {
             elementHandle.ShouldNotHaveFocusAsync(because).Result();

@@ -4,13 +4,12 @@ using System.Threading.Tasks;
 namespace PuppeteerSharp.Contrib.Extensions
 {
     /// <summary>
-    /// <see cref="Page"/> extension methods.
+    /// Extension methods for <see cref="Page"/>.
     /// </summary>
     public static class PageExtensions
     {
         /// <summary>
         /// The method runs <c>document.querySelectorAll</c> within the page and then tests a <c>RegExp</c> against the elements <c>textContent</c>. The first element match is returned. If no element matches the selector and regular expression, the return value resolve to <c>null</c>.
-        /// See also https://stackoverflow.com/a/37098508
         /// </summary>
         /// <param name="page">A <see cref="Page"/> to query</param>
         /// <param name="selector">A selector to query page for</param>
@@ -31,7 +30,6 @@ namespace PuppeteerSharp.Contrib.Extensions
 
         /// <summary>
         /// The method runs <c>document.querySelectorAll</c> within the page and then tests a <c>RegExp</c> against the elements <c>textContent</c>. All element matches are returned. If no element matches the selector and regular expression, the return value resolve to <see cref="System.Array.Empty{T}"/>.
-        /// See also https://stackoverflow.com/a/37098508
         /// </summary>
         /// <param name="page">A <see cref="Page"/> to query</param>
         /// <param name="selector">A selector to query page for</param>
