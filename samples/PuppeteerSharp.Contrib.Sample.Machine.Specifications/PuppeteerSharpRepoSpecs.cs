@@ -39,10 +39,10 @@ namespace PuppeteerSharp.Contrib.Sample
                 ElementHandle[] repositories = page.QuerySelectorAllAsync(".repo-list-item").Await();
                 repositories.Length.ShouldBeGreaterThan(0);
                 var repository = repositories.First();
-                ElementHandle link = repository.QuerySelectorAsync("a").Await();
-                ElementHandle text = repository.QuerySelectorAsync("p").Await();
                 repository.ShouldHaveContent("hardkoded/puppeteer-sharp");
+                ElementHandle text = repository.QuerySelectorAsync("p").Await();
                 text.ShouldHaveContent("Headless Chrome .NET API");
+                ElementHandle link = repository.QuerySelectorAsync("a").Await();
                 link.ClickAsync().Await();
                 page.WaitForNavigationAsync().Await();
 

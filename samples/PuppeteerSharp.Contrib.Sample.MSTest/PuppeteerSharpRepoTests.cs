@@ -45,10 +45,10 @@ namespace PuppeteerSharp.Contrib.Sample
             var repositories = await page.QuerySelectorAllAsync(".repo-list-item");
             Assert.IsTrue(repositories.Length > 0);
             var repository = repositories.First();
-            var link = await repository.QuerySelectorAsync("a");
-            var text = await repository.QuerySelectorAsync("p");
             await repository.ShouldHaveContentAsync("hardkoded/puppeteer-sharp");
+            var text = await repository.QuerySelectorAsync("p");
             await text.ShouldHaveContentAsync("Headless Chrome .NET API");
+            var link = await repository.QuerySelectorAsync("a");
             await link.ClickAsync();
             await page.WaitForNavigationAsync();
 

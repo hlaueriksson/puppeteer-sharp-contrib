@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -30,14 +30,15 @@ namespace PuppeteerSharp.Contrib.Sample.StepDefinitions
         public async Task GivenIGoToTheGitHubStartPage()
         {
             await Page.GoToAsync("https://github.com/");
-            Page.QuerySelectorAsync("h1").ShouldHaveContent("Built for developers");
+            var heading = await Page.QuerySelectorAsync("h1");
+            await heading.ShouldHaveContentAsync("Built for developers");
         }
 
         [When(@"I search for ""(.*)""")]
         public async Task WhenISearchFor(string query)
         {
             var input = await Page.QuerySelectorAsync("input.header-search-input");
-            if (input.IsHidden()) await Page.ClickAsync(".octicon-three-bars");
+            if (await input.IsHiddenAsync()) await Page.ClickAsync(".octicon-three-bars");
             await Page.TypeAsync("input.header-search-input", query);
             await Page.Keyboard.PressAsync("Enter");
             await Page.WaitForNavigationAsync();
@@ -49,14 +50,15 @@ namespace PuppeteerSharp.Contrib.Sample.StepDefinitions
             var repositories = await Page.QuerySelectorAllAsync(".repo-list-item");
             repositories.Length.Should().BeGreaterThan(0);
             var repository = repositories.First();
-            var link = await repository.QuerySelectorAsync("a");
+            await repository.ShouldHaveContentAsync("hardkoded/puppeteer-sharp");
             var text = await repository.QuerySelectorAsync("p");
-            repository.ShouldHaveContent("hardkoded/puppeteer-sharp");
-            text.ShouldHaveContent("Headless Chrome .NET API");
+            await text.ShouldHaveContentAsync("Headless Chrome .NET API");
+            var link = await repository.QuerySelectorAsync("a");
             await link.ClickAsync();
             await Page.WaitForNavigationAsync();
 
-            Page.QuerySelectorAsync("article > h1").ShouldHaveContent("Puppeteer Sharp");
+            var heading = await Page.QuerySelectorAsync("article > h1");
+            await heading.ShouldHaveContentAsync("Puppeteer Sharp");
             Page.Url.Should().Be("https://github.com/hardkoded/puppeteer-sharp");
         }
 
@@ -89,7 +91,7 @@ namespace PuppeteerSharp.Contrib.Sample.StepDefinitions
             await Page.WaitForNavigationAsync();
 
             var latest = await Page.QuerySelectorAsync(".release .release-header a");
-            LatestReleaseVersion.Add(Page.Url, VersionWithoutPatch(latest.TextContent()));
+            LatestReleaseVersion.Add(Page.Url, VersionWithoutPatch(await latest.TextContentAsync()));
 
             string VersionWithoutPatch(string version)
             {

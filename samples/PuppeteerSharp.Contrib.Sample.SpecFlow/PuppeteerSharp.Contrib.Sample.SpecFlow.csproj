@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net48</TargetFramework>
@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.7.0" />
     <PackageReference Include="PuppeteerSharp" Version="2.0.3" />
-    <PackageReference Include="PuppeteerSharp.Contrib.Should" Version="1.0.0" />
+    <PackageReference Include="PuppeteerSharp.Contrib.Should" Version="2.0.0" />
     <PackageReference Include="SpecFlow.xUnit" Version="3.0.225" />
   </ItemGroup>
 

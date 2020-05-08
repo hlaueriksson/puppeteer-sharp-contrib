@@ -30,10 +30,11 @@ namespace PuppeteerSharp.Contrib.Sample
             var page = await Browser.NewPageAsync();
 
             await page.GoToAsync("https://github.com/");
-            page.QuerySelectorAsync("h1").ShouldHaveContent("Built for developers");
+            var heading = await page.QuerySelectorAsync("h1");
+            await heading.ShouldHaveContentAsync("Built for developers");
 
             var input = await page.QuerySelectorAsync("input.header-search-input");
-            if (input.IsHidden()) await page.ClickAsync(".octicon-three-bars");
+            if (await input.IsHiddenAsync()) await page.ClickAsync(".octicon-three-bars");
             await page.TypeAsync("input.header-search-input", "Puppeteer Sharp");
             await page.Keyboard.PressAsync("Enter");
             await page.WaitForNavigationAsync();
@@ -41,14 +42,15 @@ namespace PuppeteerSharp.Contrib.Sample
             var repositories = await page.QuerySelectorAllAsync(".repo-list-item");
             Assert.NotEmpty(repositories);
             var repository = repositories.First();
-            var link = await repository.QuerySelectorAsync("a");
+            await repository.ShouldHaveContentAsync("hardkoded/puppeteer-sharp");
             var text = await repository.QuerySelectorAsync("p");
-            repository.ShouldHaveContent("hardkoded/puppeteer-sharp");
-            text.ShouldHaveContent("Headless Chrome .NET API");
+            await text.ShouldHaveContentAsync("Headless Chrome .NET API");
+            var link = await repository.QuerySelectorAsync("a");
             await link.ClickAsync();
             await page.WaitForNavigationAsync();
 
-            page.QuerySelectorAsync("article > h1").ShouldHaveContent("Puppeteer Sharp");
+            heading = await page.QuerySelectorAsync("article > h1");
+            await heading.ShouldHaveContentAsync("Puppeteer Sharp");
             Assert.Equal("https://github.com/hardkoded/puppeteer-sharp", page.Url);
         }
 
@@ -87,7 +89,7 @@ namespace PuppeteerSharp.Contrib.Sample
                 await page.WaitForNavigationAsync();
 
                 var latest = await page.QuerySelectorAsync(".release .release-header a");
-                return VersionWithoutPatch(latest.TextContent());
+                return VersionWithoutPatch(await latest.TextContentAsync());
 
                 string VersionWithoutPatch(string version)
                 {
