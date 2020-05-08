@@ -19,7 +19,15 @@ They may be convenient, but can be considered _unsafe_ since you [run the risk o
 
 ## Installation
 
-TODO
+| NuGet            |       | [![PuppeteerSharp.Contrib.Should.Unsafe][1]][2]                                       |
+| :--------------- | ----: | :------------------------------------------------------------------------------------ |
+| Package Manager  | `PM>` | `Install-Package PuppeteerSharp.Contrib.Should.Unsafe -Version 2.0.0`                 |
+| .NET CLI         | `>`   | `dotnet add package PuppeteerSharp.Contrib.Should.Unsafe --version 2.0.0`             |
+| PackageReference |       | `<PackageReference Include="PuppeteerSharp.Contrib.Should.Unsafe" Version="2.0.0" />` |
+| Paket CLI        | `>`   | `paket add PuppeteerSharp.Contrib.Should.Unsafe --version 2.0.0`                      |
+
+[1]: https://img.shields.io/nuget/v/PuppeteerSharp.Contrib.Should.Unsafe.svg?label=PuppeteerSharp.Contrib.Should.Unsafe
+[2]: https://www.nuget.org/packages/PuppeteerSharp.Contrib.Should.Unsafe
 
 ## Should assertions for `ElementHandle`
 

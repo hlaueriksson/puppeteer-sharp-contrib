@@ -19,7 +19,15 @@ They may be convenient, but can be considered _unsafe_ since you [run the risk o
 
 ## Installation
 
-TODO
+| NuGet            |       | [![PuppeteerSharp.Contrib.Extensions.Unsafe][1]][2]                                       |
+| :--------------- | ----: | :---------------------------------------------------------------------------------------- |
+| Package Manager  | `PM>` | `Install-Package PuppeteerSharp.Contrib.Extensions.Unsafe -Version 2.0.0`                 |
+| .NET CLI         | `>`   | `dotnet add package PuppeteerSharp.Contrib.Extensions.Unsafe --version 2.0.0`             |
+| PackageReference |       | `<PackageReference Include="PuppeteerSharp.Contrib.Extensions.Unsafe" Version="2.0.0" />` |
+| Paket CLI        | `>`   | `paket add PuppeteerSharp.Contrib.Extensions.Unsafe --version 2.0.0`                      |
+
+[1]: https://img.shields.io/nuget/v/PuppeteerSharp.Contrib.Extensions.Unsafe.svg?label=PuppeteerSharp.Contrib.Extensions.Unsafe
+[2]: https://www.nuget.org/packages/PuppeteerSharp.Contrib.Extensions.Unsafe
 
 ## Extensions for `ElementHandle`
 

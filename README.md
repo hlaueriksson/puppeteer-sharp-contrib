@@ -7,7 +7,8 @@
 [![PuppeteerSharp.Contrib.Should](https://img.shields.io/nuget/v/PuppeteerSharp.Contrib.Should.svg?label=PuppeteerSharp.Contrib.Should)](https://www.nuget.org/packages/PuppeteerSharp.Contrib.Should)
 [![PuppeteerSharp.Contrib.PageObjects](https://img.shields.io/nuget/v/PuppeteerSharp.Contrib.PageObjects.svg?label=PuppeteerSharp.Contrib.PageObjects)](https://www.nuget.org/packages/PuppeteerSharp.Contrib.PageObjects)
 
-TODO
+[![PuppeteerSharp.Contrib.Extensions.Unsafe](https://img.shields.io/nuget/v/PuppeteerSharp.Contrib.Extensions.Unsafe.svg?label=PuppeteerSharp.Contrib.Extensions.Unsafe)](https://www.nuget.org/packages/PuppeteerSharp.Contrib.Extensions.Unsafe)
+[![PuppeteerSharp.Contrib.Should.Unsafe](https://img.shields.io/nuget/v/PuppeteerSharp.Contrib.Should.Unsafe.svg?label=PuppeteerSharp.Contrib.Should.Unsafe)](https://www.nuget.org/packages/PuppeteerSharp.Contrib.Should.Unsafe)
 
 Contributions to the Headless Chrome .NET API 🌐🧪
 
@@ -76,7 +77,7 @@ These libraries contains _extension methods_ to the Puppeteer Sharp API and they
 
 ## PuppeteerSharp.Contrib.Extensions.Unsafe
 
-TODO
+[![NuGet](https://buildstats.info/nuget/PuppeteerSharp.Contrib.Extensions.Unsafe)](https://www.nuget.org/packages/PuppeteerSharp.Contrib.Extensions.Unsafe/)
 
 `PuppeteerSharp.Contrib.Extensions.Unsafe` contains _sync over async_ versions of the extension methods from the [safe](#puppeteersharpcontribextensions) package.
 
@@ -84,7 +85,7 @@ TODO
 
 ## PuppeteerSharp.Contrib.Should.Unsafe
 
-TODO
+[![NuGet](https://buildstats.info/nuget/PuppeteerSharp.Contrib.Should.Unsafe)](https://www.nuget.org/packages/PuppeteerSharp.Contrib.Should.Unsafe/)
 
 `PuppeteerSharp.Contrib.Should.Unsafe` contains _sync over async_ versions of the extension methods from the [safe](#puppeteersharpcontribshould) package.
 
