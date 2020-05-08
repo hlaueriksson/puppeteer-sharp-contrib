@@ -11,6 +11,7 @@
   - [Installation](#installation)
   - [Should assertions for `Page`](#should-assertions-for-page)
   - [Should assertions for `ElementHandle`](#should-assertions-for-elementhandle)
+  - [Failures](#failures)
   - [Samples](#samples)
 
 ## Installation
@@ -58,6 +59,40 @@
 * `ShouldNotHaveContentAsync`
 * `ShouldNotHaveFocusAsync`
 * `ShouldNotHaveValueAsync`
+
+## Failures
+
+The following failing examples will throw an exception with a message explaining why the assertion failed.
+
+```csharp
+await Page.SetContentAsync(@"
+<html>
+  <body>
+   <div id='foo'>Foo</div>
+  <body>
+</html>");
+
+var div = await Page.QuerySelectorAsync("#foo");
+await div.ShouldHaveContentAsync("Bar");
+```
+
+> Expected element to have content "Bar", but it did not.
+
+```csharp
+await Page.SetContentAsync(@"
+<html>
+  <body>
+   <form>
+    <input id='foo' value='Foo' />
+   </form>
+  <body>
+</html>");
+
+var input = await Page.QuerySelectorAsync("#foo");
+await input.ShouldHaveValueAsync("Bar", "that would be the perfect example");
+```
+
+> Expected element to have value "Bar" because that would be the perfect example, but found "Foo".
 
 ## Samples
 

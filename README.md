@@ -29,6 +29,7 @@ It provides a convenient way to write readable and robust browser tests in .NET
   - [PuppeteerSharp.Contrib.Extensions.Unsafe](#puppeteersharpcontribextensionsunsafe)
   - [PuppeteerSharp.Contrib.Should.Unsafe](#puppeteersharpcontribshouldunsafe)
   - [Samples](#samples)
+  - [Upgrading](#upgrading)
   - [Attribution](#attribution)
 
 ## Introduction
@@ -380,6 +381,15 @@ namespace PuppeteerSharp.Contrib.Sample
     }
 }
 ```
+
+## Upgrading
+
+> Upgrading from version `1.0.0` to `2.0.0`
+
+If you use the _sync_ methods from `PuppeteerSharp.Contrib.Extensions` or `PuppeteerSharp.Contrib.Should`, please install:
+
+* `PuppeteerSharp.Contrib.Extensions.Unsafe`
+* `PuppeteerSharp.Contrib.Should.Unsafe`
 
 ## Attribution
 
