@@ -105,5 +105,35 @@ namespace PuppeteerSharp.Contrib.Sample
             input = await Page.QuerySelectorAsync("#foo");
             await input.ShouldBeSelectedAsync();
         }
+
+        [Test, Explicit]
+        public async Task Assert_message()
+        {
+            await Page.SetContentAsync(@"
+<html>
+  <body>
+   <div id='foo'>Foo</div>
+  <body>
+</html>");
+
+            var div = await Page.QuerySelectorAsync("#foo");
+            await div.ShouldHaveContentAsync("Bar");
+        }
+
+        [Test, Explicit]
+        public async Task Assert_message_with_because()
+        {
+            await Page.SetContentAsync(@"
+<html>
+  <body>
+   <form>
+    <input id='foo' value='Foo' />
+   </form>
+  <body>
+</html>");
+
+            var input = await Page.QuerySelectorAsync("#foo");
+            await input.ShouldHaveValueAsync("Bar", "that would be the perfect example");
+        }
     }
 }

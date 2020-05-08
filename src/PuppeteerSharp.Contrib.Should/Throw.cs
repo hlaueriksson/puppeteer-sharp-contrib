@@ -1,261 +1,154 @@
-﻿using System.Threading.Tasks;
-
 namespace PuppeteerSharp.Contrib.Should
 {
     internal static class Throw
     {
-        public static void ShouldExist(Task<ElementHandle> task, string message)
+        /* Page */
+
+        public static void ShouldHaveContent(Page page, string regex, string because)
         {
-            ShouldExist(task.Result(), message);
+            throw Exception($"Expected page to have content \"{regex}\"", "but it did not", because);
         }
 
-        public static void ShouldExist(ElementHandle handle, string message)
+        public static void ShouldNotHaveContent(Page page, string regex, string because)
         {
-            Exception("Should exist, but did not.", message);
+            throw Exception($"Expected page not to have content \"{regex}\"", null, because);
         }
 
-        public static void ShouldNotExist(Task<ElementHandle> task, string message)
+        public static void ShouldHaveTitle(Page page, string regex, string actual, string because)
         {
-            ShouldNotExist(task.Result(), message);
+            throw Exception($"Expected page to have title \"{regex}\"", $"but found \"{actual}\"", because);
         }
 
-        public static void ShouldNotExist(ElementHandle handle, string message)
+        public static void ShouldNotHaveTitle(Page page, string regex, string because)
         {
-            Exception("Should not exist, but did.", message);
+            throw Exception($"Expected page not to have title \"{regex}\"", null, because);
         }
 
-        public static void ShouldHaveValue(Task<ElementHandle> task, string message)
+        /* ElementHandle */
+
+        public static void ShouldExist(ElementHandle elementHandle, string because)
         {
-            ShouldHaveValue(task.Result(), message);
+            throw Exception("Expected element to exist", "but it did not", because);
         }
 
-        public static void ShouldHaveValue(ElementHandle handle, string message)
+        public static void ShouldNotExist(ElementHandle elementHandle, string because)
         {
-            Exception("Should have value, but did not.", message);
+            throw Exception("Expected element not to exist", "but it did", because);
         }
 
-        public static void ShouldNotHaveValue(Task<ElementHandle> task, string message)
+        public static void ShouldHaveValue(ElementHandle elementHandle, string value, string actual, string because)
         {
-            ShouldNotHaveValue(task.Result(), message);
+            throw Exception($"Expected element to have value \"{value}\"", $"but found \"{actual}\"", because);
         }
 
-        public static void ShouldNotHaveValue(ElementHandle handle, string message)
+        public static void ShouldNotHaveValue(ElementHandle elementHandle, string value, string because)
         {
-            Exception("Should not have value, but did.", message);
+            throw Exception($"Expected element not to have value \"{value}\"", null, because);
         }
 
-        public static void ShouldHaveAttribute(Task<ElementHandle> task, string message)
+        public static void ShouldHaveAttribute(ElementHandle elementHandle, string name, string because)
         {
-            ShouldHaveAttribute(task.Result(), message);
+            throw Exception($"Expected element to have attribute \"{name}\"", "but it did not", because);
         }
 
-        public static void ShouldHaveAttribute(ElementHandle handle, string message)
+        public static void ShouldNotHaveAttribute(ElementHandle elementHandle, string name, string because)
         {
-            Exception("Should have attribute, but did not.", message);
+            throw Exception($"Expected element not to have attribute \"{name}\"", "but it did", because);
         }
 
-        public static void ShouldNotHaveAttribute(Task<ElementHandle> task, string message)
+        public static void ShouldHaveContent(ElementHandle elementHandle, string content, string because)
         {
-            ShouldNotHaveAttribute(task.Result(), message);
+            throw Exception($"Expected element to have content \"{content}\"", "but it did not", because);
         }
 
-        public static void ShouldNotHaveAttribute(ElementHandle handle, string message)
+        public static void ShouldNotHaveContent(ElementHandle elementHandle, string content, string because)
         {
-            Exception("Should not have attribute, but did.", message);
+            throw Exception($"Expected element not to have content \"{content}\"", "but it did", because);
         }
 
-        public static void ShouldHaveContent(Task<ElementHandle> task, string message)
+        public static void ShouldHaveClass(ElementHandle elementHandle, string className, string because)
         {
-            ShouldHaveContent(task.Result(), message);
+            throw Exception($"Expected element to have class \"{className}\"", "but it did not", because);
         }
 
-        public static void ShouldHaveContent(ElementHandle handle, string message)
+        public static void ShouldNotHaveClass(ElementHandle elementHandle, string className, string because)
         {
-            Exception("Should have content, but did not.", message);
+            throw Exception($"Expected element not to have class \"{className}\"", "but it did", because);
         }
 
-        public static void ShouldNotHaveContent(Task<ElementHandle> task, string message)
+        public static void ShouldBeVisible(ElementHandle elementHandle, string because)
         {
-            ShouldNotHaveContent(task.Result(), message);
+            throw Exception("Expected element to be visible", "but it is not", because);
         }
 
-        public static void ShouldNotHaveContent(ElementHandle handle, string message)
+        public static void ShouldBeHidden(ElementHandle elementHandle, string because)
         {
-            Exception("Should not have content, but did.", message);
+            throw Exception("Expected element to be hidden", "but it is not", because);
         }
 
-        public static void ShouldHaveClass(Task<ElementHandle> task, string message)
+        public static void ShouldBeSelected(ElementHandle elementHandle, string because)
         {
-            ShouldHaveClass(task.Result(), message);
+            throw Exception("Expected element to be selected", "but it is not", because);
         }
 
-        public static void ShouldHaveClass(ElementHandle handle, string message)
+        public static void ShouldNotBeSelected(ElementHandle elementHandle, string because)
         {
-            Exception("Should have class, but did not.", message);
+            throw Exception("Expected element not to be selected", "but it is", because);
         }
 
-        public static void ShouldNotHaveClass(Task<ElementHandle> task, string message)
+        public static void ShouldBeChecked(ElementHandle elementHandle, string because)
         {
-            ShouldNotHaveClass(task.Result(), message);
+            throw Exception("Expected element to be checked", "but it is not", because);
         }
 
-        public static void ShouldNotHaveClass(ElementHandle handle, string message)
+        public static void ShouldNotBeChecked(ElementHandle elementHandle, string because)
         {
-            Exception("Should not have class, but did.", message);
+            throw Exception("Expected element not to be checked", "but it is", because);
         }
 
-        public static void ShouldBeVisible(Task<ElementHandle> task, string message)
+        public static void ShouldBeDisabled(ElementHandle elementHandle, string because)
         {
-            ShouldBeVisible(task.Result(), message);
+            throw Exception("Expected element to be disabled", "but it is not", because);
         }
 
-        public static void ShouldBeVisible(ElementHandle handle, string message)
+        public static void ShouldBeEnabled(ElementHandle elementHandle, string because)
         {
-            Exception("Should be visible, but is not.", message);
+            throw Exception("Expected element to be enabled", "but it is not", because);
         }
 
-        public static void ShouldBeHidden(Task<ElementHandle> task, string message)
+        public static void ShouldBeReadOnly(ElementHandle elementHandle, string because)
         {
-            ShouldBeHidden(task.Result(), message);
+            throw Exception("Expected element to be read-only", "but it is not", because);
         }
 
-        public static void ShouldBeHidden(ElementHandle handle, string message)
+        public static void ShouldNotBeReadOnly(ElementHandle elementHandle, string because)
         {
-            Exception("Should be hidden, but is not.", message);
+            throw Exception("Expected element not to be read-only", "but it is", because);
         }
 
-        public static void ShouldBeSelected(Task<ElementHandle> task, string message)
+        public static void ShouldBeRequired(ElementHandle elementHandle, string because)
         {
-            ShouldBeSelected(task.Result(), message);
+            throw Exception("Expected element to be required", "but it is not", because);
         }
 
-        public static void ShouldBeSelected(ElementHandle handle, string message)
+        public static void ShouldNotBeRequired(ElementHandle elementHandle, string because)
         {
-            Exception("Should be selected, but is not.", message);
+            throw Exception("Expected element not to be required", "but it is", because);
         }
 
-        public static void ShouldNotBeSelected(Task<ElementHandle> task, string message)
+        public static void ShouldHaveFocus(ElementHandle elementHandle, string because)
         {
-            ShouldNotBeSelected(task.Result(), message);
+            throw Exception("Expected element to have focus", "but it did not", because);
         }
 
-        public static void ShouldNotBeSelected(ElementHandle handle, string message)
+        public static void ShouldNotHaveFocus(ElementHandle elementHandle, string because)
         {
-            Exception("Should not be selected, but is.", message);
+            throw Exception("Expected element not to have focus", "but it did", because);
         }
 
-        public static void ShouldBeChecked(Task<ElementHandle> task, string message)
+        private static ShouldException Exception(string expected, string actual, string because)
         {
-            ShouldBeChecked(task.Result(), message);
-        }
-
-        public static void ShouldBeChecked(ElementHandle handle, string message)
-        {
-            Exception("Should be checked, but is not.", message);
-        }
-
-        public static void ShouldNotBeChecked(Task<ElementHandle> task, string message)
-        {
-            ShouldNotBeChecked(task.Result(), message);
-        }
-
-        public static void ShouldNotBeChecked(ElementHandle handle, string message)
-        {
-            Exception("Should not be checked, but is.", message);
-        }
-
-        public static void ShouldBeDisabled(Task<ElementHandle> task, string message)
-        {
-            ShouldBeDisabled(task.Result(), message);
-        }
-
-        public static void ShouldBeDisabled(ElementHandle handle, string message)
-        {
-            Exception("Should be disabled, but is not.", message);
-        }
-
-        public static void ShouldBeEnabled(Task<ElementHandle> task, string message)
-        {
-            ShouldBeEnabled(task.Result(), message);
-        }
-
-        public static void ShouldBeEnabled(ElementHandle handle, string message)
-        {
-            Exception("Should be enabled, but is not.", message);
-        }
-
-        public static void ShouldBeReadOnly(Task<ElementHandle> task, string message)
-        {
-            ShouldBeReadOnly(task.Result(), message);
-        }
-
-        public static void ShouldBeReadOnly(ElementHandle handle, string message)
-        {
-            Exception("Should be read-only, but is not.", message);
-        }
-
-        public static void ShouldNotBeReadOnly(Task<ElementHandle> task, string message)
-        {
-            ShouldNotBeReadOnly(task.Result(), message);
-        }
-
-        public static void ShouldNotBeReadOnly(ElementHandle handle, string message)
-        {
-            Exception("Should not be read-only, but is.", message);
-        }
-
-        public static void ShouldBeRequired(Task<ElementHandle> task, string message)
-        {
-            ShouldBeRequired(task.Result(), message);
-        }
-
-        public static void ShouldBeRequired(ElementHandle handle, string message)
-        {
-            Exception("Should be required, but is not.", message);
-        }
-
-        public static void ShouldNotBeRequired(Task<ElementHandle> task, string message)
-        {
-            ShouldNotBeRequired(task.Result(), message);
-        }
-
-        public static void ShouldNotBeRequired(ElementHandle handle, string message)
-        {
-            Exception("Should not be required, but is.", message);
-        }
-
-        public static void ShouldHaveFocus(Task<ElementHandle> task, string message)
-        {
-            ShouldHaveFocus(task.Result(), message);
-        }
-
-        public static void ShouldHaveFocus(ElementHandle handle, string message)
-        {
-            Exception("Should have focus, but did not.", message);
-        }
-
-        public static void ShouldNotHaveFocus(Task<ElementHandle> task, string message)
-        {
-            ShouldNotHaveFocus(task.Result(), message);
-        }
-
-        public static void ShouldNotHaveFocus(ElementHandle handle, string message)
-        {
-            Exception("Should not have focus, but did.", message);
-        }
-
-        // Result
-
-        private static T Result<T>(this Task<T> task)
-        {
-            return task.GetAwaiter().GetResult();
-        }
-
-        // Throw
-
-        private static void Exception(string message, string customMessage)
-        {
-            throw new ShouldException(new ShouldMessage(message, customMessage).ToString());
+            return new ShouldException(new ShouldMessage(expected, because, actual).ToString());
         }
     }
 }

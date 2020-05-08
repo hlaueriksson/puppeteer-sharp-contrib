@@ -2,12 +2,16 @@
 
 `PuppeteerSharp.Contrib.Should` is a should assertion library for the Puppeteer Sharp API.
 
+:boom: The _sync over async_ versions of the extension methods has been moved to the [PuppeteerSharp.Contrib.Should.Unsafe](PuppeteerSharp.Contrib.Should.Unsafe.md) package.
+
 ## Content
 
 - [PuppeteerSharp.Contrib.Should](#puppeteersharpcontribshould)
   - [Content](#content)
   - [Installation](#installation)
+  - [Should assertions for `Page`](#should-assertions-for-page)
   - [Should assertions for `ElementHandle`](#should-assertions-for-elementhandle)
+  - [Failures](#failures)
   - [Samples](#samples)
 
 ## Installation
@@ -21,6 +25,13 @@
 
 [1]: https://img.shields.io/nuget/v/PuppeteerSharp.Contrib.Should.svg?label=PuppeteerSharp.Contrib.Should
 [2]: https://www.nuget.org/packages/PuppeteerSharp.Contrib.Should
+
+## Should assertions for `Page`
+
+* `ShouldHaveContentAsync`
+* `ShouldHaveTitleAsync`
+* `ShouldNotHaveContentAsync`
+* `ShouldNotHaveTitleAsync`
 
 ## Should assertions for `ElementHandle`
 
@@ -48,6 +59,40 @@
 * `ShouldNotHaveContentAsync`
 * `ShouldNotHaveFocusAsync`
 * `ShouldNotHaveValueAsync`
+
+## Failures
+
+The following failing examples will throw an exception with a message explaining why the assertion failed.
+
+```csharp
+await Page.SetContentAsync(@"
+<html>
+  <body>
+   <div id='foo'>Foo</div>
+  <body>
+</html>");
+
+var div = await Page.QuerySelectorAsync("#foo");
+await div.ShouldHaveContentAsync("Bar");
+```
+
+> Expected element to have content "Bar", but it did not.
+
+```csharp
+await Page.SetContentAsync(@"
+<html>
+  <body>
+   <form>
+    <input id='foo' value='Foo' />
+   </form>
+  <body>
+</html>");
+
+var input = await Page.QuerySelectorAsync("#foo");
+await input.ShouldHaveValueAsync("Bar", "that would be the perfect example");
+```
+
+> Expected element to have value "Bar" because that would be the perfect example, but found "Foo".
 
 ## Samples
 
