@@ -152,10 +152,10 @@ namespace PuppeteerSharp.Contrib.Sample
             var repositories = await page.QuerySelectorAllAsync(".repo-list-item");
             Assert.IsNotEmpty(repositories);
             var repository = repositories.First();
-            var link = await repository.QuerySelectorAsync("a");
-            var text = await repository.QuerySelectorAsync("p");
             await repository.ShouldHaveContentAsync("hardkoded/puppeteer-sharp");
+            var text = await repository.QuerySelectorAsync("p");
             await text.ShouldHaveContentAsync("Headless Chrome .NET API");
+            var link = await repository.QuerySelectorAsync("a");
             await link.ClickAsync();
             await page.WaitForNavigationAsync();
 
@@ -334,7 +334,8 @@ namespace PuppeteerSharp.Contrib.Sample
             var page = await Browser.NewPageAsync();
 
             var startPage = await page.GoToAsync<GitHubStartPage>("https://github.com/");
-            startPage.Heading.ShouldHaveContent("Built for developers");
+            var heading = await startPage.Heading;
+            await heading.ShouldHaveContentAsync("Built for developers");
 
             var headerMenu = await startPage.HeaderMenu;
             var searchPage = await headerMenu.Search("Puppeteer Sharp");
@@ -342,13 +343,15 @@ namespace PuppeteerSharp.Contrib.Sample
             var repositories = await searchPage.RepoListItems;
             Assert.IsNotEmpty(repositories);
             var repository = repositories.First();
-            repository.Text.ShouldHaveContent("Headless Chrome .NET API");
+            var text = await repository.Text;
+            await text.ShouldHaveContentAsync("Headless Chrome .NET API");
             var link = await repository.Link;
             await link.ShouldHaveContentAsync("hardkoded/puppeteer-sharp");
             await link.ClickAsync();
 
             var repoPage = await page.WaitForNavigationAsync<GitHubRepoPage>();
-            repoPage.Heading.ShouldHaveContent("Puppeteer Sharp");
+            heading = await repoPage.Heading;
+            await heading.ShouldHaveContentAsync("Puppeteer Sharp");
             Assert.AreEqual("https://github.com/hardkoded/puppeteer-sharp", repoPage.Page.Url);
         }
 
