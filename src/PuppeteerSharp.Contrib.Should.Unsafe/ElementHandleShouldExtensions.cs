@@ -143,13 +143,14 @@ namespace PuppeteerSharp.Contrib.Should
         /// Asserts that the element has the specified content.
         /// </summary>
         /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
-        /// <param name="content">The content</param>
+        /// <param name="regex">A regular expression to test against <c>element.textContent</c></param>
+        /// <param name="flags">A set of flags for the regular expression</param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
-        /// <remarks>Evaluates <c>node.textContent</c></remarks>
-        public static ElementHandle ShouldHaveContent(this ElementHandle elementHandle, string content, string because = null)
+        /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
+        public static ElementHandle ShouldHaveContent(this ElementHandle elementHandle, string regex, string flags = "", string because = null)
         {
-            elementHandle.ShouldHaveContentAsync(content, because).Result();
+            elementHandle.ShouldHaveContentAsync(regex, flags, because).Result();
 
             return elementHandle;
         }
@@ -158,25 +159,27 @@ namespace PuppeteerSharp.Contrib.Should
         /// Asserts that the element has the specified content.
         /// </summary>
         /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
-        /// <param name="content">The content</param>
+        /// <param name="regex">A regular expression to test against <c>element.textContent</c></param>
+        /// <param name="flags">A set of flags for the regular expression</param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
-        /// <remarks>Evaluates <c>node.textContent</c></remarks>
-        public static void ShouldHaveContent(this Task<ElementHandle> elementHandleTask, string content, string because = null)
+        /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
+        public static void ShouldHaveContent(this Task<ElementHandle> elementHandleTask, string regex, string flags = "", string because = null)
         {
-            elementHandleTask.Result().ShouldHaveContentAsync(content, because).Result();
+            elementHandleTask.Result().ShouldHaveContentAsync(regex, flags, because).Result();
         }
 
         /// <summary>
         /// Asserts that the element does not have the specified content.
         /// </summary>
         /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
-        /// <param name="content">The content</param>
+        /// <param name="regex">A regular expression to test against <c>element.textContent</c></param>
+        /// <param name="flags">A set of flags for the regular expression</param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
         /// <returns>The <see cref="ElementHandle"/> for method chaining</returns>
-        /// <remarks>Evaluates <c>node.textContent</c></remarks>
-        public static ElementHandle ShouldNotHaveContent(this ElementHandle elementHandle, string content, string because = null)
+        /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
+        public static ElementHandle ShouldNotHaveContent(this ElementHandle elementHandle, string regex, string flags = "", string because = null)
         {
-            elementHandle.ShouldNotHaveContentAsync(content, because).Result();
+            elementHandle.ShouldNotHaveContentAsync(regex, flags, because).Result();
 
             return elementHandle;
         }
@@ -185,12 +188,13 @@ namespace PuppeteerSharp.Contrib.Should
         /// Asserts that the element does not have the specified content.
         /// </summary>
         /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
-        /// <param name="content">The content</param>
+        /// <param name="regex">A regular expression to test against <c>element.textContent</c></param>
+        /// <param name="flags">A set of flags for the regular expression</param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
-        /// <remarks>Evaluates <c>node.textContent</c></remarks>
-        public static void ShouldNotHaveContent(this Task<ElementHandle> elementHandleTask, string content, string because = null)
+        /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
+        public static void ShouldNotHaveContent(this Task<ElementHandle> elementHandleTask, string regex, string flags = "", string because = null)
         {
-            elementHandleTask.Result().ShouldNotHaveContentAsync(content, because).Result();
+            elementHandleTask.Result().ShouldNotHaveContentAsync(regex, flags, because).Result();
         }
 
         // Class

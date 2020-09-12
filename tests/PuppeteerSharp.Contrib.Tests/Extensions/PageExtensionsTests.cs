@@ -25,6 +25,9 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
             var bar = await Page.QuerySelectorWithContentAsync("div", "Ba.");
             Assert.Equal("bar", await bar.IdAsync());
 
+            var flags = await Page.QuerySelectorWithContentAsync("div", "foo", "i");
+            Assert.Equal("foo", await flags.IdAsync());
+
             var missing = await Page.QuerySelectorWithContentAsync("div", "Missing");
             Assert.Null(missing);
 
@@ -40,6 +43,9 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
             divs = await Page.QuerySelectorAllWithContentAsync("div", "Ba.");
             Assert.Equal(new[] { "bar", "baz" }, await Task.WhenAll(divs.Select(x => x.IdAsync())));
 
+            var flags = await Page.QuerySelectorAllWithContentAsync("div", "foo", "i");
+            Assert.Equal(new[] { "foo" }, await Task.WhenAll(flags.Select(x => x.IdAsync())));
+
             var missing = await Page.QuerySelectorAllWithContentAsync("div", "Missing");
             Assert.Empty(missing);
 
@@ -50,6 +56,7 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
         public async Task HasContentAsync_should_return_true_if_page_has_the_content()
         {
             Assert.True(await Page.HasContentAsync("Ba."));
+            Assert.True(await Page.HasContentAsync("ba.", "i"));
             Assert.False(await Page.HasContentAsync("Missing"));
             await Assert.ThrowsAsync<ArgumentNullException>(() => ((Page)null).HasContentAsync(""));
         }
@@ -65,6 +72,7 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
 </html>");
 
             Assert.True(await Page.HasTitleAsync("Ba."));
+            Assert.True(await Page.HasTitleAsync("ba.", "i"));
             Assert.False(await Page.HasTitleAsync("Missing"));
             await Assert.ThrowsAsync<ArgumentNullException>(() => ((Page)null).HasTitleAsync(""));
         }

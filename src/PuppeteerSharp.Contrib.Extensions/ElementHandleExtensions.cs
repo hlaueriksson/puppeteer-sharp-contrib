@@ -17,16 +17,18 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <param name="elementHandle">An <see cref="ElementHandle"/> to query</param>
         /// <param name="selector">A selector to query element for</param>
         /// <param name="regex">A regular expression to test against <c>element.textContent</c></param>
+        /// <param name="flags">A set of flags for the regular expression</param>
         /// <returns>Task which resolves to <see cref="ElementHandle"/> pointing to the element</returns>
-        public static async Task<ElementHandle> QuerySelectorWithContentAsync(this ElementHandle elementHandle, string selector, string regex)
+        /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
+        public static async Task<ElementHandle> QuerySelectorWithContentAsync(this ElementHandle elementHandle, string selector, string regex, string flags = "")
         {
             return await elementHandle.GuardFromNull().EvaluateFunctionHandleAsync(
-                @"(element, selector, regex) => {
+                @"(element, selector, regex, flags) => {
                     var elements = element.querySelectorAll(selector);
                     return Array.prototype.find.call(elements, function(element) {
-                        return RegExp(regex).test(element.textContent);
+                        return RegExp(regex, flags).test(element.textContent);
                     });
-                }", selector, regex).ConfigureAwait(false) as ElementHandle;
+                }", selector, regex, flags).ConfigureAwait(false) as ElementHandle;
         }
 
         /// <summary>
@@ -35,16 +37,18 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <param name="elementHandle">An <see cref="ElementHandle"/> to query</param>
         /// <param name="selector">A selector to query element for</param>
         /// <param name="regex">A regular expression to test against <c>element.textContent</c></param>
+        /// <param name="flags">A set of flags for the regular expression</param>
         /// <returns>Task which resolves to ElementHandles pointing to the elements</returns>
-        public static async Task<ElementHandle[]> QuerySelectorAllWithContentAsync(this ElementHandle elementHandle, string selector, string regex)
+        /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
+        public static async Task<ElementHandle[]> QuerySelectorAllWithContentAsync(this ElementHandle elementHandle, string selector, string regex, string flags = "")
         {
             var arrayHandle = await elementHandle.GuardFromNull().EvaluateFunctionHandleAsync(
-                @"(element, selector, regex) => {
+                @"(element, selector, regex, flags) => {
                     var elements = element.querySelectorAll(selector);
                     return Array.prototype.filter.call(elements, function(element) {
-                        return RegExp(regex).test(element.textContent);
+                        return RegExp(regex, flags).test(element.textContent);
                     });
-                }", selector, regex).ConfigureAwait(false);
+                }", selector, regex, flags).ConfigureAwait(false);
 
             if (arrayHandle == null) throw new InvalidOperationException("EvaluateFunctionHandleAsync returned null.");
 
@@ -112,12 +116,13 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// Indicates whether the element has the specified content or not.
         /// </summary>
         /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
-        /// <param name="content">The content</param>
+        /// <param name="regex">A regular expression to test against <c>element.textContent</c></param>
+        /// <param name="flags">A set of flags for the regular expression</param>
         /// <returns><c>true</c> if the element has the specified content</returns>
-        /// <remarks>Evaluates <c>node.textContent</c></remarks>
-        public static async Task<bool> HasContentAsync(this ElementHandle elementHandle, string content)
+        /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
+        public static async Task<bool> HasContentAsync(this ElementHandle elementHandle, string regex, string flags = "")
         {
-            return await elementHandle.EvaluateFunctionWithoutDisposeAsync<bool>("(node, content) => node.textContent.includes(content)", content).ConfigureAwait(false);
+            return await elementHandle.EvaluateFunctionWithoutDisposeAsync<bool>("(element, regex, flags) => RegExp(regex, flags).test(element.textContent)", regex, flags).ConfigureAwait(false);
         }
 
         /// <summary>

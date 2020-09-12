@@ -13,11 +13,13 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="page">A <see cref="Page"/></param>
         /// <param name="regex">A regular expression to test against <c>document.documentElement.textContent</c></param>
+        /// <param name="flags">A set of flags for the regular expression</param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public static async Task ShouldHaveContentAsync(this Page page, string regex, string because = null)
+        /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
+        public static async Task ShouldHaveContentAsync(this Page page, string regex, string flags = "", string because = null)
         {
-            if (!await page.HasContentAsync(regex).ConfigureAwait(false)) Throw.ShouldHaveContent(page, regex, because);
+            if (!await page.HasContentAsync(regex, flags).ConfigureAwait(false)) Throw.ShouldHaveContent(page, regex, flags, because);
         }
 
         /// <summary>
@@ -25,11 +27,13 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="page">A <see cref="Page"/></param>
         /// <param name="regex">A regular expression to test against <c>document.documentElement.textContent</c></param>
+        /// <param name="flags">A set of flags for the regular expression</param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public static async Task ShouldNotHaveContentAsync(this Page page, string regex, string because = null)
+        /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
+        public static async Task ShouldNotHaveContentAsync(this Page page, string regex, string flags = "", string because = null)
         {
-            if (await page.HasContentAsync(regex).ConfigureAwait(false)) Throw.ShouldNotHaveContent(page, regex, because);
+            if (await page.HasContentAsync(regex, flags).ConfigureAwait(false)) Throw.ShouldNotHaveContent(page, regex, flags, because);
         }
 
         /// <summary>
@@ -37,11 +41,13 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="page">A <see cref="Page"/></param>
         /// <param name="regex">A regular expression to test against <c>document.title</c></param>
+        /// <param name="flags">A set of flags for the regular expression</param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public static async Task ShouldHaveTitleAsync(this Page page, string regex, string because = null)
+        /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
+        public static async Task ShouldHaveTitleAsync(this Page page, string regex, string flags = "", string because = null)
         {
-            if (!await page.HasTitleAsync(regex).ConfigureAwait(false)) Throw.ShouldHaveTitle(page, regex, await page.GuardFromNull().GetTitleAsync().ConfigureAwait(false), because);
+            if (!await page.HasTitleAsync(regex, flags).ConfigureAwait(false)) Throw.ShouldHaveTitle(page, regex, flags, await page.GuardFromNull().GetTitleAsync().ConfigureAwait(false), because);
         }
 
         /// <summary>
@@ -49,11 +55,13 @@ namespace PuppeteerSharp.Contrib.Should
         /// </summary>
         /// <param name="page">A <see cref="Page"/></param>
         /// <param name="regex">A regular expression to test against <c>document.title</c></param>
+        /// <param name="flags">A set of flags for the regular expression</param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public static async Task ShouldNotHaveTitleAsync(this Page page, string regex, string because = null)
+        /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
+        public static async Task ShouldNotHaveTitleAsync(this Page page, string regex, string flags = "", string because = null)
         {
-            if (await page.HasTitleAsync(regex).ConfigureAwait(false)) Throw.ShouldNotHaveTitle(page, regex, because);
+            if (await page.HasTitleAsync(regex, flags).ConfigureAwait(false)) Throw.ShouldNotHaveTitle(page, regex, flags, because);
         }
     }
 }

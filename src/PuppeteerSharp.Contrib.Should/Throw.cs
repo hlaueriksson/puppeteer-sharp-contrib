@@ -4,24 +4,24 @@ namespace PuppeteerSharp.Contrib.Should
     {
         /* Page */
 
-        public static void ShouldHaveContent(Page page, string regex, string because)
+        public static void ShouldHaveContent(Page page, string regex, string flags, string because)
         {
-            throw Exception($"Expected page to have content \"{regex}\"", "but it did not", because);
+            throw Exception($"Expected page to have content \"/{regex}/{flags}\"", "but it did not", because);
         }
 
-        public static void ShouldNotHaveContent(Page page, string regex, string because)
+        public static void ShouldNotHaveContent(Page page, string regex, string flags, string because)
         {
-            throw Exception($"Expected page not to have content \"{regex}\"", null, because);
+            throw Exception($"Expected page not to have content \"/{regex}/{flags}\"", null, because);
         }
 
-        public static void ShouldHaveTitle(Page page, string regex, string actual, string because)
+        public static void ShouldHaveTitle(Page page, string regex, string flags, string actual, string because)
         {
-            throw Exception($"Expected page to have title \"{regex}\"", $"but found \"{actual}\"", because);
+            throw Exception($"Expected page to have title \"/{regex}/{flags}\"", $"but found \"{actual}\"", because);
         }
 
-        public static void ShouldNotHaveTitle(Page page, string regex, string because)
+        public static void ShouldNotHaveTitle(Page page, string regex, string flags, string because)
         {
-            throw Exception($"Expected page not to have title \"{regex}\"", null, because);
+            throw Exception($"Expected page not to have title \"/{regex}/{flags}\"", null, because);
         }
 
         /* ElementHandle */
@@ -56,14 +56,14 @@ namespace PuppeteerSharp.Contrib.Should
             throw Exception($"Expected element not to have attribute \"{name}\"", "but it did", because);
         }
 
-        public static void ShouldHaveContent(ElementHandle elementHandle, string content, string because)
+        public static void ShouldHaveContent(ElementHandle elementHandle, string regex, string flags, string because)
         {
-            throw Exception($"Expected element to have content \"{content}\"", "but it did not", because);
+            throw Exception($"Expected element to have content \"/{regex}/{flags}\"", "but it did not", because);
         }
 
-        public static void ShouldNotHaveContent(ElementHandle elementHandle, string content, string because)
+        public static void ShouldNotHaveContent(ElementHandle elementHandle, string regex, string flags, string because)
         {
-            throw Exception($"Expected element not to have content \"{content}\"", "but it did", because);
+            throw Exception($"Expected element not to have content \"/{regex}/{flags}\"", "but it did", because);
         }
 
         public static void ShouldHaveClass(ElementHandle elementHandle, string className, string because)

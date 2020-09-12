@@ -121,24 +121,26 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// Indicates whether the element has the specified content or not.
         /// </summary>
         /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
-        /// <param name="content">The content</param>
+        /// <param name="regex">A regular expression to test against <c>element.textContent</c></param>
+        /// <param name="flags">A set of flags for the regular expression</param>
         /// <returns><c>true</c> if the element has the specified content</returns>
-        /// <remarks>Evaluates <c>node.textContent</c></remarks>
-        public static bool HasContent(this ElementHandle elementHandle, string content)
+        /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
+        public static bool HasContent(this ElementHandle elementHandle, string regex, string flags = "")
         {
-            return elementHandle.HasContentAsync(content).Result();
+            return elementHandle.HasContentAsync(regex, flags).Result();
         }
 
         /// <summary>
         /// Indicates whether the element has the specified content or not.
         /// </summary>
         /// <param name="elementHandleTask">An <see cref="ElementHandle"/></param>
-        /// <param name="content">The content</param>
+        /// <param name="regex">A regular expression to test against <c>element.textContent</c></param>
+        /// <param name="flags">A set of flags for the regular expression</param>
         /// <returns><c>true</c> if the element has the specified content</returns>
-        /// <remarks>Evaluates <c>node.textContent</c></remarks>
-        public static bool HasContent(this Task<ElementHandle> elementHandleTask, string content)
+        /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
+        public static bool HasContent(this Task<ElementHandle> elementHandleTask, string regex, string flags = "")
         {
-            return elementHandleTask.GuardFromNull().Result().HasContent(content);
+            return elementHandleTask.GuardFromNull().Result().HasContent(regex, flags);
         }
 
         // ClassName
