@@ -7,18 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentAssertions" Version="5.7.0" />
+    <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="PuppeteerSharp" Version="2.0.3" />
     <PackageReference Include="PuppeteerSharp.Contrib.Should" Version="3.0.0" />
-    <PackageReference Include="SpecFlow.xUnit" Version="3.0.225" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Features\PuppeteerSharpRepo.feature.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>PuppeteerSharpRepo.feature</DependentUpon>
-    </Compile>
+    <PackageReference Include="SpecFlow.xUnit" Version="3.4.8" />
   </ItemGroup>
 
   <ItemGroup>
