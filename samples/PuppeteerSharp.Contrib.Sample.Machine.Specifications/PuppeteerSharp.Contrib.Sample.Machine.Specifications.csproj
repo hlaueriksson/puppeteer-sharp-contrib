@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net48</TargetFramework>
@@ -12,9 +12,9 @@
     <PackageReference Include="Machine.Specifications.Should" Version="1.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
     <PackageReference Include="PuppeteerSharp" Version="2.0.3" />
-    <PackageReference Include="PuppeteerSharp.Contrib.Extensions.Unsafe" Version="2.0.0" />
-    <PackageReference Include="PuppeteerSharp.Contrib.Should" Version="2.0.0" />
-    <PackageReference Include="PuppeteerSharp.Contrib.Should.Unsafe" Version="2.0.0" />
+    <PackageReference Include="PuppeteerSharp.Contrib.Extensions.Unsafe" Version="3.0.0" />
+    <PackageReference Include="PuppeteerSharp.Contrib.Should" Version="3.0.0" />
+    <PackageReference Include="PuppeteerSharp.Contrib.Should.Unsafe" Version="3.0.0" />
   </ItemGroup>
 
 </Project>
