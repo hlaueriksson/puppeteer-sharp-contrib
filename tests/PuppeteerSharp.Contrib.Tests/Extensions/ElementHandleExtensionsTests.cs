@@ -29,6 +29,9 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
             var bar = await html.QuerySelectorWithContentAsync("div", "Ba.");
             Assert.Equal("bar", await bar.IdAsync());
 
+            var flags = await html.QuerySelectorWithContentAsync("div", "foo", "i");
+            Assert.Equal("foo", await flags.IdAsync());
+
             var missing = await html.QuerySelectorWithContentAsync("div", "Missing");
             Assert.Null(missing);
         }
@@ -50,6 +53,9 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
 
             divs = await html.QuerySelectorAllWithContentAsync("div", "Ba.");
             Assert.Equal(new[] { "bar", "baz" }, await Task.WhenAll(divs.Select(x => x.IdAsync())));
+
+            var flags = await html.QuerySelectorAllWithContentAsync("div", "foo", "i");
+            Assert.Equal(new[] { "foo" }, await Task.WhenAll(flags.Select(x => x.IdAsync())));
 
             var missing = await html.QuerySelectorAllWithContentAsync("div", "Missing");
             Assert.Empty(missing);
@@ -108,11 +114,21 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
         [Fact]
         public async Task HasContentAsync_should_return_true_if_element_has_the_content()
         {
-            var like = await Page.QuerySelectorAsync(".like");
-            Assert.True(await like.HasContentAsync("100"));
+            await Page.SetContentAsync(@"
+<html>
+  <div id='foo'>Foo</div>
+  <div id='bar'>Bar</div>
+  <div id='baz'>Baz</div>
+</html>");
 
-            var retweets = await Page.QuerySelectorAsync("div");
-            Assert.False(await retweets.HasContentAsync("20"));
+            var foo = await Page.QuerySelectorAsync("#foo");
+            Assert.True(await foo.HasContentAsync("Foo"));
+
+            var bar = await Page.QuerySelectorAsync("#bar");
+            Assert.False(await bar.HasContentAsync("ba."));
+
+            var flags = await Page.QuerySelectorAsync("html");
+            Assert.True(await flags.HasContentAsync("ba.", "i"));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             await Assert.ThrowsAsync<ArgumentNullException>(() => missing.HasContentAsync(""));

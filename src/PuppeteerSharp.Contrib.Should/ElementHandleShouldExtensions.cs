@@ -98,26 +98,28 @@ namespace PuppeteerSharp.Contrib.Should
         /// Asserts that the element has the specified content.
         /// </summary>
         /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
-        /// <param name="content">The content</param>
+        /// <param name="regex">A regular expression to test against <c>element.textContent</c></param>
+        /// <param name="flags">A set of flags for the regular expression</param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        /// <remarks>Evaluates <c>node.textContent</c></remarks>
-        public static async Task ShouldHaveContentAsync(this ElementHandle elementHandle, string content, string because = null)
+        /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
+        public static async Task ShouldHaveContentAsync(this ElementHandle elementHandle, string regex, string flags = "", string because = null)
         {
-            if (!await elementHandle.HasContentAsync(content).ConfigureAwait(false)) Throw.ShouldHaveContent(elementHandle, content, because);
+            if (!await elementHandle.HasContentAsync(regex, flags).ConfigureAwait(false)) Throw.ShouldHaveContent(elementHandle, regex, flags, because);
         }
 
         /// <summary>
         /// Asserts that the element does not have the specified content.
         /// </summary>
         /// <param name="elementHandle">An <see cref="ElementHandle"/></param>
-        /// <param name="content">The content</param>
+        /// <param name="regex">A regular expression to test against <c>element.textContent</c></param>
+        /// <param name="flags">A set of flags for the regular expression</param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        /// <remarks>Evaluates <c>node.textContent</c></remarks>
-        public static async Task ShouldNotHaveContentAsync(this ElementHandle elementHandle, string content, string because = null)
+        /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
+        public static async Task ShouldNotHaveContentAsync(this ElementHandle elementHandle, string regex, string flags = "", string because = null)
         {
-            if (await elementHandle.HasContentAsync(content).ConfigureAwait(false)) Throw.ShouldNotHaveContent(elementHandle, content, because);
+            if (await elementHandle.HasContentAsync(regex, flags).ConfigureAwait(false)) Throw.ShouldNotHaveContent(elementHandle, regex, flags, because);
         }
 
         // Class

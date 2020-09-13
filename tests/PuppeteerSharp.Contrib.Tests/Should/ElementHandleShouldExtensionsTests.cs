@@ -106,8 +106,8 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             var like = await Page.QuerySelectorAsync(".like");
             await like.ShouldHaveContentAsync("100");
 
-            var ex = await Assert.ThrowsAsync<ShouldException>(() => like.ShouldHaveContentAsync("200"));
-            Assert.Equal("Expected element to have content \"200\", but it did not.", ex.Message);
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => like.ShouldHaveContentAsync("200", "i"));
+            Assert.Equal("Expected element to have content \"/200/i\", but it did not.", ex.Message);
 
             var missing = await Page.QuerySelectorAsync(".missing");
             await Assert.ThrowsAsync<ArgumentNullException>(() => missing.ShouldHaveContentAsync(""));
@@ -119,8 +119,8 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             var like = await Page.QuerySelectorAsync(".like");
             await like.ShouldNotHaveContentAsync("200");
 
-            var ex = await Assert.ThrowsAsync<ShouldException>(() => like.ShouldNotHaveContentAsync("100"));
-            Assert.Equal("Expected element not to have content \"100\", but it did.", ex.Message);
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => like.ShouldNotHaveContentAsync("100", "i"));
+            Assert.Equal("Expected element not to have content \"/100/i\", but it did.", ex.Message);
 
             var missing = await Page.QuerySelectorAsync(".missing");
             await Assert.ThrowsAsync<ArgumentNullException>(() => missing.ShouldNotHaveContentAsync(""));

@@ -14,18 +14,18 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <param name="page">A <see cref="Page"/> to query</param>
         /// <param name="selector">A selector to query page for</param>
         /// <param name="regex">A regular expression to test against <c>element.textContent</c></param>
+        /// <param name="flags">A set of flags for the regular expression</param>
         /// <returns>Task which resolves to <see cref="ElementHandle"/> pointing to the frame element</returns>
-        public static async Task<ElementHandle> QuerySelectorWithContentAsync(this Page page, string selector, string regex)
+        /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
+        public static async Task<ElementHandle> QuerySelectorWithContentAsync(this Page page, string selector, string regex, string flags = "")
         {
-            var handle = await page.GuardFromNull().EvaluateFunctionHandleAsync(
-                @"(selector, regex) => {
+            return await page.GuardFromNull().EvaluateFunctionHandleAsync(
+                @"(selector, regex, flags) => {
                     var elements = document.querySelectorAll(selector);
                     return Array.prototype.find.call(elements, function(element) {
-                        return RegExp(regex).test(element.textContent);
+                        return RegExp(regex, flags).test(element.textContent);
                     });
-                }", selector, regex).ConfigureAwait(false) as ElementHandle;
-
-            return handle;
+                }", selector, regex, flags).ConfigureAwait(false) as ElementHandle;
         }
 
         /// <summary>
@@ -34,16 +34,18 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <param name="page">A <see cref="Page"/> to query</param>
         /// <param name="selector">A selector to query page for</param>
         /// <param name="regex">A regular expression to test against <c>element.textContent</c></param>
+        /// <param name="flags">A set of flags for the regular expression</param>
         /// <returns>Task which resolves to ElementHandles pointing to the frame elements</returns>
-        public static async Task<ElementHandle[]> QuerySelectorAllWithContentAsync(this Page page, string selector, string regex)
+        /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
+        public static async Task<ElementHandle[]> QuerySelectorAllWithContentAsync(this Page page, string selector, string regex, string flags = "")
         {
             var arrayHandle = await page.GuardFromNull().EvaluateFunctionHandleAsync(
-                @"(selector, regex) => {
+                @"(selector, regex, flags) => {
                     var elements = document.querySelectorAll(selector);
                     return Array.prototype.filter.call(elements, function(element) {
-                        return RegExp(regex).test(element.textContent);
+                        return RegExp(regex, flags).test(element.textContent);
                     });
-                }", selector, regex).ConfigureAwait(false);
+                }", selector, regex, flags).ConfigureAwait(false);
 
             var properties = await arrayHandle.GetPropertiesAsync().ConfigureAwait(false);
             await arrayHandle.DisposeAsync().ConfigureAwait(false);
@@ -56,10 +58,12 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// </summary>
         /// <param name="page">A <see cref="Page"/></param>
         /// <param name="regex">A regular expression to test against <c>document.documentElement.textContent</c></param>
+        /// <param name="flags">A set of flags for the regular expression</param>
         /// <returns><c>true</c> if the page has the specified content</returns>
-        public static async Task<bool> HasContentAsync(this Page page, string regex)
+        /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
+        public static async Task<bool> HasContentAsync(this Page page, string regex, string flags = "")
         {
-            return await page.GuardFromNull().EvaluateFunctionAsync<bool>("(regex) => RegExp(regex).test(document.documentElement.textContent)", regex).ConfigureAwait(false);
+            return await page.GuardFromNull().EvaluateFunctionAsync<bool>("(regex, flags) => RegExp(regex, flags).test(document.documentElement.textContent)", regex, flags).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -67,10 +71,12 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// </summary>
         /// <param name="page">A <see cref="Page"/></param>
         /// <param name="regex">A regular expression to test against <c>document.title</c></param>
+        /// <param name="flags">A set of flags for the regular expression</param>
         /// <returns><c>true</c> if the page has the specified title</returns>
-        public static async Task<bool> HasTitleAsync(this Page page, string regex)
+        /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
+        public static async Task<bool> HasTitleAsync(this Page page, string regex, string flags = "")
         {
-            return await page.GuardFromNull().EvaluateFunctionAsync<bool>("(regex) => RegExp(regex).test(document.title)", regex).ConfigureAwait(false);
+            return await page.GuardFromNull().EvaluateFunctionAsync<bool>("(regex, flags) => RegExp(regex, flags).test(document.title)", regex, flags).ConfigureAwait(false);
         }
     }
 }

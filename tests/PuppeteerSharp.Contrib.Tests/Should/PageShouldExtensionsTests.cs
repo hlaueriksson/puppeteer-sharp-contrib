@@ -15,8 +15,8 @@ namespace PuppeteerSharp.Contrib.Tests.Should
         {
             await Page.ShouldHaveContentAsync("10.");
 
-            var ex = await Assert.ThrowsAsync<ShouldException>(() => Page.ShouldHaveContentAsync("20."));
-            Assert.Equal("Expected page to have content \"20.\", but it did not.", ex.Message);
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => Page.ShouldHaveContentAsync("20.", "i"));
+            Assert.Equal("Expected page to have content \"/20./i\", but it did not.", ex.Message);
         }
 
         [Fact]
@@ -24,8 +24,8 @@ namespace PuppeteerSharp.Contrib.Tests.Should
         {
             await Page.ShouldNotHaveContentAsync("20.");
 
-            var ex = await Assert.ThrowsAsync<ShouldException>(() => Page.ShouldNotHaveContentAsync("10."));
-            Assert.Equal("Expected page not to have content \"10.\".", ex.Message);
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => Page.ShouldNotHaveContentAsync("10.", "i"));
+            Assert.Equal("Expected page not to have content \"/10./i\".", ex.Message);
         }
 
         [Fact]
@@ -35,8 +35,8 @@ namespace PuppeteerSharp.Contrib.Tests.Should
 
             await Page.ShouldHaveTitleAsync("10.");
 
-            var ex = await Assert.ThrowsAsync<ShouldException>(() => Page.ShouldHaveTitleAsync("20."));
-            Assert.Equal("Expected page to have title \"20.\", but found \"100\".", ex.Message);
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => Page.ShouldHaveTitleAsync("20.", "i"));
+            Assert.Equal("Expected page to have title \"/20./i\", but found \"100\".", ex.Message);
         }
 
         [Fact]
@@ -46,8 +46,8 @@ namespace PuppeteerSharp.Contrib.Tests.Should
 
             await Page.ShouldNotHaveTitleAsync("20.");
 
-            var ex = await Assert.ThrowsAsync<ShouldException>(() => Page.ShouldNotHaveTitleAsync("10."));
-            Assert.Equal("Expected page not to have title \"10.\".", ex.Message);
+            var ex = await Assert.ThrowsAsync<ShouldException>(() => Page.ShouldNotHaveTitleAsync("10.", "i"));
+            Assert.Equal("Expected page not to have title \"/10./i\".", ex.Message);
         }
     }
 }

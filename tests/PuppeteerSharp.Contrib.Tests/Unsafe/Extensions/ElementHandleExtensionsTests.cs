@@ -71,13 +71,23 @@ namespace PuppeteerSharp.Contrib.Tests.Unsafe.Extensions
         [Fact]
         public async Task HasContent_should_return_true_if_element_has_the_content()
         {
-            var retweets = await Page.QuerySelectorAsync(".retweets");
-            Assert.True(retweets.HasContent("10"));
+            await Page.SetContentAsync(@"
+<html>
+  <div id='foo'>Foo</div>
+  <div id='bar'>Bar</div>
+  <div id='baz'>Baz</div>
+</html>");
 
-            Assert.True(Page.QuerySelectorAsync(".retweets").HasContent("10"));
+            var foo = await Page.QuerySelectorAsync("#foo");
+            Assert.True(foo.HasContent("Foo"));
 
-            retweets = await Page.QuerySelectorAsync("div");
-            Assert.False(retweets.HasContent("20"));
+            Assert.True(Page.QuerySelectorAsync("#foo").HasContent("Foo"));
+
+            var bar = await Page.QuerySelectorAsync("#bar");
+            Assert.False(bar.HasContent("ba."));
+
+            var flags = await Page.QuerySelectorAsync("html");
+            Assert.True(flags.HasContent("ba.", "i"));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.Throws<ArgumentNullException>(() => missing.HasContent(""));
