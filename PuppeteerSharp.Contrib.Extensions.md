@@ -17,10 +17,10 @@
 
 | NuGet            |       | [![PuppeteerSharp.Contrib.Extensions][1]][2]                                       |
 | :--------------- | ----: | :--------------------------------------------------------------------------------- |
-| Package Manager  | `PM>` | `Install-Package PuppeteerSharp.Contrib.Extensions -Version 1.0.0`                 |
-| .NET CLI         | `>`   | `dotnet add package PuppeteerSharp.Contrib.Extensions --version 1.0.0`             |
-| PackageReference |       | `<PackageReference Include="PuppeteerSharp.Contrib.Extensions" Version="1.0.0" />` |
-| Paket CLI        | `>`   | `paket add PuppeteerSharp.Contrib.Extensions --version 1.0.0`                      |
+| Package Manager  | `PM>` | `Install-Package PuppeteerSharp.Contrib.Extensions -Version 3.0.0`                 |
+| .NET CLI         | `>`   | `dotnet add package PuppeteerSharp.Contrib.Extensions --version 3.0.0`             |
+| PackageReference |       | `<PackageReference Include="PuppeteerSharp.Contrib.Extensions" Version="3.0.0" />` |
+| Paket CLI        | `>`   | `paket add PuppeteerSharp.Contrib.Extensions --version 3.0.0`                      |
 
 [1]: https://img.shields.io/nuget/v/PuppeteerSharp.Contrib.Extensions.svg?label=PuppeteerSharp.Contrib.Extensions
 [2]: https://www.nuget.org/packages/PuppeteerSharp.Contrib.Extensions

@@ -18,10 +18,10 @@
 
 | NuGet            |       | [![PuppeteerSharp.Contrib.Should][1]][2]                                       |
 | :--------------- | ----: | :----------------------------------------------------------------------------- |
-| Package Manager  | `PM>` | `Install-Package PuppeteerSharp.Contrib.Should -Version 1.0.0`                 |
-| .NET CLI         | `>`   | `dotnet add package PuppeteerSharp.Contrib.Should --version 1.0.0`             |
-| PackageReference |       | `<PackageReference Include="PuppeteerSharp.Contrib.Should" Version="1.0.0" />` |
-| Paket CLI        | `>`   | `paket add PuppeteerSharp.Contrib.Should --version 1.0.0`                      |
+| Package Manager  | `PM>` | `Install-Package PuppeteerSharp.Contrib.Should -Version 3.0.0`                 |
+| .NET CLI         | `>`   | `dotnet add package PuppeteerSharp.Contrib.Should --version 3.0.0`             |
+| PackageReference |       | `<PackageReference Include="PuppeteerSharp.Contrib.Should" Version="3.0.0" />` |
+| Paket CLI        | `>`   | `paket add PuppeteerSharp.Contrib.Should --version 3.0.0`                      |
 
 [1]: https://img.shields.io/nuget/v/PuppeteerSharp.Contrib.Should.svg?label=PuppeteerSharp.Contrib.Should
 [2]: https://www.nuget.org/packages/PuppeteerSharp.Contrib.Should
