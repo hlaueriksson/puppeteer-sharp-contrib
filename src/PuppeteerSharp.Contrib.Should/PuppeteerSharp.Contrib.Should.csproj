@@ -2,16 +2,21 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.0.0</Version>
+    <Version>3.0.0</Version>
     <PackageReleaseNotes>
-☑️ Bump PuppeteerSharp to 2.0.0
-☑️ The sync over async versions of the extension methods has been moved to the PuppeteerSharp.Contrib.Should.Unsafe package 💥
-☑️ New extension methods for Page
+Extension methods that uses regular expressions, now also has a flags parameter 🎏
+
+Extension methods for Page
  ◼️ ShouldHaveContentAsync
  ◼️ ShouldNotHaveContentAsync
  ◼️ ShouldHaveTitleAsync
  ◼️ ShouldNotHaveTitleAsync
-☑️ Improved failure messages
+
+Extension methods for content matching, now uses regular expressions (with flags) 💥
+
+Extension methods for ElementHandle
+ ◼️ ShouldHaveContentAsync
+ ◼️ ShouldNotHaveContentAsync
     </PackageReleaseNotes>
     <Authors>Henrik Lau Eriksson</Authors>
     <Description>Contributions to the Headless Chrome .NET API 🌐🧪

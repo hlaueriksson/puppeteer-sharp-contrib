@@ -3,7 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>PuppeteerSharp.Contrib.Should</RootNamespace>
-    <Version>2.0.0</Version>
+    <Version>3.0.0</Version>
+    <PackageReleaseNotes>
+Extension methods for content matching, now uses regular expressions (with flags) 💥
+
+Extension methods for ElementHandle
+ ◼️ ShouldHaveContent
+ ◼️ ShouldNotHaveContent
+    </PackageReleaseNotes>
     <Authors>Henrik Lau Eriksson</Authors>
     <Description>Contributions to the Headless Chrome .NET API 🌐🧪
 
