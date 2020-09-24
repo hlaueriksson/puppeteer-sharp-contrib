@@ -23,7 +23,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             Assert.NotNull(result);
             Assert.IsAssignableFrom<FakePageObject>(result);
 
-            result = await Page.GoToAsync<FakePageObject>("about:blank", TimeSpan.FromSeconds(10).Milliseconds, new[] { WaitUntilNavigation.Load });
+            result = await Page.GoToAsync<FakePageObject>("about:blank", (int) TimeSpan.FromSeconds(10).TotalMilliseconds, new[] { WaitUntilNavigation.Load });
             Assert.NotNull(result);
             Assert.IsAssignableFrom<FakePageObject>(result);
 
