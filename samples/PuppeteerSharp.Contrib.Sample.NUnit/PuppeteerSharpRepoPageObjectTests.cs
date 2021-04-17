@@ -33,7 +33,7 @@ namespace PuppeteerSharp.Contrib.Sample
 
             var startPage = await page.GoToAsync<GitHubStartPage>("https://github.com/");
             var heading = await startPage.Heading;
-            await heading.ShouldHaveContentAsync("Built for developers");
+            await heading.ShouldHaveContentAsync("Where the world builds software");
 
             var headerMenu = await startPage.HeaderMenu;
             var searchPage = await headerMenu.Search("Puppeteer Sharp");
@@ -75,7 +75,7 @@ namespace PuppeteerSharp.Contrib.Sample
             var repoPage = await page.GoToAsync<GitHubRepoPage>("https://github.com/hardkoded/puppeteer-sharp");
             var puppeteerSharpVersion = await repoPage.GetLatestReleaseVersion();
 
-            repoPage = await page.GoToAsync<GitHubRepoPage>("https://github.com/GoogleChrome/puppeteer");
+            repoPage = await page.GoToAsync<GitHubRepoPage>("https://github.com/puppeteer/puppeteer");
             var puppeteerVersion = await repoPage.GetLatestReleaseVersion();
 
             Assert.AreEqual(puppeteerVersion, puppeteerSharpVersion);

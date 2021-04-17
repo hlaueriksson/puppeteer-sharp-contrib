@@ -206,7 +206,7 @@ namespace PuppeteerSharp.Documentation
             var innerText = await element.EvaluateFunctionAsync<string>("e => e.innerText");
             var url = await element.EvaluateFunctionAsync<string>("e => e.getAttribute('href')");
             var hasContent = await element.EvaluateFunctionAsync<bool>("(e, value) => e.textContent.includes(value)", "puppeteer-sharp");
-            Assert.Equal("<a data-pjax=\"#js-repo-pjax-container\" class=\"\" href=\"/hardkoded/puppeteer-sharp\">puppeteer-sharp</a>", outerHtml);
+            Assert.Equal("<a data-pjax=\"#js-repo-pjax-container\" href=\"/hardkoded/puppeteer-sharp\">puppeteer-sharp</a>", outerHtml);
             Assert.Equal("puppeteer-sharp", innerText);
             Assert.Equal("/hardkoded/puppeteer-sharp", url);
             Assert.True(hasContent);
@@ -215,7 +215,7 @@ namespace PuppeteerSharp.Documentation
             innerText = await page.EvaluateFunctionAsync<string>("e => e.innerText", element);
             url = await page.EvaluateFunctionAsync<string>("e => e.getAttribute('href')", element);
             hasContent = await page.EvaluateFunctionAsync<bool>("(e, value) => e.textContent.includes(value)", element, "puppeteer-sharp");
-            Assert.Equal("<a data-pjax=\"#js-repo-pjax-container\" class=\"\" href=\"/hardkoded/puppeteer-sharp\">puppeteer-sharp</a>", outerHtml);
+            Assert.Equal("<a data-pjax=\"#js-repo-pjax-container\" href=\"/hardkoded/puppeteer-sharp\">puppeteer-sharp</a>", outerHtml);
             Assert.Equal("puppeteer-sharp", innerText);
             Assert.Equal("/hardkoded/puppeteer-sharp", url);
             Assert.True(hasContent);
@@ -224,7 +224,7 @@ namespace PuppeteerSharp.Documentation
             innerText = await page.EvaluateExpressionAsync<string>($"document.querySelector({"'h1 > strong > a'"}).innerText");
             url = await page.EvaluateExpressionAsync<string>($"document.querySelector({"'h1 > strong > a'"}).getAttribute('href')");
             hasContent = await page.EvaluateExpressionAsync<bool>($"document.querySelector({"'h1 > strong > a'"}).textContent.includes({"'puppeteer-sharp'"})");
-            Assert.Equal("<a data-pjax=\"#js-repo-pjax-container\" class=\"\" href=\"/hardkoded/puppeteer-sharp\">puppeteer-sharp</a>", outerHtml);
+            Assert.Equal("<a data-pjax=\"#js-repo-pjax-container\" href=\"/hardkoded/puppeteer-sharp\">puppeteer-sharp</a>", outerHtml);
             Assert.Equal("puppeteer-sharp", innerText);
             Assert.Equal("/hardkoded/puppeteer-sharp", url);
             Assert.True(hasContent);
@@ -233,7 +233,7 @@ namespace PuppeteerSharp.Documentation
             innerText = await (await element.GetPropertyAsync("innerText")).JsonValueAsync<string>();
             url = await (await element.GetPropertyAsync("href")).JsonValueAsync<string>();
             hasContent = await (await element.GetPropertyAsync("textContent")).EvaluateFunctionAsync<bool>("(p, value) => p.includes(value)", "puppeteer-sharp");
-            Assert.Equal("<a data-pjax=\"#js-repo-pjax-container\" class=\"\" href=\"/hardkoded/puppeteer-sharp\">puppeteer-sharp</a>", outerHtml);
+            Assert.Equal("<a data-pjax=\"#js-repo-pjax-container\" href=\"/hardkoded/puppeteer-sharp\">puppeteer-sharp</a>", outerHtml);
             Assert.Equal("puppeteer-sharp", innerText);
             Assert.Equal("https://github.com/hardkoded/puppeteer-sharp", url);
             Assert.True(hasContent);

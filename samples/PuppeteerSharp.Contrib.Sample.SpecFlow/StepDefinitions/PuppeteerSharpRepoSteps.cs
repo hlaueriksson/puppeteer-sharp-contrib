@@ -31,7 +31,7 @@ namespace PuppeteerSharp.Contrib.Sample.StepDefinitions
         {
             await Page.GoToAsync("https://github.com/");
             var heading = await Page.QuerySelectorAsync("h1");
-            await heading.ShouldHaveContentAsync("Built for developers");
+            await heading.ShouldHaveContentAsync("Where the world builds software");
         }
 
         [When(@"I search for ""(.*)""")]
@@ -86,31 +86,21 @@ namespace PuppeteerSharp.Contrib.Sample.StepDefinitions
         [Given(@"I check the latest release version")]
         public async Task GivenICheckTheLatestReleaseVersion()
         {
-            var releases = await Page.QuerySelectorWithContentAsync("a", "releases");
-            await releases.ClickAsync();
-            await Page.WaitForNavigationAsync();
-
-            var latest = await Page.QuerySelectorAsync(".release .release-header a");
-            LatestReleaseVersion.Add(Page.Url, VersionWithoutPatch(await latest.TextContentAsync()));
-
-            string VersionWithoutPatch(string version)
-            {
-                var tokens = version.Split(".".ToCharArray());
-                return string.Join(".", tokens.Take(2));
-            }
+            var latest = await Page.QuerySelectorWithContentAsync("a[href*='releases'] span", @"v\d\.\d\.\d");
+            LatestReleaseVersion.Add(Page.Url, await latest.TextContentAsync());
         }
 
         [Given(@"I go to the Puppeteer repo on GitHub")]
         public async Task GivenIGoToThePuppeteerRepoOnGitHub()
         {
-            await Page.GoToAsync("https://github.com/GoogleChrome/puppeteer");
+            await Page.GoToAsync("https://github.com/puppeteer/puppeteer");
         }
 
         [Then(@"the latest release version should be up to date with Puppeteer")]
         public void ThenTheLatestReleaseVersionShouldBeUpToDateWithPuppeteer()
         {
-            var puppeteerSharpVersion = LatestReleaseVersion["https://github.com/hardkoded/puppeteer-sharp/releases"];
-            var puppeteerVersion = LatestReleaseVersion["https://github.com/GoogleChrome/puppeteer/releases"];
+            var puppeteerSharpVersion = LatestReleaseVersion["https://github.com/hardkoded/puppeteer-sharp"];
+            var puppeteerVersion = LatestReleaseVersion["https://github.com/puppeteer/puppeteer"];
 
             puppeteerSharpVersion.Should().Be(puppeteerVersion);
         }

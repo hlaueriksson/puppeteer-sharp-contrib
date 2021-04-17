@@ -56,18 +56,8 @@ namespace PuppeteerSharp.Contrib.Sample
 
         public async Task<string> GetLatestReleaseVersion()
         {
-            var releases = await Page.QuerySelectorWithContentAsync("a", "releases");
-            await releases.ClickAsync();
-            await Page.WaitForNavigationAsync();
-
-            var latest = await Page.QuerySelectorAsync(".release .release-header a");
-            return VersionWithoutPatch(await latest.TextContentAsync());
-
-            string VersionWithoutPatch(string version)
-            {
-                var tokens = version.Split(".".ToCharArray());
-                return string.Join(".", tokens.Take(2));
-            }
+            var latest = await Page.QuerySelectorWithContentAsync("a[href*='releases'] span", @"v\d\.\d\.\d");
+            return await latest.TextContentAsync();
         }
     }
 

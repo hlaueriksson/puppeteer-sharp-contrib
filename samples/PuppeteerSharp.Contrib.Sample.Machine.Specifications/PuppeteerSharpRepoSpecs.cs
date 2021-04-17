@@ -28,7 +28,7 @@ namespace PuppeteerSharp.Contrib.Sample
                 Page page = Browser.NewPageAsync().Await();
 
                 page.GoToAsync("https://github.com/").Await();
-                page.QuerySelectorAsync("h1").ShouldHaveContent("Built for developers");
+                page.QuerySelectorAsync("h1").ShouldHaveContent("Where the world builds software");
 
                 ElementHandle input = page.QuerySelectorAsync("input.header-search-input").Await();
                 if (input.IsHidden()) page.ClickAsync(".octicon-three-bars").Await();
@@ -74,25 +74,15 @@ namespace PuppeteerSharp.Contrib.Sample
                 page.GoToAsync("https://github.com/hardkoded/puppeteer-sharp").Await();
                 var puppeteerSharpVersion = GetLatestReleaseVersion();
 
-                page.GoToAsync("https://github.com/GoogleChrome/puppeteer").Await();
+                page.GoToAsync("https://github.com/puppeteer/puppeteer").Await();
                 var puppeteerVersion = GetLatestReleaseVersion();
 
                 puppeteerSharpVersion.ShouldEqual(puppeteerVersion);
 
                 string GetLatestReleaseVersion()
                 {
-                    ElementHandle releases = page.QuerySelectorWithContentAsync("a", "releases").Await();
-                    releases.ClickAsync().Await();
-                    page.WaitForNavigationAsync().Await();
-
-                    ElementHandle latest = page.QuerySelectorAsync(".release .release-header a").Await();
-                    return VersionWithoutPatch(latest.TextContent());
-
-                    string VersionWithoutPatch(string version)
-                    {
-                        var tokens = version.Split(".".ToCharArray());
-                        return string.Join(".", tokens.Take(2));
-                    }
+                    ElementHandle latest = page.QuerySelectorWithContentAsync("a[href*='releases'] span", @"v\d\.\d\.\d").Await();
+                    return latest.TextContent();
                 }
             };
         }
