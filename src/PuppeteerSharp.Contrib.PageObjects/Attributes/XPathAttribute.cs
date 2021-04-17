@@ -30,7 +30,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
     /// </code>
     /// </example>
     [AttributeUsage(AttributeTargets.Property)]
-    public class XPathAttribute : Attribute
+    public sealed class XPathAttribute : Attribute
     {
         /// <summary>
         /// An XPath expression to evaluate on a <see cref="Page" /> or <see cref="ElementHandle" />.

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net48</TargetFramework>
@@ -7,8 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Castle.Core" Version="4.4.0" />
-    <PackageReference Include="PuppeteerSharp" Version="2.0.0" />
+    <Compile Remove="Unsafe\**" />
+    <EmbeddedResource Remove="Unsafe\**" />
+    <None Remove="Unsafe\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Castle.Core" Version="4.4.1" />
+    <PackageReference Include="PuppeteerSharp" Version="3.0.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
       <PrivateAssets>all</PrivateAssets>
@@ -17,10 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\PuppeteerSharp.Contrib.Extensions.Unsafe\PuppeteerSharp.Contrib.Extensions.Unsafe.csproj" />
     <ProjectReference Include="..\..\src\PuppeteerSharp.Contrib.Extensions\PuppeteerSharp.Contrib.Extensions.csproj" />
     <ProjectReference Include="..\..\src\PuppeteerSharp.Contrib.PageObjects\PuppeteerSharp.Contrib.PageObjects.csproj" />
-    <ProjectReference Include="..\..\src\PuppeteerSharp.Contrib.Should.Unsafe\PuppeteerSharp.Contrib.Should.Unsafe.csproj" />
     <ProjectReference Include="..\..\src\PuppeteerSharp.Contrib.Should\PuppeteerSharp.Contrib.Should.csproj" />
   </ItemGroup>
 

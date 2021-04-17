@@ -43,7 +43,7 @@ Extension methods for ElementHandle
   <Import Project="../../Analyzers.props" />
 
   <ItemGroup>
-    <PackageReference Include="PuppeteerSharp" Version="2.0.0" />
+    <PackageReference Include="PuppeteerSharp" Version="3.0.0" />
   </ItemGroup>
 
 </Project>

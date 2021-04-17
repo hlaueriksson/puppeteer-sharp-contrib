@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("PuppeteerSharp.Contrib.Tests")]
@@ -34,7 +35,7 @@ namespace PuppeteerSharp.Contrib.Should
             const string space = " ";
 
             Because = Because.Trim();
-            if (!Because.StartsWith(prefix)) Because = prefix + space + Because;
+            if (!Because.StartsWith(prefix, StringComparison.InvariantCultureIgnoreCase)) Because = prefix + space + Because;
             return space + Because;
         }
     }
