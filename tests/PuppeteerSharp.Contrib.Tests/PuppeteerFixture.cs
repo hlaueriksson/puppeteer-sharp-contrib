@@ -27,7 +27,7 @@ namespace PuppeteerSharp.Contrib.Tests
 
         private async Task SetUp()
         {
-            await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
+            await new BrowserFetcher().DownloadAsync();
         }
     }
 }
