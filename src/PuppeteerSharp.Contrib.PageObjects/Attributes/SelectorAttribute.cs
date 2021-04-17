@@ -38,7 +38,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
     /// </code>
     /// </example>
     [AttributeUsage(AttributeTargets.Property)]
-    public class SelectorAttribute : Attribute
+    public sealed class SelectorAttribute : Attribute
     {
         /// <summary>
         /// A selector to query a <see cref="Page" /> or <see cref="ElementHandle" /> for.
