@@ -101,82 +101,82 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         // PageObject
 
         [Fact]
-        public async Task GetReturnValue_returns_ElementHandle_for_property_on_PageObject_marked_with_SelectorAttribute()
+        public async Task GetReturnValueAsync_returns_ElementHandle_for_property_on_PageObject_marked_with_SelectorAttribute()
         {
             var pageObject = new FakePageObject();
             pageObject.Initialize(Page, null);
             var methodInfo = pageObject.GetType().GetProperty(nameof(FakePageObject.SelectorForElementHandle)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
 
-            var result = await invocation.GetReturnValue(pageObject, new SelectorAttribute(".tweet"));
+            var result = await invocation.GetReturnValueAsync(pageObject, new SelectorAttribute(".tweet"));
 
             Assert.NotNull(result);
             Assert.IsType<ElementHandle>(result);
         }
 
         [Fact]
-        public async Task GetReturnValue_returns_ElementHandle_array_for_property_on_PageObject_marked_with_SelectorAttribute()
+        public async Task GetReturnValueAsync_returns_ElementHandle_array_for_property_on_PageObject_marked_with_SelectorAttribute()
         {
             var pageObject = new FakePageObject();
             pageObject.Initialize(Page, null);
             var methodInfo = pageObject.GetType().GetProperty(nameof(FakePageObject.SelectorForElementHandleArray)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
 
-            var result = await invocation.GetReturnValue(pageObject, new SelectorAttribute("div"));
+            var result = await invocation.GetReturnValueAsync(pageObject, new SelectorAttribute("div"));
 
             Assert.NotNull(result);
             Assert.IsType<ElementHandle[]>(result);
         }
 
         [Fact]
-        public async Task GetReturnValue_returns_ElementObject_for_property_on_PageObject_marked_with_SelectorAttribute()
+        public async Task GetReturnValueAsync_returns_ElementObject_for_property_on_PageObject_marked_with_SelectorAttribute()
         {
             var pageObject = new FakePageObject();
             pageObject.Initialize(Page, null);
             var methodInfo = pageObject.GetType().GetProperty(nameof(FakePageObject.SelectorForElementObject)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
 
-            var result = await invocation.GetReturnValue(pageObject, new SelectorAttribute(".retweets"));
+            var result = await invocation.GetReturnValueAsync(pageObject, new SelectorAttribute(".retweets"));
 
             Assert.NotNull(result);
             Assert.IsAssignableFrom<FakeElementObject>(result);
         }
 
         [Fact]
-        public async Task GetReturnValue_returns_ElementObject_array_for_property_on_PageObject_marked_with_SelectorAttribute()
+        public async Task GetReturnValueAsync_returns_ElementObject_array_for_property_on_PageObject_marked_with_SelectorAttribute()
         {
             var pageObject = new FakePageObject();
             pageObject.Initialize(Page, null);
             var methodInfo = pageObject.GetType().GetProperty(nameof(FakePageObject.SelectorForElementObjectArray)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
 
-            var result = await invocation.GetReturnValue(pageObject, new SelectorAttribute("div"));
+            var result = await invocation.GetReturnValueAsync(pageObject, new SelectorAttribute("div"));
 
             Assert.NotNull(result);
             Assert.IsAssignableFrom<FakeElementObject[]>(result);
         }
 
         [Fact]
-        public async Task GetReturnValue_returns_null_for_property_on_PageObject_marked_with_SelectorAttribute_when_Page_is_null()
+        public async Task GetReturnValueAsync_returns_null_for_property_on_PageObject_marked_with_SelectorAttribute_when_Page_is_null()
         {
             var pageObject = new FakePageObject();
             var methodInfo = pageObject.GetType().GetProperty(nameof(FakePageObject.SelectorForElementHandle)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
 
-            var result = await invocation.GetReturnValue(pageObject, new SelectorAttribute(".retweets"));
+            var result = await invocation.GetReturnValueAsync(pageObject, new SelectorAttribute(".retweets"));
 
             Assert.Null(result);
         }
 
         [Fact]
-        public async Task GetReturnValue_returns_null_for_property_on_PageObject_marked_with_SelectorAttribute_but_wrong_return_type()
+        public async Task GetReturnValueAsync_returns_null_for_property_on_PageObject_marked_with_SelectorAttribute_but_wrong_return_type()
         {
             var pageObject = new FakePageObject();
             pageObject.Initialize(Page, null);
             var methodInfo = pageObject.GetType().GetProperty(nameof(FakePageObject.SelectorForWrongReturnType)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
 
-            var result = await invocation.GetReturnValue(pageObject, new SelectorAttribute(".tweet"));
+            var result = await invocation.GetReturnValueAsync(pageObject, new SelectorAttribute(".tweet"));
 
             Assert.Null(result);
         }
@@ -184,7 +184,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         // ElementObject
 
         [Fact]
-        public async Task GetReturnValue_returns_ElementHandle_for_property_on_ElementObject_marked_with_SelectorAttribute()
+        public async Task GetReturnValueAsync_returns_ElementHandle_for_property_on_ElementObject_marked_with_SelectorAttribute()
         {
             var elementHandle = await Page.QuerySelectorAsync("html");
             var elementObject = new FakeElementObject();
@@ -192,14 +192,14 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var methodInfo = elementObject.GetType().GetProperty(nameof(FakeElementObject.SelectorForElementHandle)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
 
-            var result = await invocation.GetReturnValue(elementObject, new SelectorAttribute(".tweet"));
+            var result = await invocation.GetReturnValueAsync(elementObject, new SelectorAttribute(".tweet"));
 
             Assert.NotNull(result);
             Assert.IsType<ElementHandle>(result);
         }
 
         [Fact]
-        public async Task GetReturnValue_returns_ElementHandle_array_for_property_on_ElementObject_marked_with_SelectorAttribute()
+        public async Task GetReturnValueAsync_returns_ElementHandle_array_for_property_on_ElementObject_marked_with_SelectorAttribute()
         {
             var elementHandle = await Page.QuerySelectorAsync("html");
             var elementObject = new FakeElementObject();
@@ -207,14 +207,14 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var methodInfo = elementObject.GetType().GetProperty(nameof(FakeElementObject.SelectorForElementHandleArray)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
 
-            var result = await invocation.GetReturnValue(elementObject, new SelectorAttribute("div"));
+            var result = await invocation.GetReturnValueAsync(elementObject, new SelectorAttribute("div"));
 
             Assert.NotNull(result);
             Assert.IsType<ElementHandle[]>(result);
         }
 
         [Fact]
-        public async Task GetReturnValue_returns_ElementObject_for_property_on_ElementObject_marked_with_SelectorAttribute()
+        public async Task GetReturnValueAsync_returns_ElementObject_for_property_on_ElementObject_marked_with_SelectorAttribute()
         {
             var elementHandle = await Page.QuerySelectorAsync("html");
             var elementObject = new FakeElementObject();
@@ -222,14 +222,14 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var methodInfo = elementObject.GetType().GetProperty(nameof(FakeElementObject.SelectorForElementObject)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
 
-            var result = await invocation.GetReturnValue(elementObject, new SelectorAttribute(".retweets"));
+            var result = await invocation.GetReturnValueAsync(elementObject, new SelectorAttribute(".retweets"));
 
             Assert.NotNull(result);
             Assert.IsAssignableFrom<FakeElementObject>(result);
         }
 
         [Fact]
-        public async Task GetReturnValue_returns_ElementObject_array_for_property_on_ElementObject_marked_with_SelectorAttribute()
+        public async Task GetReturnValueAsync_returns_ElementObject_array_for_property_on_ElementObject_marked_with_SelectorAttribute()
         {
             var elementHandle = await Page.QuerySelectorAsync("html");
             var elementObject = new FakeElementObject();
@@ -237,26 +237,26 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var methodInfo = elementObject.GetType().GetProperty(nameof(FakeElementObject.SelectorForElementObjectArray)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
 
-            var result = await invocation.GetReturnValue(elementObject, new SelectorAttribute("div"));
+            var result = await invocation.GetReturnValueAsync(elementObject, new SelectorAttribute("div"));
 
             Assert.NotNull(result);
             Assert.IsAssignableFrom<FakeElementObject[]>(result);
         }
 
         [Fact]
-        public async Task GetReturnValue_returns_null_for_property_on_ElementObject_marked_with_SelectorAttribute_when_Page_is_null()
+        public async Task GetReturnValueAsync_returns_null_for_property_on_ElementObject_marked_with_SelectorAttribute_when_Page_is_null()
         {
             var elementObject = new FakeElementObject();
             var methodInfo = elementObject.GetType().GetProperty(nameof(FakeElementObject.SelectorForElementHandle)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
 
-            var result = await invocation.GetReturnValue(elementObject, new SelectorAttribute(".tweet"));
+            var result = await invocation.GetReturnValueAsync(elementObject, new SelectorAttribute(".tweet"));
 
             Assert.Null(result);
         }
 
         [Fact]
-        public async Task GetReturnValue_returns_null_for_property_on_ElementObject_marked_with_SelectorAttribute_but_wrong_return_type()
+        public async Task GetReturnValueAsync_returns_null_for_property_on_ElementObject_marked_with_SelectorAttribute_but_wrong_return_type()
         {
             var elementHandle = await Page.QuerySelectorAsync("html");
             var elementObject = new FakeElementObject();
@@ -264,7 +264,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var methodInfo = elementObject.GetType().GetProperty(nameof(FakeElementObject.SelectorForWrongReturnType)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
 
-            var result = await invocation.GetReturnValue(elementObject, new SelectorAttribute(".tweet"));
+            var result = await invocation.GetReturnValueAsync(elementObject, new SelectorAttribute(".tweet"));
 
             Assert.Null(result);
         }
@@ -272,54 +272,54 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         // PageObject
 
         [Fact]
-        public async Task GetReturnValue_returns_ElementHandle_array_for_property_on_PageObject_marked_with_XPathAttribute()
+        public async Task GetReturnValueAsync_returns_ElementHandle_array_for_property_on_PageObject_marked_with_XPathAttribute()
         {
             var pageObject = new FakePageObject();
             pageObject.Initialize(Page, null);
             var methodInfo = pageObject.GetType().GetProperty(nameof(FakePageObject.XPathForElementHandleArray)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
 
-            var result = await invocation.GetReturnValue(pageObject, new XPathAttribute("//div"));
+            var result = await invocation.GetReturnValueAsync(pageObject, new XPathAttribute("//div"));
 
             Assert.NotNull(result);
             Assert.IsType<ElementHandle[]>(result);
         }
 
         [Fact]
-        public async Task GetReturnValue_returns_ElementObject_array_for_property_on_PageObject_marked_with_XPathAttribute()
+        public async Task GetReturnValueAsync_returns_ElementObject_array_for_property_on_PageObject_marked_with_XPathAttribute()
         {
             var pageObject = new FakePageObject();
             pageObject.Initialize(Page, null);
             var methodInfo = pageObject.GetType().GetProperty(nameof(FakePageObject.XPathForElementObjectArray)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
 
-            var result = await invocation.GetReturnValue(pageObject, new XPathAttribute("//div"));
+            var result = await invocation.GetReturnValueAsync(pageObject, new XPathAttribute("//div"));
 
             Assert.NotNull(result);
             Assert.IsAssignableFrom<FakeElementObject[]>(result);
         }
 
         [Fact]
-        public async Task GetReturnValue_returns_null_for_property_on_PageObject_marked_with_XPathAttribute_when_Page_is_null()
+        public async Task GetReturnValueAsync_returns_null_for_property_on_PageObject_marked_with_XPathAttribute_when_Page_is_null()
         {
             var pageObject = new FakePageObject();
             var methodInfo = pageObject.GetType().GetProperty(nameof(FakePageObject.XPathForElementHandleArray)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
 
-            var result = await invocation.GetReturnValue(pageObject, new XPathAttribute("//div"));
+            var result = await invocation.GetReturnValueAsync(pageObject, new XPathAttribute("//div"));
 
             Assert.Null(result);
         }
 
         [Fact]
-        public async Task GetReturnValue_returns_null_for_property_on_PageObject_marked_with_XPathAttribute_but_wrong_return_type()
+        public async Task GetReturnValueAsync_returns_null_for_property_on_PageObject_marked_with_XPathAttribute_but_wrong_return_type()
         {
             var pageObject = new FakePageObject();
             pageObject.Initialize(Page, null);
             var methodInfo = pageObject.GetType().GetProperty(nameof(FakePageObject.XPathForWrongReturnType)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
 
-            var result = await invocation.GetReturnValue(pageObject, new XPathAttribute("//div"));
+            var result = await invocation.GetReturnValueAsync(pageObject, new XPathAttribute("//div"));
 
             Assert.Null(result);
         }
@@ -327,7 +327,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         // ElementObject
 
         [Fact]
-        public async Task GetReturnValue_returns_ElementHandle_array_for_property_on_ElementObject_marked_with_XPathAttribute()
+        public async Task GetReturnValueAsync_returns_ElementHandle_array_for_property_on_ElementObject_marked_with_XPathAttribute()
         {
             var elementHandle = await Page.QuerySelectorAsync("html");
             var elementObject = new FakeElementObject();
@@ -335,14 +335,14 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var methodInfo = elementObject.GetType().GetProperty(nameof(FakeElementObject.XPathForElementHandleArray)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
 
-            var result = await invocation.GetReturnValue(elementObject, new XPathAttribute("//div"));
+            var result = await invocation.GetReturnValueAsync(elementObject, new XPathAttribute("//div"));
 
             Assert.NotNull(result);
             Assert.IsType<ElementHandle[]>(result);
         }
 
         [Fact]
-        public async Task GetReturnValue_returns_ElementObject_array_for_property_on_ElementObject_marked_with_XPathAttribute()
+        public async Task GetReturnValueAsync_returns_ElementObject_array_for_property_on_ElementObject_marked_with_XPathAttribute()
         {
             var elementHandle = await Page.QuerySelectorAsync("html");
             var elementObject = new FakeElementObject();
@@ -350,26 +350,26 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var methodInfo = elementObject.GetType().GetProperty(nameof(FakeElementObject.XPathForElementObjectArray)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
 
-            var result = await invocation.GetReturnValue(elementObject, new XPathAttribute("//div"));
+            var result = await invocation.GetReturnValueAsync(elementObject, new XPathAttribute("//div"));
 
             Assert.NotNull(result);
             Assert.IsAssignableFrom<FakeElementObject[]>(result);
         }
 
         [Fact]
-        public async Task GetReturnValue_returns_null_for_property_on_ElementObject_marked_with_XPathAttribute_when_Page_is_null()
+        public async Task GetReturnValueAsync_returns_null_for_property_on_ElementObject_marked_with_XPathAttribute_when_Page_is_null()
         {
             var elementObject = new FakeElementObject();
             var methodInfo = elementObject.GetType().GetProperty(nameof(FakeElementObject.XPathForElementHandleArray)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
 
-            var result = await invocation.GetReturnValue(elementObject, new XPathAttribute("//div"));
+            var result = await invocation.GetReturnValueAsync(elementObject, new XPathAttribute("//div"));
 
             Assert.Null(result);
         }
 
         [Fact]
-        public async Task GetReturnValue_returns_null_for_property_on_ElementObject_marked_with_XPathAttribute_but_wrong_return_type()
+        public async Task GetReturnValueAsync_returns_null_for_property_on_ElementObject_marked_with_XPathAttribute_but_wrong_return_type()
         {
             var elementHandle = await Page.QuerySelectorAsync("html");
             var elementObject = new FakeElementObject();
@@ -377,7 +377,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var methodInfo = elementObject.GetType().GetProperty(nameof(FakeElementObject.XPathForWrongReturnType)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
 
-            var result = await invocation.GetReturnValue(elementObject, new XPathAttribute("//div"));
+            var result = await invocation.GetReturnValueAsync(elementObject, new XPathAttribute("//div"));
 
             Assert.Null(result);
         }
