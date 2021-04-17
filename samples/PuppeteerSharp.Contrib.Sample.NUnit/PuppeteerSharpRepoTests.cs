@@ -13,7 +13,7 @@ namespace PuppeteerSharp.Contrib.Sample
         [SetUp]
         public async Task SetUp()
         {
-            await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
+            await new BrowserFetcher().DownloadAsync();
             Browser = await Puppeteer.LaunchAsync(new LaunchOptions
             {
                 Headless = true

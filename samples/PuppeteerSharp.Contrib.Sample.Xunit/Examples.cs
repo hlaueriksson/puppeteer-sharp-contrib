@@ -10,7 +10,7 @@ namespace PuppeteerSharp.Documentation
         [Fact]
         public async Task download_Browser()
         {
-            await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
+            await new BrowserFetcher().DownloadAsync();
         }
 
         [Fact]

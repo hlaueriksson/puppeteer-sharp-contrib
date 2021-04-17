@@ -18,7 +18,7 @@ namespace PuppeteerSharp.Contrib.Sample
         [BeforeScenario]
         public async Task BeforeScenario()
         {
-            await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
+            await new BrowserFetcher().DownloadAsync();
             Browser = await Puppeteer.LaunchAsync(new LaunchOptions
             {
                 Headless = true
