@@ -10,7 +10,7 @@
     <PackageReference Include="Machine.Specifications" Version="1.0.0" />
     <PackageReference Include="Machine.Specifications.Runner.VisualStudio" Version="2.10.1" />
     <PackageReference Include="Machine.Specifications.Should" Version="1.0.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
     <PackageReference Include="PuppeteerSharp" Version="2.0.4" />
     <PackageReference Include="PuppeteerSharp.Contrib.Extensions.Unsafe" Version="3.0.0" />
     <PackageReference Include="PuppeteerSharp.Contrib.Should" Version="3.0.0" />
