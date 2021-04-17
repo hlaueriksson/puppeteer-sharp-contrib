@@ -2,21 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>3.0.0</Version>
+    <Version>4.0.0</Version>
     <PackageReleaseNotes>
-Extension methods that uses regular expressions, now also has a flags parameter 🎏
-
-Extension methods for Page
- ◼️ ShouldHaveContentAsync
- ◼️ ShouldNotHaveContentAsync
- ◼️ ShouldHaveTitleAsync
- ◼️ ShouldNotHaveTitleAsync
-
-Extension methods for content matching, now uses regular expressions (with flags) 💥
-
-Extension methods for ElementHandle
- ◼️ ShouldHaveContentAsync
- ◼️ ShouldNotHaveContentAsync
+⬆️ Bump PuppeteerSharp to 3.0.0
     </PackageReleaseNotes>
     <Authors>Henrik Lau Eriksson</Authors>
     <Description>Contributions to the Headless Chrome .NET API 🌐🧪
