@@ -2,6 +2,8 @@
 
 `PuppeteerSharp.Contrib.Should.Unsafe` is a should assertion library for the Puppeteer Sharp API.
 
+:no_entry: This package is no longer maintained and will not be published in new versions.
+
 :warning: These extension methods are the _sync over async_ versions of the originals from the [PuppeteerSharp.Contrib.Should](PuppeteerSharp.Contrib.Should.md) package.
 They may be convenient, but can be considered _unsafe_ since you [run the risk of a deadlock](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#avoid-using-taskresult-and-taskwait).
 

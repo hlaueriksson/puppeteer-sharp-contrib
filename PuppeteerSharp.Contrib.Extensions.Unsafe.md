@@ -2,6 +2,8 @@
 
 `PuppeteerSharp.Contrib.Extensions.Unsafe` is a library with convenient extension methods for writing browser tests with the Puppeteer Sharp API.
 
+:no_entry: This package is no longer maintained and will not be published in new versions.
+
 :warning: These extension methods are the _sync over async_ versions of the originals from the [PuppeteerSharp.Contrib.Extensions](PuppeteerSharp.Contrib.Extensions.md) package.
 They may be convenient, but can be considered _unsafe_ since you [run the risk of a deadlock](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#avoid-using-taskresult-and-taskwait).
 

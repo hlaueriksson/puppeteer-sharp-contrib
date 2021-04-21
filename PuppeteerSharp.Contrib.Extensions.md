@@ -2,8 +2,6 @@
 
 `PuppeteerSharp.Contrib.Extensions` is a library with convenient extension methods for writing browser tests with the Puppeteer Sharp API.
 
-:boom: The _sync over async_ versions of the extension methods has been moved to the [PuppeteerSharp.Contrib.Extensions.Unsafe](PuppeteerSharp.Contrib.Extensions.Unsafe.md) package.
-
 ## Content
 
 - [PuppeteerSharp.Contrib.Extensions](#puppeteersharpcontribextensions)
@@ -17,10 +15,10 @@
 
 | NuGet            |       | [![PuppeteerSharp.Contrib.Extensions][1]][2]                                       |
 | :--------------- | ----: | :--------------------------------------------------------------------------------- |
-| Package Manager  | `PM>` | `Install-Package PuppeteerSharp.Contrib.Extensions -Version 3.0.0`                 |
-| .NET CLI         | `>`   | `dotnet add package PuppeteerSharp.Contrib.Extensions --version 3.0.0`             |
-| PackageReference |       | `<PackageReference Include="PuppeteerSharp.Contrib.Extensions" Version="3.0.0" />` |
-| Paket CLI        | `>`   | `paket add PuppeteerSharp.Contrib.Extensions --version 3.0.0`                      |
+| Package Manager  | `PM>` | `Install-Package PuppeteerSharp.Contrib.Extensions -Version 4.0.0`                 |
+| .NET CLI         | `>`   | `dotnet add package PuppeteerSharp.Contrib.Extensions --version 4.0.0`             |
+| PackageReference |       | `<PackageReference Include="PuppeteerSharp.Contrib.Extensions" Version="4.0.0" />` |
+| Paket CLI        | `>`   | `paket add PuppeteerSharp.Contrib.Extensions --version 4.0.0`                      |
 
 [1]: https://img.shields.io/nuget/v/PuppeteerSharp.Contrib.Extensions.svg?label=PuppeteerSharp.Contrib.Extensions
 [2]: https://www.nuget.org/packages/PuppeteerSharp.Contrib.Extensions
@@ -100,7 +98,7 @@ namespace PuppeteerSharp.Contrib.Sample
         [SetUp]
         public async Task SetUp()
         {
-            await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
+            await new BrowserFetcher().DownloadAsync();
             Browser = await Puppeteer.LaunchAsync(new LaunchOptions
             {
                 Headless = true

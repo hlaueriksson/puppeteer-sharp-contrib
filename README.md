@@ -7,9 +7,6 @@
 [![PuppeteerSharp.Contrib.Should](https://img.shields.io/nuget/v/PuppeteerSharp.Contrib.Should.svg?label=PuppeteerSharp.Contrib.Should)](https://www.nuget.org/packages/PuppeteerSharp.Contrib.Should)
 [![PuppeteerSharp.Contrib.PageObjects](https://img.shields.io/nuget/v/PuppeteerSharp.Contrib.PageObjects.svg?label=PuppeteerSharp.Contrib.PageObjects)](https://www.nuget.org/packages/PuppeteerSharp.Contrib.PageObjects)
 
-[![PuppeteerSharp.Contrib.Extensions.Unsafe](https://img.shields.io/nuget/v/PuppeteerSharp.Contrib.Extensions.Unsafe.svg?label=PuppeteerSharp.Contrib.Extensions.Unsafe)](https://www.nuget.org/packages/PuppeteerSharp.Contrib.Extensions.Unsafe)
-[![PuppeteerSharp.Contrib.Should.Unsafe](https://img.shields.io/nuget/v/PuppeteerSharp.Contrib.Should.Unsafe.svg?label=PuppeteerSharp.Contrib.Should.Unsafe)](https://www.nuget.org/packages/PuppeteerSharp.Contrib.Should.Unsafe)
-
 Contributions to the Headless Chrome .NET API 🌐🧪
 
 Puppeteer Sharp Contributions offers extensions to the Puppeteer Sharp API.
@@ -27,9 +24,8 @@ It provides a convenient way to write readable and robust browser tests in .NET
   - [PuppeteerSharp.Contrib.Extensions](#puppeteersharpcontribextensions)
   - [PuppeteerSharp.Contrib.Should](#puppeteersharpcontribshould)
   - [PuppeteerSharp.Contrib.PageObjects](#puppeteersharpcontribpageobjects)
-  - [PuppeteerSharp.Contrib.Extensions.Unsafe](#puppeteersharpcontribextensionsunsafe)
-  - [PuppeteerSharp.Contrib.Should.Unsafe](#puppeteersharpcontribshouldunsafe)
   - [Samples](#samples)
+  - [Unsafe](#unsafe)
   - [Upgrading](#upgrading)
   - [Attribution](#attribution)
 
@@ -42,8 +38,6 @@ _Puppeteer Sharp Contributions_ consists of a few libraries that helps you write
 * `PuppeteerSharp.Contrib.Extensions`
 * `PuppeteerSharp.Contrib.Should`
 * `PuppeteerSharp.Contrib.PageObjects`
-* `PuppeteerSharp.Contrib.Extensions.Unsafe`
-* `PuppeteerSharp.Contrib.Should.Unsafe`
 
 These libraries contains _extension methods_ to the Puppeteer Sharp API and they are test framework agnostic.
 
@@ -55,8 +49,6 @@ These libraries contains _extension methods_ to the Puppeteer Sharp API and they
 
 :book: README: [PuppeteerSharp.Contrib.Extensions.md](PuppeteerSharp.Contrib.Extensions.md)
 
-:boom: The _sync over async_ versions of the extension methods has been moved to the [unsafe](#puppeteersharpcontribextensionsunsafe) package.
-
 ## PuppeteerSharp.Contrib.Should
 
 [![NuGet](https://buildstats.info/nuget/PuppeteerSharp.Contrib.Should)](https://www.nuget.org/packages/PuppeteerSharp.Contrib.Should/)
@@ -65,8 +57,6 @@ These libraries contains _extension methods_ to the Puppeteer Sharp API and they
 
 :book: README: [PuppeteerSharp.Contrib.Should.md](PuppeteerSharp.Contrib.Should.md)
 
-:boom: The _sync over async_ versions of the extension methods has been moved to the [unsafe](#puppeteersharpcontribshouldunsafe) package.
-
 ## PuppeteerSharp.Contrib.PageObjects
 
 [![NuGet](https://buildstats.info/nuget/PuppeteerSharp.Contrib.PageObjects)](https://www.nuget.org/packages/PuppeteerSharp.Contrib.PageObjects/)
@@ -74,22 +64,6 @@ These libraries contains _extension methods_ to the Puppeteer Sharp API and they
 `PuppeteerSharp.Contrib.PageObjects` is a library for writing browser tests using the _page object pattern_ with the Puppeteer Sharp API.
 
 :book: README: [PuppeteerSharp.Contrib.PageObjects.md](PuppeteerSharp.Contrib.PageObjects.md)
-
-## PuppeteerSharp.Contrib.Extensions.Unsafe
-
-[![NuGet](https://buildstats.info/nuget/PuppeteerSharp.Contrib.Extensions.Unsafe)](https://www.nuget.org/packages/PuppeteerSharp.Contrib.Extensions.Unsafe/)
-
-`PuppeteerSharp.Contrib.Extensions.Unsafe` contains _sync over async_ versions of the extension methods from the [safe](#puppeteersharpcontribextensions) package.
-
-:book: README: [PuppeteerSharp.Contrib.Extensions.Unsafe.md](PuppeteerSharp.Contrib.Extensions.Unsafe.md)
-
-## PuppeteerSharp.Contrib.Should.Unsafe
-
-[![NuGet](https://buildstats.info/nuget/PuppeteerSharp.Contrib.Should.Unsafe)](https://www.nuget.org/packages/PuppeteerSharp.Contrib.Should.Unsafe/)
-
-`PuppeteerSharp.Contrib.Should.Unsafe` contains _sync over async_ versions of the extension methods from the [safe](#puppeteersharpcontribshould) package.
-
-:book: README: [PuppeteerSharp.Contrib.Should.Unsafe.md](PuppeteerSharp.Contrib.Should.Unsafe.md)
 
 ## Samples
 
@@ -121,7 +95,7 @@ namespace PuppeteerSharp.Contrib.Sample
         [SetUp]
         public async Task SetUp()
         {
-            await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
+            await new BrowserFetcher().DownloadAsync();
             Browser = await Puppeteer.LaunchAsync(new LaunchOptions
             {
                 Headless = true
@@ -141,7 +115,7 @@ namespace PuppeteerSharp.Contrib.Sample
 
             await page.GoToAsync("https://github.com/");
             var h1 = await page.QuerySelectorAsync("h1");
-            await h1.ShouldHaveContentAsync("Built for developers");
+            await h1.ShouldHaveContentAsync("Where the world builds software");
 
             var input = await page.QuerySelectorAsync("input.header-search-input");
             if (await input.IsHiddenAsync()) await page.ClickAsync(".octicon-three-bars");
@@ -187,25 +161,15 @@ namespace PuppeteerSharp.Contrib.Sample
             await page.GoToAsync("https://github.com/hardkoded/puppeteer-sharp");
             var puppeteerSharpVersion = await GetLatestReleaseVersion();
 
-            await page.GoToAsync("https://github.com/GoogleChrome/puppeteer");
+            await page.GoToAsync("https://github.com/puppeteer/puppeteer");
             var puppeteerVersion = await GetLatestReleaseVersion();
 
             Assert.AreEqual(puppeteerVersion, puppeteerSharpVersion);
 
             async Task<string> GetLatestReleaseVersion()
             {
-                var releases = await page.QuerySelectorWithContentAsync("a", "releases");
-                await releases.ClickAsync();
-                await page.WaitForNavigationAsync();
-
-                var latest = await page.QuerySelectorAsync(".release .release-header a");
-                return VersionWithoutPatch(await latest.TextContentAsync());
-
-                string VersionWithoutPatch(string version)
-                {
-                    var tokens = version.Split(".".ToCharArray());
-                    return string.Join(".", tokens.Take(2));
-                }
+                var latest = await page.QuerySelectorWithContentAsync("a[href*='releases'] span", @"v\d\.\d\.\d");
+                return await latest.TextContentAsync();
             }
         }
     }
@@ -215,7 +179,6 @@ namespace PuppeteerSharp.Contrib.Sample
 This is an example with `NUnit` and `PuppeteerSharp.Contrib.PageObjects`:
 
 ```csharp
-using System.Linq;
 using System.Threading.Tasks;
 using PuppeteerSharp.Contrib.Extensions;
 using PuppeteerSharp.Contrib.PageObjects;
@@ -273,18 +236,8 @@ namespace PuppeteerSharp.Contrib.Sample
 
         public async Task<string> GetLatestReleaseVersion()
         {
-            var releases = await Page.QuerySelectorWithContentAsync("a", "releases");
-            await releases.ClickAsync();
-            await Page.WaitForNavigationAsync();
-
-            var latest = await Page.QuerySelectorAsync(".release .release-header a");
-            return VersionWithoutPatch(await latest.TextContentAsync());
-
-            string VersionWithoutPatch(string version)
-            {
-                var tokens = version.Split(".".ToCharArray());
-                return string.Join(".", tokens.Take(2));
-            }
+            var latest = await Page.QuerySelectorWithContentAsync("a[href*='releases'] span", @"v\d\.\d\.\d");
+            return await latest.TextContentAsync();
         }
     }
 
@@ -315,7 +268,7 @@ namespace PuppeteerSharp.Contrib.Sample
         [SetUp]
         public async Task SetUp()
         {
-            await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
+            await new BrowserFetcher().DownloadAsync();
             Browser = await Puppeteer.LaunchAsync(new LaunchOptions
             {
                 Headless = true
@@ -335,7 +288,7 @@ namespace PuppeteerSharp.Contrib.Sample
 
             var startPage = await page.GoToAsync<GitHubStartPage>("https://github.com/");
             var heading = await startPage.Heading;
-            await heading.ShouldHaveContentAsync("Built for developers");
+            await heading.ShouldHaveContentAsync("Where the world builds software");
 
             var headerMenu = await startPage.HeaderMenu;
             var searchPage = await headerMenu.Search("Puppeteer Sharp");
@@ -377,7 +330,7 @@ namespace PuppeteerSharp.Contrib.Sample
             var repoPage = await page.GoToAsync<GitHubRepoPage>("https://github.com/hardkoded/puppeteer-sharp");
             var puppeteerSharpVersion = await repoPage.GetLatestReleaseVersion();
 
-            repoPage = await page.GoToAsync<GitHubRepoPage>("https://github.com/GoogleChrome/puppeteer");
+            repoPage = await page.GoToAsync<GitHubRepoPage>("https://github.com/puppeteer/puppeteer");
             var puppeteerVersion = await repoPage.GetLatestReleaseVersion();
 
             Assert.AreEqual(puppeteerVersion, puppeteerSharpVersion);
@@ -386,11 +339,32 @@ namespace PuppeteerSharp.Contrib.Sample
 }
 ```
 
+## Unsafe
+
+Two packages contains _sync over async_ versions of the extension methods:
+
+* `PuppeteerSharp.Contrib.Extensions.Unsafe`
+* `PuppeteerSharp.Contrib.Should.Unsafe`
+
+:no_entry: These packages are no longer maintained and will not be published in new versions.
+
+:book: README: [PuppeteerSharp.Contrib.Extensions.Unsafe.md](PuppeteerSharp.Contrib.Extensions.Unsafe.md)
+
+:book: README: [PuppeteerSharp.Contrib.Should.Unsafe.md](PuppeteerSharp.Contrib.Should.Unsafe.md)
+
 ## Upgrading
 
-> Upgrading from version `1.0.0` to `2.0.0`
+> :arrow_up: Upgrading from version `1.0.0` to `2.0.0`
 
 If you use the _sync_ methods from `PuppeteerSharp.Contrib.Extensions` or `PuppeteerSharp.Contrib.Should`, please install:
+
+* `PuppeteerSharp.Contrib.Extensions.Unsafe`
+* `PuppeteerSharp.Contrib.Should.Unsafe`
+
+> :arrow_up: Upgrading from version `2.0.0` to `4.0.0`
+
+If you use the _sync_ methods from `PuppeteerSharp.Contrib.Extensions.Unsafe` or `PuppeteerSharp.Contrib.Should.Unsafe`, please rewrite your code to use _async_ versions.
+Then uninstall:
 
 * `PuppeteerSharp.Contrib.Extensions.Unsafe`
 * `PuppeteerSharp.Contrib.Should.Unsafe`
