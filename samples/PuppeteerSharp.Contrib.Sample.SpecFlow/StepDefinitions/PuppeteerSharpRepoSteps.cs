@@ -86,7 +86,7 @@ namespace PuppeteerSharp.Contrib.Sample.StepDefinitions
         [Given(@"I check the latest release version")]
         public async Task GivenICheckTheLatestReleaseVersion()
         {
-            var latest = await Page.QuerySelectorWithContentAsync("a[href*='releases'] span", @"v\d\.\d\.\d");
+            var latest = await Page.QuerySelectorWithContentAsync("a[href*='releases'] span", @"v\d+\.\d\.\d");
             LatestReleaseVersion.Add(Page.Url, await latest.TextContentAsync());
         }
 

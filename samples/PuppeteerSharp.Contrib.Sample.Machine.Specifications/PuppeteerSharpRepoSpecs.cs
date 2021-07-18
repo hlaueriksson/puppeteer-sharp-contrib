@@ -81,7 +81,7 @@ namespace PuppeteerSharp.Contrib.Sample
 
                 string GetLatestReleaseVersion()
                 {
-                    ElementHandle latest = page.QuerySelectorWithContentAsync("a[href*='releases'] span", @"v\d\.\d\.\d").Await();
+                    ElementHandle latest = page.QuerySelectorWithContentAsync("a[href*='releases'] span", @"v\d+\.\d\.\d").Await();
                     return latest.TextContent();
                 }
             };

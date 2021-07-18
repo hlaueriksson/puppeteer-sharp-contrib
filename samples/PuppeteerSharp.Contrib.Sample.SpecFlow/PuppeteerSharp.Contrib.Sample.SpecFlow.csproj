@@ -8,10 +8,10 @@
 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
-    <PackageReference Include="PuppeteerSharp" Version="4.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
+    <PackageReference Include="PuppeteerSharp" Version="5.0.0" />
     <PackageReference Include="PuppeteerSharp.Contrib.Should" Version="4.0.0" />
-    <PackageReference Include="SpecFlow.xUnit" Version="3.7.38" />
+    <PackageReference Include="SpecFlow.xUnit" Version="3.9.8" />
   </ItemGroup>
 
   <ItemGroup>

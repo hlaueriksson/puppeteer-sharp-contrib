@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Threading.Tasks;
 using PuppeteerSharp.Contrib.Extensions;
 using PuppeteerSharp.Contrib.PageObjects;
@@ -56,7 +55,7 @@ namespace PuppeteerSharp.Contrib.Sample
 
         public async Task<string> GetLatestReleaseVersion()
         {
-            var latest = await Page.QuerySelectorWithContentAsync("a[href*='releases'] span", @"v\d\.\d\.\d");
+            var latest = await Page.QuerySelectorWithContentAsync("a[href*='releases'] span", @"v\d+\.\d\.\d");
             return await latest.TextContentAsync();
         }
     }
