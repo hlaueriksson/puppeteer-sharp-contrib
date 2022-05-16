@@ -40,7 +40,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         public async Task WaitForNavigationAsync_returns_proxy_of_type()
         {
             await Page.GoToAsync("https://github.com/hardkoded/puppeteer-sharp");
-            await Page.ClickAsync("h1 > strong > a");
+            await Page.ClickAsync("h2 > strong > a");
             var result = await Page.WaitForNavigationAsync<FakePageObject>(new NavigationOptions());
             Assert.NotNull(result);
             Assert.IsAssignableFrom<FakePageObject>(result);
