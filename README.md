@@ -1,6 +1,6 @@
 # Puppeteer Sharp Contributions
 
-[![Build status](https://ci.appveyor.com/api/projects/status/sg69dj3wt7kl2t2h?svg=true)](https://ci.appveyor.com/project/hlaueriksson/puppeteer-sharp-contrib)
+[![build](https://github.com/hlaueriksson/puppeteer-sharp-contrib/actions/workflows/build.yml/badge.svg)](https://github.com/hlaueriksson/puppeteer-sharp-contrib/actions/workflows/build.yml)
 [![CodeFactor](https://www.codefactor.io/repository/github/hlaueriksson/puppeteer-sharp-contrib/badge)](https://www.codefactor.io/repository/github/hlaueriksson/puppeteer-sharp-contrib)
 
 [![PuppeteerSharp.Contrib.Extensions](https://img.shields.io/nuget/v/PuppeteerSharp.Contrib.Extensions.svg?label=PuppeteerSharp.Contrib.Extensions)](https://www.nuget.org/packages/PuppeteerSharp.Contrib.Extensions)
