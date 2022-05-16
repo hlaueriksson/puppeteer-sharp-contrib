@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>PuppeteerSharp.Contrib.Sample</RootNamespace>
     <IsPackable>false</IsPackable>
+    <NoWarn>$(NoWarn);IDE0044</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
