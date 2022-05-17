@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="6.6.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
-    <PackageReference Include="PuppeteerSharp" Version="5.0.0" />
+    <PackageReference Include="PuppeteerSharp" Version="7.0.0" />
     <PackageReference Include="PuppeteerSharp.Contrib.Should" Version="4.0.0" />
     <PackageReference Include="SpecFlow.xUnit" Version="3.9.74" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
