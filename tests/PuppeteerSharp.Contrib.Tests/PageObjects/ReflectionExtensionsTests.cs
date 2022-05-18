@@ -26,7 +26,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.SelectorForElementHandle)).GetMethod;
             Assert.True(methodInfo.IsGetterPropertyWithAttribute<SelectorAttribute>());
         }
-        
+
         [Fact]
         public void IsGetterPropertyWithAttribute_returns_false_for_getter_property_not_marked_with_given_attribute()
         {
@@ -83,7 +83,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.SelectorForElementHandle)).GetMethod;
             Assert.True(methodInfo.IsReturningAsyncResult());
         }
-        
+
         [Fact]
         public void IsReturningAsyncResult_returns_false_for_methods_that_does_not_return_Task_of_T()
         {

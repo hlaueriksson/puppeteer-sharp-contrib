@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using PuppeteerSharp;
 using Xunit;
 
 namespace PuppeteerSharp.Documentation
@@ -55,7 +54,7 @@ namespace PuppeteerSharp.Documentation
         [Fact]
         public async Task timeout()
         {
-            var timeout = (int) TimeSpan.FromSeconds(30).TotalMilliseconds; // default value
+            var timeout = (int)TimeSpan.FromSeconds(30).TotalMilliseconds; // default value
             _page.DefaultNavigationTimeout = timeout;
             _page.DefaultTimeout = timeout;
             var options = new NavigationOptions { Timeout = timeout };
@@ -69,7 +68,7 @@ namespace PuppeteerSharp.Documentation
         [Fact]
         public async Task wait()
         {
-            var timeout = (int) TimeSpan.FromSeconds(3).TotalMilliseconds;
+            var timeout = (int)TimeSpan.FromSeconds(3).TotalMilliseconds;
 
             var requestTask = _page.WaitForRequestAsync("https://github.com/hardkoded/puppeteer-sharp", new WaitForOptions { Timeout = timeout });
             var responseTask = _page.WaitForResponseAsync("https://github.com/hardkoded/puppeteer-sharp", new WaitForOptions { Timeout = timeout });

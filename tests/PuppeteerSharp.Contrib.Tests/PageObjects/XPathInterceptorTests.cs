@@ -47,7 +47,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             Assert.Null(invocation.ReturnValue);
         }
-        
+
         [Fact]
         public void Intercept_sets_the_ReturnValue_to_null_for_property_on_PageObject_marked_with_XPathAttribute_but_non_Task_return_type()
         {
