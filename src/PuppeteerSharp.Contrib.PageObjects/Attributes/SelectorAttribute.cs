@@ -3,20 +3,20 @@ using System;
 namespace PuppeteerSharp.Contrib.PageObjects
 {
     /// <summary>
-    /// Represents a selector for a property on a <see cref="PageObject" /> or <see cref="ElementObject" />.
+    /// Represents a selector for a property on a <see cref="PageObject"/> or <see cref="ElementObject"/>.
     ///
-    /// Properties decorated with a <see cref="SelectorAttribute" /> must be a:
+    /// Properties decorated with a <see cref="SelectorAttribute"/> must be a:
     /// <list type="bullet">
     /// <item><description>public</description></item>
     /// <item><description>virtual</description></item>
     /// <item><description>getter</description></item>
     /// </list>
-    /// that returns a <see cref="System.Threading.Tasks.Task{TResult}" /> of:
+    /// that returns a <see cref="System.Threading.Tasks.Task{TResult}"/> of:
     /// <list type="bullet">
-    /// <item><description><see cref="ElementHandle" />,</description></item>
-    /// <item><description><see cref="ElementHandle" />[],</description></item>
-    /// <item><description><see cref="ElementObject" /> or</description></item>
-    /// <item><description><see cref="ElementObject" />[]</description></item>
+    /// <item><description><see cref="ElementHandle"/>,</description></item>
+    /// <item><description><see cref="ElementHandle"/>[],</description></item>
+    /// <item><description><see cref="ElementObject"/> or</description></item>
+    /// <item><description><see cref="ElementObject"/>[]</description></item>
     /// </list>
     /// </summary>
     /// <example>
@@ -41,16 +41,16 @@ namespace PuppeteerSharp.Contrib.PageObjects
     public sealed class SelectorAttribute : Attribute
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SelectorAttribute" /> class.
+        /// Initializes a new instance of the <see cref="SelectorAttribute"/> class.
         /// </summary>
-        /// <param name="selector">A selector to query a <see cref="Page" /> or <see cref="ElementHandle" /> for.</param>
+        /// <param name="selector">A selector to query a <see cref="Page"/> or <see cref="ElementHandle"/> for.</param>
         public SelectorAttribute(string selector)
         {
             Selector = selector;
         }
 
         /// <summary>
-        /// A selector to query a <see cref="Page" /> or <see cref="ElementHandle" /> for.
+        /// A selector to query a <see cref="Page"/> or <see cref="ElementHandle"/> for.
         /// </summary>
         public string Selector { get; }
     }

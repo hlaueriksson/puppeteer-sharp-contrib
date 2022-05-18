@@ -12,13 +12,13 @@ namespace PuppeteerSharp.Contrib.PageObjects
     public static class ElementHandleExtensions
     {
         /// <summary>
-        /// Runs <c>element.querySelectorAll</c> within the element and returns an <see cref="ElementObject" /> array.
+        /// Runs <c>element.querySelectorAll</c> within the element and returns an <see cref="ElementObject"/> array.
         /// If no elements match the selector, the return value resolve to <see cref="System.Array.Empty{T}"/>.
         /// </summary>
-        /// <typeparam name="T">The type of <see cref="ElementObject" />.</typeparam>
-        /// <param name="elementHandle">A <see cref="ElementHandle" />.</param>
+        /// <typeparam name="T">The type of <see cref="ElementObject"/>.</typeparam>
+        /// <param name="elementHandle">A <see cref="ElementHandle"/>.</param>
         /// <param name="selector">A selector to query element for.</param>
-        /// <returns>Task which resolves to the <see cref="ElementObject" /> array.</returns>
+        /// <returns>Task which resolves to the <see cref="ElementObject"/> array.</returns>
         /// <seealso cref="ElementHandle.QuerySelectorAllAsync(string)"/>
         public static async Task<T[]> QuerySelectorAllAsync<T>(this ElementHandle elementHandle, string selector)
             where T : ElementObject
@@ -29,13 +29,13 @@ namespace PuppeteerSharp.Contrib.PageObjects
         }
 
         /// <summary>
-        /// Runs <c>element.querySelector</c> within the element and returns an <see cref="ElementObject" />.
+        /// Runs <c>element.querySelector</c> within the element and returns an <see cref="ElementObject"/>.
         /// If no elements match the selector, the return value resolve to <c>null</c>.
         /// </summary>
-        /// <typeparam name="T">The type of <see cref="ElementObject" />.</typeparam>
-        /// <param name="elementHandle">A <see cref="ElementHandle" />.</param>
+        /// <typeparam name="T">The type of <see cref="ElementObject"/>.</typeparam>
+        /// <param name="elementHandle">A <see cref="ElementHandle"/>.</param>
         /// <param name="selector">A selector to query element for.</param>
-        /// <returns>Task which resolves to the <see cref="ElementObject" />.</returns>
+        /// <returns>Task which resolves to the <see cref="ElementObject"/>.</returns>
         /// <seealso cref="ElementHandle.QuerySelectorAsync(string)"/>
         public static async Task<T?> QuerySelectorAsync<T>(this ElementHandle elementHandle, string selector)
             where T : ElementObject
@@ -46,13 +46,13 @@ namespace PuppeteerSharp.Contrib.PageObjects
         }
 
         /// <summary>
-        /// Evaluates the XPath expression relative to the element and returns an <see cref="ElementObject" /> array.
+        /// Evaluates the XPath expression relative to the element and returns an <see cref="ElementObject"/> array.
         /// If no elements match the expression, the return value resolve to <see cref="System.Array.Empty{T}"/>.
         /// </summary>
-        /// <typeparam name="T">The type of <see cref="ElementObject" />.</typeparam>
-        /// <param name="elementHandle">A <see cref="ElementHandle" />.</param>
-        /// <param name="expression">Expression to evaluate <see href="https://developer.mozilla.org/en-US/docs/Web/API/Document/evaluate" />.</param>
-        /// <returns>Task which resolves to the <see cref="ElementObject" /> array.</returns>
+        /// <typeparam name="T">The type of <see cref="ElementObject"/>.</typeparam>
+        /// <param name="elementHandle">A <see cref="ElementHandle"/>.</param>
+        /// <param name="expression">Expression to evaluate <see href="https://developer.mozilla.org/en-US/docs/Web/API/Document/evaluate"/>.</param>
+        /// <returns>Task which resolves to the <see cref="ElementObject"/> array.</returns>
         /// <seealso cref="ElementHandle.XPathAsync(string)"/>
         public static async Task<T[]> XPathAsync<T>(this ElementHandle elementHandle, string expression)
             where T : ElementObject
