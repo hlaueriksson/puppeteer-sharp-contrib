@@ -13,7 +13,8 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
             return typeof(Task).IsAssignableFrom(returnType) && returnType.IsGenericType;
         }
 
-        public static bool IsGetterPropertyWithAttribute<T>(this IInvocation invocation) where T : Attribute
+        public static bool IsGetterPropertyWithAttribute<T>(this IInvocation invocation)
+            where T : Attribute
         {
             if (!invocation.Method.IsGetter()) return false;
 
@@ -22,7 +23,8 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
             return property.HasAttribute<T>();
         }
 
-        public static T GetAttribute<T>(this IInvocation invocation) where T : Attribute
+        public static T GetAttribute<T>(this IInvocation invocation)
+            where T : Attribute
         {
             var property = invocation.TargetType.GetProperty(invocation.Method);
 
@@ -48,7 +50,7 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
                    typeof(ElementObject[]).IsAssignableFrom(invocation.Method.ReturnType.GetGenericArguments()[0]);
         }
 
-        public static async Task<object> GetReturnValueAsync(this IInvocation invocation, PageObject pageObject, SelectorAttribute attribute)
+        public static async Task<object?> GetReturnValueAsync(this IInvocation invocation, PageObject pageObject, SelectorAttribute attribute)
         {
             var page = pageObject.Page;
 
@@ -84,7 +86,7 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
             return null;
         }
 
-        public static async Task<object> GetReturnValueAsync(this IInvocation invocation, ElementObject elementObject, SelectorAttribute attribute)
+        public static async Task<object?> GetReturnValueAsync(this IInvocation invocation, ElementObject elementObject, SelectorAttribute attribute)
         {
             var element = elementObject.Element;
 
@@ -120,7 +122,7 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
             return null;
         }
 
-        public static async Task<object> GetReturnValueAsync(this IInvocation invocation, PageObject pageObject, XPathAttribute attribute)
+        public static async Task<object?> GetReturnValueAsync(this IInvocation invocation, PageObject pageObject, XPathAttribute attribute)
         {
             var page = pageObject.Page;
 
@@ -143,7 +145,7 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
             return null;
         }
 
-        public static async Task<object> GetReturnValueAsync(this IInvocation invocation, ElementObject elementObject, XPathAttribute attribute)
+        public static async Task<object?> GetReturnValueAsync(this IInvocation invocation, ElementObject elementObject, XPathAttribute attribute)
         {
             var element = elementObject.Element;
 

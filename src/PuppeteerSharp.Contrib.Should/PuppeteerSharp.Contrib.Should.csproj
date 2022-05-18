@@ -35,4 +35,8 @@
     <ProjectReference Include="..\PuppeteerSharp.Contrib.Extensions\PuppeteerSharp.Contrib.Extensions.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="PuppeteerSharp.Contrib.Tests" />
+  </ItemGroup>
+
 </Project>

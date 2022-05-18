@@ -33,11 +33,6 @@ namespace PuppeteerSharp.Contrib.PageObjects
     public sealed class XPathAttribute : Attribute
     {
         /// <summary>
-        /// An XPath expression to evaluate on a <see cref="Page" /> or <see cref="ElementHandle" />.
-        /// </summary>
-        public string Expression { get; }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="XPathAttribute" /> class.
         /// </summary>
         /// <param name="expression">An XPath expression to evaluate on a <see cref="Page" /> or <see cref="ElementHandle" />.</param>
@@ -45,5 +40,10 @@ namespace PuppeteerSharp.Contrib.PageObjects
         {
             Expression = expression;
         }
+
+        /// <summary>
+        /// An XPath expression to evaluate on a <see cref="Page" /> or <see cref="ElementHandle" />.
+        /// </summary>
+        public string Expression { get; }
     }
 }

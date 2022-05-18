@@ -33,4 +33,8 @@
     <PackageReference Include="PuppeteerSharp" Version="3.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="PuppeteerSharp.Contrib.Tests" />
+  </ItemGroup>
+
 </Project>

@@ -1,24 +1,21 @@
 using System;
-using System.Runtime.CompilerServices;
-
-[assembly: InternalsVisibleTo("PuppeteerSharp.Contrib.Tests")]
 
 namespace PuppeteerSharp.Contrib.Should
 {
     internal class ShouldMessage
     {
-        private string Expected { get; }
-
-        private string Because { get; set; }
-
-        private string Actual { get; }
-
-        public ShouldMessage(string expected, string because, string actual)
+        public ShouldMessage(string expected, string? because, string? actual)
         {
             Expected = expected;
             Because = because;
             Actual = actual;
         }
+
+        private string Expected { get; }
+
+        private string? Because { get; set; }
+
+        private string? Actual { get; }
 
         public override string ToString()
         {
@@ -34,7 +31,7 @@ namespace PuppeteerSharp.Contrib.Should
             const string prefix = "because";
             const string space = " ";
 
-            Because = Because.Trim();
+            Because = Because!.Trim();
             if (!Because.StartsWith(prefix, StringComparison.InvariantCultureIgnoreCase)) Because = prefix + space + Because;
             return space + Because;
         }

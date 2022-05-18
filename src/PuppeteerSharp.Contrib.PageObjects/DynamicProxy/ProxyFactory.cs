@@ -8,7 +8,8 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
         private static readonly ProxyGenerator ProxyGenerator = new ProxyGenerator();
         private static readonly ProxyGenerationOptions Options = new ProxyGenerationOptions(new ProxyGenerationHook()) { Selector = new InterceptorSelector() };
 
-        public static T PageObject<T>(Page page, Response response) where T : PageObject
+        public static T PageObject<T>(Page page, Response response)
+            where T : PageObject
         {
             var proxy = ProxyGenerator.CreateClassProxy<T>(Options, new SelectorInterceptor(), new XPathInterceptor());
             proxy.Initialize(page, response);
@@ -16,7 +17,8 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
             return proxy;
         }
 
-        public static T ElementObject<T>(Page page, ElementHandle elementHandle) where T : ElementObject
+        public static T? ElementObject<T>(Page page, ElementHandle elementHandle)
+            where T : ElementObject
         {
             if (elementHandle == null) return default;
 
@@ -26,12 +28,12 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
             return proxy;
         }
 
-        public static ElementObject ElementObject(Type proxyType, Page page, ElementHandle elementHandle)
+        public static ElementObject? ElementObject(Type proxyType, Page page, ElementHandle elementHandle)
         {
             if (elementHandle == null) return default;
 
-            var proxy = ProxyGenerator.CreateClassProxy(proxyType, Options, new SelectorInterceptor(), new XPathInterceptor()) as ElementObject;
-            proxy?.Initialize(page, elementHandle);
+            var proxy = (ElementObject)ProxyGenerator.CreateClassProxy(proxyType, Options, new SelectorInterceptor(), new XPathInterceptor());
+            proxy.Initialize(page, elementHandle);
 
             return proxy;
         }

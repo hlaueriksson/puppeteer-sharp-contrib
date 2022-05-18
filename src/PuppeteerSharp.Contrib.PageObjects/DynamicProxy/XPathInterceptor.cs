@@ -31,7 +31,7 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
 #pragma warning restore CA2008 // Do not create tasks without passing a TaskScheduler
         }
 
-        private async Task InterceptAsync(IInvocation invocation)
+        private static async Task InterceptAsync(IInvocation invocation)
         {
             if (invocation.IsGetterPropertyWithAttribute<XPathAttribute>())
             {
@@ -44,6 +44,7 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
                     invocation.ReturnValue = result;
                     return;
                 }
+
                 if (invocation.InvocationTarget is ElementObject elementObject)
                 {
                     var result = await invocation.GetReturnValueAsync(elementObject, attribute).ConfigureAwait(false);

@@ -41,11 +41,6 @@ namespace PuppeteerSharp.Contrib.PageObjects
     public sealed class SelectorAttribute : Attribute
     {
         /// <summary>
-        /// A selector to query a <see cref="Page" /> or <see cref="ElementHandle" /> for.
-        /// </summary>
-        public string Selector { get; }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SelectorAttribute" /> class.
         /// </summary>
         /// <param name="selector">A selector to query a <see cref="Page" /> or <see cref="ElementHandle" /> for.</param>
@@ -53,5 +48,10 @@ namespace PuppeteerSharp.Contrib.PageObjects
         {
             Selector = selector;
         }
+
+        /// <summary>
+        /// A selector to query a <see cref="Page" /> or <see cref="ElementHandle" /> for.
+        /// </summary>
+        public string Selector { get; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -8,7 +8,8 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
 {
     internal static class ReflectionExtensions
     {
-        public static bool IsGetterPropertyWithAttribute<T>(this MethodInfo methodInfo) where T : Attribute
+        public static bool IsGetterPropertyWithAttribute<T>(this MethodInfo methodInfo)
+            where T : Attribute
         {
             if (!methodInfo.IsGetter()) return false;
 
@@ -22,12 +23,14 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
             return methodInfo.IsSpecialName && methodInfo.IsCompilerGenerated() && methodInfo.Name.StartsWith("get_", StringComparison.OrdinalIgnoreCase);
         }
 
-        public static bool HasAttribute<T>(this PropertyInfo propertyInfo) where T : Attribute
+        public static bool HasAttribute<T>(this PropertyInfo propertyInfo)
+            where T : Attribute
         {
             return propertyInfo.GetCustomAttributes<T>().Any();
         }
 
-        public static T GetAttribute<T>(this PropertyInfo propertyInfo) where T : Attribute
+        public static T GetAttribute<T>(this PropertyInfo propertyInfo)
+            where T : Attribute
         {
             return propertyInfo.GetCustomAttribute<T>();
         }
