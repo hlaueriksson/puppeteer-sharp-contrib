@@ -8,12 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Unsafe\**" />
-    <EmbeddedResource Remove="Unsafe\**" />
-    <None Remove="Unsafe\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Castle.Core" Version="4.4.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
     <PackageReference Include="PuppeteerSharp" Version="3.0.0" />
