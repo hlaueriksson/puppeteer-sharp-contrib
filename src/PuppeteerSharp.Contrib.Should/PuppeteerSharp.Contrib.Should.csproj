@@ -16,13 +16,15 @@
     <PackageId>PuppeteerSharp.Contrib.Should</PackageId>
     <PackageProjectUrl>https://github.com/hlaueriksson/puppeteer-sharp-contrib</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
+    <PackageReadmeFile>PuppeteerSharp.Contrib.Should.md</PackageReadmeFile>
     <PackageTags>headless;chrome;puppeteer;test;testing;automation;assert</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\icon.png" Link="icon.png" Pack="true" PackagePath="\" />
+    <None Include="..\..\icon.png" Pack="true" PackagePath="\" />
+    <None Include="..\..\PuppeteerSharp.Contrib.Should.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <Import Project="../../Analyzers.props" />
