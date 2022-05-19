@@ -1,16 +1,16 @@
-# PuppeteerSharp.Contrib.Should
+# PuppeteerSharp.Contrib.Should<!-- omit in toc -->
+
+[![build](https://github.com/hlaueriksson/puppeteer-sharp-contrib/actions/workflows/build.yml/badge.svg)](https://github.com/hlaueriksson/puppeteer-sharp-contrib/actions/workflows/build.yml) [![CodeFactor](https://www.codefactor.io/repository/github/hlaueriksson/puppeteer-sharp-contrib/badge)](https://www.codefactor.io/repository/github/hlaueriksson/puppeteer-sharp-contrib)
 
 `PuppeteerSharp.Contrib.Should` is a should assertion library for the Puppeteer Sharp API.
 
-## Content
+## Content<!-- omit in toc -->
 
-- [PuppeteerSharp.Contrib.Should](#puppeteersharpcontribshould)
-  - [Content](#content)
-  - [Installation](#installation)
-  - [Should assertions for `Page`](#should-assertions-for-page)
-  - [Should assertions for `ElementHandle`](#should-assertions-for-elementhandle)
-  - [Failures](#failures)
-  - [Samples](#samples)
+- [Installation](#installation)
+- [Should assertions for `Page`](#should-assertions-for-page)
+- [Should assertions for `ElementHandle`](#should-assertions-for-elementhandle)
+- [Failures](#failures)
+- [Samples](#samples)
 
 ## Installation
 
@@ -26,37 +26,37 @@
 
 ## Should assertions for `Page`
 
-* `ShouldHaveContentAsync`
-* `ShouldHaveTitleAsync`
-* `ShouldNotHaveContentAsync`
-* `ShouldNotHaveTitleAsync`
+- `ShouldHaveContentAsync`
+- `ShouldHaveTitleAsync`
+- `ShouldNotHaveContentAsync`
+- `ShouldNotHaveTitleAsync`
 
 ## Should assertions for `ElementHandle`
 
-* `ShouldBeCheckedAsync`
-* `ShouldBeDisabledAsync`
-* `ShouldBeEnabledAsync`
-* `ShouldBeHiddenAsync`
-* `ShouldBeReadOnlyAsync`
-* `ShouldBeRequiredAsync`
-* `ShouldBeSelectedAsync`
-* `ShouldBeVisibleAsync`
-* `ShouldExist`
-* `ShouldHaveAttributeAsync`
-* `ShouldHaveClassAsync`
-* `ShouldHaveContentAsync`
-* `ShouldHaveFocusAsync`
-* `ShouldHaveValueAsync`
-* `ShouldNotBeCheckedAsync`
-* `ShouldNotBeReadOnlyAsync`
-* `ShouldNotBeRequiredAsync`
-* `ShouldNotBeSelectedAsync`
-* `ShouldNotExist`
-* `ShouldNotHaveAttributeAsync`
-* `ShouldNotHaveClassAsync`
-* `ShouldNotHaveContentAsync`
-* `ShouldNotHaveFocusAsync`
-* `ShouldNotHaveValueAsync`
+- `ShouldBeCheckedAsync`
+- `ShouldBeDisabledAsync`
+- `ShouldBeEnabledAsync`
+- `ShouldBeHiddenAsync`
+- `ShouldBeReadOnlyAsync`
+- `ShouldBeRequiredAsync`
+- `ShouldBeSelectedAsync`
+- `ShouldBeVisibleAsync`
+- `ShouldExist`
+- `ShouldHaveAttributeAsync`
+- `ShouldHaveClassAsync`
+- `ShouldHaveContentAsync`
+- `ShouldHaveFocusAsync`
+- `ShouldHaveValueAsync`
+- `ShouldNotBeCheckedAsync`
+- `ShouldNotBeReadOnlyAsync`
+- `ShouldNotBeRequiredAsync`
+- `ShouldNotBeSelectedAsync`
+- `ShouldNotExist`
+- `ShouldNotHaveAttributeAsync`
+- `ShouldNotHaveClassAsync`
+- `ShouldNotHaveContentAsync`
+- `ShouldNotHaveFocusAsync`
+- `ShouldNotHaveValueAsync`
 
 ## Failures
 
@@ -94,7 +94,7 @@ await input.ShouldHaveValueAsync("Bar", "that would be the perfect example");
 
 ## Samples
 
-Sample projects are located in the [`samples`](/samples/) folder.
+Sample projects are located in the [`samples`](https://github.com/hlaueriksson/puppeteer-sharp-contrib/tree/master/samples) folder.
 
 This is an example with `NUnit`:
 

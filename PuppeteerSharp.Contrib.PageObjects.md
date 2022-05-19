@@ -1,20 +1,20 @@
-# PuppeteerSharp.Contrib.PageObjects
+# PuppeteerSharp.Contrib.PageObjects<!-- omit in toc -->
+
+[![build](https://github.com/hlaueriksson/puppeteer-sharp-contrib/actions/workflows/build.yml/badge.svg)](https://github.com/hlaueriksson/puppeteer-sharp-contrib/actions/workflows/build.yml) [![CodeFactor](https://www.codefactor.io/repository/github/hlaueriksson/puppeteer-sharp-contrib/badge)](https://www.codefactor.io/repository/github/hlaueriksson/puppeteer-sharp-contrib)
 
 `PuppeteerSharp.Contrib.PageObjects` is a library for writing browser tests using the _page object pattern_ with the Puppeteer Sharp API.
 
-## Content
+## Content<!-- omit in toc -->
 
-- [PuppeteerSharp.Contrib.PageObjects](#puppeteersharpcontribpageobjects)
-  - [Content](#content)
-  - [Installation](#installation)
-  - [Page Objects](#page-objects)
-  - [Element Objects](#element-objects)
-  - [Selector Attributes](#selector-attributes)
-  - [XPath Attributes](#xpath-attributes)
-  - [Extensions for `Page`](#extensions-for-page)
-  - [Extensions for `ElementHandle`](#extensions-for-elementhandle)
-  - [Samples](#samples)
-  - [Further Reading](#further-reading)
+- [Installation](#installation)
+- [Page Objects](#page-objects)
+- [Element Objects](#element-objects)
+- [Selector Attributes](#selector-attributes)
+- [XPath Attributes](#xpath-attributes)
+- [Extensions for `Page`](#extensions-for-page)
+- [Extensions for `ElementHandle`](#extensions-for-elementhandle)
+- [Samples](#samples)
+- [Further Reading](#further-reading)
 
 ## Installation
 
@@ -75,17 +75,17 @@ public class GitHubHeaderMenu : ElementObject
 
 Properties decorated with a `[Selector]` attribute must be a:
 
-* public
-* virtual
-* asynchronous
-* getter
+- public
+- virtual
+- asynchronous
+- getter
 
 that returns:
 
-* `Task<ElementHandle>`
-* `Task<ElementHandle[]>`
-* `Task<ElementObject>` or
-* `Task<ElementObject[]>`
+- `Task<ElementHandle>`
+- `Task<ElementHandle[]>`
+- `Task<ElementObject>` or
+- `Task<ElementObject[]>`
 
 Example:
 
@@ -109,15 +109,15 @@ public virtual Task<BarElementObject[]> SelectorForElementObjectArray { get; }
 
 Properties decorated with a `[XPath]` attribute must be a:
 
-* public
-* virtual
-* asynchronous
-* getter
+- public
+- virtual
+- asynchronous
+- getter
 
 that returns:
 
-* `Task<ElementHandle[]>` or
-* `Task<ElementObject[]>`
+- `Task<ElementHandle[]>` or
+- `Task<ElementObject[]>`
 
 Example:
 
@@ -133,32 +133,32 @@ public virtual Task<FooElementObject[]> XPathForElementObjectArray { get; }
 
 Where `T` is a `PageObject`:
 
-* `GoToAsync<T>`
-* `WaitForNavigationAsync<T>`
+- `GoToAsync<T>`
+- `WaitForNavigationAsync<T>`
 
 Where `T` is an `ElementObject`:
 
-* `QuerySelectorAllAsync<T>`
-* `QuerySelectorAsync<T>`
-* `WaitForSelectorAsync<T>`
-* `WaitForXPathAsync<T>`
-* `XPathAsync<T>`
+- `QuerySelectorAllAsync<T>`
+- `QuerySelectorAsync<T>`
+- `WaitForSelectorAsync<T>`
+- `WaitForXPathAsync<T>`
+- `XPathAsync<T>`
 
 ## Extensions for `ElementHandle`
 
 Where `T` is an `ElementObject`:
 
-* `QuerySelectorAllAsync<T>`
-* `QuerySelectorAsync<T>`
-* `XPathAsync<T>`
+- `QuerySelectorAllAsync<T>`
+- `QuerySelectorAsync<T>`
+- `XPathAsync<T>`
 
 ## Samples
 
-A sample project with `NUnit` is located in the [`samples/PuppeteerSharp.Contrib.Sample.NUnit`](/samples/PuppeteerSharp.Contrib.Sample.NUnit/) folder:
+A sample project with `NUnit` is located in the [`samples`](https://github.com/hlaueriksson/puppeteer-sharp-contrib/tree/master/samples/PuppeteerSharp.Contrib.Sample.NUnit) folder:
 
-* [`PageObjects.cs`](/samples/PuppeteerSharp.Contrib.Sample.NUnit/PageObjects.cs) contains the page and element objects
-* [`PuppeteerSharpRepoPageObjectTests.cs`](/samples/PuppeteerSharp.Contrib.Sample.NUnit/PuppeteerSharpRepoPageObjectTests.cs) contains the tests using the page object pattern
+- [`PageObjects.cs`](https://github.com/hlaueriksson/puppeteer-sharp-contrib/blob/master/samples/PuppeteerSharp.Contrib.Sample.NUnit/PageObjects.cs) contains the page and element objects
+- [`PuppeteerSharpRepoPageObjectTests.cs`](https://github.com/hlaueriksson/puppeteer-sharp-contrib/blob/master/samples/PuppeteerSharp.Contrib.Sample.NUnit/PuppeteerSharpRepoPageObjectTests.cs) contains the tests using the page object pattern
 
 ## Further Reading
 
-* https://martinfowler.com/bliki/PageObject.html
+- https://martinfowler.com/bliki/PageObject.html

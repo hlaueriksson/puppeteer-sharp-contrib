@@ -1,15 +1,15 @@
-# PuppeteerSharp.Contrib.Extensions
+# PuppeteerSharp.Contrib.Extensions<!-- omit in toc -->
+
+[![build](https://github.com/hlaueriksson/puppeteer-sharp-contrib/actions/workflows/build.yml/badge.svg)](https://github.com/hlaueriksson/puppeteer-sharp-contrib/actions/workflows/build.yml) [![CodeFactor](https://www.codefactor.io/repository/github/hlaueriksson/puppeteer-sharp-contrib/badge)](https://www.codefactor.io/repository/github/hlaueriksson/puppeteer-sharp-contrib)
 
 `PuppeteerSharp.Contrib.Extensions` is a library with convenient extension methods for writing browser tests with the Puppeteer Sharp API.
 
-## Content
+## Content<!-- omit in toc -->
 
-- [PuppeteerSharp.Contrib.Extensions](#puppeteersharpcontribextensions)
-  - [Content](#content)
-  - [Installation](#installation)
-  - [Extensions for `Page`](#extensions-for-page)
-  - [Extensions for `ElementHandle`](#extensions-for-elementhandle)
-  - [Samples](#samples)
+- [Installation](#installation)
+- [Extensions for `Page`](#extensions-for-page)
+- [Extensions for `ElementHandle`](#extensions-for-elementhandle)
+- [Samples](#samples)
 
 ## Installation
 
@@ -27,58 +27,58 @@
 
 Query:
 
-* `QuerySelectorWithContentAsync`
-* `QuerySelectorAllWithContentAsync`
+- `QuerySelectorWithContentAsync`
+- `QuerySelectorAllWithContentAsync`
 
 Evaluation:
 
-* `HasContentAsync`
-* `HasTitleAsync`
+- `HasContentAsync`
+- `HasTitleAsync`
 
 ## Extensions for `ElementHandle`
 
 Attributes:
 
-* `ClassListAsync`
-* `ClassNameAsync`
-* `GetAttributeAsync`
-* `HrefAsync`
-* `IdAsync`
-* `NameAsync`
-* `SrcAsync`
-* `ValueAsync`
+- `ClassListAsync`
+- `ClassNameAsync`
+- `GetAttributeAsync`
+- `HrefAsync`
+- `IdAsync`
+- `NameAsync`
+- `SrcAsync`
+- `ValueAsync`
 
 Content:
 
-* `InnerHtmlAsync`
-* `InnerTextAsync`
-* `OuterHtmlAsync`
-* `TextContentAsync`
+- `InnerHtmlAsync`
+- `InnerTextAsync`
+- `OuterHtmlAsync`
+- `TextContentAsync`
 
 Evaluation:
 
-* `Exists`
-* `HasAttributeAsync`
-* `HasClassAsync`
-* `HasContentAsync`
-* `HasFocusAsync`
-* `IsCheckedAsync`
-* `IsDisabledAsync`
-* `IsEnabledAsync`
-* `IsHiddenAsync`
-* `IsReadOnlyAsync`
-* `IsRequiredAsync`
-* `IsSelectedAsync`
-* `IsVisibleAsync`
+- `Exists`
+- `HasAttributeAsync`
+- `HasClassAsync`
+- `HasContentAsync`
+- `HasFocusAsync`
+- `IsCheckedAsync`
+- `IsDisabledAsync`
+- `IsEnabledAsync`
+- `IsHiddenAsync`
+- `IsReadOnlyAsync`
+- `IsRequiredAsync`
+- `IsSelectedAsync`
+- `IsVisibleAsync`
 
 Query:
 
-* `QuerySelectorWithContentAsync`
-* `QuerySelectorAllWithContentAsync`
+- `QuerySelectorWithContentAsync`
+- `QuerySelectorAllWithContentAsync`
 
 ## Samples
 
-Sample projects are located in the [`samples`](/samples/) folder.
+Sample projects are located in the [`samples`](https://github.com/hlaueriksson/puppeteer-sharp-contrib/tree/master/samples) folder.
 
 This is an example with `NUnit`:
 

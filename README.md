@@ -1,4 +1,4 @@
-# Puppeteer Sharp Contributions
+# Puppeteer Sharp Contributions<!-- omit in toc -->
 
 [![build](https://github.com/hlaueriksson/puppeteer-sharp-contrib/actions/workflows/build.yml/badge.svg)](https://github.com/hlaueriksson/puppeteer-sharp-contrib/actions/workflows/build.yml)
 [![CodeFactor](https://www.codefactor.io/repository/github/hlaueriksson/puppeteer-sharp-contrib/badge)](https://www.codefactor.io/repository/github/hlaueriksson/puppeteer-sharp-contrib)
@@ -16,18 +16,16 @@ It provides a convenient way to write readable and robust browser tests in .NET
 >
 > [Puppeteer](https://github.com/puppeteer/puppeteer) is a Node library which provides a high-level API to control Chrome or Chromium over the DevTools Protocol. Puppeteer runs headless by default, but can be configured to run full (non-headless) Chrome or Chromium.
 
-## Content
+## Content<!-- omit in toc -->
 
-- [Puppeteer Sharp Contributions](#puppeteer-sharp-contributions)
-  - [Content](#content)
-  - [Introduction](#introduction)
-  - [PuppeteerSharp.Contrib.Extensions](#puppeteersharpcontribextensions)
-  - [PuppeteerSharp.Contrib.Should](#puppeteersharpcontribshould)
-  - [PuppeteerSharp.Contrib.PageObjects](#puppeteersharpcontribpageobjects)
-  - [Samples](#samples)
-  - [Unsafe](#unsafe)
-  - [Upgrading](#upgrading)
-  - [Attribution](#attribution)
+- [Introduction](#introduction)
+- [PuppeteerSharp.Contrib.Extensions](#puppeteersharpcontribextensions)
+- [PuppeteerSharp.Contrib.Should](#puppeteersharpcontribshould)
+- [PuppeteerSharp.Contrib.PageObjects](#puppeteersharpcontribpageobjects)
+- [Samples](#samples)
+- [Unsafe](#unsafe)
+- [Upgrading](#upgrading)
+- [Attribution](#attribution)
 
 ## Introduction
 
@@ -35,9 +33,9 @@ It provides a convenient way to write readable and robust browser tests in .NET
 
 _Puppeteer Sharp Contributions_ consists of a few libraries that helps you write browser automation tests:
 
-* `PuppeteerSharp.Contrib.Extensions`
-* `PuppeteerSharp.Contrib.Should`
-* `PuppeteerSharp.Contrib.PageObjects`
+- `PuppeteerSharp.Contrib.Extensions`
+- `PuppeteerSharp.Contrib.Should`
+- `PuppeteerSharp.Contrib.PageObjects`
 
 These libraries contains _extension methods_ to the Puppeteer Sharp API and they are test framework agnostic.
 
@@ -71,11 +69,11 @@ Sample projects are located in the [`samples`](/samples/) folder.
 
 Examples are written with these test frameworks:
 
-* Machine.Specifications
-* MSTest
-* NUnit
-* SpecFlow
-* Xunit
+- Machine.Specifications
+- MSTest
+- NUnit
+- SpecFlow
+- Xunit
 
 This is an example with `NUnit` and `PuppeteerSharp.Contrib.Should`:
 
@@ -343,8 +341,8 @@ namespace PuppeteerSharp.Contrib.Sample
 
 Two packages contains _sync over async_ versions of the extension methods:
 
-* `PuppeteerSharp.Contrib.Extensions.Unsafe`
-* `PuppeteerSharp.Contrib.Should.Unsafe`
+- `PuppeteerSharp.Contrib.Extensions.Unsafe`
+- `PuppeteerSharp.Contrib.Should.Unsafe`
 
 :no_entry: These packages are no longer maintained and will not be published in new versions.
 
@@ -358,16 +356,16 @@ Two packages contains _sync over async_ versions of the extension methods:
 
 If you use the _sync_ methods from `PuppeteerSharp.Contrib.Extensions` or `PuppeteerSharp.Contrib.Should`, please install:
 
-* `PuppeteerSharp.Contrib.Extensions.Unsafe`
-* `PuppeteerSharp.Contrib.Should.Unsafe`
+- `PuppeteerSharp.Contrib.Extensions.Unsafe`
+- `PuppeteerSharp.Contrib.Should.Unsafe`
 
 > :arrow_up: Upgrading from version `2.0.0` to `4.0.0`
 
 If you use the _sync_ methods from `PuppeteerSharp.Contrib.Extensions.Unsafe` or `PuppeteerSharp.Contrib.Should.Unsafe`, please rewrite your code to use _async_ versions.
 Then uninstall:
 
-* `PuppeteerSharp.Contrib.Extensions.Unsafe`
-* `PuppeteerSharp.Contrib.Should.Unsafe`
+- `PuppeteerSharp.Contrib.Extensions.Unsafe`
+- `PuppeteerSharp.Contrib.Should.Unsafe`
 
 ## Attribution
 
