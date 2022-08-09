@@ -33,7 +33,7 @@ namespace PuppeteerSharp.Contrib.Sample
 
             var startPage = await page.GoToAsync<GitHubStartPage>("https://github.com/");
             var heading = await startPage.Heading;
-            await heading.ShouldHaveContentAsync("Where the world builds software");
+            await heading.ShouldHaveContentAsync("Let's build");
 
             var headerMenu = await startPage.HeaderMenu;
             var searchPage = await headerMenu.Search("Puppeteer Sharp");
@@ -47,7 +47,7 @@ namespace PuppeteerSharp.Contrib.Sample
             await link.ShouldHaveContentAsync("hardkoded/puppeteer-sharp");
             await link.ClickAsync();
 
-            var repoPage = await page.WaitForNavigationAsync<GitHubRepoPage>();
+            var repoPage = await page.WaitForNavigationAsync<GitHubRepoPage>(new NavigationOptions { WaitUntil = new[] { WaitUntilNavigation.Networkidle0 } });
             heading = await repoPage.Heading;
             await heading.ShouldHaveContentAsync("Puppeteer Sharp");
             Assert.AreEqual("https://github.com/hardkoded/puppeteer-sharp", repoPage.Page.Url);

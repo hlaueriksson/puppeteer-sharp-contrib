@@ -30,7 +30,7 @@ namespace PuppeteerSharp.Contrib.Sample
 
                 await page.GoToAsync("https://github.com/");
                 var heading = await page.QuerySelectorAsync("h1");
-                await heading.ShouldHaveContentAsync("Where the world builds software");
+                await heading.ShouldHaveContentAsync("Let's build");
 
                 var input = await page.QuerySelectorAsync("input.header-search-input");
                 if (await input.IsHiddenAsync()) await page.ClickAsync(".octicon-three-bars");
@@ -46,7 +46,7 @@ namespace PuppeteerSharp.Contrib.Sample
                 await text.ShouldHaveContentAsync("Headless Chrome .NET API");
                 var link = await repository.QuerySelectorAsync("a");
                 await link.ClickAsync();
-                await page.WaitForNavigationAsync();
+                await page.WaitForNavigationAsync(new NavigationOptions { WaitUntil = new[] { WaitUntilNavigation.Networkidle0 } });
 
                 heading = await page.QuerySelectorAsync("article > h1");
                 await heading.ShouldHaveContentAsync("Puppeteer Sharp");
