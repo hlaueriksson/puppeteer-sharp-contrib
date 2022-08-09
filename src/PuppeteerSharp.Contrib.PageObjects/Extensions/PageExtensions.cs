@@ -18,7 +18,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// <typeparam name="T">The type of <see cref="PageObject"/>.</typeparam>
         /// <param name="page">A <see cref="Page"/>.</param>
         /// <param name="url">URL to navigate page to. The url should include scheme, e.g. <c>https://</c>.</param>
-        /// <param name="options">Navigation parameters.</param>
+        /// <param name="options">Navigation options.</param>
         /// <returns>Task which resolves to the <see cref="PageObject"/>.</returns>
         /// <seealso cref="Page.GoToAsync(string, NavigationOptions)"/>
         public static async Task<T> GoToAsync<T>(this Page page, string url, NavigationOptions options)
@@ -65,22 +65,152 @@ namespace PuppeteerSharp.Contrib.PageObjects
         }
 
         /// <summary>
+        /// Reloads the page and returns a <see cref="PageObject"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of <see cref="PageObject"/>.</typeparam>
+        /// <param name="page">A <see cref="Page"/>.</param>
+        /// <param name="options">Navigation options.</param>
+        /// <returns>Task which resolves to the <see cref="PageObject"/>.
+        /// In case of multiple redirects, the navigation will resolve with the response of the last redirect.
+        /// </returns>
+        /// <seealso cref="Page.ReloadAsync(NavigationOptions)"/>
+        public static async Task<T> ReloadAsync<T>(this Page page, NavigationOptions options)
+            where T : PageObject
+        {
+            var response = await page.GuardFromNull().ReloadAsync(options).ConfigureAwait(false);
+
+            return ProxyFactory.PageObject<T>(page, response);
+        }
+
+        /// <summary>
+        /// Reloads the page and returns a <see cref="PageObject"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of <see cref="PageObject"/>.</typeparam>
+        /// <param name="page">A <see cref="Page"/>.</param>
+        /// <param name="timeout">Maximum navigation time in milliseconds, defaults to 30 seconds, pass <c>0</c> to disable timeout. </param>
+        /// <param name="waitUntil">When to consider navigation succeeded, defaults to <see cref="WaitUntilNavigation.Load"/>. Given an array of <see cref="WaitUntilNavigation"/>, navigation is considered to be successful after all events have been fired.</param>
+        /// <returns>Task which resolves to the <see cref="PageObject"/>.
+        /// In case of multiple redirects, the navigation will resolve with the response of the last redirect.
+        /// </returns>
+        /// <seealso cref="Page.ReloadAsync(int?, WaitUntilNavigation[])"/>
+        public static async Task<T> ReloadAsync<T>(this Page page, int? timeout = null, WaitUntilNavigation[]? waitUntil = null)
+            where T : PageObject
+        {
+            var response = await page.GuardFromNull().ReloadAsync(timeout, waitUntil).ConfigureAwait(false);
+
+            return ProxyFactory.PageObject<T>(page, response);
+        }
+
+        /// <summary>
         /// Waits for navigation and returns a <see cref="PageObject"/>.
         /// This resolves when the page navigates to a new URL or reloads.
         /// It is useful for when you run code which will indirectly cause the page to navigate.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="PageObject"/>.</typeparam>
         /// <param name="page">A <see cref="Page"/>.</param>
-        /// <param name="options">navigation options.</param>
+        /// <param name="options">Navigation options.</param>
         /// <returns>Task which resolves to the <see cref="PageObject"/>.
-        /// In case of multiple redirects, the <see cref="PageObject.Response"/> is the response of the last redirect.
-        /// In case of navigation to a different anchor or navigation due to History API usage, the <see cref="PageObject.Response"/> is <c>null</c>.
+        /// In case of multiple redirects, the navigation will resolve with the response of the last redirect.
+        /// In case of navigation to a different anchor or navigation due to History API usage, the navigation will resolve with <c>null</c>.
         /// </returns>
         /// <seealso cref="Page.WaitForNavigationAsync(NavigationOptions)"/>
         public static async Task<T> WaitForNavigationAsync<T>(this Page page, NavigationOptions? options = null)
             where T : PageObject
         {
             var response = await page.GuardFromNull().WaitForNavigationAsync(options).ConfigureAwait(false);
+
+            return ProxyFactory.PageObject<T>(page, response);
+        }
+
+        /// <summary>
+        /// Waits for a response and returns a <see cref="PageObject"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of <see cref="PageObject"/>.</typeparam>
+        /// <param name="page">A <see cref="Page"/>.</param>
+        /// <param name="url">URL to wait for.</param>
+        /// <param name="options">Waiting options.</param>
+        /// <returns>Task which resolves to the <see cref="PageObject"/>.</returns>
+        /// <seealso cref="Page.WaitForResponseAsync(string, WaitForOptions)"/>
+        public static async Task<T> WaitForResponseAsync<T>(this Page page, string url, WaitForOptions? options = null)
+            where T : PageObject
+        {
+            var response = await page.GuardFromNull().WaitForResponseAsync(url, options).ConfigureAwait(false);
+
+            return ProxyFactory.PageObject<T>(page, response);
+        }
+
+        /// <summary>
+        /// Waits for a response and returns a <see cref="PageObject"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of <see cref="PageObject"/>.</typeparam>
+        /// <param name="page">A <see cref="Page"/>.</param>
+        /// <param name="predicate">Function which looks for a matching response.</param>
+        /// <param name="options">Waiting options.</param>
+        /// <returns>Task which resolves to the <see cref="PageObject"/>.</returns>
+        /// <seealso cref="Page.WaitForResponseAsync(Func{Response, bool}, WaitForOptions)"/>
+        public static async Task<T> WaitForResponseAsync<T>(this Page page, Func<Response, bool> predicate, WaitForOptions? options = null)
+            where T : PageObject
+        {
+            var response = await page.GuardFromNull().WaitForResponseAsync(predicate, options).ConfigureAwait(false);
+
+            return ProxyFactory.PageObject<T>(page, response);
+        }
+
+        /// <summary>
+        /// Waits for a response and returns a <see cref="PageObject"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of <see cref="PageObject"/>.</typeparam>
+        /// <param name="page">A <see cref="Page"/>.</param>
+        /// <param name="predicate">Function which looks for a matching response.</param>
+        /// <param name="options">Waiting options.</param>
+        /// <returns>Task which resolves to the <see cref="PageObject"/>.</returns>
+        /// <seealso cref="Page.WaitForResponseAsync(Func{Response, Task{bool}}, WaitForOptions)"/>
+        public static async Task<T> WaitForResponseAsync<T>(this Page page, Func<Response, Task<bool>> predicate, WaitForOptions? options = null)
+            where T : PageObject
+        {
+            var response = await page.GuardFromNull().WaitForResponseAsync(predicate, options).ConfigureAwait(false);
+
+            return ProxyFactory.PageObject<T>(page, response);
+        }
+
+        /// <summary>
+        /// Navigate to the previous page in history and returns a <see cref="PageObject"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of <see cref="PageObject"/>.</typeparam>
+        /// <param name="page">A <see cref="Page"/>.</param>
+        /// <param name="options">Navigation options.</param>
+        /// <returns>Task which resolves to the <see cref="PageObject"/>.
+        /// In case of multiple redirects, the navigation will resolve with the response of the last redirect.
+        /// If can not go back, resolves to <c>null</c>.
+        /// </returns>
+        /// <seealso cref="Page.GoBackAsync(NavigationOptions)"/>
+        public static async Task<T?> GoBackAsync<T>(this Page page, NavigationOptions? options = null)
+            where T : PageObject
+        {
+            var response = await page.GuardFromNull().GoBackAsync(options).ConfigureAwait(false);
+
+            if (response == null) return default;
+
+            return ProxyFactory.PageObject<T>(page, response);
+        }
+
+        /// <summary>
+        /// Navigate to the next page in history and returns a <see cref="PageObject"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of <see cref="PageObject"/>.</typeparam>
+        /// <param name="page">A <see cref="Page"/>.</param>
+        /// <param name="options">Navigation options.</param>
+        /// <returns>Task which resolves to the <see cref="PageObject"/>.
+        /// In case of multiple redirects, the navigation will resolve with the response of the last redirect.
+        /// If can not go forward, resolves to <c>null</c>.
+        /// </returns>
+        /// <seealso cref="Page.GoForwardAsync(NavigationOptions)"/>
+        public static async Task<T?> GoForwardAsync<T>(this Page page, NavigationOptions? options = null)
+            where T : PageObject
+        {
+            var response = await page.GuardFromNull().GoForwardAsync(options).ConfigureAwait(false);
+
+            if (response == null) return default;
 
             return ProxyFactory.PageObject<T>(page, response);
         }
@@ -127,8 +257,10 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// <typeparam name="T">The type of <see cref="ElementObject"/>.</typeparam>
         /// <param name="page">A <see cref="Page"/>.</param>
         /// <param name="selector">A selector of an element to wait for.</param>
-        /// <param name="options">Optional waiting parameters.</param>
-        /// <returns>A task that resolves to the <see cref="ElementObject"/>, when a element specified by selector string is added to DOM.</returns>
+        /// <param name="options">Waiting options.</param>
+        /// <returns>A task that resolves to the <see cref="ElementObject"/>, when a element specified by selector string is added to DOM.
+        /// Resolves to <c>null</c> if waiting for <c>hidden: true</c> and selector is not found in DOM.
+        /// </returns>
         /// <seealso cref="Page.WaitForSelectorAsync(string, WaitForSelectorOptions)"/>
         public static async Task<T?> WaitForSelectorAsync<T>(this Page page, string selector, WaitForSelectorOptions? options = null)
             where T : ElementObject
@@ -144,8 +276,10 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// <typeparam name="T">The type of <see cref="ElementObject"/>.</typeparam>
         /// <param name="page">A <see cref="Page"/>.</param>
         /// <param name="xpath">A XPath expression of an element to wait for.</param>
-        /// <param name="options">Optional waiting parameters.</param>
-        /// <returns>A task that resolves to the <see cref="ElementObject"/>, when a element specified by xpath string is added to DOM.</returns>
+        /// <param name="options">Waiting options.</param>
+        /// <returns>A task that resolves to the <see cref="ElementObject"/>, when a element specified by xpath string is added to DOM.
+        /// Resolves to <c>null</c> if waiting for <c>hidden: true</c> and xpath is not found in DOM.
+        /// </returns>
         /// <seealso cref="Page.WaitForXPathAsync(string, WaitForSelectorOptions)"/>
         public static async Task<T?> WaitForXPathAsync<T>(this Page page, string xpath, WaitForSelectorOptions? options = null)
             where T : ElementObject

@@ -4,7 +4,16 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Version>2.0.0</Version>
     <PackageReleaseNotes>
-⬆️ Bump PuppeteerSharp to 3.0.0
+⬆️ Bump PuppeteerSharp to 7.1.0
+
+New extensions for Page:
+◼️ GoBackAsync&lt;T&gt;
+◼️ GoForwardAsync&lt;T&gt;
+◼️ ReloadAsync&lt;T&gt;
+◼️ WaitForResponseAsync&lt;T&gt;
+
+New extensions for ElementHandle:
+◼️ WaitForSelectorAsync&lt;T&gt;
     </PackageReleaseNotes>
     <Authors>Henrik Lau Eriksson</Authors>
     <Description>Contributions to the Headless Chrome .NET API 🌐🧪
@@ -30,8 +39,8 @@
   <Import Project="../../Analyzers.props" />
 
   <ItemGroup>
-    <PackageReference Include="Castle.Core" Version="4.4.1" />
-    <PackageReference Include="PuppeteerSharp" Version="3.0.0" />
+    <PackageReference Include="Castle.Core" Version="5.1.0" />
+    <PackageReference Include="PuppeteerSharp" Version="7.1.0" />
   </ItemGroup>
 
   <ItemGroup>

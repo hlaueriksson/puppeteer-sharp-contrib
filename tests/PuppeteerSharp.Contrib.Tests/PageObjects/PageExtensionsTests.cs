@@ -37,11 +37,69 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         }
 
         [Fact]
+        public async Task ReloadAsync_returns_proxy_of_type()
+        {
+            var result = await Page.ReloadAsync<FakePageObject>(new NavigationOptions());
+            Assert.NotNull(result);
+            Assert.IsAssignableFrom<FakePageObject>(result);
+
+            result = await Page.ReloadAsync<FakePageObject>((int)TimeSpan.FromSeconds(10).TotalMilliseconds, new[] { WaitUntilNavigation.Load });
+            Assert.NotNull(result);
+            Assert.IsAssignableFrom<FakePageObject>(result);
+        }
+
+        [Fact]
         public async Task WaitForNavigationAsync_returns_proxy_of_type()
         {
             await Page.GoToAsync("https://github.com/hardkoded/puppeteer-sharp");
             await Page.ClickAsync("#repository-container-header strong a");
             var result = await Page.WaitForNavigationAsync<FakePageObject>(new NavigationOptions());
+            Assert.NotNull(result);
+            Assert.IsAssignableFrom<FakePageObject>(result);
+        }
+
+        [Fact]
+        public async Task WaitForResponseAsync_returns_proxy_of_type()
+        {
+            await Page.GoToAsync("https://github.com/hardkoded/puppeteer-sharp");
+            await Page.ClickAsync("#repository-container-header strong a");
+            var result = await Page.WaitForResponseAsync<FakePageObject>("https://github.com/hardkoded/puppeteer-sharp", new WaitForOptions());
+            Assert.NotNull(result);
+            Assert.IsAssignableFrom<FakePageObject>(result);
+
+            await Page.ClickAsync("#repository-container-header strong a");
+            result = await Page.WaitForResponseAsync<FakePageObject>(response => response.Url == "https://github.com/hardkoded/puppeteer-sharp", new WaitForOptions());
+            Assert.NotNull(result);
+            Assert.IsAssignableFrom<FakePageObject>(result);
+
+            await Page.ClickAsync("#repository-container-header strong a");
+            result = await Page.WaitForResponseAsync<FakePageObject>(async (Response response) => (await response.TextAsync()).Contains("Puppeteer Sharp"), new WaitForOptions());
+            Assert.NotNull(result);
+            Assert.IsAssignableFrom<FakePageObject>(result);
+        }
+
+        [Fact]
+        public async Task GoBackAsync_returns_proxy_of_type()
+        {
+            var result = await Page.GoBackAsync<FakePageObject>(new NavigationOptions());
+            Assert.Null(result);
+
+            await Page.GoToAsync("https://github.com/hardkoded/puppeteer-sharp");
+            await Page.GoToAsync("about:blank");
+            result = await Page.GoBackAsync<FakePageObject>(new NavigationOptions());
+            Assert.NotNull(result);
+            Assert.IsAssignableFrom<FakePageObject>(result);
+        }
+
+        [Fact]
+        public async Task GoForwardAsync_returns_proxy_of_type()
+        {
+            var result = await Page.GoForwardAsync<FakePageObject>(new NavigationOptions());
+            Assert.Null(result);
+
+            await Page.GoToAsync("https://github.com/hardkoded/puppeteer-sharp");
+            await Page.GoBackAsync();
+            result = await Page.GoForwardAsync<FakePageObject>(new NavigationOptions());
             Assert.NotNull(result);
             Assert.IsAssignableFrom<FakePageObject>(result);
         }

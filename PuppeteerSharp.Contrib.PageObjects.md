@@ -133,8 +133,12 @@ public virtual Task<FooElementObject[]> XPathForElementObjectArray { get; }
 
 Where `T` is a `PageObject`:
 
+- `GoBackAsync<T>`
+- `GoForwardAsync<T>`
 - `GoToAsync<T>`
+- `ReloadAsync<T>`
 - `WaitForNavigationAsync<T>`
+- `WaitForResponseAsync<T>`
 
 Where `T` is an `ElementObject`:
 
@@ -150,6 +154,7 @@ Where `T` is an `ElementObject`:
 
 - `QuerySelectorAllAsync<T>`
 - `QuerySelectorAsync<T>`
+- `WaitForSelectorAsync<T>`
 - `XPathAsync<T>`
 
 ## Samples

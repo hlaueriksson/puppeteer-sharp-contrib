@@ -50,5 +50,16 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             result = await _elementHandle.XPathAsync<FakeElementObject>("//missing");
             Assert.Empty(result);
         }
+
+        [Fact]
+        public async Task WaitForSelectorAsync_returns_proxy_of_type()
+        {
+            var result = await _elementHandle.WaitForSelectorAsync<FakeElementObject>(".tweet");
+            Assert.NotNull(result);
+            Assert.IsAssignableFrom<FakeElementObject>(result);
+            Assert.NotNull(result.Page);
+
+            await Assert.ThrowsAsync<WaitTaskTimeoutException>(() => _elementHandle.WaitForSelectorAsync<FakeElementObject>(".missing", new() { Timeout = 1 }));
+        }
     }
 }
