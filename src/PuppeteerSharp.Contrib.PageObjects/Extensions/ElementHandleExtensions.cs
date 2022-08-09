@@ -62,6 +62,25 @@ namespace PuppeteerSharp.Contrib.PageObjects
             return results.Select(x => ProxyFactory.ElementObject<T>(x.GetPage(), x)).ToArray()!;
         }
 
+        /// <summary>
+        /// Waits for a selector to be added to the DOM and returns an <see cref="ElementObject"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of <see cref="ElementObject"/>.</typeparam>
+        /// <param name="elementHandle">A <see cref="ElementHandle"/>.</param>
+        /// <param name="selector">A selector of an element to wait for.</param>
+        /// <param name="options">Waiting options.</param>
+        /// <returns>Task which resolves to the <see cref="ElementObject"/>, when a element specified by selector string is added to DOM.
+        /// Resolves to <c>null</c> if waiting for <c>hidden: true</c> and selector is not found in DOM.
+        /// </returns>
+        /// <seealso cref="ElementHandle.WaitForSelectorAsync(string, WaitForSelectorOptions)"/>
+        public static async Task<T?> WaitForSelectorAsync<T>(this ElementHandle elementHandle, string selector, WaitForSelectorOptions? options = null)
+            where T : ElementObject
+        {
+            var result = await elementHandle.GuardFromNull().WaitForSelectorAsync(selector, options).ConfigureAwait(false);
+
+            return ProxyFactory.ElementObject<T>(elementHandle.GetPage(), result);
+        }
+
         private static Page GetPage(this ElementHandle elementHandle)
         {
             var propertyInfo = elementHandle.GetType().GetProperty("Page", BindingFlags.NonPublic | BindingFlags.Instance);
