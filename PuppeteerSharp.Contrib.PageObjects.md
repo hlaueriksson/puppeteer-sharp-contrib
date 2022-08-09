@@ -20,10 +20,10 @@
 
 | NuGet            |       | [![PuppeteerSharp.Contrib.PageObjects][1]][2]                                       |
 | :--------------- | ----: | :---------------------------------------------------------------------------------- |
-| Package Manager  | `PM>` | `Install-Package PuppeteerSharp.Contrib.PageObjects -Version 2.0.0`                 |
-| .NET CLI         | `>`   | `dotnet add package PuppeteerSharp.Contrib.PageObjects --version 2.0.0`             |
-| PackageReference |       | `<PackageReference Include="PuppeteerSharp.Contrib.PageObjects" Version="2.0.0" />` |
-| Paket CLI        | `>`   | `paket add PuppeteerSharp.Contrib.PageObjects --version 2.0.0`                      |
+| Package Manager  | `PM>` | `Install-Package PuppeteerSharp.Contrib.PageObjects -Version 5.0.0`                 |
+| .NET CLI         | `>`   | `dotnet add package PuppeteerSharp.Contrib.PageObjects --version 5.0.0`             |
+| PackageReference |       | `<PackageReference Include="PuppeteerSharp.Contrib.PageObjects" Version="5.0.0" />` |
+| Paket CLI        | `>`   | `paket add PuppeteerSharp.Contrib.PageObjects --version 5.0.0`                      |
 
 [1]: https://img.shields.io/nuget/v/PuppeteerSharp.Contrib.PageObjects.svg?label=PuppeteerSharp.Contrib.PageObjects
 [2]: https://www.nuget.org/packages/PuppeteerSharp.Contrib.PageObjects
