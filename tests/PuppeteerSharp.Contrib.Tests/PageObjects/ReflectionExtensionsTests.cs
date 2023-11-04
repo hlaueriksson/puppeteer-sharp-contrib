@@ -1,6 +1,6 @@
-﻿using PuppeteerSharp.Contrib.PageObjects;
+﻿using NUnit.Framework;
+using PuppeteerSharp.Contrib.PageObjects;
 using PuppeteerSharp.Contrib.PageObjects.DynamicProxy;
-using NUnit.Framework;
 
 namespace PuppeteerSharp.Contrib.Tests.PageObjects
 {

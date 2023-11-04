@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
-using PuppeteerSharp.Contrib.PageObjects.DynamicProxy;
 using NUnit.Framework;
+using PuppeteerSharp.Contrib.PageObjects.DynamicProxy;
 
 namespace PuppeteerSharp.Contrib.Tests.PageObjects
 {
-    
+
     public class SelectorInterceptorTests : PuppeteerPageBaseTest
     {
         private SelectorInterceptor _subject;

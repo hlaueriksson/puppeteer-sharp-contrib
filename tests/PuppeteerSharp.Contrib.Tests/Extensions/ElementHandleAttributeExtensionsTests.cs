@@ -1,11 +1,11 @@
 using System;
 using System.Threading.Tasks;
-using PuppeteerSharp.Contrib.Extensions;
 using NUnit.Framework;
+using PuppeteerSharp.Contrib.Extensions;
 
 namespace PuppeteerSharp.Contrib.Tests.Extensions
 {
-    
+
     public class ElementHandleAttributeExtensionsTests : PuppeteerPageBaseTest
     {
         [Test]

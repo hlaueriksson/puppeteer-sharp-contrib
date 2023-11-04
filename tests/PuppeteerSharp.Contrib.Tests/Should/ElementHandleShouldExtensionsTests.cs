@@ -1,14 +1,14 @@
 using System;
 using System.Threading.Tasks;
-using PuppeteerSharp.Contrib.Should;
 using NUnit.Framework;
+using PuppeteerSharp.Contrib.Should;
 
 namespace PuppeteerSharp.Contrib.Tests.Should
 {
-    
+
     public class ElementHandleShouldExtensionsTests : PuppeteerPageBaseTest
     {
-        protected override async Task SetUp () => await Page.SetContentAsync("<html><body><div class='tweet'><div class='like'>100</div><div class='retweets'>10</div></div></body></html>");
+        protected override async Task SetUp() => await Page.SetContentAsync("<html><body><div class='tweet'><div class='like'>100</div><div class='retweets'>10</div></div></body></html>");
 
         // Exist
 

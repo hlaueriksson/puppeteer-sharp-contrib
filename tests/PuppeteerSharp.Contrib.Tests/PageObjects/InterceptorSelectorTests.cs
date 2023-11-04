@@ -1,7 +1,7 @@
 using System.Linq;
 using Castle.DynamicProxy;
-using PuppeteerSharp.Contrib.PageObjects.DynamicProxy;
 using NUnit.Framework;
+using PuppeteerSharp.Contrib.PageObjects.DynamicProxy;
 
 namespace PuppeteerSharp.Contrib.Tests.PageObjects
 {

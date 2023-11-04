@@ -1,11 +1,11 @@
 using System;
 using System.Threading.Tasks;
-using PuppeteerSharp.Contrib.PageObjects;
 using NUnit.Framework;
+using PuppeteerSharp.Contrib.PageObjects;
 
 namespace PuppeteerSharp.Contrib.Tests.PageObjects
 {
-    
+
     public class PageExtensionsTests : PuppeteerPageBaseTest
     {
         protected override async Task SetUp() => await Page.SetContentAsync(Fake.Html);

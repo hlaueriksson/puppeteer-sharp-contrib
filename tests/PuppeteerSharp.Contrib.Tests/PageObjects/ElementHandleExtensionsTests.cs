@@ -1,11 +1,11 @@
-using System.Threading.Tasks;
-using PuppeteerSharp.Contrib.PageObjects;
-using NUnit.Framework;
 using System.Linq;
+using System.Threading.Tasks;
+using NUnit.Framework;
+using PuppeteerSharp.Contrib.PageObjects;
 
 namespace PuppeteerSharp.Contrib.Tests.PageObjects
 {
-    
+
     public class ElementHandleExtensionsTests : PuppeteerPageBaseTest
     {
         private ElementHandle _elementHandle;

@@ -1,5 +1,5 @@
-using PuppeteerSharp.Contrib.Should;
 using NUnit.Framework;
+using PuppeteerSharp.Contrib.Should;
 
 namespace PuppeteerSharp.Contrib.Tests.Should
 {

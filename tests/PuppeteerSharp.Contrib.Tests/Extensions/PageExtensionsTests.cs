@@ -1,15 +1,15 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using PuppeteerSharp.Contrib.Extensions;
 using NUnit.Framework;
+using PuppeteerSharp.Contrib.Extensions;
 
 namespace PuppeteerSharp.Contrib.Tests.Extensions
 {
-    
+
     public class PageExtensionsTests : PuppeteerPageBaseTest
     {
-        protected override async Task SetUp () => await Page.SetContentAsync(@"
+        protected override async Task SetUp() => await Page.SetContentAsync(@"
 <html>
   <div id='foo'>Foo</div>
   <div id='bar'>Bar</div>
