@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using PuppeteerSharp.Contrib.Extensions;
 using PuppeteerSharp.Contrib.Should;
+using PuppeteerSharp.Input;
 using TechTalk.SpecFlow;
 
 namespace PuppeteerSharp.Contrib.Sample.StepDefinitions
@@ -44,7 +45,7 @@ namespace PuppeteerSharp.Contrib.Sample.StepDefinitions
                 await Page.ClickAsync("[data-target=\"qbsearch-input.inputButtonText\"]");
             }
             await input.TypeAsync(query);
-            await Page.Keyboard.PressAsync("Enter");
+            await Page.Keyboard.PressAsync(Key.Enter);
             await Page.WaitForSelectorAsync("[data-testid=\"results-list\"]");
         }
 

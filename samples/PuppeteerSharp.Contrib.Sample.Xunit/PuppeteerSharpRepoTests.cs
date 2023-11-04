@@ -2,6 +2,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using PuppeteerSharp.Contrib.Extensions;
 using PuppeteerSharp.Contrib.Should;
+using PuppeteerSharp.Input;
 using Xunit;
 
 namespace PuppeteerSharp.Contrib.Sample
@@ -40,7 +41,7 @@ namespace PuppeteerSharp.Contrib.Sample
                 await page.ClickAsync("[data-target=\"qbsearch-input.inputButtonText\"]");
             }
             await input.TypeAsync("Puppeteer Sharp");
-            await page.Keyboard.PressAsync("Enter");
+            await page.Keyboard.PressAsync(Key.Enter);
             await page.WaitForSelectorAsync("[data-testid=\"results-list\"]");
 
             var repositories = await page.QuerySelectorAllAsync("[data-testid=\"results-list\"] > div");
