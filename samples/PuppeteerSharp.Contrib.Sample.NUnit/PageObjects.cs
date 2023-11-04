@@ -7,33 +7,51 @@ namespace PuppeteerSharp.Contrib.Sample
 {
     public class GitHubStartPage : PageObject
     {
-        [Selector("h1")]
+        [Selector("main h1")]
         public virtual Task<ElementHandle> Heading { get; }
 
-        [Selector(".HeaderMenu")]
-        public virtual Task<GitHubHeaderMenu> HeaderMenu { get; }
+        [Selector("header")]
+        public virtual Task<GitHubHeader> Header { get; }
+
+        public async Task<GitHubSearchPage> SearchAsync(string text)
+        {
+            var task = Page.WaitForNavigationAsync<GitHubSearchPage>();
+            await (await Header).SearchAsync(text);
+            return await task;
+        }
     }
 
-    public class GitHubHeaderMenu : ElementObject
+    public class GitHubHeader : ElementObject
     {
-        [Selector("input.header-search-input")]
+        [Selector("#query-builder-test")]
         public virtual Task<ElementHandle> SearchInput { get; }
 
-        public async Task<GitHubSearchPage> Search(string text)
+        public async Task SearchAsync(string text)
         {
             var input = await SearchInput;
-            if (await input.IsHiddenAsync()) await Page.ClickAsync(".octicon-three-bars");
+            if (await input.IsHiddenAsync())
+            {
+                await Page.ClickAsync("[aria-label=\"Toggle navigation\"][data-view-component=\"true\"]");
+                await Page.ClickAsync("[data-target=\"qbsearch-input.inputButtonText\"]");
+            }
             await input.TypeAsync(text);
             await input.PressAsync(Key.Enter);
-
-            return await Page.WaitForNavigationAsync<GitHubSearchPage>();
+            await Page.WaitForSelectorAsync("[data-testid=\"results-list\"]");
         }
     }
 
     public class GitHubSearchPage : PageObject
     {
-        [Selector(".repo-list-item")]
+        [Selector("[data-testid=\"results-list\"] > div")]
         public virtual Task<GitHubRepoListItem[]> RepoListItems { get; }
+
+        public async Task<GitHubRepoPage> GotoAsync(GitHubRepoListItem repo)
+        {
+            var task = Page.WaitForNavigationAsync<GitHubRepoPage>();
+            await (await repo.Link).ClickAsync();
+            await Page.WaitForSelectorAsync("article > h1");
+            return await task;
+        }
     }
 
     public class GitHubRepoListItem : ElementObject
@@ -41,7 +59,7 @@ namespace PuppeteerSharp.Contrib.Sample
         [Selector("a")]
         public virtual Task<ElementHandle> Link { get; }
 
-        [Selector("p")]
+        [Selector("h3 + div")]
         public virtual Task<ElementHandle> Text { get; }
     }
 
@@ -50,23 +68,31 @@ namespace PuppeteerSharp.Contrib.Sample
         [Selector("article > h1")]
         public virtual Task<ElementHandle> Heading { get; }
 
-        [Selector("img[alt='Build status']")]
-        public virtual Task<ElementHandle> BuildStatusBadge { get; }
+        [Selector("#actions-tab")]
+        public virtual Task<ElementHandle> Actions { get; }
 
-        public async Task<string> GetLatestReleaseVersion()
+        public async Task<GitHubActionsPage> GotoActionsAsync()
+        {
+            var task = Page.WaitForNavigationAsync<GitHubActionsPage>();
+            await (await Actions).ClickAsync();
+            await Page.WaitForSelectorAsync("#partial-actions-workflow-runs");
+            return await task;
+        }
+
+        public async Task<string> GetLatestReleaseVersionAsync()
         {
             var latest = await Page.QuerySelectorWithContentAsync("a[href*='releases'] span", @"v?\d+\.\d\.\d");
             var version = await latest.TextContentAsync();
-            return version.TrimStart('v');
+            return version.Substring(version.LastIndexOf('v') + 1);
         }
     }
 
-    public class AppVeyorBuildPage : PageObject
+    public class GitHubActionsPage : PageObject
     {
-        public async Task<bool> Success()
+        public async Task<string> GetLatestWorkflowRunStatusAsync()
         {
-            var success = await Page.QuerySelectorAsync(".project-build.project-build-status.success");
-            return success.Exists();
+            var status = await Page.QuerySelectorAsync(".checks-list-item-icon svg");
+            return await status.GetAttributeAsync("aria-label");
         }
     }
 }

@@ -59,7 +59,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         }
 
         [Fact]
-        public async Task WaitForResponseAsync_returns_proxy_of_type()
+        public async Task WaitForResponseAsync_returns_proxy_of_type() // TODO: Flaky
         {
             await Page.GoToAsync("https://github.com/hardkoded/puppeteer-sharp");
             await Page.ClickAsync("#repository-container-header strong a");

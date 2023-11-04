@@ -30,32 +30,36 @@ namespace PuppeteerSharp.Contrib.Sample.StepDefinitions
         public async Task GivenIGoToTheGitHubStartPage()
         {
             await Page.GoToAsync("https://github.com/");
-            var heading = await Page.QuerySelectorAsync("h1");
-            await heading.ShouldHaveContentAsync("Let's build");
+            var heading = await Page.QuerySelectorAsync("main h1");
+            await heading.ShouldHaveContentAsync("Let’s build");
         }
 
         [When(@"I search for ""(.*)""")]
         public async Task WhenISearchFor(string query)
         {
-            var input = await Page.QuerySelectorAsync("input.header-search-input");
-            if (await input.IsHiddenAsync()) await Page.ClickAsync(".octicon-three-bars");
-            await Page.TypeAsync("input.header-search-input", query);
+            var input = await Page.QuerySelectorAsync("#query-builder-test");
+            if (await input.IsHiddenAsync())
+            {
+                await Page.ClickAsync("[aria-label=\"Toggle navigation\"][data-view-component=\"true\"]");
+                await Page.ClickAsync("[data-target=\"qbsearch-input.inputButtonText\"]");
+            }
+            await input.TypeAsync(query);
             await Page.Keyboard.PressAsync("Enter");
-            await Page.WaitForNavigationAsync();
+            await Page.WaitForSelectorAsync("[data-testid=\"results-list\"]");
         }
 
         [Then(@"the repo should be the first search result")]
         public async Task ThenTheRepoShouldBeTheFirstSearchResult()
         {
-            var repositories = await Page.QuerySelectorAllAsync(".repo-list-item");
+            var repositories = await Page.QuerySelectorAllAsync("[data-testid=\"results-list\"] > div");
             repositories.Length.Should().BeGreaterThan(0);
             var repository = repositories.First();
             await repository.ShouldHaveContentAsync("hardkoded/puppeteer-sharp");
-            var text = await repository.QuerySelectorAsync("p");
+            var text = await repository.QuerySelectorAsync("h3 + div");
             await text.ShouldHaveContentAsync("Headless Chrome .NET API");
             var link = await repository.QuerySelectorAsync("a");
             await link.ClickAsync();
-            await Page.WaitForNavigationAsync(new NavigationOptions { WaitUntil = new[] { WaitUntilNavigation.Networkidle0 } });
+            await Page.WaitForSelectorAsync("article > h1");
 
             var heading = await Page.QuerySelectorAsync("article > h1");
             await heading.ShouldHaveContentAsync("Puppeteer Sharp");
@@ -71,16 +75,16 @@ namespace PuppeteerSharp.Contrib.Sample.StepDefinitions
         [When(@"I check the build status on the master branch")]
         public async Task WhenICheckTheBuildStatusOnTheMasterBranch()
         {
-            var build = await Page.QuerySelectorAsync("img[alt='Build status']");
-            await build.ClickAsync();
-            await Page.WaitForNavigationAsync(new NavigationOptions { WaitUntil = new[] { WaitUntilNavigation.Networkidle0 } });
+            await Page.ClickAsync("#actions-tab");
+            await Page.WaitForSelectorAsync("#partial-actions-workflow-runs");
         }
 
         [Then(@"the build status should be success")]
         public async Task ThenTheBuildStatusShouldBeSuccess()
         {
-            var success = await Page.QuerySelectorAsync(".project-build.project-build-status.success");
-            success.ShouldExist();
+            var status = await Page.QuerySelectorAsync(".checks-list-item-icon svg");
+            var label = await status.GetAttributeAsync("aria-label");
+            label.Should().Be("completed successfully");
         }
 
         [Given(@"I check the latest release version")]
@@ -88,7 +92,7 @@ namespace PuppeteerSharp.Contrib.Sample.StepDefinitions
         {
             var latest = await Page.QuerySelectorWithContentAsync("a[href*='releases'] span", @"v?\d+\.\d\.\d");
             var version = await latest.TextContentAsync();
-            LatestReleaseVersion.Add(Page.Url, version.TrimStart('v'));
+            LatestReleaseVersion.Add(Page.Url, version.Substring(version.LastIndexOf('v') + 1));
         }
 
         [Given(@"I go to the Puppeteer repo on GitHub")]
