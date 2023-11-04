@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using PuppeteerSharp.Contrib.PageObjects.DynamicProxy;
@@ -55,7 +56,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             Assert.IsNotEmpty(result);
             CollectionAssert.AllItemsAreInstancesOfType(result, typeof(FakeElementObject));
 
-            result = ProxyFactory.ElementObjectArray(typeof(FakeElementObject), Page, new ElementHandle[0]);
+            result = ProxyFactory.ElementObjectArray(typeof(FakeElementObject), Page, Array.Empty<ElementHandle>());
             Assert.IsEmpty(result);
         }
     }

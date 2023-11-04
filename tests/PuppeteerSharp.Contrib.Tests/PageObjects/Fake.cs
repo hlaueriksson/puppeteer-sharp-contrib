@@ -96,18 +96,12 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         public virtual Task<ElementHandle[]> XPathForElementHandleArray { get; }
     }
 
-    public class FakeInvocation : AbstractInvocation
+    public class FakeInvocation(MethodInfo proxiedMethod, object proxy = null) : AbstractInvocation(proxy, null, proxiedMethod, null)
     {
-        public FakeInvocation(MethodInfo proxiedMethod, object proxy = null) : base(proxy, null, proxiedMethod, null)
-        {
-            TargetType = proxiedMethod.DeclaringType;
-            InvocationTarget = proxy;
-        }
-
         protected override void InvokeMethodOnTarget() => throw new NotImplementedException();
 
-        public override object InvocationTarget { get; }
-        public override Type TargetType { get; }
+        public override object InvocationTarget { get; } = proxy;
+        public override Type TargetType { get; } = proxiedMethod.DeclaringType;
         public override MethodInfo MethodInvocationTarget { get; }
     }
 }
