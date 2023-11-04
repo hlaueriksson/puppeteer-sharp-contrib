@@ -4,7 +4,6 @@ using PuppeteerSharp.Contrib.Should;
 
 namespace PuppeteerSharp.Contrib.Tests.Should
 {
-
     public class PageShouldExtensionsTests : PuppeteerPageBaseTest
     {
         protected override async Task SetUp() => await Page.SetContentAsync(

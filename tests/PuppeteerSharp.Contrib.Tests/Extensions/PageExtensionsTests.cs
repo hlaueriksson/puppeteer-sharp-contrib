@@ -6,7 +6,6 @@ using PuppeteerSharp.Contrib.Extensions;
 
 namespace PuppeteerSharp.Contrib.Tests.Extensions
 {
-
     public class PageExtensionsTests : PuppeteerPageBaseTest
     {
         protected override async Task SetUp() => await Page.SetContentAsync(@"

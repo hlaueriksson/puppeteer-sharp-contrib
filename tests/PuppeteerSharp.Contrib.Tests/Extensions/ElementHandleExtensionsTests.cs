@@ -6,7 +6,6 @@ using PuppeteerSharp.Contrib.Extensions;
 
 namespace PuppeteerSharp.Contrib.Tests.Extensions
 {
-
     public class ElementHandleExtensionsTests : PuppeteerPageBaseTest
     {
         protected override async Task SetUp() => await Page.SetContentAsync("<html><body><div class='tweet'><div class='like'>100</div><div class='retweets'>10</div></div></body></html>");

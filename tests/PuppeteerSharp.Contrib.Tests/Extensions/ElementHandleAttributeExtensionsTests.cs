@@ -5,7 +5,6 @@ using PuppeteerSharp.Contrib.Extensions;
 
 namespace PuppeteerSharp.Contrib.Tests.Extensions
 {
-
     public class ElementHandleAttributeExtensionsTests : PuppeteerPageBaseTest
     {
         [Test]

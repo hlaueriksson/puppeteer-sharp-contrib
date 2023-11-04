@@ -4,7 +4,6 @@ using PuppeteerSharp.Contrib.PageObjects.DynamicProxy;
 
 namespace PuppeteerSharp.Contrib.Tests.PageObjects
 {
-
     public class SelectorInterceptorTests : PuppeteerPageBaseTest
     {
         private SelectorInterceptor _subject;

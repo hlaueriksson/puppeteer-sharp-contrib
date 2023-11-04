@@ -5,7 +5,6 @@ using PuppeteerSharp.Contrib.PageObjects.DynamicProxy;
 
 namespace PuppeteerSharp.Contrib.Tests.PageObjects
 {
-
     public class InvocationExtensionsTests : PuppeteerPageBaseTest
     {
         protected override async Task SetUp() => await Page.SetContentAsync(Fake.Html);

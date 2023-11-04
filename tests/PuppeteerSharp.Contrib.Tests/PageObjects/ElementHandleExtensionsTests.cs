@@ -5,7 +5,6 @@ using PuppeteerSharp.Contrib.PageObjects;
 
 namespace PuppeteerSharp.Contrib.Tests.PageObjects
 {
-
     public class ElementHandleExtensionsTests : PuppeteerPageBaseTest
     {
         private ElementHandle _elementHandle;

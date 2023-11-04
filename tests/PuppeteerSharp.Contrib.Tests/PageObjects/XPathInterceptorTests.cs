@@ -4,7 +4,6 @@ using PuppeteerSharp.Contrib.PageObjects.DynamicProxy;
 
 namespace PuppeteerSharp.Contrib.Tests.PageObjects
 {
-
     public class XPathInterceptorTests : PuppeteerPageBaseTest
     {
         private XPathInterceptor _subject;

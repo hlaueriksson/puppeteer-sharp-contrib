@@ -5,7 +5,6 @@ using PuppeteerSharp.Contrib.PageObjects;
 
 namespace PuppeteerSharp.Contrib.Tests.PageObjects
 {
-
     public class PageExtensionsTests : PuppeteerPageBaseTest
     {
         protected override async Task SetUp() => await Page.SetContentAsync(Fake.Html);

@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using PuppeteerSharp.Contrib.PageObjects;
 using PuppeteerSharp.Contrib.PageObjects.DynamicProxy;
 
