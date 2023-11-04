@@ -51,28 +51,36 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         public async Task WaitForNavigationAsync_returns_proxy_of_type()
         {
             await Page.GoToAsync("https://github.com/hardkoded/puppeteer-sharp");
+            var task = Page.WaitForNavigationAsync<FakePageObject>(new NavigationOptions());
             await Page.ClickAsync("#repository-container-header strong a");
-            var result = await Page.WaitForNavigationAsync<FakePageObject>(new NavigationOptions());
+            var result = await task;
             Assert.NotNull(result);
             Assert.IsInstanceOf<FakePageObject>(result);
         }
 
         [Test]
-        public async Task WaitForResponseAsync_returns_proxy_of_type() // TODO: Flaky
+        public async Task WaitForResponseAsync_returns_proxy_of_type()
         {
             await Page.GoToAsync("https://github.com/hardkoded/puppeteer-sharp");
+            var task = Page.WaitForResponseAsync<FakePageObject>("https://github.com/hardkoded/puppeteer-sharp", new WaitForOptions());
             await Page.ClickAsync("#repository-container-header strong a");
-            var result = await Page.WaitForResponseAsync<FakePageObject>("https://github.com/hardkoded/puppeteer-sharp", new WaitForOptions());
+            var result = await task;
             Assert.NotNull(result);
             Assert.IsInstanceOf<FakePageObject>(result);
 
+            task = Page.WaitForResponseAsync<FakePageObject>(response => response.Url == "https://github.com/hardkoded/puppeteer-sharp", new WaitForOptions());
             await Page.ClickAsync("#repository-container-header strong a");
-            result = await Page.WaitForResponseAsync<FakePageObject>(response => response.Url == "https://github.com/hardkoded/puppeteer-sharp", new WaitForOptions());
+            result = await task;
             Assert.NotNull(result);
             Assert.IsInstanceOf<FakePageObject>(result);
 
+            task = Page.WaitForResponseAsync<FakePageObject>(async (Response response) =>
+            {
+                await Task.Delay(1);
+                return response.Url == "https://github.com/hardkoded/puppeteer-sharp";
+            }, new WaitForOptions());
             await Page.ClickAsync("#repository-container-header strong a");
-            result = await Page.WaitForResponseAsync<FakePageObject>(async (Response response) => (await response.TextAsync()).Contains("Puppeteer Sharp"), new WaitForOptions());
+            result = await task;
             Assert.NotNull(result);
             Assert.IsInstanceOf<FakePageObject>(result);
         }
