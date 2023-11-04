@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 using PuppeteerSharp.Contrib.PageObjects.DynamicProxy;
-using Xunit;
+using NUnit.Framework;
 
 namespace PuppeteerSharp.Contrib.Tests.PageObjects
 {
-    [Collection(PuppeteerFixture.Name)]
+    
     public class SelectorInterceptorTests : PuppeteerPageBaseTest
     {
         private SelectorInterceptor _subject;
@@ -24,7 +24,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
         // PageObject
 
-        [Fact]
+        [Test]
         public async Task Intercept_sets_the_ReturnValue_to_Task_of_ElementHandle_for_property_on_PageObject_marked_with_SelectorAttribute()
         {
             var methodInfo = _pageObject.GetType().GetProperty(nameof(FakePageObject.SelectorForElementHandle)).GetMethod;
@@ -34,10 +34,10 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var result = await (Task<ElementHandle>)invocation.ReturnValue;
 
             Assert.NotNull(result);
-            Assert.IsType<ElementHandle>(result);
+            Assert.IsInstanceOf<ElementHandle>(result);
         }
 
-        [Fact]
+        [Test]
         public async Task Intercept_sets_the_ReturnValue_to_Task_of_ElementHandle_array_for_property_on_PageObject_marked_with_SelectorAttribute()
         {
             var methodInfo = _pageObject.GetType().GetProperty(nameof(FakePageObject.SelectorForElementHandleArray)).GetMethod;
@@ -47,10 +47,10 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var result = await (Task<ElementHandle[]>)invocation.ReturnValue;
 
             Assert.NotNull(result);
-            Assert.IsType<ElementHandle[]>(result);
+            Assert.IsInstanceOf<ElementHandle[]>(result);
         }
 
-        [Fact]
+        [Test]
         public async Task Intercept_sets_the_ReturnValue_to_Task_of_ElementObject_for_property_on_PageObject_marked_with_SelectorAttribute()
         {
             var methodInfo = _pageObject.GetType().GetProperty(nameof(FakePageObject.SelectorForElementObject)).GetMethod;
@@ -60,10 +60,10 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var result = await (Task<FakeElementObject>)invocation.ReturnValue;
 
             Assert.NotNull(result);
-            Assert.IsAssignableFrom<FakeElementObject>(result);
+            Assert.IsInstanceOf<FakeElementObject>(result);
         }
 
-        [Fact]
+        [Test]
         public void Intercept_sets_the_ReturnValue_to_null_for_property_on_PageObject_marked_with_SelectorAttribute_but_wrong_return_type()
         {
             var methodInfo = _pageObject.GetType().GetProperty(nameof(FakePageObject.SelectorForWrongReturnType)).GetMethod;
@@ -74,7 +74,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             Assert.Null(invocation.ReturnValue);
         }
 
-        [Fact]
+        [Test]
         public void Intercept_sets_the_ReturnValue_to_null_for_property_on_PageObject_marked_with_SelectorAttribute_but_non_Task_return_type()
         {
             var methodInfo = _pageObject.GetType().GetProperty(nameof(FakePageObject.SelectorForNonTaskReturnType)).GetMethod;
@@ -87,7 +87,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
         // ElementObject
 
-        [Fact]
+        [Test]
         public async Task Intercept_sets_the_ReturnValue_to_Task_of_ElementHandle_for_property_on_ElementObject_marked_with_SelectorAttribute()
         {
             var methodInfo = _elementObject.GetType().GetProperty(nameof(FakeElementObject.SelectorForElementHandle)).GetMethod;
@@ -97,10 +97,10 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var result = await (Task<ElementHandle>)invocation.ReturnValue;
 
             Assert.NotNull(result);
-            Assert.IsType<ElementHandle>(result);
+            Assert.IsInstanceOf<ElementHandle>(result);
         }
 
-        [Fact]
+        [Test]
         public async Task Intercept_sets_the_ReturnValue_to_Task_of_ElementHandle_array_for_property_on_ElementObject_marked_with_SelectorAttribute()
         {
             var methodInfo = _elementObject.GetType().GetProperty(nameof(FakeElementObject.SelectorForElementHandleArray)).GetMethod;
@@ -110,10 +110,10 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var result = await (Task<ElementHandle[]>)invocation.ReturnValue;
 
             Assert.NotNull(result);
-            Assert.IsType<ElementHandle[]>(result);
+            Assert.IsInstanceOf<ElementHandle[]>(result);
         }
 
-        [Fact]
+        [Test]
         public async Task Intercept_sets_the_ReturnValue_to_Task_of_ElementObject_for_property_on_ElementObject_marked_with_SelectorAttribute()
         {
             var methodInfo = _elementObject.GetType().GetProperty(nameof(FakeElementObject.SelectorForElementObject)).GetMethod;
@@ -123,10 +123,10 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var result = await (Task<FakeElementObject>)invocation.ReturnValue;
 
             Assert.NotNull(result);
-            Assert.IsAssignableFrom<FakeElementObject>(result);
+            Assert.IsInstanceOf<FakeElementObject>(result);
         }
 
-        [Fact]
+        [Test]
         public void Intercept_sets_the_ReturnValue_to_null_for_property_on_ElementObject_marked_with_SelectorAttribute_but_wrong_return_type()
         {
             var methodInfo = _elementObject.GetType().GetProperty(nameof(FakeElementObject.SelectorForWrongReturnType)).GetMethod;
@@ -137,7 +137,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             Assert.Null(invocation.ReturnValue);
         }
 
-        [Fact]
+        [Test]
         public void Intercept_sets_the_ReturnValue_to_null_for_property_on_ElementObject_marked_with_SelectorAttribute_but_non_Task_return_type()
         {
             var methodInfo = _elementObject.GetType().GetProperty(nameof(FakeElementObject.SelectorForNonTaskReturnType)).GetMethod;
@@ -150,7 +150,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
         // Unknown
 
-        [Fact]
+        [Test]
         public void Intercept_sets_the_ReturnValue_to_null_for_property_on_unknown_object_marked_with_SelectorAttribute()
         {
             var objectWithNoBaseClass = new FakeObjectWithNoBaseClass();

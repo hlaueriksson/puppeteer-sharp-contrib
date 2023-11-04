@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 using PuppeteerSharp.Contrib.PageObjects.DynamicProxy;
-using Xunit;
+using NUnit.Framework;
 
 namespace PuppeteerSharp.Contrib.Tests.PageObjects
 {
-    [Collection(PuppeteerFixture.Name)]
+    
     public class XPathInterceptorTests : PuppeteerPageBaseTest
     {
         private XPathInterceptor _subject;
@@ -24,7 +24,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
         // PageObject
 
-        [Fact]
+        [Test]
         public async Task Intercept_sets_the_ReturnValue_to_Task_of_ElementHandle_array_for_property_on_PageObject_marked_with_XPathAttribute()
         {
             var methodInfo = _pageObject.GetType().GetProperty(nameof(FakePageObject.XPathForElementHandleArray)).GetMethod;
@@ -34,10 +34,10 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var result = await (Task<ElementHandle[]>)invocation.ReturnValue;
 
             Assert.NotNull(result);
-            Assert.IsType<ElementHandle[]>(result);
+            Assert.IsInstanceOf<ElementHandle[]>(result);
         }
 
-        [Fact]
+        [Test]
         public void Intercept_sets_the_ReturnValue_to_null_for_property_on_PageObject_marked_with_XPathAttribute_but_wrong_return_type()
         {
             var methodInfo = _pageObject.GetType().GetProperty(nameof(FakePageObject.XPathForWrongReturnType)).GetMethod;
@@ -48,7 +48,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             Assert.Null(invocation.ReturnValue);
         }
 
-        [Fact]
+        [Test]
         public void Intercept_sets_the_ReturnValue_to_null_for_property_on_PageObject_marked_with_XPathAttribute_but_non_Task_return_type()
         {
             var methodInfo = _pageObject.GetType().GetProperty(nameof(FakePageObject.XPathForNonTaskReturnType)).GetMethod;
@@ -61,7 +61,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
         // ElementObject
 
-        [Fact]
+        [Test]
         public async Task Intercept_sets_the_ReturnValue_to_Task_of_ElementHandle_array_for_property_on_ElementObject_marked_with_XPathAttribute()
         {
             var methodInfo = _elementObject.GetType().GetProperty(nameof(FakeElementObject.XPathForElementHandleArray)).GetMethod;
@@ -71,10 +71,10 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var result = await (Task<ElementHandle[]>)invocation.ReturnValue;
 
             Assert.NotNull(result);
-            Assert.IsType<ElementHandle[]>(result);
+            Assert.IsInstanceOf<ElementHandle[]>(result);
         }
 
-        [Fact]
+        [Test]
         public void Intercept_sets_the_ReturnValue_to_null_for_property_on_ElementObject_marked_with_XPathAttribute_but_wrong_return_type()
         {
             var methodInfo = _elementObject.GetType().GetProperty(nameof(FakeElementObject.XPathForWrongReturnType)).GetMethod;
@@ -85,7 +85,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             Assert.Null(invocation.ReturnValue);
         }
 
-        [Fact]
+        [Test]
         public void Intercept_sets_the_ReturnValue_to_null_for_property_on_ElementObject_marked_with_XPathAttribute_but_non_Task_return_type()
         {
             var methodInfo = _elementObject.GetType().GetProperty(nameof(FakeElementObject.XPathForNonTaskReturnType)).GetMethod;
@@ -98,7 +98,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
         // Unknown
 
-        [Fact]
+        [Test]
         public void Intercept_sets_the_ReturnValue_to_null_for_property_on_unknown_object_marked_with_XPathAttribute()
         {
             var objectWithNoBaseClass = new FakeObjectWithNoBaseClass();

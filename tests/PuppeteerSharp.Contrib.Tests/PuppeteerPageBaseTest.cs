@@ -1,15 +1,16 @@
 using System.Threading.Tasks;
-using Xunit;
+using NUnit.Framework;
 
 namespace PuppeteerSharp.Contrib.Tests
 {
-    public abstract class PuppeteerPageBaseTest : IAsyncLifetime
+    public abstract class PuppeteerPageBaseTest
     {
         private Browser Browser { get; set; }
         private BrowserContext Context { get; set; }
         protected Page Page { get; private set; }
 
-        public async Task InitializeAsync()
+        [SetUp]
+        public async Task CreatePageAsync()
         {
             Browser = await Puppeteer.LaunchAsync(new LaunchOptions
             {
@@ -21,7 +22,8 @@ namespace PuppeteerSharp.Contrib.Tests
             await SetUp();
         }
 
-        public async Task DisposeAsync()
+        [TearDown]
+        public async Task ClosePageAsync()
         {
             await TearDown();
 
