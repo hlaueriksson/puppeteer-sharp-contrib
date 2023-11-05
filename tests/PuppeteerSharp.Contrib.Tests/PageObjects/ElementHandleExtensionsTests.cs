@@ -7,7 +7,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 {
     public class ElementHandleExtensionsTests : PuppeteerPageBaseTest
     {
-        private ElementHandle _elementHandle;
+        private IElementHandle _elementHandle;
 
         protected override async Task SetUp()
         {

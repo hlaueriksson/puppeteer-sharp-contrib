@@ -84,7 +84,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
 
         private static IPage GetPage(this IElementHandle elementHandle)
         {
-            var propertyInfo = elementHandle.GetType().GetProperty("IPage", BindingFlags.NonPublic | BindingFlags.Instance);
+            var propertyInfo = elementHandle.GetType().GetProperty("Page", BindingFlags.NonPublic | BindingFlags.Instance);
             var methodInfo = propertyInfo.GetGetMethod(nonPublic: true);
 
             return (IPage)methodInfo.Invoke(elementHandle, null);

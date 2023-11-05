@@ -30,10 +30,10 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var invocation = new FakeInvocation(methodInfo, _pageObject);
 
             _subject.Intercept(invocation);
-            var result = await (Task<ElementHandle>)invocation.ReturnValue;
+            var result = await (Task<IElementHandle>)invocation.ReturnValue;
 
             Assert.NotNull(result);
-            Assert.IsInstanceOf<ElementHandle>(result);
+            Assert.IsInstanceOf<IElementHandle>(result);
         }
 
         [Test]
@@ -43,10 +43,10 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var invocation = new FakeInvocation(methodInfo, _pageObject);
 
             _subject.Intercept(invocation);
-            var result = await (Task<ElementHandle[]>)invocation.ReturnValue;
+            var result = await (Task<IElementHandle[]>)invocation.ReturnValue;
 
             Assert.NotNull(result);
-            Assert.IsInstanceOf<ElementHandle[]>(result);
+            Assert.IsInstanceOf<IElementHandle[]>(result);
         }
 
         [Test]
@@ -93,10 +93,10 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var invocation = new FakeInvocation(methodInfo, _elementObject);
 
             _subject.Intercept(invocation);
-            var result = await (Task<ElementHandle>)invocation.ReturnValue;
+            var result = await (Task<IElementHandle>)invocation.ReturnValue;
 
             Assert.NotNull(result);
-            Assert.IsInstanceOf<ElementHandle>(result);
+            Assert.IsInstanceOf<IElementHandle>(result);
         }
 
         [Test]
@@ -106,10 +106,10 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var invocation = new FakeInvocation(methodInfo, _elementObject);
 
             _subject.Intercept(invocation);
-            var result = await (Task<ElementHandle[]>)invocation.ReturnValue;
+            var result = await (Task<IElementHandle[]>)invocation.ReturnValue;
 
             Assert.NotNull(result);
-            Assert.IsInstanceOf<ElementHandle[]>(result);
+            Assert.IsInstanceOf<IElementHandle[]>(result);
         }
 
         [Test]

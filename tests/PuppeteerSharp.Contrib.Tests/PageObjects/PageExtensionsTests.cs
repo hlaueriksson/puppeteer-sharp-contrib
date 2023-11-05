@@ -74,7 +74,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             Assert.NotNull(result);
             Assert.IsInstanceOf<FakePageObject>(result);
 
-            task = Page.WaitForResponseAsync<FakePageObject>(async (Response response) =>
+            task = Page.WaitForResponseAsync<FakePageObject>(async (IResponse response) =>
             {
                 await Task.Delay(1);
                 return response.Url == "https://github.com/hardkoded/puppeteer-sharp";

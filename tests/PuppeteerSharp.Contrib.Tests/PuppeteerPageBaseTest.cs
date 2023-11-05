@@ -5,9 +5,9 @@ namespace PuppeteerSharp.Contrib.Tests
 {
     public abstract class PuppeteerPageBaseTest
     {
-        private Browser Browser { get; set; }
-        private BrowserContext Context { get; set; }
-        protected Page Page { get; private set; }
+        private IBrowser Browser { get; set; }
+        private IBrowserContext Context { get; set; }
+        protected IPage Page { get; private set; }
 
         [SetUp]
         public async Task CreatePageAsync()

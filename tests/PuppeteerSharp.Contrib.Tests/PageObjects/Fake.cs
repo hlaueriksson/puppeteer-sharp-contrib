@@ -14,10 +14,10 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
     public class FakePageObject : PageObject
     {
         [Selector(".tweet")]
-        public virtual Task<ElementHandle> SelectorForElementHandle { get; }
+        public virtual Task<IElementHandle> SelectorForElementHandle { get; }
 
         [Selector("div")]
-        public virtual Task<ElementHandle[]> SelectorForElementHandleArray { get; }
+        public virtual Task<IElementHandle[]> SelectorForElementHandleArray { get; }
 
         [Selector(".retweets")]
         public virtual Task<FakeElementObject> SelectorForElementObject { get; }
@@ -26,7 +26,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         public virtual Task<FakeElementObject[]> SelectorForElementObjectArray { get; }
 
         [XPath("//div")]
-        public virtual Task<ElementHandle[]> XPathForElementHandleArray { get; }
+        public virtual Task<IElementHandle[]> XPathForElementHandleArray { get; }
 
         [XPath("//div")]
         public virtual Task<FakeElementObject[]> XPathForElementObjectArray { get; }
@@ -37,7 +37,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         public virtual Task<object> SelectorForWrongReturnType { get; }
 
         [Selector(".tweet")]
-        public virtual ElementHandle SelectorForNonTaskReturnType { get; }
+        public virtual IElementHandle SelectorForNonTaskReturnType { get; }
 
         [Selector(".retweets")]
         public virtual FakeElementObject SelectorForElementObjectWithNonTaskReturnType { get; }
@@ -49,16 +49,16 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         public virtual Task<object[]> XPathForWrongReturnType { get; }
 
         [XPath("//div")]
-        public virtual ElementHandle[] XPathForNonTaskReturnType { get; }
+        public virtual IElementHandle[] XPathForNonTaskReturnType { get; }
     }
 
     public class FakeElementObject : ElementObject
     {
         [Selector(".tweet")]
-        public virtual Task<ElementHandle> SelectorForElementHandle { get; }
+        public virtual Task<IElementHandle> SelectorForElementHandle { get; }
 
         [Selector("div")]
-        public virtual Task<ElementHandle[]> SelectorForElementHandleArray { get; }
+        public virtual Task<IElementHandle[]> SelectorForElementHandleArray { get; }
 
         [Selector(".retweets")]
         public virtual Task<FakeElementObject> SelectorForElementObject { get; }
@@ -67,7 +67,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         public virtual Task<FakeElementObject[]> SelectorForElementObjectArray { get; }
 
         [XPath("//div")]
-        public virtual Task<ElementHandle[]> XPathForElementHandleArray { get; }
+        public virtual Task<IElementHandle[]> XPathForElementHandleArray { get; }
 
         [XPath("//div")]
         public virtual Task<FakeElementObject[]> XPathForElementObjectArray { get; }
@@ -78,22 +78,22 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         public virtual Task<object> SelectorForWrongReturnType { get; }
 
         [Selector(".tweet")]
-        public virtual ElementHandle SelectorForNonTaskReturnType { get; }
+        public virtual IElementHandle SelectorForNonTaskReturnType { get; }
 
         [XPath("//div")]
         public virtual Task<object[]> XPathForWrongReturnType { get; }
 
         [XPath("//div")]
-        public virtual ElementHandle[] XPathForNonTaskReturnType { get; }
+        public virtual IElementHandle[] XPathForNonTaskReturnType { get; }
     }
 
     public class FakeObjectWithNoBaseClass
     {
         [Selector(".tweet")]
-        public virtual Task<ElementHandle> SelectorForElementHandle { get; }
+        public virtual Task<IElementHandle> SelectorForElementHandle { get; }
 
         [XPath("//div")]
-        public virtual Task<ElementHandle[]> XPathForElementHandleArray { get; }
+        public virtual Task<IElementHandle[]> XPathForElementHandleArray { get; }
     }
 
     public class FakeInvocation(MethodInfo proxiedMethod, object proxy = null) : AbstractInvocation(proxy, null, proxiedMethod, null)
