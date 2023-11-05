@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using PuppeteerSharp.Contrib.Extensions;
 using PuppeteerSharp.Contrib.Should;
+using PuppeteerSharp.Input;
 
 namespace PuppeteerSharp.Contrib.Sample
 {
@@ -32,27 +33,31 @@ namespace PuppeteerSharp.Contrib.Sample
             var page = await Browser.NewPageAsync();
 
             await page.GoToAsync("https://github.com/");
-            var h1 = await page.QuerySelectorAsync("h1");
-            await h1.ShouldHaveContentAsync("Let's build");
+            var heading = await page.QuerySelectorAsync("main h1");
+            await heading.ShouldHaveContentAsync("Let’s build");
 
-            var input = await page.QuerySelectorAsync("input.header-search-input");
-            if (await input.IsHiddenAsync()) await page.ClickAsync(".octicon-three-bars");
-            await page.TypeAsync("input.header-search-input", "Puppeteer Sharp");
-            await page.Keyboard.PressAsync("Enter");
-            await page.WaitForNavigationAsync();
+            var input = await page.QuerySelectorAsync("#query-builder-test");
+            if (await input.IsHiddenAsync())
+            {
+                await page.ClickAsync("[aria-label=\"Toggle navigation\"][data-view-component=\"true\"]");
+                await page.ClickAsync("[data-target=\"qbsearch-input.inputButtonText\"]");
+            }
+            await input.TypeAsync("Puppeteer Sharp");
+            await page.Keyboard.PressAsync(Key.Enter);
+            await page.WaitForSelectorAsync("[data-testid=\"results-list\"]");
 
-            var repositories = await page.QuerySelectorAllAsync(".repo-list-item");
+            var repositories = await page.QuerySelectorAllAsync("[data-testid=\"results-list\"] > div");
             Assert.IsNotEmpty(repositories);
             var repository = repositories.First();
             await repository.ShouldHaveContentAsync("hardkoded/puppeteer-sharp");
-            var text = await repository.QuerySelectorAsync("p");
+            var text = await repository.QuerySelectorAsync("h3 + div");
             await text.ShouldHaveContentAsync("Headless Chrome .NET API");
             var link = await repository.QuerySelectorAsync("a");
             await link.ClickAsync();
-            await page.WaitForNavigationAsync(new NavigationOptions { WaitUntil = new[] { WaitUntilNavigation.Networkidle0 } });
+            await page.WaitForSelectorAsync("article > h1");
 
-            h1 = await page.QuerySelectorAsync("article > h1");
-            await h1.ShouldHaveContentAsync("Puppeteer Sharp");
+            heading = await page.QuerySelectorAsync("article > h1");
+            await heading.ShouldHaveContentAsync("Puppeteer Sharp");
             Assert.AreEqual("https://github.com/hardkoded/puppeteer-sharp", page.Url);
         }
 
@@ -63,12 +68,12 @@ namespace PuppeteerSharp.Contrib.Sample
 
             await page.GoToAsync("https://github.com/hardkoded/puppeteer-sharp");
 
-            var build = await page.QuerySelectorAsync("img[alt='Build status']");
-            await build.ClickAsync();
-            await page.WaitForNavigationAsync(new NavigationOptions { WaitUntil = new[] { WaitUntilNavigation.Networkidle0 } });
+            await page.ClickAsync("#actions-tab");
+            await page.WaitForSelectorAsync("#partial-actions-workflow-runs");
 
-            var success = await page.QuerySelectorAsync(".project-build.project-build-status.success");
-            success.ShouldExist();
+            var status = await page.QuerySelectorAsync(".checks-list-item-icon svg");
+            var label = await status.GetAttributeAsync("aria-label");
+            Assert.AreEqual("completed successfully", label);
         }
 
         [Test]
@@ -88,7 +93,7 @@ namespace PuppeteerSharp.Contrib.Sample
             {
                 var latest = await page.QuerySelectorWithContentAsync("a[href*='releases'] span", @"v?\d+\.\d\.\d");
                 var version = await latest.TextContentAsync();
-                return version.TrimStart('v');
+                return version.Substring(version.LastIndexOf('v') + 1);
             }
         }
     }

@@ -1,12 +1,10 @@
-using System.Linq;
+using System;
 using System.Threading.Tasks;
-using PuppeteerSharp.Contrib.PageObjects;
+using NUnit.Framework;
 using PuppeteerSharp.Contrib.PageObjects.DynamicProxy;
-using Xunit;
 
 namespace PuppeteerSharp.Contrib.Tests.PageObjects
 {
-    [Collection(PuppeteerFixture.Name)]
     public class ProxyFactoryTests : PuppeteerPageBaseTest
     {
         protected override async Task SetUp()
@@ -14,52 +12,52 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             await Page.SetContentAsync(Fake.Html);
         }
 
-        [Fact]
+        [Test]
         public void PageObject_returns_proxy_of_type()
         {
             var result = ProxyFactory.PageObject<FakePageObject>(Page, null);
 
             Assert.NotNull(result);
-            Assert.IsAssignableFrom<FakePageObject>(result);
+            Assert.IsInstanceOf<FakePageObject>(result);
         }
 
-        [Fact]
+        [Test]
         public async Task ElementObject_returns_proxy_of_type()
         {
             var elementHandle = await Page.QuerySelectorAsync(".tweet");
 
             var result = ProxyFactory.ElementObject<FakeElementObject>(Page, elementHandle);
             Assert.NotNull(result);
-            Assert.IsAssignableFrom<FakeElementObject>(result);
+            Assert.IsInstanceOf<FakeElementObject>(result);
 
             result = ProxyFactory.ElementObject<FakeElementObject>(Page, null);
             Assert.Null(result);
         }
 
-        [Fact]
+        [Test]
         public async Task ElementObject_returns_proxy_of_given_type()
         {
             var elementHandle = await Page.QuerySelectorAsync(".tweet");
 
             var result = ProxyFactory.ElementObject(typeof(FakeElementObject), Page, elementHandle);
             Assert.NotNull(result);
-            Assert.IsAssignableFrom<FakeElementObject>(result);
+            Assert.IsInstanceOf<FakeElementObject>(result);
 
             result = ProxyFactory.ElementObject(typeof(FakeElementObject), Page, null);
             Assert.Null(result);
         }
 
-        [Fact]
+        [Test]
         public async Task ElementObjectArray_returns_proxy_of_given_type()
         {
             var elementHandles = await Page.QuerySelectorAllAsync("div");
 
             var result = ProxyFactory.ElementObjectArray(typeof(FakeElementObject), Page, elementHandles);
-            Assert.NotEmpty(result);
-            Assert.All(result.Cast<ElementObject>(), x => Assert.IsAssignableFrom<FakeElementObject>(x));
+            Assert.IsNotEmpty(result);
+            CollectionAssert.AllItemsAreInstancesOfType(result, typeof(FakeElementObject));
 
-            result = ProxyFactory.ElementObjectArray(typeof(FakeElementObject), Page, new ElementHandle[0]);
-            Assert.Empty(result);
+            result = ProxyFactory.ElementObjectArray(typeof(FakeElementObject), Page, Array.Empty<ElementHandle>());
+            Assert.IsEmpty(result);
         }
     }
 }
