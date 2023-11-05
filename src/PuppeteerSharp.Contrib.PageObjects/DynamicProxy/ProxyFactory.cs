@@ -1,12 +1,14 @@
-﻿using System;
+using System;
 using Castle.DynamicProxy;
 
 namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
 {
     internal static class ProxyFactory
     {
-        private static readonly ProxyGenerator ProxyGenerator = new ProxyGenerator();
-        private static readonly ProxyGenerationOptions Options = new ProxyGenerationOptions(new ProxyGenerationHook()) { Selector = new InterceptorSelector() };
+#pragma warning disable IDE1006 // Naming Styles
+        private static readonly ProxyGenerator ProxyGenerator = new();
+        private static readonly ProxyGenerationOptions Options = new(new ProxyGenerationHook()) { Selector = new InterceptorSelector() };
+#pragma warning restore IDE1006 // Naming Styles
 
         public static T PageObject<T>(Page page, Response response)
             where T : PageObject

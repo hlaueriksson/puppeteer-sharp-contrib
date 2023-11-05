@@ -2,20 +2,13 @@ using System;
 
 namespace PuppeteerSharp.Contrib.Should
 {
-    internal class ShouldMessage
+    internal class ShouldMessage(string expected, string? because, string? actual)
     {
-        public ShouldMessage(string expected, string? because, string? actual)
-        {
-            Expected = expected;
-            Because = because;
-            Actual = actual;
-        }
+        private string Expected { get; } = expected;
 
-        private string Expected { get; }
+        private string? Because { get; set; } = because;
 
-        private string? Because { get; set; }
-
-        private string? Actual { get; }
+        private string? Actual { get; } = actual;
 
         public override string ToString()
         {

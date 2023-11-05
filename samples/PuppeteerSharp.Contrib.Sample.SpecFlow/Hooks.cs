@@ -5,15 +5,10 @@ using TechTalk.SpecFlow;
 namespace PuppeteerSharp.Contrib.Sample
 {
     [Binding]
-    public class Hooks
+    public class Hooks(IObjectContainer objectContainer)
     {
-        private IObjectContainer ObjectContainer { get; }
+        private IObjectContainer ObjectContainer { get; } = objectContainer;
         private Browser Browser { get; set; }
-
-        public Hooks(IObjectContainer objectContainer)
-        {
-            ObjectContainer = objectContainer;
-        }
 
         [BeforeScenario]
         public async Task BeforeScenario()

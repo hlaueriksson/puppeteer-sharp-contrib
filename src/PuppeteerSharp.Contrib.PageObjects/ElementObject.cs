@@ -1,9 +1,8 @@
 namespace PuppeteerSharp.Contrib.PageObjects
 {
     /// <summary>
-    /// Base class for element objects.
-    ///
-    /// Create element objects by inheriting <see cref="ElementObject"/> and declare properties decorated with <see cref="SelectorAttribute"/> or <see cref="XPathAttribute"/>.
+    /// <para>Base class for element objects.</para>
+    /// <para>Create element objects by inheriting <see cref="ElementObject"/> and declare properties decorated with <see cref="SelectorAttribute"/> or <see cref="XPathAttribute"/>.</para>
     /// </summary>
     /// <example>
     /// Usage:

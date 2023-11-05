@@ -18,7 +18,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="ElementHandle"/> for method chaining.</returns>
         public static ElementHandle ShouldExist(this ElementHandle elementHandle, string? because = null)
         {
-            if (!elementHandle.Exists()) Throw.ShouldExist(elementHandle, because);
+            if (!elementHandle.Exists()) Throw.ElementShouldExist(because);
 
             return elementHandle;
         }
@@ -31,7 +31,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="ElementHandle"/> for method chaining.</returns>
         public static ElementHandle ShouldNotExist(this ElementHandle elementHandle, string? because = null)
         {
-            if (elementHandle.Exists()) Throw.ShouldNotExist(elementHandle, because);
+            if (elementHandle.Exists()) Throw.ElementShouldNotExist(because);
 
             return elementHandle;
         }
@@ -50,7 +50,7 @@ namespace PuppeteerSharp.Contrib.Should
         {
             var actual = await elementHandle.ValueAsync().ConfigureAwait(false);
 
-            if (actual != value) Throw.ShouldHaveValue(elementHandle, value, actual, because);
+            if (actual != value) Throw.ElementShouldHaveValue(value, actual, because);
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <button>, <option>, <input>, <li>, <meter>, <progress>, <param>]]></remarks>
         public static async Task ShouldNotHaveValueAsync(this ElementHandle elementHandle, string value, string? because = null)
         {
-            if (await elementHandle.ValueAsync().ConfigureAwait(false) == value) Throw.ShouldNotHaveValue(elementHandle, value, because);
+            if (await elementHandle.ValueAsync().ConfigureAwait(false) == value) Throw.ElementShouldNotHaveValue(value, because);
         }
 
         // Attribute
@@ -77,7 +77,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static async Task ShouldHaveAttributeAsync(this ElementHandle elementHandle, string name, string? because = null)
         {
-            if (!await elementHandle.HasAttributeAsync(name).ConfigureAwait(false)) Throw.ShouldHaveAttribute(elementHandle, name, because);
+            if (!await elementHandle.HasAttributeAsync(name).ConfigureAwait(false)) Throw.ElementShouldHaveAttribute(name, because);
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static async Task ShouldNotHaveAttributeAsync(this ElementHandle elementHandle, string name, string? because = null)
         {
-            if (await elementHandle.HasAttributeAsync(name).ConfigureAwait(false)) Throw.ShouldNotHaveAttribute(elementHandle, name, because);
+            if (await elementHandle.HasAttributeAsync(name).ConfigureAwait(false)) Throw.ElementShouldNotHaveAttribute(name, because);
         }
 
         // Content
@@ -105,7 +105,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
         public static async Task ShouldHaveContentAsync(this ElementHandle elementHandle, string regex, string flags = "", string? because = null)
         {
-            if (!await elementHandle.HasContentAsync(regex, flags).ConfigureAwait(false)) Throw.ShouldHaveContent(elementHandle, regex, flags, because);
+            if (!await elementHandle.HasContentAsync(regex, flags).ConfigureAwait(false)) Throw.ElementShouldHaveContent(regex, flags, because);
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
         public static async Task ShouldNotHaveContentAsync(this ElementHandle elementHandle, string regex, string flags = "", string? because = null)
         {
-            if (await elementHandle.HasContentAsync(regex, flags).ConfigureAwait(false)) Throw.ShouldNotHaveContent(elementHandle, regex, flags, because);
+            if (await elementHandle.HasContentAsync(regex, flags).ConfigureAwait(false)) Throw.ElementShouldNotHaveContent(regex, flags, because);
         }
 
         // Class
@@ -133,7 +133,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static async Task ShouldHaveClassAsync(this ElementHandle elementHandle, string className, string? because = null)
         {
-            if (!await elementHandle.HasClassAsync(className).ConfigureAwait(false)) Throw.ShouldHaveClass(elementHandle, className, because);
+            if (!await elementHandle.HasClassAsync(className).ConfigureAwait(false)) Throw.ElementShouldHaveClass(className, because);
         }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static async Task ShouldNotHaveClassAsync(this ElementHandle elementHandle, string className, string? because = null)
         {
-            if (await elementHandle.HasClassAsync(className).ConfigureAwait(false)) Throw.ShouldNotHaveClass(elementHandle, className, because);
+            if (await elementHandle.HasClassAsync(className).ConfigureAwait(false)) Throw.ElementShouldNotHaveClass(className, because);
         }
 
         // Visible
@@ -158,7 +158,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static async Task ShouldBeVisibleAsync(this ElementHandle elementHandle, string? because = null)
         {
-            if (await elementHandle.IsHiddenAsync().ConfigureAwait(false)) Throw.ShouldBeVisible(elementHandle, because);
+            if (await elementHandle.IsHiddenAsync().ConfigureAwait(false)) Throw.ElementShouldBeVisible(because);
         }
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static async Task ShouldBeHiddenAsync(this ElementHandle elementHandle, string? because = null)
         {
-            if (await elementHandle.IsVisibleAsync().ConfigureAwait(false)) Throw.ShouldBeHidden(elementHandle, because);
+            if (await elementHandle.IsVisibleAsync().ConfigureAwait(false)) Throw.ElementShouldBeHidden(because);
         }
 
         // Selected
@@ -183,7 +183,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <option>]]></remarks>
         public static async Task ShouldBeSelectedAsync(this ElementHandle elementHandle, string? because = null)
         {
-            if (!await elementHandle.IsSelectedAsync().ConfigureAwait(false)) Throw.ShouldBeSelected(elementHandle, because);
+            if (!await elementHandle.IsSelectedAsync().ConfigureAwait(false)) Throw.ElementShouldBeSelected(because);
         }
 
         /// <summary>
@@ -195,7 +195,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <option>]]></remarks>
         public static async Task ShouldNotBeSelectedAsync(this ElementHandle elementHandle, string? because = null)
         {
-            if (await elementHandle.IsSelectedAsync().ConfigureAwait(false)) Throw.ShouldNotBeSelected(elementHandle, because);
+            if (await elementHandle.IsSelectedAsync().ConfigureAwait(false)) Throw.ElementShouldNotBeSelected(because);
         }
 
         // Checked
@@ -209,7 +209,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <command>, <input>]]></remarks>
         public static async Task ShouldBeCheckedAsync(this ElementHandle elementHandle, string? because = null)
         {
-            if (!await elementHandle.IsCheckedAsync().ConfigureAwait(false)) Throw.ShouldBeChecked(elementHandle, because);
+            if (!await elementHandle.IsCheckedAsync().ConfigureAwait(false)) Throw.ElementShouldBeChecked(because);
         }
 
         /// <summary>
@@ -221,7 +221,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <command>, <input>]]></remarks>
         public static async Task ShouldNotBeCheckedAsync(this ElementHandle elementHandle, string? because = null)
         {
-            if (await elementHandle.IsCheckedAsync().ConfigureAwait(false)) Throw.ShouldNotBeChecked(elementHandle, because);
+            if (await elementHandle.IsCheckedAsync().ConfigureAwait(false)) Throw.ElementShouldNotBeChecked(because);
         }
 
         // Disabled
@@ -235,7 +235,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <button>, <command>, <fieldset>, <input>, <keygen>, <optgroup>, <option>, <select>, <textarea>]]></remarks>
         public static async Task ShouldBeDisabledAsync(this ElementHandle elementHandle, string? because = null)
         {
-            if (await elementHandle.IsEnabledAsync().ConfigureAwait(false)) Throw.ShouldBeDisabled(elementHandle, because);
+            if (await elementHandle.IsEnabledAsync().ConfigureAwait(false)) Throw.ElementShouldBeDisabled(because);
         }
 
         /// <summary>
@@ -247,7 +247,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <button>, <command>, <fieldset>, <input>, <keygen>, <optgroup>, <option>, <select>, <textarea>]]></remarks>
         public static async Task ShouldBeEnabledAsync(this ElementHandle elementHandle, string? because = null)
         {
-            if (await elementHandle.IsDisabledAsync().ConfigureAwait(false)) Throw.ShouldBeEnabled(elementHandle, because);
+            if (await elementHandle.IsDisabledAsync().ConfigureAwait(false)) Throw.ElementShouldBeEnabled(because);
         }
 
         // ReadOnly
@@ -261,7 +261,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <input>, <textarea>]]></remarks>
         public static async Task ShouldBeReadOnlyAsync(this ElementHandle elementHandle, string? because = null)
         {
-            if (!await elementHandle.IsReadOnlyAsync().ConfigureAwait(false)) Throw.ShouldBeReadOnly(elementHandle, because);
+            if (!await elementHandle.IsReadOnlyAsync().ConfigureAwait(false)) Throw.ElementShouldBeReadOnly(because);
         }
 
         /// <summary>
@@ -273,7 +273,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <input>, <textarea>]]></remarks>
         public static async Task ShouldNotBeReadOnlyAsync(this ElementHandle elementHandle, string? because = null)
         {
-            if (await elementHandle.IsReadOnlyAsync().ConfigureAwait(false)) Throw.ShouldNotBeReadOnly(elementHandle, because);
+            if (await elementHandle.IsReadOnlyAsync().ConfigureAwait(false)) Throw.ElementShouldNotBeReadOnly(because);
         }
 
         // Required
@@ -287,7 +287,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <input>, <select>, <textarea>]]></remarks>
         public static async Task ShouldBeRequiredAsync(this ElementHandle elementHandle, string? because = null)
         {
-            if (!await elementHandle.IsRequiredAsync().ConfigureAwait(false)) Throw.ShouldBeRequired(elementHandle, because);
+            if (!await elementHandle.IsRequiredAsync().ConfigureAwait(false)) Throw.ElementShouldBeRequired(because);
         }
 
         /// <summary>
@@ -299,7 +299,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <input>, <select>, <textarea>]]></remarks>
         public static async Task ShouldNotBeRequiredAsync(this ElementHandle elementHandle, string? because = null)
         {
-            if (await elementHandle.IsRequiredAsync().ConfigureAwait(false)) Throw.ShouldNotBeRequired(elementHandle, because);
+            if (await elementHandle.IsRequiredAsync().ConfigureAwait(false)) Throw.ElementShouldNotBeRequired(because);
         }
 
         // Focus
@@ -313,7 +313,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <button>, <input>, <keygen>, <select>, <textarea>]]></remarks>
         public static async Task ShouldHaveFocusAsync(this ElementHandle elementHandle, string? because = null)
         {
-            if (!await elementHandle.HasFocusAsync().ConfigureAwait(false)) Throw.ShouldHaveFocus(elementHandle, because);
+            if (!await elementHandle.HasFocusAsync().ConfigureAwait(false)) Throw.ElementShouldHaveFocus(because);
         }
 
         /// <summary>
@@ -325,7 +325,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <remarks><![CDATA[Elements: <button>, <input>, <keygen>, <select>, <textarea>]]></remarks>
         public static async Task ShouldNotHaveFocusAsync(this ElementHandle elementHandle, string? because = null)
         {
-            if (await elementHandle.HasFocusAsync().ConfigureAwait(false)) Throw.ShouldNotHaveFocus(elementHandle, because);
+            if (await elementHandle.HasFocusAsync().ConfigureAwait(false)) Throw.ElementShouldNotHaveFocus(because);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Reflection;
 using Castle.DynamicProxy;
@@ -20,7 +20,7 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
                 return interceptors.Where(x => x is XPathInterceptor).ToArray();
             }
 
-            return interceptors.Where(x => !(x is SelectorInterceptor) && !(x is XPathInterceptor)).ToArray();
+            return interceptors.Where(x => x is not SelectorInterceptor && x is not XPathInterceptor).ToArray();
         }
     }
 }
