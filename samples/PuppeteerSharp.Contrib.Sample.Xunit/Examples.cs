@@ -81,7 +81,6 @@ namespace PuppeteerSharp.Documentation
             await _page.WaitForExpressionAsync("1 + 1 === 2", new WaitForFunctionOptions { Timeout = timeout });
             await _page.WaitForFunctionAsync("() => window.location.href === 'https://github.com/hardkoded/puppeteer-sharp'", new WaitForFunctionOptions { Timeout = timeout });
             await _page.WaitForSelectorAsync("#readme", new WaitForSelectorOptions { Timeout = timeout });
-            await _page.WaitForXPathAsync("//*[@id='readme']", new WaitForSelectorOptions { Timeout = timeout });
             await _page.WaitForTimeoutAsync(timeout);
 
             // WaitUntilNavigation
@@ -99,7 +98,6 @@ namespace PuppeteerSharp.Documentation
             await frame.WaitForExpressionAsync("1 + 1 === 2", new WaitForFunctionOptions { Timeout = timeout });
             await frame.WaitForFunctionAsync("() => window.location.href === 'https://github.com/hardkoded/puppeteer-sharp'", new WaitForFunctionOptions { Timeout = timeout });
             await frame.WaitForSelectorAsync("#readme", new WaitForSelectorOptions { Timeout = timeout });
-            await frame.WaitForXPathAsync("//*[@id='readme']", new WaitForSelectorOptions { Timeout = timeout });
             await frame.WaitForTimeoutAsync(timeout);
         }
 
