@@ -106,10 +106,10 @@ namespace PuppeteerSharp.Documentation
         [Fact]
         public async Task values_from_Page()
         {
-            var url = _page.Url;
-            var title = await _page.GetTitleAsync();
-            var content = await _page.GetContentAsync();
-            var cookies = await _page.GetCookiesAsync();
+            _ = _page.Url;
+            _ = await _page.GetTitleAsync();
+            _ = await _page.GetContentAsync();
+            _ = await _page.GetCookiesAsync();
         }
 
         [Fact]

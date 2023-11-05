@@ -54,10 +54,7 @@ namespace PuppeteerSharp.Contrib.Extensions
                 }",
                 selector,
                 regex,
-                flags).ConfigureAwait(false);
-
-            if (arrayHandle == null) throw new InvalidOperationException("EvaluateFunctionHandleAsync returned null.");
-
+                flags).ConfigureAwait(false) ?? throw new InvalidOperationException("EvaluateFunctionHandleAsync returned null.");
             var properties = await arrayHandle.GetPropertiesAsync().ConfigureAwait(false);
             await arrayHandle.DisposeAsync().ConfigureAwait(false);
 

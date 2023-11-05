@@ -3,9 +3,8 @@ using System;
 namespace PuppeteerSharp.Contrib.PageObjects
 {
     /// <summary>
-    /// Represents a selector for a property on a <see cref="PageObject"/> or <see cref="ElementObject"/>.
-    ///
-    /// Properties decorated with a <see cref="SelectorAttribute"/> must be a:
+    /// <para>Represents a selector for a property on a <see cref="PageObject"/> or <see cref="ElementObject"/>.</para>
+    /// <para>Properties decorated with a <see cref="SelectorAttribute"/> must be a:</para>
     /// <list type="bullet">
     /// <item><description>public</description></item>
     /// <item><description>virtual</description></item>
@@ -38,20 +37,11 @@ namespace PuppeteerSharp.Contrib.PageObjects
     /// </code>
     /// </example>
     [AttributeUsage(AttributeTargets.Property)]
-    public sealed class SelectorAttribute : Attribute
+    public sealed class SelectorAttribute(string selector) : Attribute
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SelectorAttribute"/> class.
-        /// </summary>
-        /// <param name="selector">A selector to query a <see cref="Page"/> or <see cref="ElementHandle"/> for.</param>
-        public SelectorAttribute(string selector)
-        {
-            Selector = selector;
-        }
-
         /// <summary>
         /// A selector to query a <see cref="Page"/> or <see cref="ElementHandle"/> for.
         /// </summary>
-        public string Selector { get; }
+        public string Selector { get; } = selector;
     }
 }

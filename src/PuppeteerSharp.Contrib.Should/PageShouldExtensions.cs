@@ -19,7 +19,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
         public static async Task ShouldHaveContentAsync(this Page page, string regex, string flags = "", string? because = null)
         {
-            if (!await page.HasContentAsync(regex, flags).ConfigureAwait(false)) Throw.ShouldHaveContent(page, regex, flags, because);
+            if (!await page.HasContentAsync(regex, flags).ConfigureAwait(false)) Throw.PageShouldHaveContent(regex, flags, because);
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
         public static async Task ShouldNotHaveContentAsync(this Page page, string regex, string flags = "", string? because = null)
         {
-            if (await page.HasContentAsync(regex, flags).ConfigureAwait(false)) Throw.ShouldNotHaveContent(page, regex, flags, because);
+            if (await page.HasContentAsync(regex, flags).ConfigureAwait(false)) Throw.PageShouldNotHaveContent(regex, flags, because);
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
         public static async Task ShouldHaveTitleAsync(this Page page, string regex, string flags = "", string? because = null)
         {
-            if (!await page.HasTitleAsync(regex, flags).ConfigureAwait(false)) Throw.ShouldHaveTitle(page, regex, flags, await page.GuardFromNull().GetTitleAsync().ConfigureAwait(false), because);
+            if (!await page.HasTitleAsync(regex, flags).ConfigureAwait(false)) Throw.PageShouldHaveTitle(regex, flags, await page.GuardFromNull().GetTitleAsync().ConfigureAwait(false), because);
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
         public static async Task ShouldNotHaveTitleAsync(this Page page, string regex, string flags = "", string? because = null)
         {
-            if (await page.HasTitleAsync(regex, flags).ConfigureAwait(false)) Throw.ShouldNotHaveTitle(page, regex, flags, because);
+            if (await page.HasTitleAsync(regex, flags).ConfigureAwait(false)) Throw.PageShouldNotHaveTitle(regex, flags, because);
         }
     }
 }

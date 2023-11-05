@@ -10,16 +10,11 @@ using TechTalk.SpecFlow;
 namespace PuppeteerSharp.Contrib.Sample.StepDefinitions
 {
     [Binding]
-    public class PuppeteerSharpRepoSteps
+    public class PuppeteerSharpRepoSteps(Browser browser)
     {
-        private Browser Browser { get; }
+        private Browser Browser { get; } = browser;
         private Page Page { get; set; }
         private Dictionary<string, string> LatestReleaseVersion { get; } = new Dictionary<string, string>();
-
-        public PuppeteerSharpRepoSteps(Browser browser)
-        {
-            Browser = browser;
-        }
 
         [BeforeScenario]
         public async Task BeforeScenario()

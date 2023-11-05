@@ -7,7 +7,9 @@ using PuppeteerSharp;
 /// </summary>
 /// <seealso cref="https://docs.nunit.org/articles/nunit/writing-tests/attributes/setupfixture.html#notes"/>
 [SetUpFixture]
+#pragma warning disable CA1050 // Declare types in namespaces
 public class PuppeteerSetUpFixture
+#pragma warning restore CA1050 // Declare types in namespaces
 {
     [OneTimeSetUp]
     public async Task OneTimeSetUp()
