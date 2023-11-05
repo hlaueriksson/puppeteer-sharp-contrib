@@ -54,7 +54,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         {
             var methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.SelectorForElementHandle)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
-            Assert.True(invocation.IsReturning<ElementHandle>());
+            Assert.True(invocation.IsReturning<IElementHandle>());
         }
 
         [Test]
@@ -62,7 +62,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         {
             var methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.SelectorForNonTaskReturnType)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
-            Assert.False(invocation.IsReturning<ElementHandle>());
+            Assert.False(invocation.IsReturning<IElementHandle>());
         }
 
         [Test]
@@ -100,7 +100,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         // PageObject
 
         [Test]
-        public async Task GetReturnValueAsync_returns_ElementHandle_for_property_on_PageObject_marked_with_SelectorAttribute()
+        public async Task GetReturnValueAsync_returns_IElementHandle_for_property_on_PageObject_marked_with_SelectorAttribute()
         {
             var pageObject = new FakePageObject();
             pageObject.Initialize(Page, null);
@@ -110,11 +110,11 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var result = await invocation.GetReturnValueAsync(pageObject, new SelectorAttribute(".tweet"));
 
             Assert.NotNull(result);
-            Assert.IsInstanceOf<ElementHandle>(result);
+            Assert.IsInstanceOf<IElementHandle>(result);
         }
 
         [Test]
-        public async Task GetReturnValueAsync_returns_ElementHandle_array_for_property_on_PageObject_marked_with_SelectorAttribute()
+        public async Task GetReturnValueAsync_returns_IElementHandle_array_for_property_on_PageObject_marked_with_SelectorAttribute()
         {
             var pageObject = new FakePageObject();
             pageObject.Initialize(Page, null);
@@ -124,7 +124,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var result = await invocation.GetReturnValueAsync(pageObject, new SelectorAttribute("div"));
 
             Assert.NotNull(result);
-            Assert.IsInstanceOf<ElementHandle[]>(result);
+            Assert.IsInstanceOf<IElementHandle[]>(result);
         }
 
         [Test]
@@ -183,7 +183,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         // ElementObject
 
         [Test]
-        public async Task GetReturnValueAsync_returns_ElementHandle_for_property_on_ElementObject_marked_with_SelectorAttribute()
+        public async Task GetReturnValueAsync_returns_IElementHandle_for_property_on_ElementObject_marked_with_SelectorAttribute()
         {
             var elementHandle = await Page.QuerySelectorAsync("html");
             var elementObject = new FakeElementObject();
@@ -194,11 +194,11 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var result = await invocation.GetReturnValueAsync(elementObject, new SelectorAttribute(".tweet"));
 
             Assert.NotNull(result);
-            Assert.IsInstanceOf<ElementHandle>(result);
+            Assert.IsInstanceOf<IElementHandle>(result);
         }
 
         [Test]
-        public async Task GetReturnValueAsync_returns_ElementHandle_array_for_property_on_ElementObject_marked_with_SelectorAttribute()
+        public async Task GetReturnValueAsync_returns_IElementHandle_array_for_property_on_ElementObject_marked_with_SelectorAttribute()
         {
             var elementHandle = await Page.QuerySelectorAsync("html");
             var elementObject = new FakeElementObject();
@@ -209,7 +209,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var result = await invocation.GetReturnValueAsync(elementObject, new SelectorAttribute("div"));
 
             Assert.NotNull(result);
-            Assert.IsInstanceOf<ElementHandle[]>(result);
+            Assert.IsInstanceOf<IElementHandle[]>(result);
         }
 
         [Test]
@@ -271,7 +271,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         // PageObject
 
         [Test]
-        public async Task GetReturnValueAsync_returns_ElementHandle_array_for_property_on_PageObject_marked_with_XPathAttribute()
+        public async Task GetReturnValueAsync_returns_IElementHandle_array_for_property_on_PageObject_marked_with_XPathAttribute()
         {
             var pageObject = new FakePageObject();
             pageObject.Initialize(Page, null);
@@ -281,7 +281,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var result = await invocation.GetReturnValueAsync(pageObject, new XPathAttribute("//div"));
 
             Assert.NotNull(result);
-            Assert.IsInstanceOf<ElementHandle[]>(result);
+            Assert.IsInstanceOf<IElementHandle[]>(result);
         }
 
         [Test]
@@ -326,7 +326,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         // ElementObject
 
         [Test]
-        public async Task GetReturnValueAsync_returns_ElementHandle_array_for_property_on_ElementObject_marked_with_XPathAttribute()
+        public async Task GetReturnValueAsync_returns_IElementHandle_array_for_property_on_ElementObject_marked_with_XPathAttribute()
         {
             var elementHandle = await Page.QuerySelectorAsync("html");
             var elementObject = new FakeElementObject();
@@ -337,7 +337,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var result = await invocation.GetReturnValueAsync(elementObject, new XPathAttribute("//div"));
 
             Assert.NotNull(result);
-            Assert.IsInstanceOf<ElementHandle[]>(result);
+            Assert.IsInstanceOf<IElementHandle[]>(result);
         }
 
         [Test]

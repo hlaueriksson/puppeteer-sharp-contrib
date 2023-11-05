@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Reflection;
 using Castle.DynamicProxy;
 
@@ -18,7 +18,9 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
         public bool ShouldInterceptMethod(Type type, MethodInfo methodInfo)
         {
             return (methodInfo.IsGetterPropertyWithAttribute<SelectorAttribute>() ||
+#pragma warning disable CS0618 // Type or member is obsolete
                     methodInfo.IsGetterPropertyWithAttribute<XPathAttribute>()) &&
+#pragma warning restore CS0618 // Type or member is obsolete
                     methodInfo.IsReturningAsyncResult();
         }
 

@@ -56,7 +56,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             Assert.IsNotEmpty(result);
             CollectionAssert.AllItemsAreInstancesOfType(result, typeof(FakeElementObject));
 
-            result = ProxyFactory.ElementObjectArray(typeof(FakeElementObject), Page, Array.Empty<ElementHandle>());
+            result = ProxyFactory.ElementObjectArray(typeof(FakeElementObject), Page, Array.Empty<IElementHandle>());
             Assert.IsEmpty(result);
         }
     }

@@ -28,9 +28,11 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
 
         private static async Task InterceptAsync(IInvocation invocation)
         {
+#pragma warning disable CS0618 // Type or member is obsolete
             if (invocation.IsGetterPropertyWithAttribute<XPathAttribute>())
             {
                 var attribute = invocation.GetAttribute<XPathAttribute>();
+#pragma warning restore CS0618 // Type or member is obsolete
 
                 if (invocation.InvocationTarget is PageObject pageObject)
                 {

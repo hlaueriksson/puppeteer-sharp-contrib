@@ -12,7 +12,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
     /// </list>
     /// that returns a <see cref="System.Threading.Tasks.Task{TResult}"/> of:
     /// <list type="bullet">
-    /// <item><description><see cref="ElementHandle"/>[] or</description></item>
+    /// <item><description><see cref="IElementHandle"/>[] or</description></item>
     /// <item><description><see cref="ElementObject"/>[]</description></item>
     /// </list>
     /// </summary>
@@ -21,18 +21,19 @@ namespace PuppeteerSharp.Contrib.PageObjects
     /// <code>
     /// <![CDATA[
     /// [XPath("//div")]
-    /// public virtual Task<ElementHandle[]> XPathForElementHandleArray { get; }
+    /// public virtual Task<IElementHandle[]> XPathForElementHandleArray { get; }
     ///
     /// [XPath("//div")]
     /// public virtual Task<FooElementObject[]> XPathForElementObjectArray { get; }
     /// ]]>
     /// </code>
     /// </example>
+    [Obsolete("Use " + nameof(SelectorAttribute) + " instead")]
     [AttributeUsage(AttributeTargets.Property)]
     public sealed class XPathAttribute(string expression) : Attribute
     {
         /// <summary>
-        /// An XPath expression to evaluate on a <see cref="Page"/> or <see cref="ElementHandle"/>.
+        /// An XPath expression to evaluate on a <see cref="IPage"/> or <see cref="IElementHandle"/>.
         /// </summary>
         public string Expression { get; } = expression;
     }

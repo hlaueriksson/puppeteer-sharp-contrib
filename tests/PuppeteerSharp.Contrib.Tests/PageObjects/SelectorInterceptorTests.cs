@@ -24,29 +24,29 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         // PageObject
 
         [Test]
-        public async Task Intercept_sets_the_ReturnValue_to_Task_of_ElementHandle_for_property_on_PageObject_marked_with_SelectorAttribute()
+        public async Task Intercept_sets_the_ReturnValue_to_Task_of_IElementHandle_for_property_on_PageObject_marked_with_SelectorAttribute()
         {
             var methodInfo = _pageObject.GetType().GetProperty(nameof(FakePageObject.SelectorForElementHandle)).GetMethod;
             var invocation = new FakeInvocation(methodInfo, _pageObject);
 
             _subject.Intercept(invocation);
-            var result = await (Task<ElementHandle>)invocation.ReturnValue;
+            var result = await (Task<IElementHandle>)invocation.ReturnValue;
 
             Assert.NotNull(result);
-            Assert.IsInstanceOf<ElementHandle>(result);
+            Assert.IsInstanceOf<IElementHandle>(result);
         }
 
         [Test]
-        public async Task Intercept_sets_the_ReturnValue_to_Task_of_ElementHandle_array_for_property_on_PageObject_marked_with_SelectorAttribute()
+        public async Task Intercept_sets_the_ReturnValue_to_Task_of_IElementHandle_array_for_property_on_PageObject_marked_with_SelectorAttribute()
         {
             var methodInfo = _pageObject.GetType().GetProperty(nameof(FakePageObject.SelectorForElementHandleArray)).GetMethod;
             var invocation = new FakeInvocation(methodInfo, _pageObject);
 
             _subject.Intercept(invocation);
-            var result = await (Task<ElementHandle[]>)invocation.ReturnValue;
+            var result = await (Task<IElementHandle[]>)invocation.ReturnValue;
 
             Assert.NotNull(result);
-            Assert.IsInstanceOf<ElementHandle[]>(result);
+            Assert.IsInstanceOf<IElementHandle[]>(result);
         }
 
         [Test]
@@ -87,29 +87,29 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         // ElementObject
 
         [Test]
-        public async Task Intercept_sets_the_ReturnValue_to_Task_of_ElementHandle_for_property_on_ElementObject_marked_with_SelectorAttribute()
+        public async Task Intercept_sets_the_ReturnValue_to_Task_of_IElementHandle_for_property_on_ElementObject_marked_with_SelectorAttribute()
         {
             var methodInfo = _elementObject.GetType().GetProperty(nameof(FakeElementObject.SelectorForElementHandle)).GetMethod;
             var invocation = new FakeInvocation(methodInfo, _elementObject);
 
             _subject.Intercept(invocation);
-            var result = await (Task<ElementHandle>)invocation.ReturnValue;
+            var result = await (Task<IElementHandle>)invocation.ReturnValue;
 
             Assert.NotNull(result);
-            Assert.IsInstanceOf<ElementHandle>(result);
+            Assert.IsInstanceOf<IElementHandle>(result);
         }
 
         [Test]
-        public async Task Intercept_sets_the_ReturnValue_to_Task_of_ElementHandle_array_for_property_on_ElementObject_marked_with_SelectorAttribute()
+        public async Task Intercept_sets_the_ReturnValue_to_Task_of_IElementHandle_array_for_property_on_ElementObject_marked_with_SelectorAttribute()
         {
             var methodInfo = _elementObject.GetType().GetProperty(nameof(FakeElementObject.SelectorForElementHandleArray)).GetMethod;
             var invocation = new FakeInvocation(methodInfo, _elementObject);
 
             _subject.Intercept(invocation);
-            var result = await (Task<ElementHandle[]>)invocation.ReturnValue;
+            var result = await (Task<IElementHandle[]>)invocation.ReturnValue;
 
             Assert.NotNull(result);
-            Assert.IsInstanceOf<ElementHandle[]>(result);
+            Assert.IsInstanceOf<IElementHandle[]>(result);
         }
 
         [Test]

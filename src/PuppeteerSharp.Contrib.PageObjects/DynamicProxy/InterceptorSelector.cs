@@ -15,7 +15,9 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
                 return interceptors.Where(x => x is SelectorInterceptor).ToArray();
             }
 
+#pragma warning disable CS0618 // Type or member is obsolete
             if (method.IsGetterPropertyWithAttribute<XPathAttribute>())
+#pragma warning restore CS0618 // Type or member is obsolete
             {
                 return interceptors.Where(x => x is XPathInterceptor).ToArray();
             }

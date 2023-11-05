@@ -7,8 +7,8 @@ namespace PuppeteerSharp.Contrib.Sample
 {
     public class ExtensionsTests
     {
-        Browser Browser { get; set; }
-        Page Page { get; set; }
+        IBrowser Browser { get; set; }
+        IPage Page { get; set; }
 
         [SetUp]
         public async Task SetUp()

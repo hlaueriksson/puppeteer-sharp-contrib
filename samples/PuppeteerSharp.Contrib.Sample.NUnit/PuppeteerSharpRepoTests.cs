@@ -9,7 +9,7 @@ namespace PuppeteerSharp.Contrib.Sample
 {
     public class PuppeteerSharpRepoTests
     {
-        private Browser Browser { get; set; }
+        private IBrowser Browser { get; set; }
 
         [SetUp]
         public async Task SetUp()

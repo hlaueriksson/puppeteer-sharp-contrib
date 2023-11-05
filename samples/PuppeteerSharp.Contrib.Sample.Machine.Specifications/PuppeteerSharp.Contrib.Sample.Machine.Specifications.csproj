@@ -5,7 +5,6 @@
     <Nullable>disable</Nullable>
     <RootNamespace>PuppeteerSharp.Contrib.Sample</RootNamespace>
     <IsPackable>false</IsPackable>
-    <NoWarn>$(NoWarn);IDE0044</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,8 +12,10 @@
     <PackageReference Include="Machine.Specifications.Runner.VisualStudio" Version="2.10.2" />
     <PackageReference Include="Machine.Specifications.Should" Version="1.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.2" />
-    <PackageReference Include="PuppeteerSharp" Version="7.1.0" />
-    <PackageReference Include="PuppeteerSharp.Contrib.Should" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\PuppeteerSharp.Contrib.Should\PuppeteerSharp.Contrib.Should.csproj" />
   </ItemGroup>
 
 </Project>

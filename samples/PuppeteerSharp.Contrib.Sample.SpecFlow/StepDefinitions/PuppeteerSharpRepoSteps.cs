@@ -12,8 +12,8 @@ namespace PuppeteerSharp.Contrib.Sample.StepDefinitions
     [Binding]
     public class PuppeteerSharpRepoSteps(Browser browser)
     {
-        private Browser Browser { get; } = browser;
-        private Page Page { get; set; }
+        private IBrowser Browser { get; } = browser;
+        private IPage Page { get; set; }
         private Dictionary<string, string> LatestReleaseVersion { get; } = new Dictionary<string, string>();
 
         [BeforeScenario]

@@ -8,7 +8,7 @@ namespace PuppeteerSharp.Contrib.Sample
     public class GitHubStartPage : PageObject
     {
         [Selector("main h1")]
-        public virtual Task<ElementHandle> Heading { get; }
+        public virtual Task<IElementHandle> Heading { get; }
 
         [Selector("header")]
         public virtual Task<GitHubHeader> Header { get; }
@@ -24,7 +24,7 @@ namespace PuppeteerSharp.Contrib.Sample
     public class GitHubHeader : ElementObject
     {
         [Selector("#query-builder-test")]
-        public virtual Task<ElementHandle> SearchInput { get; }
+        public virtual Task<IElementHandle> SearchInput { get; }
 
         public async Task SearchAsync(string text)
         {
@@ -57,19 +57,19 @@ namespace PuppeteerSharp.Contrib.Sample
     public class GitHubRepoListItem : ElementObject
     {
         [Selector("a")]
-        public virtual Task<ElementHandle> Link { get; }
+        public virtual Task<IElementHandle> Link { get; }
 
         [Selector("h3 + div")]
-        public virtual Task<ElementHandle> Text { get; }
+        public virtual Task<IElementHandle> Text { get; }
     }
 
     public class GitHubRepoPage : PageObject
     {
         [Selector("article > h1")]
-        public virtual Task<ElementHandle> Heading { get; }
+        public virtual Task<IElementHandle> Heading { get; }
 
         [Selector("#actions-tab")]
-        public virtual Task<ElementHandle> Actions { get; }
+        public virtual Task<IElementHandle> Actions { get; }
 
         public async Task<GitHubActionsPage> GotoActionsAsync()
         {

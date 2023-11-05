@@ -11,9 +11,11 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.2" />
     <PackageReference Include="NUnit" Version="3.14.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
-    <PackageReference Include="PuppeteerSharp" Version="7.1.0" />
-    <PackageReference Include="PuppeteerSharp.Contrib.PageObjects" Version="5.0.0" />
-    <PackageReference Include="PuppeteerSharp.Contrib.Should" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\PuppeteerSharp.Contrib.PageObjects\PuppeteerSharp.Contrib.PageObjects.csproj" />
+    <ProjectReference Include="..\..\src\PuppeteerSharp.Contrib.Should\PuppeteerSharp.Contrib.Should.csproj" />
   </ItemGroup>
 
 </Project>

@@ -30,7 +30,7 @@
   <Import Project="../../Analyzers.props" />
 
   <ItemGroup>
-    <PackageReference Include="PuppeteerSharp" Version="7.1.0" />
+    <PackageReference Include="PuppeteerSharp" Version="12.0.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -8,7 +8,7 @@ namespace PuppeteerSharp.Contrib.Sample
     public class Hooks(IObjectContainer objectContainer)
     {
         private IObjectContainer ObjectContainer { get; } = objectContainer;
-        private Browser Browser { get; set; }
+        private IBrowser Browser { get; set; }
 
         [BeforeScenario]
         public async Task BeforeScenario()

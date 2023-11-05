@@ -2,7 +2,7 @@ namespace PuppeteerSharp.Contrib.Should
 {
     internal static class Throw
     {
-        /* Page */
+        /* IPage */
 
         public static void PageShouldHaveContent(string regex, string flags, string? because)
         {
@@ -24,7 +24,7 @@ namespace PuppeteerSharp.Contrib.Should
             throw Exception($"Expected page not to have title \"/{regex}/{flags}\"", null, because);
         }
 
-        /* ElementHandle */
+        /* IElementHandle */
 
         public static void ElementShouldExist(string? because)
         {
