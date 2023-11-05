@@ -12,8 +12,8 @@ namespace PuppeteerSharp.Contrib.PageObjects
     /// </list>
     /// that returns a <see cref="System.Threading.Tasks.Task{TResult}"/> of:
     /// <list type="bullet">
-    /// <item><description><see cref="ElementHandle"/>,</description></item>
-    /// <item><description><see cref="ElementHandle"/>[],</description></item>
+    /// <item><description><see cref="IElementHandle"/>,</description></item>
+    /// <item><description><see cref="IElementHandle"/>[],</description></item>
     /// <item><description><see cref="ElementObject"/> or</description></item>
     /// <item><description><see cref="ElementObject"/>[]</description></item>
     /// </list>
@@ -23,10 +23,10 @@ namespace PuppeteerSharp.Contrib.PageObjects
     /// <code>
     /// <![CDATA[
     /// [Selector("#foo")]
-    /// public virtual Task<ElementHandle> SelectorForElementHandle { get; }
+    /// public virtual Task<IElementHandle> SelectorForElementHandle { get; }
     ///
     /// [Selector(".bar")]
-    /// public virtual Task<ElementHandle[]> SelectorForElementHandleArray { get; }
+    /// public virtual Task<IElementHandle[]> SelectorForElementHandleArray { get; }
     ///
     /// [Selector("#foo")]
     /// public virtual Task<FooElementObject> SelectorForElementObject { get; }
@@ -40,7 +40,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
     public sealed class SelectorAttribute(string selector) : Attribute
     {
         /// <summary>
-        /// A selector to query a <see cref="Page"/> or <see cref="ElementHandle"/> for.
+        /// A selector to query a <see cref="IPage"/> or <see cref="IElementHandle"/> for.
         /// </summary>
         public string Selector { get; } = selector;
     }

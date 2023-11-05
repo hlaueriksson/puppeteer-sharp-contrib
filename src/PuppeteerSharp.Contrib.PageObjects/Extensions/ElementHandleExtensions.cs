@@ -7,7 +7,7 @@ using PuppeteerSharp.Contrib.PageObjects.DynamicProxy;
 namespace PuppeteerSharp.Contrib.PageObjects
 {
     /// <summary>
-    /// <see cref="ElementHandle"/> extension methods.
+    /// <see cref="IElementHandle"/> extension methods.
     /// </summary>
     public static class ElementHandleExtensions
     {
@@ -16,11 +16,11 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// If no elements match the selector, the return value resolve to <see cref="System.Array.Empty{T}"/>.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="ElementObject"/>.</typeparam>
-        /// <param name="elementHandle">A <see cref="ElementHandle"/>.</param>
+        /// <param name="elementHandle">A <see cref="IElementHandle"/>.</param>
         /// <param name="selector">A selector to query element for.</param>
         /// <returns>Task which resolves to the <see cref="ElementObject"/> array.</returns>
-        /// <seealso cref="ElementHandle.QuerySelectorAllAsync(string)"/>
-        public static async Task<T[]> QuerySelectorAllAsync<T>(this ElementHandle elementHandle, string selector)
+        /// <seealso cref="IElementHandle.QuerySelectorAllAsync(string)"/>
+        public static async Task<T[]> QuerySelectorAllAsync<T>(this IElementHandle elementHandle, string selector)
             where T : ElementObject
         {
             var results = await elementHandle.GuardFromNull().QuerySelectorAllAsync(selector).ConfigureAwait(false);
@@ -33,11 +33,11 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// If no elements match the selector, the return value resolve to <c>null</c>.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="ElementObject"/>.</typeparam>
-        /// <param name="elementHandle">A <see cref="ElementHandle"/>.</param>
+        /// <param name="elementHandle">A <see cref="IElementHandle"/>.</param>
         /// <param name="selector">A selector to query element for.</param>
         /// <returns>Task which resolves to the <see cref="ElementObject"/>.</returns>
-        /// <seealso cref="ElementHandle.QuerySelectorAsync(string)"/>
-        public static async Task<T?> QuerySelectorAsync<T>(this ElementHandle elementHandle, string selector)
+        /// <seealso cref="IElementHandle.QuerySelectorAsync(string)"/>
+        public static async Task<T?> QuerySelectorAsync<T>(this IElementHandle elementHandle, string selector)
             where T : ElementObject
         {
             var result = await elementHandle.GuardFromNull().QuerySelectorAsync(selector).ConfigureAwait(false);
@@ -50,11 +50,12 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// If no elements match the expression, the return value resolve to <see cref="System.Array.Empty{T}"/>.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="ElementObject"/>.</typeparam>
-        /// <param name="elementHandle">A <see cref="ElementHandle"/>.</param>
+        /// <param name="elementHandle">A <see cref="IElementHandle"/>.</param>
         /// <param name="expression">Expression to evaluate <see href="https://developer.mozilla.org/en-US/docs/Web/API/Document/evaluate"/>.</param>
         /// <returns>Task which resolves to the <see cref="ElementObject"/> array.</returns>
-        /// <seealso cref="ElementHandle.XPathAsync(string)"/>
-        public static async Task<T[]> XPathAsync<T>(this ElementHandle elementHandle, string expression)
+        /// <seealso cref="IElementHandle.XPathAsync(string)"/>
+        [Obsolete("Use " + nameof(QuerySelectorAsync) + " instead")]
+        public static async Task<T[]> XPathAsync<T>(this IElementHandle elementHandle, string expression)
             where T : ElementObject
         {
             var results = await elementHandle.GuardFromNull().XPathAsync(expression).ConfigureAwait(false);
@@ -66,14 +67,14 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// Waits for a selector to be added to the DOM and returns an <see cref="ElementObject"/>.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="ElementObject"/>.</typeparam>
-        /// <param name="elementHandle">A <see cref="ElementHandle"/>.</param>
+        /// <param name="elementHandle">A <see cref="IElementHandle"/>.</param>
         /// <param name="selector">A selector of an element to wait for.</param>
         /// <param name="options">Waiting options.</param>
         /// <returns>Task which resolves to the <see cref="ElementObject"/>, when a element specified by selector string is added to DOM.
         /// Resolves to <c>null</c> if waiting for <c>hidden: true</c> and selector is not found in DOM.
         /// </returns>
-        /// <seealso cref="ElementHandle.WaitForSelectorAsync(string, WaitForSelectorOptions)"/>
-        public static async Task<T?> WaitForSelectorAsync<T>(this ElementHandle elementHandle, string selector, WaitForSelectorOptions? options = null)
+        /// <seealso cref="IElementHandle.WaitForSelectorAsync(string, WaitForSelectorOptions)"/>
+        public static async Task<T?> WaitForSelectorAsync<T>(this IElementHandle elementHandle, string selector, WaitForSelectorOptions? options = null)
             where T : ElementObject
         {
             var result = await elementHandle.GuardFromNull().WaitForSelectorAsync(selector, options).ConfigureAwait(false);
@@ -81,15 +82,15 @@ namespace PuppeteerSharp.Contrib.PageObjects
             return ProxyFactory.ElementObject<T>(elementHandle.GetPage(), result);
         }
 
-        private static Page GetPage(this ElementHandle elementHandle)
+        private static IPage GetPage(this IElementHandle elementHandle)
         {
-            var propertyInfo = elementHandle.GetType().GetProperty("Page", BindingFlags.NonPublic | BindingFlags.Instance);
+            var propertyInfo = elementHandle.GetType().GetProperty("IPage", BindingFlags.NonPublic | BindingFlags.Instance);
             var methodInfo = propertyInfo.GetGetMethod(nonPublic: true);
 
-            return (Page)methodInfo.Invoke(elementHandle, null);
+            return (IPage)methodInfo.Invoke(elementHandle, null);
         }
 
-        private static ElementHandle GuardFromNull(this ElementHandle elementHandle)
+        private static IElementHandle GuardFromNull(this IElementHandle elementHandle)
         {
             if (elementHandle == null) throw new ArgumentNullException(nameof(elementHandle));
 

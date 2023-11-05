@@ -56,12 +56,12 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
 
             if (page == null) return null;
 
-            if (invocation.IsReturning<ElementHandle>())
+            if (invocation.IsReturning<IElementHandle>())
             {
                 return await page.QuerySelectorAsync(attribute.Selector).ConfigureAwait(false);
             }
 
-            if (invocation.IsReturning<ElementHandle[]>())
+            if (invocation.IsReturning<IElementHandle[]>())
             {
                 return await page.QuerySelectorAllAsync(attribute.Selector).ConfigureAwait(false);
             }
@@ -92,12 +92,12 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
 
             if (element == null) return null;
 
-            if (invocation.IsReturning<ElementHandle>())
+            if (invocation.IsReturning<IElementHandle>())
             {
                 return await element.QuerySelectorAsync(attribute.Selector).ConfigureAwait(false);
             }
 
-            if (invocation.IsReturning<ElementHandle[]>())
+            if (invocation.IsReturning<IElementHandle[]>())
             {
                 return await element.QuerySelectorAllAsync(attribute.Selector).ConfigureAwait(false);
             }
@@ -122,22 +122,28 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
             return null;
         }
 
+#pragma warning disable CS0618 // Type or member is obsolete
         public static async Task<object?> GetReturnValueAsync(this IInvocation invocation, PageObject pageObject, XPathAttribute attribute)
+#pragma warning restore CS0618 // Type or member is obsolete
         {
             var page = pageObject.Page;
 
             if (page == null) return null;
 
-            if (invocation.IsReturning<ElementHandle[]>())
+            if (invocation.IsReturning<IElementHandle[]>())
             {
+#pragma warning disable CS0618 // Type or member is obsolete
                 return await page.XPathAsync(attribute.Expression).ConfigureAwait(false);
+#pragma warning restore CS0618 // Type or member is obsolete
             }
 
             if (invocation.IsReturningElementObjectArray())
             {
                 var arrayType = invocation.Method.ReturnType.GetGenericArguments()[0];
                 var proxyType = arrayType.GetElementType();
+#pragma warning disable CS0618 // Type or member is obsolete
                 var elementHandles = await page.XPathAsync(attribute.Expression).ConfigureAwait(false);
+#pragma warning restore CS0618 // Type or member is obsolete
 
                 return ProxyFactory.ElementObjectArray(proxyType, page, elementHandles);
             }
@@ -145,22 +151,28 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
             return null;
         }
 
+#pragma warning disable CS0618 // Type or member is obsolete
         public static async Task<object?> GetReturnValueAsync(this IInvocation invocation, ElementObject elementObject, XPathAttribute attribute)
+#pragma warning restore CS0618 // Type or member is obsolete
         {
             var element = elementObject.Element;
 
             if (element == null) return null;
 
-            if (invocation.IsReturning<ElementHandle[]>())
+            if (invocation.IsReturning<IElementHandle[]>())
             {
+#pragma warning disable CS0618 // Type or member is obsolete
                 return await element.XPathAsync(attribute.Expression).ConfigureAwait(false);
+#pragma warning restore CS0618 // Type or member is obsolete
             }
 
             if (invocation.IsReturningElementObjectArray())
             {
                 var arrayType = invocation.Method.ReturnType.GetGenericArguments()[0];
                 var proxyType = arrayType.GetElementType();
+#pragma warning disable CS0618 // Type or member is obsolete
                 var elementHandles = await element.XPathAsync(attribute.Expression).ConfigureAwait(false);
+#pragma warning restore CS0618 // Type or member is obsolete
 
                 return ProxyFactory.ElementObjectArray(proxyType, elementObject.Page, elementHandles);
             }
