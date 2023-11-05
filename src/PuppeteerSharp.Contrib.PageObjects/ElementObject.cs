@@ -2,7 +2,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
 {
     /// <summary>
     /// <para>Base class for element objects.</para>
-    /// <para>Create element objects by inheriting <see cref="ElementObject"/> and declare properties decorated with <see cref="SelectorAttribute"/> or <see cref="XPathAttribute"/>.</para>
+    /// <para>Create element objects by inheriting <see cref="ElementObject"/> and declare properties decorated with <see cref="SelectorAttribute"/>.</para>
     /// </summary>
     /// <example>
     /// Usage:
@@ -21,12 +21,6 @@ namespace PuppeteerSharp.Contrib.PageObjects
     ///
     ///     [Selector(".bar")]
     ///     public virtual Task<BarElementObject[]> SelectorForElementObjectArray { get; }
-    ///
-    ///     [XPath("//div")]
-    ///     public virtual Task<IElementHandle[]> XPathForElementHandleArray { get; }
-    ///
-    ///     [XPath("//div")]
-    ///     public virtual Task<FooElementObject[]> XPathForElementObjectArray { get; }
     /// }
     /// ]]>
     /// </code>
@@ -36,16 +30,12 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// <summary>
         /// The <c>PuppeteerSharp</c> page.
         /// </summary>
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public IPage Page { get; private set; }
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        public IPage Page { get; private set; } = null!;
 
         /// <summary>
         /// The <c>PuppeteerSharp</c> element handle.
         /// </summary>
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public IElementHandle Element { get; private set; }
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        public IElementHandle Element { get; private set; } = null!;
 
         internal void Initialize(IPage page, IElementHandle element)
         {
