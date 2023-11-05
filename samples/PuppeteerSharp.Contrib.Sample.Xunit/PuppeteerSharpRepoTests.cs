@@ -9,7 +9,7 @@ namespace PuppeteerSharp.Contrib.Sample
 {
     public class PuppeteerSharpRepoTests : IAsyncLifetime
     {
-        private Browser Browser { get; set; }
+        private IBrowser Browser { get; set; }
 
         public async Task InitializeAsync()
         {

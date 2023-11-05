@@ -6,8 +6,8 @@ namespace PuppeteerSharp.Documentation
 {
     public class Examples : IAsyncLifetime
     {
-        private Browser _browser;
-        private Page _page;
+        private IBrowser _browser;
+        private IPage _page;
 
         public async Task InitializeAsync()
         {

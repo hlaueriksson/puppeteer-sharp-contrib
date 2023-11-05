@@ -10,7 +10,7 @@ namespace PuppeteerSharp.Contrib.Sample
     [Subject("PuppeteerSharp")]
     public class PuppeteerSharpRepoSpecs
     {
-        static Browser Browser;
+        static IBrowser Browser;
 
         Establish context = async () =>
         {
