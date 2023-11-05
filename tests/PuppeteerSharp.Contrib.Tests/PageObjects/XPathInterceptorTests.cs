@@ -24,7 +24,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         // PageObject
 
         [Test]
-        public async Task Intercept_sets_the_ReturnValue_to_Task_of_ElementHandle_array_for_property_on_PageObject_marked_with_XPathAttribute()
+        public async Task Intercept_sets_the_ReturnValue_to_Task_of_IElementHandle_array_for_property_on_PageObject_marked_with_XPathAttribute()
         {
             var methodInfo = _pageObject.GetType().GetProperty(nameof(FakePageObject.XPathForElementHandleArray)).GetMethod;
             var invocation = new FakeInvocation(methodInfo, _pageObject);
@@ -61,7 +61,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         // ElementObject
 
         [Test]
-        public async Task Intercept_sets_the_ReturnValue_to_Task_of_ElementHandle_array_for_property_on_ElementObject_marked_with_XPathAttribute()
+        public async Task Intercept_sets_the_ReturnValue_to_Task_of_IElementHandle_array_for_property_on_ElementObject_marked_with_XPathAttribute()
         {
             var methodInfo = _elementObject.GetType().GetProperty(nameof(FakeElementObject.XPathForElementHandleArray)).GetMethod;
             var invocation = new FakeInvocation(methodInfo, _elementObject);

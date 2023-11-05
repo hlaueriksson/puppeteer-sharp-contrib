@@ -100,7 +100,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         // PageObject
 
         [Test]
-        public async Task GetReturnValueAsync_returns_ElementHandle_for_property_on_PageObject_marked_with_SelectorAttribute()
+        public async Task GetReturnValueAsync_returns_IElementHandle_for_property_on_PageObject_marked_with_SelectorAttribute()
         {
             var pageObject = new FakePageObject();
             pageObject.Initialize(Page, null);
@@ -114,7 +114,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         }
 
         [Test]
-        public async Task GetReturnValueAsync_returns_ElementHandle_array_for_property_on_PageObject_marked_with_SelectorAttribute()
+        public async Task GetReturnValueAsync_returns_IElementHandle_array_for_property_on_PageObject_marked_with_SelectorAttribute()
         {
             var pageObject = new FakePageObject();
             pageObject.Initialize(Page, null);
@@ -183,7 +183,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         // ElementObject
 
         [Test]
-        public async Task GetReturnValueAsync_returns_ElementHandle_for_property_on_ElementObject_marked_with_SelectorAttribute()
+        public async Task GetReturnValueAsync_returns_IElementHandle_for_property_on_ElementObject_marked_with_SelectorAttribute()
         {
             var elementHandle = await Page.QuerySelectorAsync("html");
             var elementObject = new FakeElementObject();
@@ -198,7 +198,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         }
 
         [Test]
-        public async Task GetReturnValueAsync_returns_ElementHandle_array_for_property_on_ElementObject_marked_with_SelectorAttribute()
+        public async Task GetReturnValueAsync_returns_IElementHandle_array_for_property_on_ElementObject_marked_with_SelectorAttribute()
         {
             var elementHandle = await Page.QuerySelectorAsync("html");
             var elementObject = new FakeElementObject();
@@ -271,7 +271,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         // PageObject
 
         [Test]
-        public async Task GetReturnValueAsync_returns_ElementHandle_array_for_property_on_PageObject_marked_with_XPathAttribute()
+        public async Task GetReturnValueAsync_returns_IElementHandle_array_for_property_on_PageObject_marked_with_XPathAttribute()
         {
             var pageObject = new FakePageObject();
             pageObject.Initialize(Page, null);
@@ -326,7 +326,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         // ElementObject
 
         [Test]
-        public async Task GetReturnValueAsync_returns_ElementHandle_array_for_property_on_ElementObject_marked_with_XPathAttribute()
+        public async Task GetReturnValueAsync_returns_IElementHandle_array_for_property_on_ElementObject_marked_with_XPathAttribute()
         {
             var elementHandle = await Page.QuerySelectorAsync("html");
             var elementObject = new FakeElementObject();
