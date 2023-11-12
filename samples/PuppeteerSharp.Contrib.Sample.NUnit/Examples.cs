@@ -11,7 +11,7 @@ namespace PuppeteerSharp.Contrib.Sample
             await new BrowserFetcher().DownloadAsync();
             var browser = await Puppeteer.LaunchAsync(new LaunchOptions
             {
-                Headless = true
+                Headless = true,
             });
 
             // SupportedBrowser
@@ -34,8 +34,7 @@ namespace PuppeteerSharp.Contrib.Sample
         [Test]
         public async Task using_Browser()
         {
-            var options = new LaunchOptions { Headless = true };
-            await using var browser = await Puppeteer.LaunchAsync(options);
+            await using var browser = await Puppeteer.LaunchAsync(new());
             // ...
         }
 
@@ -50,8 +49,7 @@ namespace PuppeteerSharp.Contrib.Sample
         [Test]
         public async Task using_Page()
         {
-            var options = new LaunchOptions { Headless = true };
-            await using var browser = await Puppeteer.LaunchAsync(options);
+            await using var browser = await Puppeteer.LaunchAsync(new());
             await using var page = await browser.NewPageAsync();
             // ...
         }
@@ -146,7 +144,6 @@ namespace PuppeteerSharp.Contrib.Sample
             _ = page.Url;
             await page.GetContentAsync();
             await page.GetCookiesAsync();
-            //await page.SelectAsync();
             await page.GetTitleAsync();
 
             await page.PdfDataAsync();
@@ -164,7 +161,6 @@ namespace PuppeteerSharp.Contrib.Sample
             await element.GetPropertiesAsync();
             await element.GetPropertyAsync("href");
             await element.JsonValueAsync();
-            //await element.SelectAsync();
 
             await element.ScreenshotDataAsync();
         }
@@ -199,6 +195,22 @@ namespace PuppeteerSharp.Contrib.Sample
             await page.FocusAsync("#submit");
             await page.HoverAsync("#main");
             await page.TapAsync("#main");
+
+            // IElementHandle
+            var element = await page.QuerySelectorAsync("main");
+            await element.ClickAsync();
+            /*
+            await element.DragAndDropAsync();
+            */
+            await element.FocusAsync();
+            await element.HoverAsync();
+            await element.PressAsync("Control");
+            /*
+            await element.SelectAsync();
+            */
+            await element.TapAsync();
+            await element.TypeAsync("");
+            await element.UploadFileAsync();
         }
 
         [Test]
