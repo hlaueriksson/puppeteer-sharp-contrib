@@ -35,9 +35,9 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// <summary>
         /// The response from page navigation.
         /// </summary>
-        public IResponse Response { get; private set; } = null!;
+        public IResponse? Response { get; private set; }
 
-        internal void Initialize(IPage page, IResponse response)
+        internal void Initialize(IPage page, IResponse? response)
         {
             Page = page;
             Response = response;
