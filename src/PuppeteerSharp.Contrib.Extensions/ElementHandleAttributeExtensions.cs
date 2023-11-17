@@ -71,7 +71,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/API/Element/hasAttribute"/>
         public static async Task<bool> HasAttributeAsync(this IElementHandle elementHandle, string name)
         {
-            return await elementHandle.EvaluateFunctionWithoutDisposeAsync<bool>("(element, name) => element.hasAttribute(name)", name).ConfigureAwait(false);
+            return await elementHandle.EvaluateFunctionWithGuardAsync<bool>("(element, name) => element.hasAttribute(name)", name).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute"/>
         public static async Task<string> GetAttributeAsync(this IElementHandle elementHandle, string name)
         {
-            return await elementHandle.EvaluateFunctionWithoutDisposeAsync<string>("(element, name) => element.getAttribute(name)", name).ConfigureAwait(false);
+            return await elementHandle.EvaluateFunctionWithGuardAsync<string>("(element, name) => element.getAttribute(name)", name).ConfigureAwait(false);
         }
     }
 }
