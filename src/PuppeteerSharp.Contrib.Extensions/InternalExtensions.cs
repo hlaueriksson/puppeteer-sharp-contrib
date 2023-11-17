@@ -17,6 +17,13 @@ namespace PuppeteerSharp.Contrib.Extensions
             return page;
         }
 
+        internal static IResponse GuardFromNull(this IResponse response)
+        {
+            if (response == null) throw new ArgumentNullException(nameof(response));
+
+            return response;
+        }
+
         internal static IElementHandle GuardFromNull(this IElementHandle elementHandle)
         {
             if (elementHandle == null) throw new ArgumentNullException(nameof(elementHandle));

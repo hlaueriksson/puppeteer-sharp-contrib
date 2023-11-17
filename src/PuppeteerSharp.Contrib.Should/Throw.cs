@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 namespace PuppeteerSharp.Contrib.Should
 {
     internal static class Throw
@@ -32,6 +34,18 @@ namespace PuppeteerSharp.Contrib.Should
         public static void PageShouldNotHaveUrl(string regex, string flags, string? because)
         {
             throw Exception($"Expected page not to have URL \"/{regex}/{flags}\"", null, because);
+        }
+
+        /* IResponse */
+
+        public static void ResponseShouldHaveUrl(string regex, RegexOptions options, string actual, string? because)
+        {
+            throw Exception($"Expected response to have URL \"{regex}\" ({options})", $"but found \"{actual}\"", because);
+        }
+
+        public static void ResponseShouldNotHaveUrl(string regex, RegexOptions options, string? because)
+        {
+            throw Exception($"Expected response not to have URL \"{regex}\" ({options})", null, because);
         }
 
         /* IElementHandle */
