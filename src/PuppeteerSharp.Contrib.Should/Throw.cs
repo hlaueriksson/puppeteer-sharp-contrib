@@ -1,3 +1,4 @@
+using System.Net;
 using System.Text.RegularExpressions;
 
 namespace PuppeteerSharp.Contrib.Should
@@ -46,6 +47,41 @@ namespace PuppeteerSharp.Contrib.Should
         public static void ResponseShouldNotHaveUrl(string regex, RegexOptions options, string? because)
         {
             throw Exception($"Expected response not to have URL \"{regex}\" ({options})", null, because);
+        }
+
+        public static void ResponseShouldHaveStatusCode(HttpStatusCode status, HttpStatusCode actual, string? because)
+        {
+            throw Exception($"Expected response to have status code \"{status}\"", $"but found \"{actual}\"", because);
+        }
+
+        public static void ResponseShouldNotHaveStatusCode(HttpStatusCode status, string? because)
+        {
+            throw Exception($"Expected response not to have status code \"{status}\"", null, because);
+        }
+
+        public static void ResponseShouldBeSuccessful(HttpStatusCode actual, string? because)
+        {
+            throw Exception("Expected response status to be successful (2xx)", $"but found \"{actual}\"", because);
+        }
+
+        public static void ResponseShouldBeRedirection(HttpStatusCode actual, string? because)
+        {
+            throw Exception("Expected response status to be redirection (3xx)", $"but found \"{actual}\"", because);
+        }
+
+        public static void ResponseShouldHaveClientError(HttpStatusCode actual, string? because)
+        {
+            throw Exception("Expected response status to be client error (4xx)", $"but found \"{actual}\"", because);
+        }
+
+        public static void ResponseShouldHaveServerError(HttpStatusCode actual, string? because)
+        {
+            throw Exception("Expected response status to be server error (5xx)", $"but found \"{actual}\"", because);
+        }
+
+        public static void ResponseShouldHaveError(HttpStatusCode actual, string? because)
+        {
+            throw Exception("Expected response status to be an error", $"but found \"{actual}\"", because);
         }
 
         /* IElementHandle */
