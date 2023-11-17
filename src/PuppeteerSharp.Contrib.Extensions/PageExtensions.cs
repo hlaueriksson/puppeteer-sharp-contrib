@@ -84,5 +84,18 @@ namespace PuppeteerSharp.Contrib.Extensions
         {
             return await page.GuardFromNull().EvaluateFunctionAsync<bool>("(regex, flags) => RegExp(regex, flags).test(document.title)", regex, flags).ConfigureAwait(false);
         }
+
+        /// <summary>
+        /// Indicates whether the page has the specified URL or not.
+        /// </summary>
+        /// <param name="page">A <see cref="IPage"/>.</param>
+        /// <param name="regex">A regular expression to test against <c>window.location.href</c>.</param>
+        /// <param name="flags">A set of flags for the regular expression.</param>
+        /// <returns><c>true</c> if the page has the specified URL.</returns>
+        /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
+        public static async Task<bool> HasUrlAsync(this IPage page, string regex, string flags = "")
+        {
+            return await page.GuardFromNull().EvaluateFunctionAsync<bool>("(regex, flags) => RegExp(regex, flags).test(window.location.href)", regex, flags).ConfigureAwait(false);
+        }
     }
 }

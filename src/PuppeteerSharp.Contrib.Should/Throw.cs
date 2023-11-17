@@ -24,6 +24,16 @@ namespace PuppeteerSharp.Contrib.Should
             throw Exception($"Expected page not to have title \"/{regex}/{flags}\"", null, because);
         }
 
+        public static void PageShouldHaveUrl(string regex, string flags, string actual, string? because)
+        {
+            throw Exception($"Expected page to have URL \"/{regex}/{flags}\"", $"but found \"{actual}\"", because);
+        }
+
+        public static void PageShouldNotHaveUrl(string regex, string flags, string? because)
+        {
+            throw Exception($"Expected page not to have URL \"/{regex}/{flags}\"", null, because);
+        }
+
         /* IElementHandle */
 
         public static void ElementShouldExist(string? because)

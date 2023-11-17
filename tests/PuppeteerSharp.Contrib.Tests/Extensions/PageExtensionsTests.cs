@@ -75,5 +75,14 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
             Assert.False(await Page.HasTitleAsync("Missing"));
             Assert.ThrowsAsync<ArgumentNullException>(async () => await ((Page)null).HasTitleAsync(""));
         }
+
+        [Test]
+        public async Task HasUrlAsync_should_return_true_if_page_has_the_url()
+        {
+            Assert.True(await Page.HasUrlAsync("bla.")); // about:blank
+            Assert.True(await Page.HasUrlAsync("Bla.", "i"));
+            Assert.False(await Page.HasUrlAsync("Missing"));
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await ((Page)null).HasUrlAsync(""));
+        }
     }
 }
