@@ -331,7 +331,7 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
         [Test]
         public async Task HasFocusAsync_should_return_true_if_the_element_has_focus()
         {
-            await Page.SetContentAsync("<html><body><input id='foo' autofocus><input id='bar'><input id='baz'></body></html>");
+            await Page.SetContentAsync("<html><body><input id='foo' autofocus><input id='bar'><input id='baz'></body></html>", new() { WaitUntil = [WaitUntilNavigation.Networkidle0] });
 
             var input = await Page.QuerySelectorAsync("#foo");
             Assert.True(await input.HasFocusAsync());
