@@ -7,17 +7,17 @@
 ⬆️ Bump PuppeteerSharp to 12.0.0
 👽️ Use PuppeteerSharp interfaces; IPage and IElementHandle
 
-New extensions for IPage:
+New assertions for IPage:
 ◼️ ShouldHaveUrlAsync
 ◼️ ShouldNotHaveUrlAsync
 
-New extensions for IElementHandle:
+New assertions for IElementHandle:
 ◼️ ShouldHaveAttributeValueAsync
 ◼️ ShouldNotHaveAttributeValueAsync
 ◼️ ShouldBeEmptyAsync
 ◼️ ShouldNotBeEmptyAsync
 
-Extensions for IResponse:
+Assertions for IResponse:
 ◼️ ShouldHaveUrl
 ◼️ ShouldNotHaveUrl
 ◼️ ShouldHaveStatusCode

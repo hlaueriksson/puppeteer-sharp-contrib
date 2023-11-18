@@ -7,7 +7,7 @@
 ## Content<!-- omit in toc -->
 
 - [Should assertions for `IPage`](#should-assertions-for-ipage)
-- [Should extensions for `IResponse`](#should-extensions-for-iresponse)
+- [Should assertions for `IResponse`](#should-assertions-for-iresponse)
 - [Should assertions for `IElementHandle`](#should-assertions-for-ielementhandle)
 - [Failures](#failures)
 - [Samples](#samples)
@@ -21,7 +21,7 @@
 - `ShouldNotHaveTitleAsync`
 - `ShouldNotHaveUrlAsync`
 
-## Should extensions for `IResponse`
+## Should assertions for `IResponse`
 
 - `ShouldBeRedirection`
 - `ShouldBeSuccessful`

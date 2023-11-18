@@ -23,7 +23,6 @@ It provides a convenient way to write readable and robust browser tests in .NET
 - [PuppeteerSharp.Contrib.Should](#puppeteersharpcontribshould)
 - [PuppeteerSharp.Contrib.PageObjects](#puppeteersharpcontribpageobjects)
 - [Samples](#samples)
-- [Unsafe](#unsafe)
 - [Upgrading](#upgrading)
 - [Attribution](#attribution)
 
@@ -83,12 +82,13 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using PuppeteerSharp.Contrib.Extensions;
 using PuppeteerSharp.Contrib.Should;
+using PuppeteerSharp.Input;
 
 namespace PuppeteerSharp.Contrib.Sample
 {
     public class PuppeteerSharpRepoTests
     {
-        private Browser Browser { get; set; }
+        private IBrowser Browser { get; set; }
 
         [SetUp]
         public async Task SetUp()
@@ -112,27 +112,31 @@ namespace PuppeteerSharp.Contrib.Sample
             var page = await Browser.NewPageAsync();
 
             await page.GoToAsync("https://github.com/");
-            var h1 = await page.QuerySelectorAsync("h1");
-            await h1.ShouldHaveContentAsync("Where the world builds software");
+            var heading = await page.QuerySelectorAsync("main h1");
+            await heading.ShouldHaveContentAsync("Let’s build");
 
-            var input = await page.QuerySelectorAsync("input.header-search-input");
-            if (await input.IsHiddenAsync()) await page.ClickAsync(".octicon-three-bars");
-            await page.TypeAsync("input.header-search-input", "Puppeteer Sharp");
-            await page.Keyboard.PressAsync("Enter");
-            await page.WaitForNavigationAsync();
+            var input = await page.QuerySelectorAsync("#query-builder-test");
+            if (await input.IsHiddenAsync())
+            {
+                await page.ClickAsync("[aria-label=\"Toggle navigation\"][data-view-component=\"true\"]");
+                await page.ClickAsync("[data-target=\"qbsearch-input.inputButtonText\"]");
+            }
+            await input.TypeAsync("Puppeteer Sharp");
+            await page.Keyboard.PressAsync(Key.Enter);
+            await page.WaitForSelectorAsync("[data-testid=\"results-list\"]");
 
-            var repositories = await page.QuerySelectorAllAsync(".repo-list-item");
+            var repositories = await page.QuerySelectorAllAsync("[data-testid=\"results-list\"] > div");
             Assert.IsNotEmpty(repositories);
             var repository = repositories.First();
             await repository.ShouldHaveContentAsync("hardkoded/puppeteer-sharp");
-            var text = await repository.QuerySelectorAsync("p");
+            var text = await repository.QuerySelectorAsync("h3 + div");
             await text.ShouldHaveContentAsync("Headless Chrome .NET API");
             var link = await repository.QuerySelectorAsync("a");
             await link.ClickAsync();
-            await page.WaitForNavigationAsync();
+            await page.WaitForSelectorAsync("article > h1");
 
-            h1 = await page.QuerySelectorAsync("article > h1");
-            await h1.ShouldHaveContentAsync("Puppeteer Sharp");
+            heading = await page.QuerySelectorAsync("article > h1");
+            await heading.ShouldHaveContentAsync("Puppeteer Sharp");
             Assert.AreEqual("https://github.com/hardkoded/puppeteer-sharp", page.Url);
         }
 
@@ -143,12 +147,12 @@ namespace PuppeteerSharp.Contrib.Sample
 
             await page.GoToAsync("https://github.com/hardkoded/puppeteer-sharp");
 
-            var build = await page.QuerySelectorAsync("img[alt='Build status']");
-            await build.ClickAsync();
-            await page.WaitForNavigationAsync(new NavigationOptions { WaitUntil = new[] { WaitUntilNavigation.Networkidle0 } });
+            await page.ClickAsync("#actions-tab");
+            await page.WaitForSelectorAsync("#partial-actions-workflow-runs");
 
-            var success = await page.QuerySelectorAsync(".project-build.project-build-status.success");
-            success.ShouldExist();
+            var status = await page.QuerySelectorAsync(".checks-list-item-icon svg");
+            var label = await status.GetAttributeAsync("aria-label");
+            Assert.AreEqual("completed successfully", label);
         }
 
         [Test]
@@ -166,8 +170,9 @@ namespace PuppeteerSharp.Contrib.Sample
 
             async Task<string> GetLatestReleaseVersion()
             {
-                var latest = await page.QuerySelectorWithContentAsync("a[href*='releases'] span", @"v\d\.\d\.\d");
-                return await latest.TextContentAsync();
+                var latest = await page.QuerySelectorWithContentAsync("a[href*='releases'] span", @"v?\d+\.\d\.\d");
+                var version = await latest.TextContentAsync();
+                return version.Substring(version.LastIndexOf('v') + 1);
             }
         }
     }
@@ -186,65 +191,92 @@ namespace PuppeteerSharp.Contrib.Sample
 {
     public class GitHubStartPage : PageObject
     {
-        [Selector("h1")]
-        public virtual Task<ElementHandle> Heading { get; }
+        [Selector("main h1")]
+        public virtual Task<IElementHandle> Heading { get; }
 
-        [Selector(".HeaderMenu")]
-        public virtual Task<GitHubHeaderMenu> HeaderMenu { get; }
+        [Selector("header")]
+        public virtual Task<GitHubHeader> Header { get; }
+
+        public async Task<GitHubSearchPage> SearchAsync(string text)
+        {
+            var task = Page.WaitForNavigationAsync<GitHubSearchPage>();
+            await (await Header).SearchAsync(text);
+            return await task;
+        }
     }
 
-    public class GitHubHeaderMenu : ElementObject
+    public class GitHubHeader : ElementObject
     {
-        [Selector("input.header-search-input")]
-        public virtual Task<ElementHandle> SearchInput { get; }
+        [Selector("#query-builder-test")]
+        public virtual Task<IElementHandle> SearchInput { get; }
 
-        public async Task<GitHubSearchPage> Search(string text)
+        public async Task SearchAsync(string text)
         {
             var input = await SearchInput;
-            if (await input.IsHiddenAsync()) await Page.ClickAsync(".octicon-three-bars");
+            if (await input.IsHiddenAsync())
+            {
+                await Page.ClickAsync("[aria-label=\"Toggle navigation\"][data-view-component=\"true\"]");
+                await Page.ClickAsync("[data-target=\"qbsearch-input.inputButtonText\"]");
+            }
             await input.TypeAsync(text);
             await input.PressAsync(Key.Enter);
-
-            return await Page.WaitForNavigationAsync<GitHubSearchPage>();
+            await Page.WaitForSelectorAsync("[data-testid=\"results-list\"]");
         }
     }
 
     public class GitHubSearchPage : PageObject
     {
-        [Selector(".repo-list-item")]
+        [Selector("[data-testid=\"results-list\"] > div")]
         public virtual Task<GitHubRepoListItem[]> RepoListItems { get; }
+
+        public async Task<GitHubRepoPage> GotoAsync(GitHubRepoListItem repo)
+        {
+            var task = Page.WaitForNavigationAsync<GitHubRepoPage>();
+            await (await repo.Link).ClickAsync();
+            await Page.WaitForSelectorAsync("article > h1");
+            return await task;
+        }
     }
 
     public class GitHubRepoListItem : ElementObject
     {
         [Selector("a")]
-        public virtual Task<ElementHandle> Link { get; }
+        public virtual Task<IElementHandle> Link { get; }
 
-        [Selector("p")]
-        public virtual Task<ElementHandle> Text { get; }
+        [Selector("h3 + div")]
+        public virtual Task<IElementHandle> Text { get; }
     }
 
     public class GitHubRepoPage : PageObject
     {
         [Selector("article > h1")]
-        public virtual Task<ElementHandle> Heading { get; }
+        public virtual Task<IElementHandle> Heading { get; }
 
-        [Selector("img[alt='Build status']")]
-        public virtual Task<ElementHandle> BuildStatusBadge { get; }
+        [Selector("#actions-tab")]
+        public virtual Task<IElementHandle> Actions { get; }
 
-        public async Task<string> GetLatestReleaseVersion()
+        public async Task<GitHubActionsPage> GotoActionsAsync()
         {
-            var latest = await Page.QuerySelectorWithContentAsync("a[href*='releases'] span", @"v\d\.\d\.\d");
-            return await latest.TextContentAsync();
+            var task = Page.WaitForNavigationAsync<GitHubActionsPage>();
+            await (await Actions).ClickAsync();
+            await Page.WaitForSelectorAsync("#partial-actions-workflow-runs");
+            return await task;
+        }
+
+        public async Task<string> GetLatestReleaseVersionAsync()
+        {
+            var latest = await Page.QuerySelectorWithContentAsync("a[href*='releases'] span", @"v?\d+\.\d\.\d");
+            var version = await latest.TextContentAsync();
+            return version.Substring(version.LastIndexOf('v') + 1);
         }
     }
 
-    public class AppVeyorBuildPage : PageObject
+    public class GitHubActionsPage : PageObject
     {
-        public async Task<bool> Success()
+        public async Task<string> GetLatestWorkflowRunStatusAsync()
         {
-            var success = await Page.QuerySelectorAsync(".project-build.project-build-status.success");
-            return success.Exists();
+            var status = await Page.QuerySelectorAsync(".checks-list-item-icon svg");
+            return await status.GetAttributeAsync("aria-label");
         }
     }
 }
@@ -261,7 +293,7 @@ namespace PuppeteerSharp.Contrib.Sample
 {
     public class PuppeteerSharpRepoPageObjectTests
     {
-        private Browser Browser { get; set; }
+        private IBrowser Browser { get; set; }
 
         [SetUp]
         public async Task SetUp()
@@ -286,11 +318,9 @@ namespace PuppeteerSharp.Contrib.Sample
 
             var startPage = await page.GoToAsync<GitHubStartPage>("https://github.com/");
             var heading = await startPage.Heading;
-            await heading.ShouldHaveContentAsync("Where the world builds software");
+            await heading.ShouldHaveContentAsync("Let’s build");
 
-            var headerMenu = await startPage.HeaderMenu;
-            var searchPage = await headerMenu.Search("Puppeteer Sharp");
-
+            var searchPage = await startPage.SearchAsync("Puppeteer Sharp");
             var repositories = await searchPage.RepoListItems;
             Assert.IsNotEmpty(repositories);
             var repository = repositories.First();
@@ -298,9 +328,8 @@ namespace PuppeteerSharp.Contrib.Sample
             await text.ShouldHaveContentAsync("Headless Chrome .NET API");
             var link = await repository.Link;
             await link.ShouldHaveContentAsync("hardkoded/puppeteer-sharp");
-            await link.ClickAsync();
 
-            var repoPage = await page.WaitForNavigationAsync<GitHubRepoPage>();
+            var repoPage = await searchPage.GotoAsync(repository);
             heading = await repoPage.Heading;
             await heading.ShouldHaveContentAsync("Puppeteer Sharp");
             Assert.AreEqual("https://github.com/hardkoded/puppeteer-sharp", repoPage.Page.Url);
@@ -312,12 +341,10 @@ namespace PuppeteerSharp.Contrib.Sample
             var page = await Browser.NewPageAsync();
 
             var repoPage = await page.GoToAsync<GitHubRepoPage>("https://github.com/hardkoded/puppeteer-sharp");
-            var badge = await repoPage.BuildStatusBadge;
-            await badge.ClickAsync();
 
-            var buildPage = await page.WaitForNavigationAsync<AppVeyorBuildPage>(new NavigationOptions { WaitUntil = new[] { WaitUntilNavigation.Networkidle0 } });
-            var success = await buildPage.Success();
-            Assert.True(success);
+            var actionsPage = await repoPage.GotoActionsAsync();
+            var status = await actionsPage.GetLatestWorkflowRunStatusAsync();
+            Assert.AreEqual("completed successfully", status);
         }
 
         [Test]
@@ -325,11 +352,11 @@ namespace PuppeteerSharp.Contrib.Sample
         {
             var page = await Browser.NewPageAsync();
 
-            var repoPage = await page.GoToAsync<GitHubRepoPage>("https://github.com/hardkoded/puppeteer-sharp");
-            var puppeteerSharpVersion = await repoPage.GetLatestReleaseVersion();
+            var repoPage = await page.GoToAsync<GitHubRepoPage>("https://github.com/puppeteer/puppeteer");
+            var puppeteerVersion = await repoPage.GetLatestReleaseVersionAsync();
 
-            repoPage = await page.GoToAsync<GitHubRepoPage>("https://github.com/puppeteer/puppeteer");
-            var puppeteerVersion = await repoPage.GetLatestReleaseVersion();
+            repoPage = await page.GoToAsync<GitHubRepoPage>("https://github.com/hardkoded/puppeteer-sharp");
+            var puppeteerSharpVersion = await repoPage.GetLatestReleaseVersionAsync();
 
             Assert.AreEqual(puppeteerVersion, puppeteerSharpVersion);
         }
@@ -337,35 +364,14 @@ namespace PuppeteerSharp.Contrib.Sample
 }
 ```
 
-## Unsafe
-
-Two packages contains _sync over async_ versions of the extension methods:
-
-- `PuppeteerSharp.Contrib.Extensions.Unsafe`
-- `PuppeteerSharp.Contrib.Should.Unsafe`
-
-:no_entry: These packages are no longer maintained and will not be published in new versions.
-
-:book: README: [PuppeteerSharp.Contrib.Extensions.Unsafe.md](PuppeteerSharp.Contrib.Extensions.Unsafe.md)
-
-:book: README: [PuppeteerSharp.Contrib.Should.Unsafe.md](PuppeteerSharp.Contrib.Should.Unsafe.md)
-
 ## Upgrading
 
-> :arrow_up: Upgrading from version `1.0.0` to `2.0.0`
+> :arrow_up: Upgrading from version `5.0.0` to `6.0.0`
 
-If you use the _sync_ methods from `PuppeteerSharp.Contrib.Extensions` or `PuppeteerSharp.Contrib.Should`, please install:
+`PuppeteerSharp.Contrib.PageObjects`:
 
-- `PuppeteerSharp.Contrib.Extensions.Unsafe`
-- `PuppeteerSharp.Contrib.Should.Unsafe`
-
-> :arrow_up: Upgrading from version `2.0.0` to `4.0.0`
-
-If you use the _sync_ methods from `PuppeteerSharp.Contrib.Extensions.Unsafe` or `PuppeteerSharp.Contrib.Should.Unsafe`, please rewrite your code to use _async_ versions.
-Then uninstall:
-
-- `PuppeteerSharp.Contrib.Extensions.Unsafe`
-- `PuppeteerSharp.Contrib.Should.Unsafe`
+- The `[XPath]` attribute is now obsolete. Consider rewriting your code to use the `[Selector]` attribute instead.
+- The `XPathAsync` and `WaitForXPathAsync` methods are now obsolete. Consider rewriting your code to use the `QuerySelectorAsync` and `WaitForSelectorAsync` methods instead.
 
 ## Attribution
 
