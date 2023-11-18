@@ -4,16 +4,20 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Version>5.0.0</Version>
     <PackageReleaseNotes>
-⬆️ Bump PuppeteerSharp to 7.1.0
+⬆️ Bump PuppeteerSharp to 12.0.0
+👽️ Use PuppeteerSharp interfaces; IPage and IElementHandle
 
 New extensions for IPage:
-◼️ GoBackAsync&lt;T&gt;
-◼️ GoForwardAsync&lt;T&gt;
-◼️ ReloadAsync&lt;T&gt;
-◼️ WaitForResponseAsync&lt;T&gt;
+◼️ To&lt;T&gt;
 
 New extensions for IElementHandle:
-◼️ WaitForSelectorAsync&lt;T&gt;
+◼️ To&lt;T&gt;
+
+🗑️ XPath is now obsolete:
+◼️ XPathAttribute
+◼️ IPage.XPathAsync
+◼️ IPage.WaitForXPathAsync
+◼️ IElementHandle.XPathAsync
     </PackageReleaseNotes>
     <Authors>Henrik Lau Eriksson</Authors>
     <Description>Contributions to the Headless Chrome .NET API 🌐🧪

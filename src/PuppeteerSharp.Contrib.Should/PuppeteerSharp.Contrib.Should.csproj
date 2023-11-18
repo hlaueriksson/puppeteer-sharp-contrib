@@ -4,7 +4,29 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Version>5.0.0</Version>
     <PackageReleaseNotes>
-⬆️ Bump PuppeteerSharp to 7.1.0
+⬆️ Bump PuppeteerSharp to 12.0.0
+👽️ Use PuppeteerSharp interfaces; IPage and IElementHandle
+
+New extensions for IPage:
+◼️ ShouldHaveUrlAsync
+◼️ ShouldNotHaveUrlAsync
+
+New extensions for IElementHandle:
+◼️ ShouldHaveAttributeValueAsync
+◼️ ShouldNotHaveAttributeValueAsync
+◼️ ShouldBeEmptyAsync
+◼️ ShouldNotBeEmptyAsync
+
+Extensions for IResponse:
+◼️ ShouldHaveUrl
+◼️ ShouldNotHaveUrl
+◼️ ShouldHaveStatusCode
+◼️ ShouldNotHaveStatusCode
+◼️ ShouldBeSuccessful
+◼️ ShouldBeRedirection
+◼️ ShouldHaveClientError
+◼️ ShouldHaveServerError
+◼️ ShouldHaveError
     </PackageReleaseNotes>
     <Authors>Henrik Lau Eriksson</Authors>
     <Description>Contributions to the Headless Chrome .NET API 🌐🧪
