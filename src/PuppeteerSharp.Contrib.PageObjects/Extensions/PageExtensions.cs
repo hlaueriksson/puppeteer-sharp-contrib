@@ -231,7 +231,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
 
         /// <summary>
         /// Runs <c>document.querySelectorAll</c> within the page and returns an <see cref="ElementObject"/> array.
-        /// If no elements match the selector, the return value resolve to <see cref="System.Array.Empty{T}"/>.
+        /// If no elements match the selector, the return value resolve to <see cref="Array.Empty{T}"/>.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="ElementObject"/>.</typeparam>
         /// <param name="page">A <see cref="IPage"/>.</param>
@@ -304,7 +304,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
 
         /// <summary>
         /// Evaluates the XPath expression and returns an <see cref="ElementObject"/> array.
-        /// If no elements match the expression, the return value resolve to <see cref="System.Array.Empty{T}"/>.
+        /// If no elements match the expression, the return value resolve to <see cref="Array.Empty{T}"/>.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="ElementObject"/>.</typeparam>
         /// <param name="page">A <see cref="IPage"/>.</param>

@@ -35,7 +35,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         }
 
         /// <summary>
-        /// The method runs <c>element.querySelectorAll</c> and then tests a <c>RegExp</c> against the elements <c>textContent</c>. All element matches are returned. If no element matches the selector and regular expression, the return value resolve to <see cref="System.Array.Empty{T}"/>.
+        /// The method runs <c>element.querySelectorAll</c> and then tests a <c>RegExp</c> against the elements <c>textContent</c>. All element matches are returned. If no element matches the selector and regular expression, the return value resolve to <see cref="Array.Empty{T}"/>.
         /// </summary>
         /// <param name="elementHandle">An <see cref="IElementHandle"/> to query.</param>
         /// <param name="selector">A selector to query element for.</param>
