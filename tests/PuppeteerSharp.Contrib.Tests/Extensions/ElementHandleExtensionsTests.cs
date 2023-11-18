@@ -346,5 +346,28 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.HasFocusAsync());
         }
+
+        [Test]
+        public async Task IsEmptyAsync_should_return_true_if_the_element_is_empty()
+        {
+            await Page.SetContentAsync("<html><body><input id='foo'><input id='bar' value='input'></body></html>", new NavigationOptions { WaitUntil = new[] { WaitUntilNavigation.Networkidle0 } });
+
+            var input = await Page.QuerySelectorAsync("#foo");
+            Assert.True(await input.IsEmptyAsync());
+
+            input = await Page.QuerySelectorAsync("#bar");
+            Assert.False(await input.IsEmptyAsync());
+
+            var missing = await Page.QuerySelectorAsync(".missing");
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.IsEmptyAsync());
+
+            await Page.SetContentAsync("<html><body><div id='foo'> </div><div id='bar'>Text</div></body></html>", new NavigationOptions { WaitUntil = new[] { WaitUntilNavigation.Networkidle0 } });
+
+            var div = await Page.QuerySelectorAsync("#foo");
+            Assert.True(await div.IsEmptyAsync());
+
+            div = await Page.QuerySelectorAsync("#bar");
+            Assert.False(await div.IsEmptyAsync());
+        }
     }
 }

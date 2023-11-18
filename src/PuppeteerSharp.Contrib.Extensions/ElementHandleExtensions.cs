@@ -262,6 +262,24 @@ namespace PuppeteerSharp.Contrib.Extensions
             return await elementHandle.EvaluateFunctionWithGuardAsync<bool>("element => element === document.activeElement").ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Indicates whether the element is empty or not, e.g. an empty editable element or a DOM node that has no text.
+        /// </summary>
+        /// <param name="elementHandle">An <see cref="IElementHandle"/>.</param>
+        /// <returns><c>true</c> if the element is empty.</returns>
+        /// <remarks><![CDATA[Elements: <input>, <textarea>]]></remarks>
+        /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent"/>
+        public static async Task<bool> IsEmptyAsync(this IElementHandle elementHandle)
+        {
+            return await elementHandle.EvaluateFunctionWithGuardAsync<bool>(
+                @"element => {
+                    if (element.nodeName === 'INPUT' || element.nodeName === 'TEXTAREA')
+                        return !element.value;
+                    else
+                        return !element.textContent?.trim();
+                }").ConfigureAwait(false);
+        }
+
         private static async Task<string> GetPropertyValueAsync(this IElementHandle elementHandle, string propertyName)
         {
             var property = await elementHandle.GuardFromNull().GetPropertyAsync(propertyName).ConfigureAwait(false);
