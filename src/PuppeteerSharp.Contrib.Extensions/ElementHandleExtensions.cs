@@ -18,7 +18,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <param name="selector">A selector to query element for.</param>
         /// <param name="regex">A regular expression to test against <c>element.textContent</c>.</param>
         /// <param name="flags">A set of flags for the regular expression.</param>
-        /// <returns>Task which resolves to <see cref="IElementHandle"/> pointing to the element.</returns>
+        /// <returns>Task which resolves to an <see cref="IElementHandle"/> pointing to the element.</returns>
         /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
         public static async Task<IElementHandle?> QuerySelectorWithContentAsync(this IElementHandle elementHandle, string selector, string regex, string flags = "")
         {
@@ -41,7 +41,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <param name="selector">A selector to query element for.</param>
         /// <param name="regex">A regular expression to test against <c>element.textContent</c>.</param>
         /// <param name="flags">A set of flags for the regular expression.</param>
-        /// <returns>Task which resolves to ElementHandles pointing to the elements.</returns>
+        /// <returns>Task which resolves to an <see cref="IElementHandle"/> array pointing to the elements.</returns>
         /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
         public static async Task<IElementHandle[]> QuerySelectorAllWithContentAsync(this IElementHandle elementHandle, string selector, string regex, string flags = "")
         {
