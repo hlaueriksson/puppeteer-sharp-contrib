@@ -206,6 +206,16 @@ namespace PuppeteerSharp.Contrib.Should
             throw Exception("Expected element not to have focus", "but it did", because);
         }
 
+        public static void ElementShouldBeEmpty(string? because)
+        {
+            throw Exception("Expected element to be empty", "but it is not", because);
+        }
+
+        public static void ElementShouldNotBeEmpty(string? because)
+        {
+            throw Exception("Expected element not to be empty", "but it is", because);
+        }
+
         private static ShouldException Exception(string expected, string? actual, string? because)
         {
             return new ShouldException(new ShouldMessage(expected, because, actual).ToString());

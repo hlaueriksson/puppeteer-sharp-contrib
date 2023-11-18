@@ -327,5 +327,31 @@ namespace PuppeteerSharp.Contrib.Should
         {
             if (await elementHandle.HasFocusAsync().ConfigureAwait(false)) Throw.ElementShouldNotHaveFocus(because);
         }
+
+        // Empty
+
+        /// <summary>
+        /// Asserts that the element is empty, e.g. an empty editable element or a DOM node that has no text.
+        /// </summary>
+        /// <param name="elementHandle">An <see cref="IElementHandle"/>.</param>
+        /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        /// <remarks><![CDATA[Elements: <input>, <textarea>]]></remarks>
+        public static async Task ShouldBeEmptyAsync(this IElementHandle elementHandle, string? because = null)
+        {
+            if (!await elementHandle.IsEmptyAsync().ConfigureAwait(false)) Throw.ElementShouldBeEmpty(because);
+        }
+
+        /// <summary>
+        /// Asserts that the element is not empty, e.g. an non empty editable element or a DOM node that has text.
+        /// </summary>
+        /// <param name="elementHandle">An <see cref="IElementHandle"/>.</param>
+        /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        /// <remarks><![CDATA[Elements: <input>, <textarea>]]></remarks>
+        public static async Task ShouldNotBeEmptyAsync(this IElementHandle elementHandle, string? because = null)
+        {
+            if (await elementHandle.IsEmptyAsync().ConfigureAwait(false)) Throw.ElementShouldNotBeEmpty(because);
+        }
     }
 }

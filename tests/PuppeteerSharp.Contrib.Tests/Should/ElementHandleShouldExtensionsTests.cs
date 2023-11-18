@@ -394,5 +394,57 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldNotHaveFocusAsync());
         }
+
+        // Empty
+
+        [Test]
+        public async Task ShouldBeEmptyAsync_throws_if_element_is_not_empty()
+        {
+            await Page.SetContentAsync("<html><body><input id='foo'><input id='bar' value='input'></body></html>");
+
+            var input = await Page.QuerySelectorAsync("#foo");
+            await input.ShouldBeEmptyAsync();
+
+            input = await Page.QuerySelectorAsync("#bar");
+            var ex = Assert.ThrowsAsync<ShouldException>(async () => await input.ShouldBeEmptyAsync());
+            Assert.AreEqual("Expected element to be empty, but it is not.", ex.Message);
+
+            var missing = await Page.QuerySelectorAsync(".missing");
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldBeEmptyAsync());
+
+            await Page.SetContentAsync("<html><body><div id='foo'> </div><div id='bar'>Text</div></body></html>");
+
+            var div = await Page.QuerySelectorAsync("#foo");
+            await div.ShouldBeEmptyAsync();
+
+            div = await Page.QuerySelectorAsync("#bar");
+            ex = Assert.ThrowsAsync<ShouldException>(async () => await div.ShouldBeEmptyAsync());
+            Assert.AreEqual("Expected element to be empty, but it is not.", ex.Message);
+        }
+
+        [Test]
+        public async Task ShouldNotBeEmptyAsync_throws_if_element_is_empty()
+        {
+            await Page.SetContentAsync("<html><body><input id='foo'><input id='bar' value='input'></body></html>");
+
+            var input = await Page.QuerySelectorAsync("#bar");
+            await input.ShouldNotBeEmptyAsync();
+
+            input = await Page.QuerySelectorAsync("#foo");
+            var ex = Assert.ThrowsAsync<ShouldException>(async () => await input.ShouldNotBeEmptyAsync());
+            Assert.AreEqual("Expected element not to be empty, but it is.", ex.Message);
+
+            var missing = await Page.QuerySelectorAsync(".missing");
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldNotBeEmptyAsync());
+
+            await Page.SetContentAsync("<html><body><div id='foo'> </div><div id='bar'>Text</div></body></html>");
+
+            var div = await Page.QuerySelectorAsync("#bar");
+            await div.ShouldNotBeEmptyAsync();
+
+            div = await Page.QuerySelectorAsync("#foo");
+            ex = Assert.ThrowsAsync<ShouldException>(async () => await div.ShouldNotBeEmptyAsync());
+            Assert.AreEqual("Expected element not to be empty, but it is.", ex.Message);
+        }
     }
 }
