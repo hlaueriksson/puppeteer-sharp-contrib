@@ -6,35 +6,38 @@
 
 ## Content<!-- omit in toc -->
 
-- [Installation](#installation)
-- [Should assertions for `Page`](#should-assertions-for-page)
-- [Should assertions for `ElementHandle`](#should-assertions-for-elementhandle)
+- [Should assertions for `IPage`](#should-assertions-for-ipage)
+- [Should extensions for `IResponse`](#should-extensions-for-iresponse)
+- [Should assertions for `IElementHandle`](#should-assertions-for-ielementhandle)
 - [Failures](#failures)
 - [Samples](#samples)
 
-## Installation
-
-| NuGet            |       | [![PuppeteerSharp.Contrib.Should][1]][2]                                       |
-| :--------------- | ----: | :----------------------------------------------------------------------------- |
-| Package Manager  | `PM>` | `Install-Package PuppeteerSharp.Contrib.Should -Version 5.0.0`                 |
-| .NET CLI         | `>`   | `dotnet add package PuppeteerSharp.Contrib.Should --version 5.0.0`             |
-| PackageReference |       | `<PackageReference Include="PuppeteerSharp.Contrib.Should" Version="5.0.0" />` |
-| Paket CLI        | `>`   | `paket add PuppeteerSharp.Contrib.Should --version 5.0.0`                      |
-
-[1]: https://img.shields.io/nuget/v/PuppeteerSharp.Contrib.Should.svg?label=PuppeteerSharp.Contrib.Should
-[2]: https://www.nuget.org/packages/PuppeteerSharp.Contrib.Should
-
-## Should assertions for `Page`
+## Should assertions for `IPage`
 
 - `ShouldHaveContentAsync`
 - `ShouldHaveTitleAsync`
+- `ShouldHaveUrlAsync`
 - `ShouldNotHaveContentAsync`
 - `ShouldNotHaveTitleAsync`
+- `ShouldNotHaveUrlAsync`
 
-## Should assertions for `ElementHandle`
+## Should extensions for `IResponse`
+
+- `ShouldBeRedirection`
+- `ShouldBeSuccessful`
+- `ShouldHaveClientError`
+- `ShouldHaveError`
+- `ShouldHaveServerError`
+- `ShouldHaveStatusCode`
+- `ShouldHaveUrl`
+- `ShouldNotHaveStatusCode`
+- `ShouldNotHaveUrl`
+
+## Should assertions for `IElementHandle`
 
 - `ShouldBeCheckedAsync`
 - `ShouldBeDisabledAsync`
+- `ShouldBeEmptyAsync`
 - `ShouldBeEnabledAsync`
 - `ShouldBeHiddenAsync`
 - `ShouldBeReadOnlyAsync`
@@ -43,16 +46,19 @@
 - `ShouldBeVisibleAsync`
 - `ShouldExist`
 - `ShouldHaveAttributeAsync`
+- `ShouldHaveAttributeValueAsync`
 - `ShouldHaveClassAsync`
 - `ShouldHaveContentAsync`
 - `ShouldHaveFocusAsync`
 - `ShouldHaveValueAsync`
 - `ShouldNotBeCheckedAsync`
+- `ShouldNotBeEmptyAsync`
 - `ShouldNotBeReadOnlyAsync`
 - `ShouldNotBeRequiredAsync`
 - `ShouldNotBeSelectedAsync`
 - `ShouldNotExist`
 - `ShouldNotHaveAttributeAsync`
+- `ShouldNotHaveAttributeValueAsync`
 - `ShouldNotHaveClassAsync`
 - `ShouldNotHaveContentAsync`
 - `ShouldNotHaveFocusAsync`
@@ -107,8 +113,8 @@ namespace PuppeteerSharp.Contrib.Sample
 {
     public class ShouldTests
     {
-        Browser Browser { get; set; }
-        Page Page { get; set; }
+        IBrowser Browser { get; set; }
+        IPage Page { get; set; }
 
         [SetUp]
         public async Task SetUp()
@@ -189,7 +195,7 @@ namespace PuppeteerSharp.Contrib.Sample
     <option id='bar'>Bar</option>
   </select>
 </form>
-", new NavigationOptions { WaitUntil = new[] { WaitUntilNavigation.Networkidle0 } });
+");
 
             var input = await Page.QuerySelectorAsync("input[type=text]");
             await input.ShouldHaveFocusAsync();

@@ -6,65 +6,61 @@
 
 ## Content<!-- omit in toc -->
 
-- [Installation](#installation)
 - [Page Objects](#page-objects)
 - [Element Objects](#element-objects)
 - [Selector Attributes](#selector-attributes)
-- [XPath Attributes](#xpath-attributes)
-- [Extensions for `Page`](#extensions-for-page)
-- [Extensions for `ElementHandle`](#extensions-for-elementhandle)
+- [Extensions for `IPage`](#extensions-for-ipage)
+- [Extensions for `IElementHandle`](#extensions-for-ielementhandle)
 - [Samples](#samples)
 - [Further Reading](#further-reading)
 
-## Installation
-
-| NuGet            |       | [![PuppeteerSharp.Contrib.PageObjects][1]][2]                                       |
-| :--------------- | ----: | :---------------------------------------------------------------------------------- |
-| Package Manager  | `PM>` | `Install-Package PuppeteerSharp.Contrib.PageObjects -Version 5.0.0`                 |
-| .NET CLI         | `>`   | `dotnet add package PuppeteerSharp.Contrib.PageObjects --version 5.0.0`             |
-| PackageReference |       | `<PackageReference Include="PuppeteerSharp.Contrib.PageObjects" Version="5.0.0" />` |
-| Paket CLI        | `>`   | `paket add PuppeteerSharp.Contrib.PageObjects --version 5.0.0`                      |
-
-[1]: https://img.shields.io/nuget/v/PuppeteerSharp.Contrib.PageObjects.svg?label=PuppeteerSharp.Contrib.PageObjects
-[2]: https://www.nuget.org/packages/PuppeteerSharp.Contrib.PageObjects
-
 ## Page Objects
 
-A page object wraps a [`PuppeteerSharp.Page`](https://www.puppeteersharp.com/api/PuppeteerSharp.Page.html) and should encapsulate the way tests interact with a web page.
+A page object wraps an [`PuppeteerSharp.IPage`](https://www.puppeteersharp.com/api/PuppeteerSharp.IPage.html) and should encapsulate the way tests interact with a web page.
 
-Create page objects by inheriting `PageObject` and declare properties decorated with `[Selector]` or `[XPath]` attributes.
+Create page objects by inheriting `PageObject` and declare properties decorated with `[Selector]` attributes.
 
 ```csharp
 public class GitHubStartPage : PageObject
 {
-    [Selector("h1")]
-    public virtual Task<ElementHandle> Heading { get; }
+    [Selector("main h1")]
+    public virtual Task<IElementHandle> Heading { get; }
 
-    [Selector(".HeaderMenu")]
-    public virtual Task<GitHubHeaderMenu> HeaderMenu { get; }
+    [Selector("header")]
+    public virtual Task<GitHubHeader> Header { get; }
+
+    public async Task<GitHubSearchPage> SearchAsync(string text)
+    {
+        var task = Page.WaitForNavigationAsync<GitHubSearchPage>();
+        await (await Header).SearchAsync(text);
+        return await task;
+    }
 }
 ```
 
 ## Element Objects
 
-An element object wraps an [`PuppeteerSharp.ElementHandle`](https://www.puppeteersharp.com/api/PuppeteerSharp.ElementHandle.html) and should encapsulate the way tests interact with an element of a web page.
+An element object wraps an [`PuppeteerSharp.IElementHandle`](https://www.puppeteersharp.com/api/PuppeteerSharp.IElementHandle.html) and should encapsulate the way tests interact with an element of a web page.
 
-Create element objects by inheriting `ElementObject` and declare properties decorated with `[Selector]` or `[XPath]` attributes.
+Create element objects by inheriting `ElementObject` and declare properties decorated with `[Selector]` attributes.
 
 ```csharp
-public class GitHubHeaderMenu : ElementObject
+public class GitHubHeader : ElementObject
 {
-    [Selector("input.header-search-input")]
-    public virtual Task<ElementHandle> SearchInput { get; }
+    [Selector("#query-builder-test")]
+    public virtual Task<IElementHandle> SearchInput { get; }
 
-    public async Task<GitHubSearchPage> Search(string text)
+    public async Task SearchAsync(string text)
     {
         var input = await SearchInput;
-        if (await input.IsHiddenAsync()) await Page.ClickAsync(".octicon-three-bars");
+        if (await input.IsHiddenAsync())
+        {
+            await Page.ClickAsync("[aria-label=\"Toggle navigation\"][data-view-component=\"true\"]");
+            await Page.ClickAsync("[data-target=\"qbsearch-input.inputButtonText\"]");
+        }
         await input.TypeAsync(text);
         await input.PressAsync(Key.Enter);
-
-        return await Page.WaitForNavigationAsync<GitHubSearchPage>();
+        await Page.WaitForSelectorAsync("[data-testid=\"results-list\"]");
     }
 }
 ```
@@ -82,8 +78,8 @@ Properties decorated with a `[Selector]` attribute must be a:
 
 that returns:
 
-- `Task<ElementHandle>`
-- `Task<ElementHandle[]>`
+- `Task<IElementHandle>`
+- `Task<IElementHandle[]>`
 - `Task<ElementObject>` or
 - `Task<ElementObject[]>`
 
@@ -91,10 +87,10 @@ Example:
 
 ```csharp
 [Selector("#foo")]
-public virtual Task<ElementHandle> SelectorForElementHandle { get; }
+public virtual Task<IElementHandle> SelectorForElementHandle { get; }
 
 [Selector(".bar")]
-public virtual Task<ElementHandle[]> SelectorForElementHandleArray { get; }
+public virtual Task<IElementHandle[]> SelectorForElementHandleArray { get; }
 
 [Selector("#foo")]
 public virtual Task<FooElementObject> SelectorForElementObject { get; }
@@ -103,33 +99,7 @@ public virtual Task<FooElementObject> SelectorForElementObject { get; }
 public virtual Task<BarElementObject[]> SelectorForElementObjectArray { get; }
 ```
 
-## XPath Attributes
-
-`[XPath]` attributes can be applied to properties on a `PageObject` or `ElementObject`.
-
-Properties decorated with a `[XPath]` attribute must be a:
-
-- public
-- virtual
-- asynchronous
-- getter
-
-that returns:
-
-- `Task<ElementHandle[]>` or
-- `Task<ElementObject[]>`
-
-Example:
-
-```csharp
-[XPath("//div")]
-public virtual Task<ElementHandle[]> XPathForElementHandleArray { get; }
-
-[XPath("//div")]
-public virtual Task<FooElementObject[]> XPathForElementObjectArray { get; }
-```
-
-## Extensions for `Page`
+## Extensions for `IPage`
 
 Where `T` is a `PageObject`:
 
@@ -137,6 +107,7 @@ Where `T` is a `PageObject`:
 - `GoForwardAsync<T>`
 - `GoToAsync<T>`
 - `ReloadAsync<T>`
+- `To<T>`
 - `WaitForNavigationAsync<T>`
 - `WaitForResponseAsync<T>`
 
@@ -148,12 +119,13 @@ Where `T` is an `ElementObject`:
 - `WaitForXPathAsync<T>`
 - `XPathAsync<T>`
 
-## Extensions for `ElementHandle`
+## Extensions for `IElementHandle`
 
 Where `T` is an `ElementObject`:
 
 - `QuerySelectorAllAsync<T>`
 - `QuerySelectorAsync<T>`
+- `To<T>`
 - `WaitForSelectorAsync<T>`
 - `XPathAsync<T>`
 

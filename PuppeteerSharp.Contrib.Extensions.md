@@ -6,24 +6,12 @@
 
 ## Content<!-- omit in toc -->
 
-- [Installation](#installation)
-- [Extensions for `Page`](#extensions-for-page)
-- [Extensions for `ElementHandle`](#extensions-for-elementhandle)
+- [Extensions for `IPage`](#extensions-for-ipage)
+- [Extensions for `IResponse`](#extensions-for-iresponse)
+- [Extensions for `IElementHandle`](#extensions-for-ielementhandle)
 - [Samples](#samples)
 
-## Installation
-
-| NuGet            |       | [![PuppeteerSharp.Contrib.Extensions][1]][2]                                       |
-| :--------------- | ----: | :--------------------------------------------------------------------------------- |
-| Package Manager  | `PM>` | `Install-Package PuppeteerSharp.Contrib.Extensions -Version 5.0.0`                 |
-| .NET CLI         | `>`   | `dotnet add package PuppeteerSharp.Contrib.Extensions --version 5.0.0`             |
-| PackageReference |       | `<PackageReference Include="PuppeteerSharp.Contrib.Extensions" Version="5.0.0" />` |
-| Paket CLI        | `>`   | `paket add PuppeteerSharp.Contrib.Extensions --version 5.0.0`                      |
-
-[1]: https://img.shields.io/nuget/v/PuppeteerSharp.Contrib.Extensions.svg?label=PuppeteerSharp.Contrib.Extensions
-[2]: https://www.nuget.org/packages/PuppeteerSharp.Contrib.Extensions
-
-## Extensions for `Page`
+## Extensions for `IPage`
 
 Query:
 
@@ -34,8 +22,13 @@ Evaluation:
 
 - `HasContentAsync`
 - `HasTitleAsync`
+- `HasUrlAsync`
 
-## Extensions for `ElementHandle`
+## Extensions for `IResponse`
+
+- `HasUrl`
+
+## Extensions for `IElementHandle`
 
 Attributes:
 
@@ -59,11 +52,13 @@ Evaluation:
 
 - `Exists`
 - `HasAttributeAsync`
+- `HasAttributeValueAsync`
 - `HasClassAsync`
 - `HasContentAsync`
 - `HasFocusAsync`
 - `IsCheckedAsync`
 - `IsDisabledAsync`
+- `IsEmptyAsync`
 - `IsEnabledAsync`
 - `IsHiddenAsync`
 - `IsReadOnlyAsync`
@@ -92,8 +87,8 @@ namespace PuppeteerSharp.Contrib.Sample
 {
     public class ExtensionsTests
     {
-        Browser Browser { get; set; }
-        Page Page { get; set; }
+        IBrowser Browser { get; set; }
+        IPage Page { get; set; }
 
         [SetUp]
         public async Task SetUp()
@@ -230,7 +225,7 @@ namespace PuppeteerSharp.Contrib.Sample
     <option id='bar'>Bar</option>
   </select>
 </form>
-", new NavigationOptions { WaitUntil = new[] { WaitUntilNavigation.Networkidle0 } });
+");
 
             var input = await Page.QuerySelectorAsync("input[type=text]");
             Assert.True(await input.HasFocusAsync());
