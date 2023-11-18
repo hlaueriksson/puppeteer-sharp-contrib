@@ -92,6 +92,38 @@ namespace PuppeteerSharp.Contrib.Should
             if (await elementHandle.HasAttributeAsync(name).ConfigureAwait(false)) Throw.ElementShouldNotHaveAttribute(name, because);
         }
 
+        // AttributeValue
+
+        /// <summary>
+        /// Asserts that the element has the specified attribute value.
+        /// </summary>
+        /// <param name="elementHandle">An <see cref="IElementHandle"/>.</param>
+        /// <param name="name">The attribute name.</param>
+        /// <param name="regex">A regular expression to test against <c>element.getAttribute(name)</c>.</param>
+        /// <param name="flags">A set of flags for the regular expression.</param>
+        /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
+        public static async Task ShouldHaveAttributeValueAsync(this IElementHandle elementHandle, string name, string regex, string flags = "", string? because = null)
+        {
+            if (!await elementHandle.HasAttributeValueAsync(name, regex, flags).ConfigureAwait(false)) Throw.ElementShouldHaveAttributeValue(name, regex, flags, because);
+        }
+
+        /// <summary>
+        /// Asserts that the element does not have the specified attribute value.
+        /// </summary>
+        /// <param name="elementHandle">An <see cref="IElementHandle"/>.</param>
+        /// <param name="name">The attribute name.</param>
+        /// <param name="regex">A regular expression to test against <c>element.getAttribute(name)</c>.</param>
+        /// <param name="flags">A set of flags for the regular expression.</param>
+        /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
+        public static async Task ShouldNotHaveAttributeValueAsync(this IElementHandle elementHandle, string name, string regex, string flags = "", string? because = null)
+        {
+            if (await elementHandle.HasAttributeValueAsync(name, regex, flags).ConfigureAwait(false)) Throw.ElementShouldNotHaveAttributeValue(name, regex, flags, because);
+        }
+
         // Content
 
         /// <summary>

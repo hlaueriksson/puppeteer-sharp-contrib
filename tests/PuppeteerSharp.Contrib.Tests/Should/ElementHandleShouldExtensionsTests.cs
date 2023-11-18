@@ -97,6 +97,38 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldNotHaveAttributeAsync(""));
         }
 
+        // AttributeValue
+
+        [Test]
+        public async Task ShouldHaveAttributeValueAsync_throws_if_element_does_not_have_the_attribute_value()
+        {
+            await Page.SetContentAsync("<html><body><div class='class' data-foo='bar' /></body></html>");
+
+            var div = await Page.QuerySelectorAsync("div");
+            await div.ShouldHaveAttributeValueAsync("class", "class");
+
+            var ex = Assert.ThrowsAsync<ShouldException>(async () => await div.ShouldHaveAttributeValueAsync("class", "id"));
+            Assert.AreEqual("Expected element to have attribute \"class\" with value \"/id/\", but it did not.", ex.Message);
+
+            var missing = await Page.QuerySelectorAsync(".missing");
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldHaveAttributeValueAsync("", ""));
+        }
+
+        [Test]
+        public async Task ShouldNotHaveAttributeValueAsync_throws_if_element_has_the_attribute_value()
+        {
+            await Page.SetContentAsync("<html><body><div class='class' data-foo='bar' /></body></html>");
+
+            var div = await Page.QuerySelectorAsync("div");
+            await div.ShouldNotHaveAttributeValueAsync("class", "id");
+
+            var ex = Assert.ThrowsAsync<ShouldException>(async () => await div.ShouldNotHaveAttributeValueAsync("class", "class"));
+            Assert.AreEqual("Expected element not to have attribute \"class\" with value \"/class/\", but it did.", ex.Message);
+
+            var missing = await Page.QuerySelectorAsync(".missing");
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldNotHaveAttributeValueAsync("", ""));
+        }
+
         // Content
 
         [Test]

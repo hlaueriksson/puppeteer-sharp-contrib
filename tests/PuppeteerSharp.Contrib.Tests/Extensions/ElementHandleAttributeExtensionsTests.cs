@@ -101,6 +101,33 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
         }
 
         [Test]
+        public async Task HasAttributeValueAsync_should_return_true_if_element_has_the_attribute_value()
+        {
+            await Page.SetContentAsync("<html><body><div class='class' data-foo='bar' /></body></html>");
+
+            var div = await Page.QuerySelectorAsync("div");
+            Assert.True(await div.HasAttributeValueAsync("class", "cla."));
+            Assert.True(await div.HasAttributeValueAsync("class", "Cla.", "i"));
+
+            div = await Page.QuerySelectorAsync("div");
+            Assert.False(await div.HasAttributeValueAsync("class", "id"));
+            Assert.False(await div.HasAttributeValueAsync("id", "class"));
+
+            div = await Page.QuerySelectorAsync("div");
+            Assert.False(await div.HasAttributeValueAsync("class", null));
+            Assert.False(await div.HasAttributeValueAsync(null, "class"));
+            Assert.True(await div.HasAttributeValueAsync(null, null));
+
+            var body = await Page.QuerySelectorAsync("body");
+            Assert.True(await body.HasAttributeValueAsync("class", null));
+            Assert.False(await body.HasAttributeValueAsync(null, "class"));
+            Assert.True(await body.HasAttributeValueAsync(null, null));
+
+            var missing = await Page.QuerySelectorAsync(".missing");
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.HasAttributeValueAsync("", ""));
+        }
+
+        [Test]
         public async Task GetAttributeAsync_should_return_the_attribute_value_of_the_element()
         {
             await Page.SetContentAsync("<html><body><div class='class' data-foo='bar' /></body></html>");

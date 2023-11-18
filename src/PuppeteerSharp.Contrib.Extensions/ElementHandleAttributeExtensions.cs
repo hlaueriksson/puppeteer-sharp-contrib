@@ -75,6 +75,20 @@ namespace PuppeteerSharp.Contrib.Extensions
         }
 
         /// <summary>
+        /// Indicates whether the element has the specified attribute value or not.
+        /// </summary>
+        /// <param name="elementHandle">An <see cref="IElementHandle"/>.</param>
+        /// <param name="name">The attribute name.</param>
+        /// <param name="regex">A regular expression to test against <c>element.getAttribute(name)</c>.</param>
+        /// <param name="flags">A set of flags for the regular expression.</param>
+        /// <returns><c>true</c> if the element has the specified attribute value.</returns>
+        /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
+        public static async Task<bool> HasAttributeValueAsync(this IElementHandle elementHandle, string name, string regex, string flags = "")
+        {
+            return await elementHandle.EvaluateFunctionWithGuardAsync<bool>("(element, name, regex, flags) => RegExp(regex, flags).test(element.getAttribute(name))", name, regex, flags).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// The value of a specified attribute on the element.
         /// </summary>
         /// <param name="elementHandle">An <see cref="IElementHandle"/>.</param>

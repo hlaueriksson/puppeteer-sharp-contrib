@@ -116,6 +116,16 @@ namespace PuppeteerSharp.Contrib.Should
             throw Exception($"Expected element not to have attribute \"{name}\"", "but it did", because);
         }
 
+        public static void ElementShouldHaveAttributeValue(string name, string regex, string flags, string? because)
+        {
+            throw Exception($"Expected element to have attribute \"{name}\" with value \"/{regex}/{flags}\"", "but it did not", because);
+        }
+
+        public static void ElementShouldNotHaveAttributeValue(string name, string regex, string flags, string? because)
+        {
+            throw Exception($"Expected element not to have attribute \"{name}\" with value \"/{regex}/{flags}\"", "but it did", because);
+        }
+
         public static void ElementShouldHaveContent(string regex, string flags, string? because)
         {
             throw Exception($"Expected element to have content \"/{regex}/{flags}\"", "but it did not", because);
