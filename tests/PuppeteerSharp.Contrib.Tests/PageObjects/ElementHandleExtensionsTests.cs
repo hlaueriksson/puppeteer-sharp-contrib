@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using NUnit.Framework;
@@ -13,6 +14,19 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         {
             await Page.SetContentAsync(Fake.Html);
             _elementHandle = await Page.QuerySelectorAsync("html");
+        }
+
+        [Test]
+        public async Task To_returns_proxy_of_type()
+        {
+            var element = await _elementHandle.QuerySelectorAsync(".tweet");
+            var result = element.To<FakeElementObject>();
+            Assert.NotNull(result);
+            Assert.IsInstanceOf<FakeElementObject>(result);
+            Assert.NotNull(result.Page);
+            Assert.NotNull(result.Element);
+
+            Assert.Throws<ArgumentNullException>(() => ((IElementHandle)null).To<FakeElementObject>());
         }
 
         [Test]

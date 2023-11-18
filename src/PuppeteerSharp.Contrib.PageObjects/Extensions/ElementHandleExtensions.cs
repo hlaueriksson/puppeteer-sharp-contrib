@@ -12,8 +12,20 @@ namespace PuppeteerSharp.Contrib.PageObjects
     public static class ElementHandleExtensions
     {
         /// <summary>
+        /// Returns an <see cref="ElementObject"/> from the given <see cref="IElementHandle"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of <see cref="ElementObject"/>.</typeparam>
+        /// <param name="elementHandle">A <see cref="IElementHandle"/>.</param>
+        /// <returns>Task which resolves to the <see cref="ElementObject"/>.</returns>
+        public static T To<T>(this IElementHandle elementHandle)
+            where T : ElementObject
+        {
+            return ProxyFactory.ElementObject<T>(elementHandle.GuardFromNull().GetPage(), elementHandle)!;
+        }
+
+        /// <summary>
         /// Runs <c>element.querySelectorAll</c> within the element and returns an <see cref="ElementObject"/> array.
-        /// If no elements match the selector, the return value resolve to <see cref="System.Array.Empty{T}"/>.
+        /// If no elements match the selector, the return value resolve to <see cref="Array.Empty{T}"/>.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="ElementObject"/>.</typeparam>
         /// <param name="elementHandle">A <see cref="IElementHandle"/>.</param>
@@ -47,7 +59,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
 
         /// <summary>
         /// Evaluates the XPath expression relative to the element and returns an <see cref="ElementObject"/> array.
-        /// If no elements match the expression, the return value resolve to <see cref="System.Array.Empty{T}"/>.
+        /// If no elements match the expression, the return value resolve to <see cref="Array.Empty{T}"/>.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="ElementObject"/>.</typeparam>
         /// <param name="elementHandle">A <see cref="IElementHandle"/>.</param>

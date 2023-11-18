@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -32,7 +33,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         }
 
         /// <summary>
-        /// The method runs <c>document.querySelectorAll</c> within the page and then tests a <c>RegExp</c> against the elements <c>textContent</c>. All element matches are returned. If no element matches the selector and regular expression, the return value resolve to <see cref="System.Array.Empty{T}"/>.
+        /// The method runs <c>document.querySelectorAll</c> within the page and then tests a <c>RegExp</c> against the elements <c>textContent</c>. All element matches are returned. If no element matches the selector and regular expression, the return value resolve to <see cref="Array.Empty{T}"/>.
         /// </summary>
         /// <param name="page">A <see cref="IPage"/> to query.</param>
         /// <param name="selector">A selector to query page for.</param>
@@ -83,6 +84,19 @@ namespace PuppeteerSharp.Contrib.Extensions
         public static async Task<bool> HasTitleAsync(this IPage page, string regex, string flags = "")
         {
             return await page.GuardFromNull().EvaluateFunctionAsync<bool>("(regex, flags) => RegExp(regex, flags).test(document.title)", regex, flags).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Indicates whether the page has the specified URL or not.
+        /// </summary>
+        /// <param name="page">A <see cref="IPage"/>.</param>
+        /// <param name="regex">A regular expression to test against <c>window.location.href</c>.</param>
+        /// <param name="flags">A set of flags for the regular expression.</param>
+        /// <returns><c>true</c> if the page has the specified URL.</returns>
+        /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
+        public static async Task<bool> HasUrlAsync(this IPage page, string regex, string flags = "")
+        {
+            return await page.GuardFromNull().EvaluateFunctionAsync<bool>("(regex, flags) => RegExp(regex, flags).test(window.location.href)", regex, flags).ConfigureAwait(false);
         }
     }
 }

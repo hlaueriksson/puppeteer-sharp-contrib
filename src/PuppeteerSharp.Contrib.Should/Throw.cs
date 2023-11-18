@@ -1,3 +1,6 @@
+using System.Net;
+using System.Text.RegularExpressions;
+
 namespace PuppeteerSharp.Contrib.Should
 {
     internal static class Throw
@@ -22,6 +25,63 @@ namespace PuppeteerSharp.Contrib.Should
         public static void PageShouldNotHaveTitle(string regex, string flags, string? because)
         {
             throw Exception($"Expected page not to have title \"/{regex}/{flags}\"", null, because);
+        }
+
+        public static void PageShouldHaveUrl(string regex, string flags, string actual, string? because)
+        {
+            throw Exception($"Expected page to have URL \"/{regex}/{flags}\"", $"but found \"{actual}\"", because);
+        }
+
+        public static void PageShouldNotHaveUrl(string regex, string flags, string? because)
+        {
+            throw Exception($"Expected page not to have URL \"/{regex}/{flags}\"", null, because);
+        }
+
+        /* IResponse */
+
+        public static void ResponseShouldHaveUrl(string regex, RegexOptions options, string actual, string? because)
+        {
+            throw Exception($"Expected response to have URL \"{regex}\" ({options})", $"but found \"{actual}\"", because);
+        }
+
+        public static void ResponseShouldNotHaveUrl(string regex, RegexOptions options, string? because)
+        {
+            throw Exception($"Expected response not to have URL \"{regex}\" ({options})", null, because);
+        }
+
+        public static void ResponseShouldHaveStatusCode(HttpStatusCode status, HttpStatusCode actual, string? because)
+        {
+            throw Exception($"Expected response to have status code \"{status}\"", $"but found \"{actual}\"", because);
+        }
+
+        public static void ResponseShouldNotHaveStatusCode(HttpStatusCode status, string? because)
+        {
+            throw Exception($"Expected response not to have status code \"{status}\"", null, because);
+        }
+
+        public static void ResponseShouldBeSuccessful(HttpStatusCode actual, string? because)
+        {
+            throw Exception("Expected response status to be successful (2xx)", $"but found \"{actual}\"", because);
+        }
+
+        public static void ResponseShouldBeRedirection(HttpStatusCode actual, string? because)
+        {
+            throw Exception("Expected response status to be redirection (3xx)", $"but found \"{actual}\"", because);
+        }
+
+        public static void ResponseShouldHaveClientError(HttpStatusCode actual, string? because)
+        {
+            throw Exception("Expected response status to be client error (4xx)", $"but found \"{actual}\"", because);
+        }
+
+        public static void ResponseShouldHaveServerError(HttpStatusCode actual, string? because)
+        {
+            throw Exception("Expected response status to be server error (5xx)", $"but found \"{actual}\"", because);
+        }
+
+        public static void ResponseShouldHaveError(HttpStatusCode actual, string? because)
+        {
+            throw Exception("Expected response status to be an error", $"but found \"{actual}\"", because);
         }
 
         /* IElementHandle */
@@ -54,6 +114,16 @@ namespace PuppeteerSharp.Contrib.Should
         public static void ElementShouldNotHaveAttribute(string name, string? because)
         {
             throw Exception($"Expected element not to have attribute \"{name}\"", "but it did", because);
+        }
+
+        public static void ElementShouldHaveAttributeValue(string name, string regex, string flags, string? because)
+        {
+            throw Exception($"Expected element to have attribute \"{name}\" with value \"/{regex}/{flags}\"", "but it did not", because);
+        }
+
+        public static void ElementShouldNotHaveAttributeValue(string name, string regex, string flags, string? because)
+        {
+            throw Exception($"Expected element not to have attribute \"{name}\" with value \"/{regex}/{flags}\"", "but it did", because);
         }
 
         public static void ElementShouldHaveContent(string regex, string flags, string? because)
@@ -144,6 +214,16 @@ namespace PuppeteerSharp.Contrib.Should
         public static void ElementShouldNotHaveFocus(string? because)
         {
             throw Exception("Expected element not to have focus", "but it did", because);
+        }
+
+        public static void ElementShouldBeEmpty(string? because)
+        {
+            throw Exception("Expected element to be empty", "but it is not", because);
+        }
+
+        public static void ElementShouldNotBeEmpty(string? because)
+        {
+            throw Exception("Expected element not to be empty", "but it is", because);
         }
 
         private static ShouldException Exception(string expected, string? actual, string? because)

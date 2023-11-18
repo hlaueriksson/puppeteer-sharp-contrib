@@ -10,7 +10,7 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
         private static readonly ProxyGenerationOptions Options = new(new ProxyGenerationHook()) { Selector = new InterceptorSelector() };
 #pragma warning restore IDE1006 // Naming Styles
 
-        public static T PageObject<T>(IPage page, IResponse response)
+        public static T PageObject<T>(IPage page, IResponse? response)
             where T : PageObject
         {
             var proxy = ProxyGenerator.CreateClassProxy<T>(Options, new SelectorInterceptor(), new XPathInterceptor());

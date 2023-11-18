@@ -5,7 +5,7 @@ namespace PuppeteerSharp.Contrib.Extensions
 {
     internal static class InternalExtensions
     {
-        internal static async Task<T> EvaluateFunctionWithoutDisposeAsync<T>(this IElementHandle elementHandle, string pageFunction, params object[] args)
+        internal static async Task<T> EvaluateFunctionWithGuardAsync<T>(this IElementHandle elementHandle, string pageFunction, params object[] args)
         {
             return await elementHandle.GuardFromNull().EvaluateFunctionAsync<T>(pageFunction, args).ConfigureAwait(false);
         }
@@ -15,6 +15,13 @@ namespace PuppeteerSharp.Contrib.Extensions
             if (page == null) throw new ArgumentNullException(nameof(page));
 
             return page;
+        }
+
+        internal static IResponse GuardFromNull(this IResponse response)
+        {
+            if (response == null) throw new ArgumentNullException(nameof(response));
+
+            return response;
         }
 
         internal static IElementHandle GuardFromNull(this IElementHandle elementHandle)

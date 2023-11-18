@@ -30,7 +30,7 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
             var missing = await Page.QuerySelectorWithContentAsync("div", "Missing");
             Assert.Null(missing);
 
-            Assert.ThrowsAsync<ArgumentNullException>(async () => await ((Page)null).QuerySelectorWithContentAsync("", ""));
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await ((IPage)null).QuerySelectorWithContentAsync("", ""));
         }
 
         [Test]
@@ -48,7 +48,7 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
             var missing = await Page.QuerySelectorAllWithContentAsync("div", "Missing");
             Assert.IsEmpty(missing);
 
-            Assert.ThrowsAsync<ArgumentNullException>(async () => await ((Page)null).QuerySelectorAllWithContentAsync("", ""));
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await ((IPage)null).QuerySelectorAllWithContentAsync("", ""));
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
             Assert.True(await Page.HasContentAsync("Ba."));
             Assert.True(await Page.HasContentAsync("ba.", "i"));
             Assert.False(await Page.HasContentAsync("Missing"));
-            Assert.ThrowsAsync<ArgumentNullException>(async () => await ((Page)null).HasContentAsync(""));
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await ((IPage)null).HasContentAsync(""));
         }
 
         [Test]
@@ -73,7 +73,16 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
             Assert.True(await Page.HasTitleAsync("Ba."));
             Assert.True(await Page.HasTitleAsync("ba.", "i"));
             Assert.False(await Page.HasTitleAsync("Missing"));
-            Assert.ThrowsAsync<ArgumentNullException>(async () => await ((Page)null).HasTitleAsync(""));
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await ((IPage)null).HasTitleAsync(""));
+        }
+
+        [Test]
+        public async Task HasUrlAsync_should_return_true_if_page_has_the_url()
+        {
+            Assert.True(await Page.HasUrlAsync("bla.")); // about:blank
+            Assert.True(await Page.HasUrlAsync("Bla.", "i"));
+            Assert.False(await Page.HasUrlAsync("Missing"));
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await ((IPage)null).HasUrlAsync(""));
         }
     }
 }

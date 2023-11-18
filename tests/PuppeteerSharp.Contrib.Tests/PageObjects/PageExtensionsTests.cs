@@ -12,6 +12,18 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         // PageObject
 
         [Test]
+        public void To_returns_proxy_of_type()
+        {
+            var result = Page.To<FakePageObject>();
+            Assert.NotNull(result);
+            Assert.IsInstanceOf<FakePageObject>(result);
+            Assert.NotNull(result.Page);
+            Assert.Null(result.Response);
+
+            Assert.Throws<ArgumentNullException>(() => ((IPage)null).To<FakePageObject>());
+        }
+
+        [Test]
         public async Task GoToAsync_returns_proxy_of_type()
         {
             var result = await Page.GoToAsync<FakePageObject>("about:blank", new NavigationOptions());

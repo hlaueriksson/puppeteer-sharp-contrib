@@ -13,6 +13,18 @@ namespace PuppeteerSharp.Contrib.PageObjects
         // PageObject
 
         /// <summary>
+        /// Returns a <see cref="PageObject"/> from the given <see cref="IPage"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of <see cref="PageObject"/>.</typeparam>
+        /// <param name="page">A <see cref="IPage"/>.</param>
+        /// <returns>Task which resolves to the <see cref="PageObject"/>.</returns>
+        public static T To<T>(this IPage page)
+            where T : PageObject
+        {
+            return ProxyFactory.PageObject<T>(page.GuardFromNull(), null);
+        }
+
+        /// <summary>
         /// Navigates to an url and returns a <see cref="PageObject"/>.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="PageObject"/>.</typeparam>
@@ -189,7 +201,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         {
             var response = await page.GuardFromNull().GoBackAsync(options).ConfigureAwait(false);
 
-            if (response == null) return default;
+            if (response == null) return default; // TODO: why?
 
             return ProxyFactory.PageObject<T>(page, response);
         }
@@ -210,7 +222,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         {
             var response = await page.GuardFromNull().GoForwardAsync(options).ConfigureAwait(false);
 
-            if (response == null) return default;
+            if (response == null) return default; // TODO: why?
 
             return ProxyFactory.PageObject<T>(page, response);
         }
@@ -219,7 +231,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
 
         /// <summary>
         /// Runs <c>document.querySelectorAll</c> within the page and returns an <see cref="ElementObject"/> array.
-        /// If no elements match the selector, the return value resolve to <see cref="System.Array.Empty{T}"/>.
+        /// If no elements match the selector, the return value resolve to <see cref="Array.Empty{T}"/>.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="ElementObject"/>.</typeparam>
         /// <param name="page">A <see cref="IPage"/>.</param>
@@ -292,7 +304,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
 
         /// <summary>
         /// Evaluates the XPath expression and returns an <see cref="ElementObject"/> array.
-        /// If no elements match the expression, the return value resolve to <see cref="System.Array.Empty{T}"/>.
+        /// If no elements match the expression, the return value resolve to <see cref="Array.Empty{T}"/>.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="ElementObject"/>.</typeparam>
         /// <param name="page">A <see cref="IPage"/>.</param>

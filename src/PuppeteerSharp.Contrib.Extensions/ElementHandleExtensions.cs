@@ -35,7 +35,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         }
 
         /// <summary>
-        /// The method runs <c>element.querySelectorAll</c> and then tests a <c>RegExp</c> against the elements <c>textContent</c>. All element matches are returned. If no element matches the selector and regular expression, the return value resolve to <see cref="System.Array.Empty{T}"/>.
+        /// The method runs <c>element.querySelectorAll</c> and then tests a <c>RegExp</c> against the elements <c>textContent</c>. All element matches are returned. If no element matches the selector and regular expression, the return value resolve to <see cref="Array.Empty{T}"/>.
         /// </summary>
         /// <param name="elementHandle">An <see cref="IElementHandle"/> to query.</param>
         /// <param name="selector">A selector to query element for.</param>
@@ -125,7 +125,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
         public static async Task<bool> HasContentAsync(this IElementHandle elementHandle, string regex, string flags = "")
         {
-            return await elementHandle.EvaluateFunctionWithoutDisposeAsync<bool>("(element, regex, flags) => RegExp(regex, flags).test(element.textContent)", regex, flags).ConfigureAwait(false);
+            return await elementHandle.EvaluateFunctionWithGuardAsync<bool>("(element, regex, flags) => RegExp(regex, flags).test(element.textContent)", regex, flags).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/API/Element/className"/>
         public static async Task<string> ClassNameAsync(this IElementHandle elementHandle)
         {
-            return await elementHandle.EvaluateFunctionWithoutDisposeAsync<string>("element => element.className").ConfigureAwait(false);
+            return await elementHandle.EvaluateFunctionWithGuardAsync<string>("element => element.className").ConfigureAwait(false);
         }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/API/Element/classList"/>
         public static async Task<string[]> ClassListAsync(this IElementHandle elementHandle)
         {
-            var json = await elementHandle.EvaluateFunctionWithoutDisposeAsync<JObject>("element => element.classList").ConfigureAwait(false);
+            var json = await elementHandle.EvaluateFunctionWithGuardAsync<JObject>("element => element.classList").ConfigureAwait(false);
             var dictionary = json.ToObject<Dictionary<string, string>>();
             return dictionary?.Values.ToArray() ?? new string[0];
         }
@@ -160,7 +160,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <returns><c>true</c> if the element has the specified class.</returns>
         public static async Task<bool> HasClassAsync(this IElementHandle elementHandle, string className)
         {
-            return await elementHandle.EvaluateFunctionWithoutDisposeAsync<bool>("(element, className) => element.classList.contains(className)", className).ConfigureAwait(false);
+            return await elementHandle.EvaluateFunctionWithGuardAsync<bool>("(element, className) => element.classList.contains(className)", className).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -171,7 +171,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <seealso href="https://blog.jquery.com/2009/02/20/jquery-1-3-2-released/#visible-hidden-overhauled"/>
         public static async Task<bool> IsVisibleAsync(this IElementHandle elementHandle)
         {
-            return await elementHandle.EvaluateFunctionWithoutDisposeAsync<bool>("element => element.offsetWidth > 0 && element.offsetHeight > 0").ConfigureAwait(false);
+            return await elementHandle.EvaluateFunctionWithGuardAsync<bool>("element => element.offsetWidth > 0 && element.offsetHeight > 0").ConfigureAwait(false);
         }
 
         /// <summary>
@@ -192,7 +192,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <remarks><![CDATA[Elements: <option>]]></remarks>
         public static async Task<bool> IsSelectedAsync(this IElementHandle elementHandle)
         {
-            return await elementHandle.EvaluateFunctionWithoutDisposeAsync<bool>("element => element.selected").ConfigureAwait(false);
+            return await elementHandle.EvaluateFunctionWithGuardAsync<bool>("element => element.selected").ConfigureAwait(false);
         }
 
         /// <summary>
@@ -203,7 +203,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <remarks><![CDATA[Elements: <command>, <input>]]></remarks>
         public static async Task<bool> IsCheckedAsync(this IElementHandle elementHandle)
         {
-            return await elementHandle.EvaluateFunctionWithoutDisposeAsync<bool>("element => element.checked").ConfigureAwait(false);
+            return await elementHandle.EvaluateFunctionWithGuardAsync<bool>("element => element.checked").ConfigureAwait(false);
         }
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <remarks><![CDATA[Elements: <button>, <command>, <fieldset>, <input>, <keygen>, <optgroup>, <option>, <select>, <textarea>]]></remarks>
         public static async Task<bool> IsDisabledAsync(this IElementHandle elementHandle)
         {
-            return await elementHandle.EvaluateFunctionWithoutDisposeAsync<bool>("element => element.disabled").ConfigureAwait(false);
+            return await elementHandle.EvaluateFunctionWithGuardAsync<bool>("element => element.disabled").ConfigureAwait(false);
         }
 
         /// <summary>
@@ -236,7 +236,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <remarks><![CDATA[Elements: <input>, <textarea>]]></remarks>
         public static async Task<bool> IsReadOnlyAsync(this IElementHandle elementHandle)
         {
-            return await elementHandle.EvaluateFunctionWithoutDisposeAsync<bool>("element => element.readOnly").ConfigureAwait(false);
+            return await elementHandle.EvaluateFunctionWithGuardAsync<bool>("element => element.readOnly").ConfigureAwait(false);
         }
 
         /// <summary>
@@ -247,7 +247,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <remarks><![CDATA[Elements: <input>, <select>, <textarea>]]></remarks>
         public static async Task<bool> IsRequiredAsync(this IElementHandle elementHandle)
         {
-            return await elementHandle.EvaluateFunctionWithoutDisposeAsync<bool>("element => element.required").ConfigureAwait(false);
+            return await elementHandle.EvaluateFunctionWithGuardAsync<bool>("element => element.required").ConfigureAwait(false);
         }
 
         /// <summary>
@@ -259,7 +259,25 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/API/DocumentOrShadowRoot/activeElement"/>
         public static async Task<bool> HasFocusAsync(this IElementHandle elementHandle)
         {
-            return await elementHandle.EvaluateFunctionWithoutDisposeAsync<bool>("element => element === document.activeElement").ConfigureAwait(false);
+            return await elementHandle.EvaluateFunctionWithGuardAsync<bool>("element => element === document.activeElement").ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Indicates whether the element is empty or not, e.g. an empty editable element or a DOM node that has no text.
+        /// </summary>
+        /// <param name="elementHandle">An <see cref="IElementHandle"/>.</param>
+        /// <returns><c>true</c> if the element is empty.</returns>
+        /// <remarks><![CDATA[Elements: <input>, <textarea>]]></remarks>
+        /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent"/>
+        public static async Task<bool> IsEmptyAsync(this IElementHandle elementHandle)
+        {
+            return await elementHandle.EvaluateFunctionWithGuardAsync<bool>(
+                @"element => {
+                    if (element.nodeName === 'INPUT' || element.nodeName === 'TEXTAREA')
+                        return !element.value;
+                    else
+                        return !element.textContent?.trim();
+                }").ConfigureAwait(false);
         }
 
         private static async Task<string> GetPropertyValueAsync(this IElementHandle elementHandle, string propertyName)
