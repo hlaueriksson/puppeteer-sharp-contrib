@@ -42,7 +42,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
     public sealed class SelectorAttribute(string selector) : Attribute
     {
         /// <summary>
-        /// A selector to query a <see cref="IPage"/> or <see cref="IElementHandle"/> for.
+        /// A selector to query an <see cref="IPage"/> or <see cref="IElementHandle"/> for.
         /// </summary>
         public string Selector { get; } = selector;
     }

@@ -16,7 +16,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// Returns a <see cref="PageObject"/> from the given <see cref="IPage"/>.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="PageObject"/>.</typeparam>
-        /// <param name="page">A <see cref="IPage"/>.</param>
+        /// <param name="page">An <see cref="IPage"/>.</param>
         /// <returns>Task which resolves to the <see cref="PageObject"/>.</returns>
         public static T To<T>(this IPage page)
             where T : PageObject
@@ -28,7 +28,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// Navigates to an url and returns a <see cref="PageObject"/>.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="PageObject"/>.</typeparam>
-        /// <param name="page">A <see cref="IPage"/>.</param>
+        /// <param name="page">An <see cref="IPage"/>.</param>
         /// <param name="url">URL to navigate page to. The url should include scheme, e.g. <c>https://</c>.</param>
         /// <param name="options">Navigation options.</param>
         /// <returns>Task which resolves to the <see cref="PageObject"/>.</returns>
@@ -45,7 +45,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// Navigates to an url and returns a <see cref="PageObject"/>.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="PageObject"/>.</typeparam>
-        /// <param name="page">A <see cref="IPage"/>.</param>
+        /// <param name="page">An <see cref="IPage"/>.</param>
         /// <param name="url">URL to navigate page to. The url should include scheme, e.g. <c>https://</c>.</param>
         /// <param name="waitUntil">When to consider navigation succeeded.</param>
         /// <returns>Task which resolves to the <see cref="PageObject"/>.</returns>
@@ -62,7 +62,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// Navigates to an url and returns a <see cref="PageObject"/>.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="PageObject"/>.</typeparam>
-        /// <param name="page">A <see cref="IPage"/>.</param>
+        /// <param name="page">An <see cref="IPage"/>.</param>
         /// <param name="url">URL to navigate page to. The url should include scheme, e.g. <c>https://</c>.</param>
         /// <param name="timeout">Maximum navigation time in milliseconds, defaults to 30 seconds, pass <c>0</c> to disable timeout.</param>
         /// <param name="waitUntil">When to consider navigation succeeded, defaults to <see cref="WaitUntilNavigation.Load"/>. Given an array of <see cref="WaitUntilNavigation"/>, navigation is considered to be successful after all events have been fired.</param>
@@ -80,7 +80,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// Reloads the page and returns a <see cref="PageObject"/>.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="PageObject"/>.</typeparam>
-        /// <param name="page">A <see cref="IPage"/>.</param>
+        /// <param name="page">An <see cref="IPage"/>.</param>
         /// <param name="options">Navigation options.</param>
         /// <returns>Task which resolves to the <see cref="PageObject"/>.
         /// In case of multiple redirects, the navigation will resolve with the response of the last redirect.
@@ -98,7 +98,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// Reloads the page and returns a <see cref="PageObject"/>.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="PageObject"/>.</typeparam>
-        /// <param name="page">A <see cref="IPage"/>.</param>
+        /// <param name="page">An <see cref="IPage"/>.</param>
         /// <param name="timeout">Maximum navigation time in milliseconds, defaults to 30 seconds, pass <c>0</c> to disable timeout. </param>
         /// <param name="waitUntil">When to consider navigation succeeded, defaults to <see cref="WaitUntilNavigation.Load"/>. Given an array of <see cref="WaitUntilNavigation"/>, navigation is considered to be successful after all events have been fired.</param>
         /// <returns>Task which resolves to the <see cref="PageObject"/>.
@@ -119,7 +119,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// It is useful for when you run code which will indirectly cause the page to navigate.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="PageObject"/>.</typeparam>
-        /// <param name="page">A <see cref="IPage"/>.</param>
+        /// <param name="page">An <see cref="IPage"/>.</param>
         /// <param name="options">Navigation options.</param>
         /// <returns>Task which resolves to the <see cref="PageObject"/>.
         /// In case of multiple redirects, the navigation will resolve with the response of the last redirect.
@@ -138,7 +138,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// Waits for a response and returns a <see cref="PageObject"/>.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="PageObject"/>.</typeparam>
-        /// <param name="page">A <see cref="IPage"/>.</param>
+        /// <param name="page">An <see cref="IPage"/>.</param>
         /// <param name="url">URL to wait for.</param>
         /// <param name="options">Waiting options.</param>
         /// <returns>Task which resolves to the <see cref="PageObject"/>.</returns>
@@ -155,7 +155,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// Waits for a response and returns a <see cref="PageObject"/>.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="PageObject"/>.</typeparam>
-        /// <param name="page">A <see cref="IPage"/>.</param>
+        /// <param name="page">An <see cref="IPage"/>.</param>
         /// <param name="predicate">Function which looks for a matching response.</param>
         /// <param name="options">Waiting options.</param>
         /// <returns>Task which resolves to the <see cref="PageObject"/>.</returns>
@@ -172,7 +172,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// Waits for a response and returns a <see cref="PageObject"/>.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="PageObject"/>.</typeparam>
-        /// <param name="page">A <see cref="IPage"/>.</param>
+        /// <param name="page">An <see cref="IPage"/>.</param>
         /// <param name="predicate">Function which looks for a matching response.</param>
         /// <param name="options">Waiting options.</param>
         /// <returns>Task which resolves to the <see cref="PageObject"/>.</returns>
@@ -189,7 +189,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// Navigate to the previous page in history and returns a <see cref="PageObject"/>.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="PageObject"/>.</typeparam>
-        /// <param name="page">A <see cref="IPage"/>.</param>
+        /// <param name="page">An <see cref="IPage"/>.</param>
         /// <param name="options">Navigation options.</param>
         /// <returns>Task which resolves to the <see cref="PageObject"/>.
         /// In case of multiple redirects, the navigation will resolve with the response of the last redirect.
@@ -210,7 +210,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// Navigate to the next page in history and returns a <see cref="PageObject"/>.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="PageObject"/>.</typeparam>
-        /// <param name="page">A <see cref="IPage"/>.</param>
+        /// <param name="page">An <see cref="IPage"/>.</param>
         /// <param name="options">Navigation options.</param>
         /// <returns>Task which resolves to the <see cref="PageObject"/>.
         /// In case of multiple redirects, the navigation will resolve with the response of the last redirect.
@@ -234,7 +234,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// If no elements match the selector, the return value resolve to <see cref="Array.Empty{T}"/>.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="ElementObject"/>.</typeparam>
-        /// <param name="page">A <see cref="IPage"/>.</param>
+        /// <param name="page">An <see cref="IPage"/>.</param>
         /// <param name="selector">A selector to query page for.</param>
         /// <returns>Task which resolves to the <see cref="ElementObject"/> array.</returns>
         /// <seealso cref="IPage.QuerySelectorAllAsync(string)"/>
@@ -251,7 +251,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// If no elements match the selector, the return value resolve to <c>null</c>.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="ElementObject"/>.</typeparam>
-        /// <param name="page">A <see cref="IPage"/>.</param>
+        /// <param name="page">An <see cref="IPage"/>.</param>
         /// <param name="selector">A selector to query page for.</param>
         /// <returns>Task which resolves to the <see cref="ElementObject"/>.</returns>
         /// <seealso cref="IPage.QuerySelectorAsync(string)"/>
@@ -267,7 +267,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// Waits for a selector to be added to the DOM and returns an <see cref="ElementObject"/>.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="ElementObject"/>.</typeparam>
-        /// <param name="page">A <see cref="IPage"/>.</param>
+        /// <param name="page">An <see cref="IPage"/>.</param>
         /// <param name="selector">A selector of an element to wait for.</param>
         /// <param name="options">Waiting options.</param>
         /// <returns>A task that resolves to the <see cref="ElementObject"/>, when a element specified by selector string is added to DOM.
@@ -286,7 +286,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// Waits for a XPath expression to be added to the DOM and returns an <see cref="ElementObject"/>.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="ElementObject"/>.</typeparam>
-        /// <param name="page">A <see cref="IPage"/>.</param>
+        /// <param name="page">An <see cref="IPage"/>.</param>
         /// <param name="xpath">A XPath expression of an element to wait for.</param>
         /// <param name="options">Waiting options.</param>
         /// <returns>A task that resolves to the <see cref="ElementObject"/>, when a element specified by xpath string is added to DOM.
@@ -307,7 +307,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         /// If no elements match the expression, the return value resolve to <see cref="Array.Empty{T}"/>.
         /// </summary>
         /// <typeparam name="T">The type of <see cref="ElementObject"/>.</typeparam>
-        /// <param name="page">A <see cref="IPage"/>.</param>
+        /// <param name="page">An <see cref="IPage"/>.</param>
         /// <param name="expression">Expression to evaluate <see href="https://developer.mozilla.org/en-US/docs/Web/API/Document/evaluate"/>.</param>
         /// <returns>Task which resolves to the <see cref="ElementObject"/> array.</returns>
         /// <seealso cref="IPage.XPathAsync(string)"/>

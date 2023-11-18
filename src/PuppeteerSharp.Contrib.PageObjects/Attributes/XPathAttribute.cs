@@ -35,7 +35,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
     public sealed class XPathAttribute(string expression) : Attribute
     {
         /// <summary>
-        /// An XPath expression to evaluate on a <see cref="IPage"/> or <see cref="IElementHandle"/>.
+        /// An XPath expression to evaluate on an <see cref="IPage"/> or <see cref="IElementHandle"/>.
         /// </summary>
         public string Expression { get; } = expression;
     }
