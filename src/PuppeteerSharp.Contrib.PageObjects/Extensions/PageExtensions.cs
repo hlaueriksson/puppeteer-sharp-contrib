@@ -201,7 +201,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         {
             var response = await page.GuardFromNull().GoBackAsync(options).ConfigureAwait(false);
 
-            if (response == null) return default; // TODO: why?
+            if (response == null) return default;
 
             return ProxyFactory.PageObject<T>(page, response);
         }
@@ -222,7 +222,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
         {
             var response = await page.GuardFromNull().GoForwardAsync(options).ConfigureAwait(false);
 
-            if (response == null) return default; // TODO: why?
+            if (response == null) return default;
 
             return ProxyFactory.PageObject<T>(page, response);
         }

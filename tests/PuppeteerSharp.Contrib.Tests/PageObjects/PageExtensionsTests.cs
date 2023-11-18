@@ -34,7 +34,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             Assert.NotNull(result);
             Assert.IsInstanceOf<FakePageObject>(result);
 
-            result = await Page.GoToAsync<FakePageObject>("about:blank", (int)TimeSpan.FromSeconds(10).TotalMilliseconds, new[] { WaitUntilNavigation.Load });
+            result = await Page.GoToAsync<FakePageObject>("about:blank", (int)TimeSpan.FromSeconds(10).TotalMilliseconds, [WaitUntilNavigation.Load]);
             Assert.NotNull(result);
             Assert.IsInstanceOf<FakePageObject>(result);
 
@@ -54,7 +54,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             Assert.NotNull(result);
             Assert.IsInstanceOf<FakePageObject>(result);
 
-            result = await Page.ReloadAsync<FakePageObject>((int)TimeSpan.FromSeconds(10).TotalMilliseconds, new[] { WaitUntilNavigation.Load });
+            result = await Page.ReloadAsync<FakePageObject>((int)TimeSpan.FromSeconds(10).TotalMilliseconds, [WaitUntilNavigation.Load]);
             Assert.NotNull(result);
             Assert.IsInstanceOf<FakePageObject>(result);
         }
