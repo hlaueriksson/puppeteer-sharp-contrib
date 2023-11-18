@@ -6,7 +6,7 @@ namespace PuppeteerSharp.Contrib.Sample
 {
     public class Examples
     {
-        async Task<IBrowser> Browser()
+        static async Task<IBrowser> Browser()
         {
             await new BrowserFetcher().DownloadAsync();
             var browser = await Puppeteer.LaunchAsync(new LaunchOptions
@@ -38,7 +38,7 @@ namespace PuppeteerSharp.Contrib.Sample
             // ...
         }
 
-        async Task<IPage> Page()
+        static async Task<IPage> Page()
         {
             var browser = await Browser();
             var page = await browser.NewPageAsync();
@@ -116,15 +116,15 @@ namespace PuppeteerSharp.Contrib.Sample
             // Frame
             var frame = page.MainFrame;
 
-            tasks = new Task[]
-            {
+            tasks =
+            [
                 frame.WaitForExpressionAsync("1 + 1 === 2", new() { Timeout = timeout }),
                 frame.WaitForFunctionAsync("() => window.location.href === 'https://github.com/hardkoded/puppeteer-sharp'", new WaitForFunctionOptions { Timeout = timeout }),
                 frame.WaitForNavigationAsync(new() { Timeout = timeout }),
                 frame.WaitForSelectorAsync("#readme", new() { Timeout = timeout }),
                 frame.WaitForTimeoutAsync(timeout),
                 //frame.WaitForXPathAsync(), // Obsolete
-            };
+            ];
             await page.GoToAsync("https://github.com/hardkoded/puppeteer-sharp");
             await Task.WhenAll(tasks);
 

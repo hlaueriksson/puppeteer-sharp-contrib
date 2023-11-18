@@ -88,7 +88,7 @@ namespace PuppeteerSharp.Contrib.Sample
     <option id='bar'>Bar</option>
   </select>
 </form>
-", new NavigationOptions { WaitUntil = new[] { WaitUntilNavigation.Networkidle0 } });
+");
 
             var input = await Page.QuerySelectorAsync("input[type=text]");
             await input.ShouldHaveFocusAsync();

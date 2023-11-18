@@ -14,7 +14,7 @@ namespace PuppeteerSharp.Contrib.Sample.StepDefinitions
     {
         private IBrowser Browser { get; } = browser;
         private IPage Page { get; set; }
-        private Dictionary<string, string> LatestReleaseVersion { get; } = new Dictionary<string, string>();
+        private Dictionary<string, string> LatestReleaseVersion { get; } = [];
 
         [BeforeScenario]
         public async Task BeforeScenario()
