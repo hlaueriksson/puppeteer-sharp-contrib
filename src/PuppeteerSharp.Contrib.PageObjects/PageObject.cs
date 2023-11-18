@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace PuppeteerSharp.Contrib.PageObjects
 {
     /// <summary>
@@ -25,6 +27,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
     /// ]]>
     /// </code>
     /// </example>
+    [DebuggerDisplay("{Page}")]
     public abstract class PageObject
     {
         /// <summary>

@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 
 namespace PuppeteerSharp.Contrib.PageObjects
 {
@@ -30,6 +31,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
     /// </example>
     [Obsolete("Use " + nameof(SelectorAttribute) + " instead")]
     [AttributeUsage(AttributeTargets.Property)]
+    [DebuggerDisplay("{Expression}")]
     public sealed class XPathAttribute(string expression) : Attribute
     {
         /// <summary>

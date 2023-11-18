@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 
 namespace PuppeteerSharp.Contrib.PageObjects
 {
@@ -37,6 +38,7 @@ namespace PuppeteerSharp.Contrib.PageObjects
     /// </code>
     /// </example>
     [AttributeUsage(AttributeTargets.Property)]
+    [DebuggerDisplay("{Selector}")]
     public sealed class SelectorAttribute(string selector) : Attribute
     {
         /// <summary>
