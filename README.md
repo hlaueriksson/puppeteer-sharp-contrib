@@ -368,15 +368,25 @@ namespace PuppeteerSharp.Contrib.Sample
 
 > :arrow_up: Upgrading from version `5.0.0` to `6.0.0`
 
-`PuppeteerSharp.Contrib.PageObjects`:
+Since [v8.0.0](https://github.com/hardkoded/puppeteer-sharp/releases/tag/v8.0.0) of PuppeteerSharp, the public API relies on interfaces.
 
-- The `[XPath]` attribute is now obsolete. Consider rewriting your code to use the `[Selector]` attribute instead.
-- The `XPathAsync` and `WaitForXPathAsync` methods are now obsolete. Consider rewriting your code to use the `QuerySelectorAsync` and `WaitForSelectorAsync` methods instead.
+Therefor, change the use of:
+
+- ~~`Page`~~ to `IPage`
+- ~~`ElementHandle`~~ to `IElementHandle`
+
+**PuppeteerSharp.Contrib.PageObjects**
+
+Since [v10.1.0](https://github.com/hardkoded/puppeteer-sharp/releases/tag/v10.1.0) of PuppeteerSharp, the `XPathAsync` and `WaitForXPathAsync` methods were replaced in favor of the `xpath/` selector handler.
+
+Therefor, change the use of:
+
+- ~~`[XPath]`~~ attribute to `[Selector]`
+- ~~`XPathAsync`~~ method to `QuerySelectorAsync`
+- ~~`WaitForXPathAsync`~~ method to `WaitForSelectorAsync`
 
 ## Attribution
 
 Puppeteer Sharp Contributions is standing on the shoulders of giants.
 
 It would not exist without https://github.com/hardkoded/puppeteer-sharp and https://github.com/puppeteer/puppeteer
-
-Inspiration and experience has been drawn from the previous usage of https://github.com/featurist/coypu and https://github.com/stirno/FluentAutomation
