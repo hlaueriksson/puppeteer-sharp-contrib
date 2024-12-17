@@ -281,7 +281,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         }
 
         /// <summary>
-        /// Clicks at random piont of an element.
+        /// Clicks at random point of an element.
         /// </summary>
         /// <param name="elementHandle">An <see cref="IElementHandle"/>.</param>
         /// <param name="isCircular"><c>true</c> if the element is circular.</param>
