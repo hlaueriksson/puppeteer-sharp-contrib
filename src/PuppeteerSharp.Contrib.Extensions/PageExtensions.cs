@@ -98,5 +98,19 @@ namespace PuppeteerSharp.Contrib.Extensions
         {
             return await page.GuardFromNull().EvaluateFunctionAsync<bool>("(regex, flags) => RegExp(regex, flags).test(window.location.href)", regex, flags).ConfigureAwait(false);
         }
+
+        /// <summary>
+        /// Waits for the specific element or elements to be removed from page's DOM.
+        /// </summary>
+        /// <param name="page">A <see cref="IPage"/>.</param>
+        /// <param name="selector">An element's selector to query page for.</param>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
+        public static async Task WaitForElementsRemovedFromDOMAsync(this IPage page, string selector)
+        {
+            await page.GuardFromNull().WaitForFunctionAsync(
+                string.Format("async () => document.querySelector('{0}') === null", selector),
+                new WaitForFunctionOptions { Polling = WaitForFunctionPollingOption.Mutation })
+                .ConfigureAwait(false);
+        }
     }
 }
