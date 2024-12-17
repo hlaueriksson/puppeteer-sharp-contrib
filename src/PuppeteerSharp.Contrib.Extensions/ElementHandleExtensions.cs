@@ -280,6 +280,47 @@ namespace PuppeteerSharp.Contrib.Extensions
                 }").ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Clicks at random piont of an element.
+        /// </summary>
+        /// <param name="elementHandle">An <see cref="IElementHandle"/>.</param>
+        /// <param name="isCircular"><c>true</c> if the element is circular.</param>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
+        public static async Task ClickAtRandomPointAsync(this IElementHandle elementHandle, bool isCircular = false)
+        {
+            Random rnd = new();
+            var box = await elementHandle.BoundingBoxAsync();
+
+            if (box == null)
+            {
+                await elementHandle.ClickAsync();
+            }
+            else
+            {
+                if (isCircular)
+                {
+                    double r = (double)Math.Min(box.Width, box.Height);
+                    r = rnd.NextDouble() * r;
+                    var a = rnd.NextDouble() * 2 * Math.PI;
+                    var sin = Math.Sin(a);
+                    var cos = Math.Cos(a);
+                    var x = ((double)box.Width / 2) + (cos * r);
+                    var y = ((double)box.Height / 2) + (sin * r);
+                    await elementHandle.ClickAsync(new PuppeteerSharp.Input.ClickOptions
+                    {
+                        OffSet = new Offset((decimal)x, (decimal)y),
+                    });
+                }
+                else
+                {
+                    await elementHandle.ClickAsync(new PuppeteerSharp.Input.ClickOptions
+                    {
+                        OffSet = new Offset(rnd.Next((int)box.Width * 100) / 100, rnd.Next((int)box.Height * 100) / 100),
+                    });
+                }
+            }
+        }
+
         private static async Task<string> GetPropertyValueAsync(this IElementHandle elementHandle, string propertyName)
         {
             var property = await elementHandle.GuardFromNull().GetPropertyAsync(propertyName).ConfigureAwait(false);
