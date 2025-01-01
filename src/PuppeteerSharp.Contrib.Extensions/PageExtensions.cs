@@ -57,7 +57,7 @@ namespace PuppeteerSharp.Contrib.Extensions
             var properties = await arrayHandle.GetPropertiesAsync().ConfigureAwait(false);
             await arrayHandle.DisposeAsync().ConfigureAwait(false);
 
-            return properties.Values.OfType<IElementHandle>().ToArray();
+            return [.. properties.Values.OfType<IElementHandle>()];
         }
 
         /// <summary>

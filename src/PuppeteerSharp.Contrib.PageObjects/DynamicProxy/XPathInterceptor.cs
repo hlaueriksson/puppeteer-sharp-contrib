@@ -21,7 +21,7 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
 
 #pragma warning disable VSTHRD105 // Avoid method overloads that assume TaskScheduler.Current
 #pragma warning disable VSTHRD110 // Observe result of async calls
-            InterceptAsync(invocation).ContinueWith(_ => tcsType.GetMethod("SetResult").Invoke(tcs, new[] { invocation.ReturnValue }));
+            InterceptAsync(invocation).ContinueWith(_ => tcsType.GetMethod("SetResult").Invoke(tcs, [invocation.ReturnValue]));
 #pragma warning restore VSTHRD110 // Observe result of async calls
 #pragma warning restore VSTHRD105 // Avoid method overloads that assume TaskScheduler.Current
         }

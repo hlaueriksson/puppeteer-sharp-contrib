@@ -58,7 +58,7 @@ namespace PuppeteerSharp.Contrib.Extensions
             var properties = await arrayHandle.GetPropertiesAsync().ConfigureAwait(false);
             await arrayHandle.DisposeAsync().ConfigureAwait(false);
 
-            return properties.Values.OfType<IElementHandle>().ToArray();
+            return [.. properties.Values.OfType<IElementHandle>()];
         }
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         {
             var json = await elementHandle.EvaluateFunctionWithGuardAsync<JObject>("element => element.classList").ConfigureAwait(false);
             var dictionary = json.ToObject<Dictionary<string, string>>();
-            return dictionary?.Values.ToArray() ?? new string[0];
+            return dictionary?.Values.ToArray() ?? [];
         }
 
         /// <summary>
