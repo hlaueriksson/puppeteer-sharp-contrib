@@ -23,7 +23,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// </summary>
         /// <param name="elementHandle">An <see cref="IElementHandle"/>.</param>
         /// <returns>The element's <c>name</c>, or <c>null</c> if the attribute is missing.</returns>
-        /// <remarks><![CDATA[Elements: <button>, <form>, <fieldset>, <iframe>, <input>, <keygen>, <object>, <output>, <select>, <textarea>, <map>, <meta>, <param>]]></remarks>
+        /// <remarks><![CDATA[Elements: <button>, <form>, <fieldset>, <iframe>, <input>, <object>, <output>, <select>, <textarea>, <map>, <meta>, <param>]]></remarks>
         public static async Task<string> NameAsync(this IElementHandle elementHandle)
         {
             return await elementHandle.GetAttributeAsync("name").ConfigureAwait(false);
@@ -34,7 +34,7 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// </summary>
         /// <param name="elementHandle">An <see cref="IElementHandle"/>.</param>
         /// <returns>The element's <c>value</c>, or <c>null</c> if the attribute is missing.</returns>
-        /// <remarks><![CDATA[Elements: <button>, <option>, <input>, <li>, <meter>, <progress>, <param>]]></remarks>
+        /// <remarks><![CDATA[Elements: <button>, <data>, <input>, <li>, <meter>, <option>, <progress>, <param>]]></remarks>
         public static async Task<string> ValueAsync(this IElementHandle elementHandle)
         {
             return await elementHandle.GetAttributeAsync("value").ConfigureAwait(false);
