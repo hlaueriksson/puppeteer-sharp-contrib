@@ -126,7 +126,7 @@ namespace PuppeteerSharp.Contrib.Sample
             await page.WaitForSelectorAsync("[data-testid=\"results-list\"]");
 
             var repositories = await page.QuerySelectorAllAsync("[data-testid=\"results-list\"] > div");
-            Assert.IsNotEmpty(repositories);
+            Assert.That(repositories, Is.Not.Empty);
             var repository = repositories.First();
             await repository.ShouldHaveContentAsync("hardkoded/puppeteer-sharp");
             var text = await repository.QuerySelectorAsync("h3 + div");
@@ -137,7 +137,7 @@ namespace PuppeteerSharp.Contrib.Sample
 
             heading = await page.QuerySelectorAsync("article > h1");
             await heading.ShouldHaveContentAsync("Puppeteer Sharp");
-            Assert.AreEqual("https://github.com/hardkoded/puppeteer-sharp", page.Url);
+            Assert.That(page.Url, Is.EqualTo("https://github.com/hardkoded/puppeteer-sharp"));
         }
 
         [Test]
@@ -152,7 +152,7 @@ namespace PuppeteerSharp.Contrib.Sample
 
             var status = await page.QuerySelectorAsync(".checks-list-item-icon svg");
             var label = await status.GetAttributeAsync("aria-label");
-            Assert.AreEqual("completed successfully", label);
+            Assert.That(label, Is.EqualTo("completed successfully"));
         }
 
         [Test]
@@ -166,7 +166,7 @@ namespace PuppeteerSharp.Contrib.Sample
             await page.GoToAsync("https://github.com/puppeteer/puppeteer");
             var puppeteerVersion = await GetLatestReleaseVersion();
 
-            Assert.AreEqual(puppeteerVersion, puppeteerSharpVersion);
+            Assert.That(puppeteerSharpVersion, Is.EqualTo(puppeteerVersion));
 
             async Task<string> GetLatestReleaseVersion()
             {
@@ -322,7 +322,7 @@ namespace PuppeteerSharp.Contrib.Sample
 
             var searchPage = await startPage.SearchAsync("Puppeteer Sharp");
             var repositories = await searchPage.RepoListItems;
-            Assert.IsNotEmpty(repositories);
+            Assert.That(repositories, Is.Not.Empty);
             var repository = repositories.First();
             var text = await repository.Text;
             await text.ShouldHaveContentAsync("Headless Chrome .NET API");
@@ -332,7 +332,7 @@ namespace PuppeteerSharp.Contrib.Sample
             var repoPage = await searchPage.GotoAsync(repository);
             heading = await repoPage.Heading;
             await heading.ShouldHaveContentAsync("Puppeteer Sharp");
-            Assert.AreEqual("https://github.com/hardkoded/puppeteer-sharp", repoPage.Page.Url);
+            Assert.That(repoPage.Page.Url, Is.EqualTo("https://github.com/hardkoded/puppeteer-sharp"));
         }
 
         [Test]
@@ -344,7 +344,7 @@ namespace PuppeteerSharp.Contrib.Sample
 
             var actionsPage = await repoPage.GotoActionsAsync();
             var status = await actionsPage.GetLatestWorkflowRunStatusAsync();
-            Assert.AreEqual("completed successfully", status);
+            Assert.That(status, Is.EqualTo("completed successfully"));
         }
 
         [Test]
@@ -358,7 +358,7 @@ namespace PuppeteerSharp.Contrib.Sample
             repoPage = await page.GoToAsync<GitHubRepoPage>("https://github.com/hardkoded/puppeteer-sharp");
             var puppeteerSharpVersion = await repoPage.GetLatestReleaseVersionAsync();
 
-            Assert.AreEqual(puppeteerVersion, puppeteerSharpVersion);
+            Assert.That(puppeteerSharpVersion, Is.EqualTo(puppeteerVersion));
         }
     }
 }
