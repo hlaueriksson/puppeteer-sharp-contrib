@@ -60,11 +60,9 @@ Evaluation:
 - `IsDisabledAsync`
 - `IsEmptyAsync`
 - `IsEnabledAsync`
-- `IsHiddenAsync`
 - `IsReadOnlyAsync`
 - `IsRequiredAsync`
 - `IsSelectedAsync`
-- `IsVisibleAsync`
 
 Query:
 

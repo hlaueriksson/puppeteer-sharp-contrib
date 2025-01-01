@@ -31,6 +31,7 @@ Extensions for IResponse:
     <PackageTags>headless;chrome;puppeteer;test;testing;automation</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>NU1903</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -41,7 +42,11 @@ Extensions for IResponse:
   <Import Project="../../Analyzers.props" />
 
   <ItemGroup>
-    <PackageReference Include="PuppeteerSharp" Version="12.0.0" />
+    <PackageReference Include="PuppeteerSharp" Version="20.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="PuppeteerSharp.Contrib.Should" />
   </ItemGroup>
 
 </Project>

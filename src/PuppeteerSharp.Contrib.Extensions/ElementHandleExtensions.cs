@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 
 namespace PuppeteerSharp.Contrib.Extensions
 {
@@ -147,8 +147,8 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/API/Element/classList"/>
         public static async Task<string[]> ClassListAsync(this IElementHandle elementHandle)
         {
-            var json = await elementHandle.EvaluateFunctionWithGuardAsync<JObject>("element => element.classList").ConfigureAwait(false);
-            var dictionary = json.ToObject<Dictionary<string, string>>();
+            var json = await elementHandle.EvaluateFunctionWithGuardAsync<JsonElement>("element => element.classList").ConfigureAwait(false);
+            var dictionary = json.Deserialize<Dictionary<string, string>>();
             return dictionary?.Values.ToArray() ?? [];
         }
 
@@ -161,27 +161,6 @@ namespace PuppeteerSharp.Contrib.Extensions
         public static async Task<bool> HasClassAsync(this IElementHandle elementHandle, string className)
         {
             return await elementHandle.EvaluateFunctionWithGuardAsync<bool>("(element, className) => element.classList.contains(className)", className).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Indicates whether the element is visible or not.
-        /// </summary>
-        /// <param name="elementHandle">An <see cref="IElementHandle"/>.</param>
-        /// <returns><c>true</c> if the element is visible.</returns>
-        /// <seealso href="https://blog.jquery.com/2009/02/20/jquery-1-3-2-released/#visible-hidden-overhauled"/>
-        public static async Task<bool> IsVisibleAsync(this IElementHandle elementHandle)
-        {
-            return await elementHandle.EvaluateFunctionWithGuardAsync<bool>("element => element.offsetWidth > 0 && element.offsetHeight > 0").ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Indicates whether the element is hidden or not. This is the logical negation of <see cref="IsVisibleAsync"/>.
-        /// </summary>
-        /// <param name="elementHandle">An <see cref="IElementHandle"/>.</param>
-        /// <returns><c>true</c> if the element is hidden.</returns>
-        public static async Task<bool> IsHiddenAsync(this IElementHandle elementHandle)
-        {
-            return !await elementHandle.IsVisibleAsync().ConfigureAwait(false);
         }
 
         /// <summary>

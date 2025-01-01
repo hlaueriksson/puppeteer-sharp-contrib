@@ -190,7 +190,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static async Task ShouldBeVisibleAsync(this IElementHandle elementHandle, string? because = null)
         {
-            if (await elementHandle.IsHiddenAsync().ConfigureAwait(false)) Throw.ElementShouldBeVisible(because);
+            if (await elementHandle.GuardFromNull().IsHiddenAsync().ConfigureAwait(false)) Throw.ElementShouldBeVisible(because);
         }
 
         /// <summary>
@@ -201,7 +201,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static async Task ShouldBeHiddenAsync(this IElementHandle elementHandle, string? because = null)
         {
-            if (await elementHandle.IsVisibleAsync().ConfigureAwait(false)) Throw.ElementShouldBeHidden(because);
+            if (await elementHandle.GuardFromNull().IsVisibleAsync().ConfigureAwait(false)) Throw.ElementShouldBeHidden(because);
         }
 
         // Selected

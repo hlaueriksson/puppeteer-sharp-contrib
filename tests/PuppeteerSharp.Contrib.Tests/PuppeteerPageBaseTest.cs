@@ -16,7 +16,7 @@ namespace PuppeteerSharp.Contrib.Tests
             {
                 Headless = true
             });
-            Context = await Browser.CreateIncognitoBrowserContextAsync();
+            Context = await Browser.CreateBrowserContextAsync();
             Page = await Context.NewPageAsync();
 
             await SetUp();

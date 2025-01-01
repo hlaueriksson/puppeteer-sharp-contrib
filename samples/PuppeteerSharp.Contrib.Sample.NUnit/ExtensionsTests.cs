@@ -122,14 +122,12 @@ namespace PuppeteerSharp.Contrib.Sample
         }
 
         [Test]
-        public async Task Visibility()
+        public async Task Existentiality()
         {
             await Page.SetContentAsync("<div>Foo</div>");
 
             var div = await Page.QuerySelectorAsync("div");
             Assert.That(div.Exists());
-            Assert.That(await div.IsHiddenAsync(), Is.False);
-            Assert.That(await div.IsVisibleAsync());
         }
 
         [Test]

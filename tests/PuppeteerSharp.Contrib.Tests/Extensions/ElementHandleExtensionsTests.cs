@@ -179,42 +179,6 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
         }
 
         [Test]
-        public async Task IsVisibleAsync_should_return_true_if_the_element_is_visible()
-        {
-            await Page.SetContentAsync("<html><body><div id='foo'>Foo</div><div id='bar' style='display:none'>Bar</div><div id='baz' style='visibility:hidden'>Baz</div></body></html>");
-
-            var div = await Page.QuerySelectorAsync("#foo");
-            Assert.That(await div.IsVisibleAsync());
-
-            div = await Page.QuerySelectorAsync("#bar");
-            Assert.That(await div.IsVisibleAsync(), Is.False);
-
-            div = await Page.QuerySelectorAsync("#baz");
-            Assert.That(await div.IsVisibleAsync()); // according to the jQuery implementation
-
-            var missing = await Page.QuerySelectorAsync(".missing");
-            Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.IsVisibleAsync());
-        }
-
-        [Test]
-        public async Task IsHiddenAsync_should_return_false_if_the_element_is_visible()
-        {
-            await Page.SetContentAsync("<html><body><div id='foo'>Foo</div><div id='bar' style='display:none'>Bar</div><div id='baz' style='visibility:hidden'>Baz</div></body></html>");
-
-            var div = await Page.QuerySelectorAsync("#foo");
-            Assert.That(await div.IsHiddenAsync(), Is.False);
-
-            div = await Page.QuerySelectorAsync("#bar");
-            Assert.That(await div.IsHiddenAsync());
-
-            div = await Page.QuerySelectorAsync("#baz");
-            Assert.That(await div.IsHiddenAsync(), Is.False); // according to the jQuery implementation
-
-            var missing = await Page.QuerySelectorAsync(".missing");
-            Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.IsHiddenAsync());
-        }
-
-        [Test]
         public async Task IsSelectedAsync_should_return_true_if_the_element_is_selected()
         {
             await Page.SetContentAsync("<html><body><select><option id='foo'>Foo</option><option id='bar'>Bar</option><option id='baz'>Baz</option></select></body></html>");

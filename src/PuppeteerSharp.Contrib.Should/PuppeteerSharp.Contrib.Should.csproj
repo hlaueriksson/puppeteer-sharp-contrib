@@ -42,6 +42,7 @@ Assertions for IResponse:
     <PackageTags>headless;chrome;puppeteer;test;testing;automation;assert</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>NU1903</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -52,7 +53,7 @@ Assertions for IResponse:
   <Import Project="../../Analyzers.props" />
 
   <ItemGroup>
-    <PackageReference Include="PuppeteerSharp" Version="12.0.0" />
+    <PackageReference Include="PuppeteerSharp" Version="20.0.0" />
   </ItemGroup>
 
   <ItemGroup>
