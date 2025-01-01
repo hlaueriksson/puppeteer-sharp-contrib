@@ -32,8 +32,8 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             _subject.Intercept(invocation);
             var result = await (Task<IElementHandle>)invocation.ReturnValue;
 
-            Assert.NotNull(result);
-            Assert.IsInstanceOf<IElementHandle>(result);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<IElementHandle>());
         }
 
         [Test]
@@ -45,8 +45,8 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             _subject.Intercept(invocation);
             var result = await (Task<IElementHandle[]>)invocation.ReturnValue;
 
-            Assert.NotNull(result);
-            Assert.IsInstanceOf<IElementHandle[]>(result);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<IElementHandle[]>());
         }
 
         [Test]
@@ -58,8 +58,8 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             _subject.Intercept(invocation);
             var result = await (Task<FakeElementObject>)invocation.ReturnValue;
 
-            Assert.NotNull(result);
-            Assert.IsInstanceOf<FakeElementObject>(result);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<FakeElementObject>());
         }
 
         [Test]
@@ -70,7 +70,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             _subject.Intercept(invocation);
 
-            Assert.Null(invocation.ReturnValue);
+            Assert.That(invocation.ReturnValue, Is.Null);
         }
 
         [Test]
@@ -81,7 +81,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             _subject.Intercept(invocation);
 
-            Assert.Null(invocation.ReturnValue);
+            Assert.That(invocation.ReturnValue, Is.Null);
         }
 
         // ElementObject
@@ -95,8 +95,8 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             _subject.Intercept(invocation);
             var result = await (Task<IElementHandle>)invocation.ReturnValue;
 
-            Assert.NotNull(result);
-            Assert.IsInstanceOf<IElementHandle>(result);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<IElementHandle>());
         }
 
         [Test]
@@ -108,8 +108,8 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             _subject.Intercept(invocation);
             var result = await (Task<IElementHandle[]>)invocation.ReturnValue;
 
-            Assert.NotNull(result);
-            Assert.IsInstanceOf<IElementHandle[]>(result);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<IElementHandle[]>());
         }
 
         [Test]
@@ -121,8 +121,8 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             _subject.Intercept(invocation);
             var result = await (Task<FakeElementObject>)invocation.ReturnValue;
 
-            Assert.NotNull(result);
-            Assert.IsInstanceOf<FakeElementObject>(result);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<FakeElementObject>());
         }
 
         [Test]
@@ -133,7 +133,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             _subject.Intercept(invocation);
 
-            Assert.Null(invocation.ReturnValue);
+            Assert.That(invocation.ReturnValue, Is.Null);
         }
 
         [Test]
@@ -144,7 +144,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             _subject.Intercept(invocation);
 
-            Assert.Null(invocation.ReturnValue);
+            Assert.That(invocation.ReturnValue, Is.Null);
         }
 
         // Unknown
@@ -158,7 +158,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             _subject.Intercept(invocation);
 
-            Assert.Null(invocation.ReturnValue);
+            Assert.That(invocation.ReturnValue, Is.Null);
         }
     }
 }

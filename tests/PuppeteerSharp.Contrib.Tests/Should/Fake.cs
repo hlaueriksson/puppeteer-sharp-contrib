@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Net;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
@@ -32,6 +33,8 @@ namespace PuppeteerSharp.Contrib.Tests.Should
         public ValueTask<byte[]> BufferAsync() => throw new System.NotImplementedException();
         public Task<JObject> JsonAsync() => throw new System.NotImplementedException();
         public Task<T> JsonAsync<T>() => throw new System.NotImplementedException();
+        public Task<JsonDocument> JsonAsync(JsonDocumentOptions options = default) => throw new System.NotImplementedException();
+        public Task<T> JsonAsync<T>(JsonSerializerOptions options = null) => throw new System.NotImplementedException();
         public Task<string> TextAsync() => throw new System.NotImplementedException();
     }
 }

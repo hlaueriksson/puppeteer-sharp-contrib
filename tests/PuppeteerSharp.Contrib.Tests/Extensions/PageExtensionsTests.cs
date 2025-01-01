@@ -19,16 +19,16 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
         public async Task QuerySelectorWithContentAsync_should_return_the_first_element_that_match_the_selector_and_has_the_content()
         {
             var foo = await Page.QuerySelectorWithContentAsync("div", "Foo");
-            Assert.AreEqual("foo", await foo.IdAsync());
+            Assert.That(await foo.IdAsync(), Is.EqualTo("foo"));
 
             var bar = await Page.QuerySelectorWithContentAsync("div", "Ba.");
-            Assert.AreEqual("bar", await bar.IdAsync());
+            Assert.That(await bar.IdAsync(), Is.EqualTo("bar"));
 
             var flags = await Page.QuerySelectorWithContentAsync("div", "foo", "i");
-            Assert.AreEqual("foo", await flags.IdAsync());
+            Assert.That(await flags.IdAsync(), Is.EqualTo("foo"));
 
             var missing = await Page.QuerySelectorWithContentAsync("div", "Missing");
-            Assert.Null(missing);
+            Assert.That(missing, Is.Null);
 
             Assert.ThrowsAsync<ArgumentNullException>(async () => await ((IPage)null).QuerySelectorWithContentAsync("", ""));
         }
@@ -37,16 +37,16 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
         public async Task QuerySelectorAllWithContentAsync_should_return_all_elements_that_match_the_selector_and_has_the_content()
         {
             var divs = await Page.QuerySelectorAllWithContentAsync("div", "Foo");
-            Assert.AreEqual(new[] { "foo" }, await Task.WhenAll(divs.Select(x => x.IdAsync())));
+            Assert.That(await Task.WhenAll(divs.Select(x => x.IdAsync())), Is.EqualTo(new[] { "foo" }));
 
             divs = await Page.QuerySelectorAllWithContentAsync("div", "Ba.");
-            Assert.AreEqual(new[] { "bar", "baz" }, await Task.WhenAll(divs.Select(x => x.IdAsync())));
+            Assert.That(await Task.WhenAll(divs.Select(x => x.IdAsync())), Is.EqualTo(new[] { "bar", "baz" }));
 
             var flags = await Page.QuerySelectorAllWithContentAsync("div", "foo", "i");
-            Assert.AreEqual(new[] { "foo" }, await Task.WhenAll(flags.Select(x => x.IdAsync())));
+            Assert.That(await Task.WhenAll(flags.Select(x => x.IdAsync())), Is.EqualTo(new[] { "foo" }));
 
             var missing = await Page.QuerySelectorAllWithContentAsync("div", "Missing");
-            Assert.IsEmpty(missing);
+            Assert.That(missing, Is.Empty);
 
             Assert.ThrowsAsync<ArgumentNullException>(async () => await ((IPage)null).QuerySelectorAllWithContentAsync("", ""));
         }
@@ -54,9 +54,9 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
         [Test]
         public async Task HasContentAsync_should_return_true_if_page_has_the_content()
         {
-            Assert.True(await Page.HasContentAsync("Ba."));
-            Assert.True(await Page.HasContentAsync("ba.", "i"));
-            Assert.False(await Page.HasContentAsync("Missing"));
+            Assert.That(await Page.HasContentAsync("Ba."));
+            Assert.That(await Page.HasContentAsync("ba.", "i"));
+            Assert.That(await Page.HasContentAsync("Missing"), Is.False);
             Assert.ThrowsAsync<ArgumentNullException>(async () => await ((IPage)null).HasContentAsync(""));
         }
 
@@ -70,18 +70,18 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
  </head>
 </html>");
 
-            Assert.True(await Page.HasTitleAsync("Ba."));
-            Assert.True(await Page.HasTitleAsync("ba.", "i"));
-            Assert.False(await Page.HasTitleAsync("Missing"));
+            Assert.That(await Page.HasTitleAsync("Ba."));
+            Assert.That(await Page.HasTitleAsync("ba.", "i"));
+            Assert.That(await Page.HasTitleAsync("Missing"), Is.False);
             Assert.ThrowsAsync<ArgumentNullException>(async () => await ((IPage)null).HasTitleAsync(""));
         }
 
         [Test]
         public async Task HasUrlAsync_should_return_true_if_page_has_the_url()
         {
-            Assert.True(await Page.HasUrlAsync("bla.")); // about:blank
-            Assert.True(await Page.HasUrlAsync("Bla.", "i"));
-            Assert.False(await Page.HasUrlAsync("Missing"));
+            Assert.That(await Page.HasUrlAsync("bla.")); // about:blank
+            Assert.That(await Page.HasUrlAsync("Bla.", "i"));
+            Assert.That(await Page.HasUrlAsync("Missing"), Is.False);
             Assert.ThrowsAsync<ArgumentNullException>(async () => await ((IPage)null).HasUrlAsync(""));
         }
     }

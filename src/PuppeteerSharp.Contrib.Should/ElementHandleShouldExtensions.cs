@@ -45,7 +45,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <param name="value">The value.</param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        /// <remarks><![CDATA[Elements: <button>, <option>, <input>, <li>, <meter>, <progress>, <param>]]></remarks>
+        /// <remarks><![CDATA[Elements: <button>, <data>, <input>, <li>, <meter>, <option>, <progress>, <param>]]></remarks>
         public static async Task ShouldHaveValueAsync(this IElementHandle elementHandle, string value, string? because = null)
         {
             var actual = await elementHandle.ValueAsync().ConfigureAwait(false);
@@ -60,7 +60,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <param name="value">The value.</param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        /// <remarks><![CDATA[Elements: <button>, <option>, <input>, <li>, <meter>, <progress>, <param>]]></remarks>
+        /// <remarks><![CDATA[Elements: <button>, <data>, <input>, <li>, <meter>, <option>, <progress>, <param>]]></remarks>
         public static async Task ShouldNotHaveValueAsync(this IElementHandle elementHandle, string value, string? because = null)
         {
             if (await elementHandle.ValueAsync().ConfigureAwait(false) == value) Throw.ElementShouldNotHaveValue(value, because);
@@ -190,7 +190,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static async Task ShouldBeVisibleAsync(this IElementHandle elementHandle, string? because = null)
         {
-            if (await elementHandle.IsHiddenAsync().ConfigureAwait(false)) Throw.ElementShouldBeVisible(because);
+            if (await elementHandle.GuardFromNull().IsHiddenAsync().ConfigureAwait(false)) Throw.ElementShouldBeVisible(because);
         }
 
         /// <summary>
@@ -201,7 +201,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public static async Task ShouldBeHiddenAsync(this IElementHandle elementHandle, string? because = null)
         {
-            if (await elementHandle.IsVisibleAsync().ConfigureAwait(false)) Throw.ElementShouldBeHidden(because);
+            if (await elementHandle.GuardFromNull().IsVisibleAsync().ConfigureAwait(false)) Throw.ElementShouldBeHidden(because);
         }
 
         // Selected
@@ -238,7 +238,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <param name="elementHandle">An <see cref="IElementHandle"/>.</param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        /// <remarks><![CDATA[Elements: <command>, <input>]]></remarks>
+        /// <remarks><![CDATA[Elements: <input>]]></remarks>
         public static async Task ShouldBeCheckedAsync(this IElementHandle elementHandle, string? because = null)
         {
             if (!await elementHandle.IsCheckedAsync().ConfigureAwait(false)) Throw.ElementShouldBeChecked(because);
@@ -250,7 +250,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <param name="elementHandle">An <see cref="IElementHandle"/>.</param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        /// <remarks><![CDATA[Elements: <command>, <input>]]></remarks>
+        /// <remarks><![CDATA[Elements: <input>]]></remarks>
         public static async Task ShouldNotBeCheckedAsync(this IElementHandle elementHandle, string? because = null)
         {
             if (await elementHandle.IsCheckedAsync().ConfigureAwait(false)) Throw.ElementShouldNotBeChecked(because);
@@ -264,7 +264,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <param name="elementHandle">An <see cref="IElementHandle"/>.</param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        /// <remarks><![CDATA[Elements: <button>, <command>, <fieldset>, <input>, <keygen>, <optgroup>, <option>, <select>, <textarea>]]></remarks>
+        /// <remarks><![CDATA[Elements: <button>, <fieldset>, <input>, <optgroup>, <option>, <select>, <textarea>]]></remarks>
         public static async Task ShouldBeDisabledAsync(this IElementHandle elementHandle, string? because = null)
         {
             if (await elementHandle.IsEnabledAsync().ConfigureAwait(false)) Throw.ElementShouldBeDisabled(because);
@@ -276,7 +276,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <param name="elementHandle">An <see cref="IElementHandle"/>.</param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        /// <remarks><![CDATA[Elements: <button>, <command>, <fieldset>, <input>, <keygen>, <optgroup>, <option>, <select>, <textarea>]]></remarks>
+        /// <remarks><![CDATA[Elements: <button>, <fieldset>, <input>, <optgroup>, <option>, <select>, <textarea>]]></remarks>
         public static async Task ShouldBeEnabledAsync(this IElementHandle elementHandle, string? because = null)
         {
             if (await elementHandle.IsDisabledAsync().ConfigureAwait(false)) Throw.ElementShouldBeEnabled(because);
@@ -342,7 +342,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <param name="elementHandle">An <see cref="IElementHandle"/>.</param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        /// <remarks><![CDATA[Elements: <button>, <input>, <keygen>, <select>, <textarea>]]></remarks>
+        /// <remarks><![CDATA[Elements: <button>, <input>, <select>, <textarea>]]></remarks>
         public static async Task ShouldHaveFocusAsync(this IElementHandle elementHandle, string? because = null)
         {
             if (!await elementHandle.HasFocusAsync().ConfigureAwait(false)) Throw.ElementShouldHaveFocus(because);
@@ -354,7 +354,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <param name="elementHandle">An <see cref="IElementHandle"/>.</param>
         /// <param name="because">A phrase explaining why the assertion is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        /// <remarks><![CDATA[Elements: <button>, <input>, <keygen>, <select>, <textarea>]]></remarks>
+        /// <remarks><![CDATA[Elements: <button>, <input>, <select>, <textarea>]]></remarks>
         public static async Task ShouldNotHaveFocusAsync(this IElementHandle elementHandle, string? because = null)
         {
             if (await elementHandle.HasFocusAsync().ConfigureAwait(false)) Throw.ElementShouldNotHaveFocus(because);

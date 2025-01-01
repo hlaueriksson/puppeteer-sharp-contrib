@@ -16,8 +16,8 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         {
             var result = ProxyFactory.PageObject<FakePageObject>(Page, null);
 
-            Assert.NotNull(result);
-            Assert.IsInstanceOf<FakePageObject>(result);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<FakePageObject>());
         }
 
         [Test]
@@ -26,11 +26,11 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var elementHandle = await Page.QuerySelectorAsync(".tweet");
 
             var result = ProxyFactory.ElementObject<FakeElementObject>(Page, elementHandle);
-            Assert.NotNull(result);
-            Assert.IsInstanceOf<FakeElementObject>(result);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<FakeElementObject>());
 
             result = ProxyFactory.ElementObject<FakeElementObject>(Page, null);
-            Assert.Null(result);
+            Assert.That(result, Is.Null);
         }
 
         [Test]
@@ -39,11 +39,11 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var elementHandle = await Page.QuerySelectorAsync(".tweet");
 
             var result = ProxyFactory.ElementObject(typeof(FakeElementObject), Page, elementHandle);
-            Assert.NotNull(result);
-            Assert.IsInstanceOf<FakeElementObject>(result);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<FakeElementObject>());
 
             result = ProxyFactory.ElementObject(typeof(FakeElementObject), Page, null);
-            Assert.Null(result);
+            Assert.That(result, Is.Null);
         }
 
         [Test]
@@ -52,11 +52,11 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var elementHandles = await Page.QuerySelectorAllAsync("div");
 
             var result = ProxyFactory.ElementObjectArray(typeof(FakeElementObject), Page, elementHandles);
-            Assert.IsNotEmpty(result);
-            CollectionAssert.AllItemsAreInstancesOfType(result, typeof(FakeElementObject));
+            Assert.That(result, Is.Not.Empty);
+            Assert.That(result, Is.All.InstanceOf(typeof(FakeElementObject)));
 
             result = ProxyFactory.ElementObjectArray(typeof(FakeElementObject), Page, []);
-            Assert.IsEmpty(result);
+            Assert.That(result, Is.Empty);
         }
     }
 }

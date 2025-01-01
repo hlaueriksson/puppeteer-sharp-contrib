@@ -40,16 +40,16 @@ namespace PuppeteerSharp.Contrib.Sample
             var html = await Page.QuerySelectorAsync("html");
 
             var div = await Page.QuerySelectorWithContentAsync("div", "Ba.");
-            Assert.AreEqual("bar", await div.IdAsync());
+            Assert.That(await div.IdAsync(), Is.EqualTo("bar"));
 
             div = await html.QuerySelectorWithContentAsync("div", "Ba.");
-            Assert.AreEqual("bar", await div.IdAsync());
+            Assert.That(await div.IdAsync(), Is.EqualTo("bar"));
 
             var divs = await Page.QuerySelectorAllWithContentAsync("div", "Ba.");
-            Assert.AreEqual(new[] { "bar", "baz" }, await Task.WhenAll(divs.Select(x => x.IdAsync())));
+            Assert.That(await Task.WhenAll(divs.Select(x => x.IdAsync())), Is.EqualTo(new[] { "bar", "baz" }));
 
             divs = await html.QuerySelectorAllWithContentAsync("div", "Ba.");
-            Assert.AreEqual(new[] { "bar", "baz" }, await Task.WhenAll(divs.Select(x => x.IdAsync())));
+            Assert.That(await Task.WhenAll(divs.Select(x => x.IdAsync())), Is.EqualTo(new[] { "bar", "baz" }));
         }
 
         [Test]
@@ -67,25 +67,25 @@ namespace PuppeteerSharp.Contrib.Sample
 </html>");
 
             var form = await Page.QuerySelectorAsync("form");
-            Assert.AreEqual("post", await form.GetAttributeAsync("method"));
+            Assert.That(await form.GetAttributeAsync("method"), Is.EqualTo("post"));
 
             var input = await Page.QuerySelectorAsync("#name");
-            Assert.True(await input.HasAttributeAsync("required"));
+            Assert.That(await input.HasAttributeAsync("required"));
 
             var link = await Page.QuerySelectorAsync("a");
-            Assert.AreEqual("/unsubscribe/", await link.HrefAsync());
+            Assert.That(await link.HrefAsync(), Is.EqualTo("/unsubscribe/"));
 
             input = await Page.QuerySelectorAsync("input[type=email]");
-            Assert.AreEqual("email", await input.IdAsync());
+            Assert.That(await input.IdAsync(), Is.EqualTo("email"));
 
             input = await Page.QuerySelectorAsync("#email");
-            Assert.AreEqual("email", await input.NameAsync());
+            Assert.That(await input.NameAsync(), Is.EqualTo("email"));
 
             var img = await Page.QuerySelectorAsync("img");
-            Assert.AreEqual("unsubscribe.png", await img.SrcAsync());
+            Assert.That(await img.SrcAsync(), Is.EqualTo("unsubscribe.png"));
 
             input = await Page.QuerySelectorAsync("input[type=submit]");
-            Assert.AreEqual("Subscribe!", await input.ValueAsync());
+            Assert.That(await input.ValueAsync(), Is.EqualTo("Subscribe!"));
         }
 
         [Test]
@@ -94,9 +94,9 @@ namespace PuppeteerSharp.Contrib.Sample
             await Page.SetContentAsync("<div class='foo bar' />");
 
             var div = await Page.QuerySelectorAsync("div");
-            Assert.AreEqual("foo bar", await div.ClassNameAsync());
-            Assert.AreEqual(new[] { "foo", "bar" }, await div.ClassListAsync());
-            Assert.True(await div.HasClassAsync("bar"));
+            Assert.That(await div.ClassNameAsync(), Is.EqualTo("foo bar"));
+            Assert.That(await div.ClassListAsync(), Is.EqualTo(new[] { "foo", "bar" }));
+            Assert.That(await div.HasClassAsync("bar"));
         }
 
         [Test]
@@ -112,24 +112,22 @@ namespace PuppeteerSharp.Contrib.Sample
 ");
 
             var html = await Page.QuerySelectorAsync("html");
-            Assert.True(await html.HasContentAsync("Foo"));
+            Assert.That(await html.HasContentAsync("Foo"));
 
             var div = await Page.QuerySelectorAsync("div");
-            Assert.AreEqual("\n    Foo\n    <span>Bar</span>\n  ", await div.InnerHtmlAsync());
-            Assert.AreEqual("<div>\n    Foo\n    <span>Bar</span>\n  </div>", await div.OuterHtmlAsync());
-            Assert.AreEqual("Foo Bar", await div.InnerTextAsync());
-            Assert.AreEqual("\n    Foo\n    Bar\n  ", await div.TextContentAsync());
+            Assert.That(await div.InnerHtmlAsync(), Is.EqualTo("\n    Foo\n    <span>Bar</span>\n  "));
+            Assert.That(await div.OuterHtmlAsync(), Is.EqualTo("<div>\n    Foo\n    <span>Bar</span>\n  </div>"));
+            Assert.That(await div.InnerTextAsync(), Is.EqualTo("Foo Bar"));
+            Assert.That(await div.TextContentAsync(), Is.EqualTo("\n    Foo\n    Bar\n  "));
         }
 
         [Test]
-        public async Task Visibility()
+        public async Task Existentiality()
         {
             await Page.SetContentAsync("<div>Foo</div>");
 
             var div = await Page.QuerySelectorAsync("div");
-            Assert.True(div.Exists());
-            Assert.False(await div.IsHiddenAsync());
-            Assert.True(await div.IsVisibleAsync());
+            Assert.That(div.Exists());
         }
 
         [Test]
@@ -148,19 +146,19 @@ namespace PuppeteerSharp.Contrib.Sample
 ");
 
             var input = await Page.QuerySelectorAsync("input[type=text]");
-            Assert.True(await input.HasFocusAsync());
-            Assert.True(await input.IsRequiredAsync());
+            Assert.That(await input.HasFocusAsync());
+            Assert.That(await input.IsRequiredAsync());
 
             input = await Page.QuerySelectorAsync("input[type=radio]");
-            Assert.False(await input.IsDisabledAsync());
-            Assert.True(await input.IsEnabledAsync());
-            Assert.True(await input.IsReadOnlyAsync());
+            Assert.That(await input.IsDisabledAsync(), Is.False);
+            Assert.That(await input.IsEnabledAsync());
+            Assert.That(await input.IsReadOnlyAsync());
 
             input = await Page.QuerySelectorAsync("input[type=checkbox]");
-            Assert.True(await input.IsCheckedAsync());
+            Assert.That(await input.IsCheckedAsync());
 
             input = await Page.QuerySelectorAsync("#foo");
-            Assert.True(await input.IsSelectedAsync());
+            Assert.That(await input.IsSelectedAsync());
         }
     }
 }

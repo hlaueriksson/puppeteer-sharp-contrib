@@ -13,10 +13,10 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
             await Page.SetContentAsync("<html><body><input id='foo' value='input' /><button id='bar' value='button' /></body></html>");
 
             var input = await Page.QuerySelectorAsync("input");
-            Assert.AreEqual("foo", await input.IdAsync());
+            Assert.That(await input.IdAsync(), Is.EqualTo("foo"));
 
             var body = await Page.QuerySelectorAsync("body");
-            Assert.Null(await body.IdAsync());
+            Assert.That(await body.IdAsync(), Is.Null);
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.IdAsync());
@@ -28,10 +28,10 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
             await Page.SetContentAsync("<html><body><input name='foo' value='input' /><button name='bar' value='button' /></body></html>");
 
             var input = await Page.QuerySelectorAsync("input");
-            Assert.AreEqual("foo", await input.NameAsync());
+            Assert.That(await input.NameAsync(), Is.EqualTo("foo"));
 
             var body = await Page.QuerySelectorAsync("body");
-            Assert.Null(await body.NameAsync());
+            Assert.That(await body.NameAsync(), Is.Null);
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.NameAsync());
@@ -43,10 +43,10 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
             await Page.SetContentAsync("<html><body><input value='input' /><button value='button' /></body></html>");
 
             var input = await Page.QuerySelectorAsync("input");
-            Assert.AreEqual("input", await input.ValueAsync());
+            Assert.That(await input.ValueAsync(), Is.EqualTo("input"));
 
             var body = await Page.QuerySelectorAsync("body");
-            Assert.Null(await body.ValueAsync());
+            Assert.That(await body.ValueAsync(), Is.Null);
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ValueAsync());
@@ -58,10 +58,10 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
             await Page.SetContentAsync("<html><body><a href='file.html'></a><link href='file.css' /></body></html>");
 
             var a = await Page.QuerySelectorAsync("a");
-            Assert.AreEqual("file.html", await a.HrefAsync());
+            Assert.That(await a.HrefAsync(), Is.EqualTo("file.html"));
 
             var body = await Page.QuerySelectorAsync("body");
-            Assert.Null(await body.HrefAsync());
+            Assert.That(await body.HrefAsync(), Is.Null);
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.HrefAsync());
@@ -73,10 +73,10 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
             await Page.SetContentAsync("<html><body><img src='image.png' /><iframe src='file.html'></iframe></body></html>");
 
             var img = await Page.QuerySelectorAsync("img");
-            Assert.AreEqual("image.png", await img.SrcAsync());
+            Assert.That(await img.SrcAsync(), Is.EqualTo("image.png"));
 
             var body = await Page.QuerySelectorAsync("body");
-            Assert.Null(await body.SrcAsync());
+            Assert.That(await body.SrcAsync(), Is.Null);
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.SrcAsync());
@@ -88,13 +88,13 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
             await Page.SetContentAsync("<html><body><div class='class' data-foo='bar' /></body></html>");
 
             var div = await Page.QuerySelectorAsync("div");
-            Assert.True(await div.HasAttributeAsync("class"));
+            Assert.That(await div.HasAttributeAsync("class"));
 
             div = await Page.QuerySelectorAsync("div");
-            Assert.False(await div.HasAttributeAsync("id"));
+            Assert.That(await div.HasAttributeAsync("id"), Is.False);
 
             var body = await Page.QuerySelectorAsync("body");
-            Assert.False(await body.HasAttributeAsync(null));
+            Assert.That(await body.HasAttributeAsync(null), Is.False);
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.HasAttributeAsync(""));
@@ -106,22 +106,22 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
             await Page.SetContentAsync("<html><body><div class='class' data-foo='bar' /></body></html>");
 
             var div = await Page.QuerySelectorAsync("div");
-            Assert.True(await div.HasAttributeValueAsync("class", "cla."));
-            Assert.True(await div.HasAttributeValueAsync("class", "Cla.", "i"));
+            Assert.That(await div.HasAttributeValueAsync("class", "cla."));
+            Assert.That(await div.HasAttributeValueAsync("class", "Cla.", "i"));
 
             div = await Page.QuerySelectorAsync("div");
-            Assert.False(await div.HasAttributeValueAsync("class", "id"));
-            Assert.False(await div.HasAttributeValueAsync("id", "class"));
+            Assert.That(await div.HasAttributeValueAsync("class", "id"), Is.False);
+            Assert.That(await div.HasAttributeValueAsync("id", "class"), Is.False);
 
             div = await Page.QuerySelectorAsync("div");
-            Assert.False(await div.HasAttributeValueAsync("class", null));
-            Assert.False(await div.HasAttributeValueAsync(null, "class"));
-            Assert.True(await div.HasAttributeValueAsync(null, null));
+            Assert.That(await div.HasAttributeValueAsync("class", null), Is.False);
+            Assert.That(await div.HasAttributeValueAsync(null, "class"), Is.False);
+            Assert.That(await div.HasAttributeValueAsync(null, null));
 
             var body = await Page.QuerySelectorAsync("body");
-            Assert.True(await body.HasAttributeValueAsync("class", null));
-            Assert.False(await body.HasAttributeValueAsync(null, "class"));
-            Assert.True(await body.HasAttributeValueAsync(null, null));
+            Assert.That(await body.HasAttributeValueAsync("class", null));
+            Assert.That(await body.HasAttributeValueAsync(null, "class"), Is.False);
+            Assert.That(await body.HasAttributeValueAsync(null, null));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.HasAttributeValueAsync("", ""));
@@ -133,13 +133,13 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
             await Page.SetContentAsync("<html><body><div class='class' data-foo='bar' /></body></html>");
 
             var div = await Page.QuerySelectorAsync("div");
-            Assert.AreEqual("class", await div.GetAttributeAsync("class"));
+            Assert.That(await div.GetAttributeAsync("class"), Is.EqualTo("class"));
 
             div = await Page.QuerySelectorAsync("div");
-            Assert.Null(await div.GetAttributeAsync("id"));
+            Assert.That(await div.GetAttributeAsync("id"), Is.Null);
 
             var body = await Page.QuerySelectorAsync("body");
-            Assert.Null(await body.GetAttributeAsync(null));
+            Assert.That(await body.GetAttributeAsync(null), Is.Null);
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.GetAttributeAsync(""));

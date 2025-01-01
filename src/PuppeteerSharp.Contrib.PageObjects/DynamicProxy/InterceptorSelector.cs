@@ -12,17 +12,17 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
         {
             if (method.IsGetterPropertyWithAttribute<SelectorAttribute>())
             {
-                return interceptors.Where(x => x is SelectorInterceptor).ToArray();
+                return [.. interceptors.Where(x => x is SelectorInterceptor)];
             }
 
 #pragma warning disable CS0618 // Type or member is obsolete
             if (method.IsGetterPropertyWithAttribute<XPathAttribute>())
 #pragma warning restore CS0618 // Type or member is obsolete
             {
-                return interceptors.Where(x => x is XPathInterceptor).ToArray();
+                return [.. interceptors.Where(x => x is XPathInterceptor)];
             }
 
-            return interceptors.Where(x => x is not SelectorInterceptor && x is not XPathInterceptor).ToArray();
+            return [.. interceptors.Where(x => x is not SelectorInterceptor && x is not XPathInterceptor)];
         }
     }
 }

@@ -14,7 +14,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         {
             var methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.SelectorForElementHandle)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
-            Assert.True(invocation.HasValidReturnType());
+            Assert.That(invocation.HasValidReturnType());
         }
 
         [Test]
@@ -22,7 +22,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         {
             var methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.SelectorForNonTaskReturnType)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
-            Assert.False(invocation.HasValidReturnType());
+            Assert.That(invocation.HasValidReturnType(), Is.False);
         }
 
         [Test]
@@ -30,7 +30,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         {
             var methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.SelectorForElementHandle)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
-            Assert.True(invocation.IsGetterPropertyWithAttribute<SelectorAttribute>());
+            Assert.That(invocation.IsGetterPropertyWithAttribute<SelectorAttribute>());
         }
 
         [Test]
@@ -38,7 +38,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         {
             var methodInfo = typeof(string).GetMethod(nameof(string.GetTypeCode));
             var invocation = new FakeInvocation(methodInfo);
-            Assert.False(invocation.IsGetterPropertyWithAttribute<SelectorAttribute>());
+            Assert.That(invocation.IsGetterPropertyWithAttribute<SelectorAttribute>(), Is.False);
         }
 
         [Test]
@@ -46,7 +46,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         {
             var methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.SelectorForElementHandle)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
-            Assert.NotNull(invocation.GetAttribute<SelectorAttribute>());
+            Assert.That(invocation.GetAttribute<SelectorAttribute>(), Is.Not.Null);
         }
 
         [Test]
@@ -54,7 +54,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         {
             var methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.SelectorForElementHandle)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
-            Assert.True(invocation.IsReturning<IElementHandle>());
+            Assert.That(invocation.IsReturning<IElementHandle>());
         }
 
         [Test]
@@ -62,7 +62,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         {
             var methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.SelectorForNonTaskReturnType)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
-            Assert.False(invocation.IsReturning<IElementHandle>());
+            Assert.That(invocation.IsReturning<IElementHandle>(), Is.False);
         }
 
         [Test]
@@ -70,7 +70,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         {
             var methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.SelectorForElementObject)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
-            Assert.True(invocation.IsReturningElementObject());
+            Assert.That(invocation.IsReturningElementObject());
         }
 
         [Test]
@@ -78,7 +78,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         {
             var methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.SelectorForElementObjectWithNonTaskReturnType)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
-            Assert.False(invocation.IsReturningElementObject());
+            Assert.That(invocation.IsReturningElementObject(), Is.False);
         }
 
         [Test]
@@ -86,7 +86,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         {
             var methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.SelectorForElementObjectArray)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
-            Assert.True(invocation.IsReturningElementObjectArray());
+            Assert.That(invocation.IsReturningElementObjectArray());
         }
 
         [Test]
@@ -94,7 +94,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         {
             var methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.SelectorForElementObjectArrayWithNonTaskReturnType)).GetMethod;
             var invocation = new FakeInvocation(methodInfo);
-            Assert.False(invocation.IsReturningElementObjectArray());
+            Assert.That(invocation.IsReturningElementObjectArray(), Is.False);
         }
 
         // PageObject
@@ -109,8 +109,8 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             var result = await invocation.GetReturnValueAsync(pageObject, new SelectorAttribute(".tweet"));
 
-            Assert.NotNull(result);
-            Assert.IsInstanceOf<IElementHandle>(result);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<IElementHandle>());
         }
 
         [Test]
@@ -123,8 +123,8 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             var result = await invocation.GetReturnValueAsync(pageObject, new SelectorAttribute("div"));
 
-            Assert.NotNull(result);
-            Assert.IsInstanceOf<IElementHandle[]>(result);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<IElementHandle[]>());
         }
 
         [Test]
@@ -137,8 +137,8 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             var result = await invocation.GetReturnValueAsync(pageObject, new SelectorAttribute(".retweets"));
 
-            Assert.NotNull(result);
-            Assert.IsInstanceOf<FakeElementObject>(result);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<FakeElementObject>());
         }
 
         [Test]
@@ -151,8 +151,8 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             var result = await invocation.GetReturnValueAsync(pageObject, new SelectorAttribute("div"));
 
-            Assert.NotNull(result);
-            Assert.IsInstanceOf<FakeElementObject[]>(result);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<FakeElementObject[]>());
         }
 
         [Test]
@@ -164,7 +164,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             var result = await invocation.GetReturnValueAsync(pageObject, new SelectorAttribute(".retweets"));
 
-            Assert.Null(result);
+            Assert.That(result, Is.Null);
         }
 
         [Test]
@@ -177,7 +177,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             var result = await invocation.GetReturnValueAsync(pageObject, new SelectorAttribute(".tweet"));
 
-            Assert.Null(result);
+            Assert.That(result, Is.Null);
         }
 
         // ElementObject
@@ -193,8 +193,8 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             var result = await invocation.GetReturnValueAsync(elementObject, new SelectorAttribute(".tweet"));
 
-            Assert.NotNull(result);
-            Assert.IsInstanceOf<IElementHandle>(result);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<IElementHandle>());
         }
 
         [Test]
@@ -208,8 +208,8 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             var result = await invocation.GetReturnValueAsync(elementObject, new SelectorAttribute("div"));
 
-            Assert.NotNull(result);
-            Assert.IsInstanceOf<IElementHandle[]>(result);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<IElementHandle[]>());
         }
 
         [Test]
@@ -223,8 +223,8 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             var result = await invocation.GetReturnValueAsync(elementObject, new SelectorAttribute(".retweets"));
 
-            Assert.NotNull(result);
-            Assert.IsInstanceOf<FakeElementObject>(result);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<FakeElementObject>());
         }
 
         [Test]
@@ -238,8 +238,8 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             var result = await invocation.GetReturnValueAsync(elementObject, new SelectorAttribute("div"));
 
-            Assert.NotNull(result);
-            Assert.IsInstanceOf<FakeElementObject[]>(result);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<FakeElementObject[]>());
         }
 
         [Test]
@@ -251,7 +251,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             var result = await invocation.GetReturnValueAsync(elementObject, new SelectorAttribute(".tweet"));
 
-            Assert.Null(result);
+            Assert.That(result, Is.Null);
         }
 
         [Test]
@@ -265,7 +265,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             var result = await invocation.GetReturnValueAsync(elementObject, new SelectorAttribute(".tweet"));
 
-            Assert.Null(result);
+            Assert.That(result, Is.Null);
         }
 
         // PageObject
@@ -280,8 +280,8 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             var result = await invocation.GetReturnValueAsync(pageObject, new XPathAttribute("//div"));
 
-            Assert.NotNull(result);
-            Assert.IsInstanceOf<IElementHandle[]>(result);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<IElementHandle[]>());
         }
 
         [Test]
@@ -294,8 +294,8 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             var result = await invocation.GetReturnValueAsync(pageObject, new XPathAttribute("//div"));
 
-            Assert.NotNull(result);
-            Assert.IsInstanceOf<FakeElementObject[]>(result);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<FakeElementObject[]>());
         }
 
         [Test]
@@ -307,7 +307,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             var result = await invocation.GetReturnValueAsync(pageObject, new XPathAttribute("//div"));
 
-            Assert.Null(result);
+            Assert.That(result, Is.Null);
         }
 
         [Test]
@@ -320,7 +320,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             var result = await invocation.GetReturnValueAsync(pageObject, new XPathAttribute("//div"));
 
-            Assert.Null(result);
+            Assert.That(result, Is.Null);
         }
 
         // ElementObject
@@ -336,8 +336,8 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             var result = await invocation.GetReturnValueAsync(elementObject, new XPathAttribute("//div"));
 
-            Assert.NotNull(result);
-            Assert.IsInstanceOf<IElementHandle[]>(result);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<IElementHandle[]>());
         }
 
         [Test]
@@ -351,8 +351,8 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             var result = await invocation.GetReturnValueAsync(elementObject, new XPathAttribute("//div"));
 
-            Assert.NotNull(result);
-            Assert.IsInstanceOf<FakeElementObject[]>(result);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<FakeElementObject[]>());
         }
 
         [Test]
@@ -364,7 +364,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             var result = await invocation.GetReturnValueAsync(elementObject, new XPathAttribute("//div"));
 
-            Assert.Null(result);
+            Assert.That(result, Is.Null);
         }
 
         [Test]
@@ -378,7 +378,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             var result = await invocation.GetReturnValueAsync(elementObject, new XPathAttribute("//div"));
 
-            Assert.Null(result);
+            Assert.That(result, Is.Null);
         }
     }
 }

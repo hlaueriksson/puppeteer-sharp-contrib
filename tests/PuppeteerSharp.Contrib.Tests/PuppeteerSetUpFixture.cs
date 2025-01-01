@@ -14,7 +14,7 @@ public class PuppeteerSetUpFixture
     [OneTimeSetUp]
     public async Task OneTimeSetUp()
     {
-        using var browserFetcher = new BrowserFetcher();
+        var browserFetcher = new BrowserFetcher();
         await browserFetcher.DownloadAsync();
     }
 }

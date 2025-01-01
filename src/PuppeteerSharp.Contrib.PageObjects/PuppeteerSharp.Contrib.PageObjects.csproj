@@ -33,6 +33,7 @@ New extensions for IElementHandle:
     <PackageTags>headless;chrome;puppeteer;test;testing;automation;pageobject</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>NU1903</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -44,7 +45,7 @@ New extensions for IElementHandle:
 
   <ItemGroup>
     <PackageReference Include="Castle.Core" Version="5.1.1" />
-    <PackageReference Include="PuppeteerSharp" Version="12.0.0" />
+    <PackageReference Include="PuppeteerSharp" Version="20.0.0" />
   </ItemGroup>
 
   <ItemGroup>

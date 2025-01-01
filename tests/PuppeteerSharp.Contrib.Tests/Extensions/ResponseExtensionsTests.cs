@@ -13,9 +13,9 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
         {
             var response = await Page.GoToAsync("https://github.com/hardkoded/puppeteer-sharp");
 
-            Assert.True(response.HasUrl("pupp."));
-            Assert.True(response.HasUrl("Pupp.", RegexOptions.IgnoreCase));
-            Assert.False(response.HasUrl("Missing"));
+            Assert.That(response.HasUrl("pupp."));
+            Assert.That(response.HasUrl("Pupp.", RegexOptions.IgnoreCase));
+            Assert.That(response.HasUrl("Missing"), Is.False);
             Assert.Throws<ArgumentNullException>(() => ((IResponse)null).HasUrl(""));
         }
     }
