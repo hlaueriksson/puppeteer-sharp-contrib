@@ -19,7 +19,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
 
             var missing = await Page.QuerySelectorAsync(".missing");
             var ex = Assert.Throws<ShouldException>(() => missing.ShouldExist());
-            Assert.AreEqual("Expected element to exist, but it did not.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element to exist, but it did not."));
         }
 
         [Test]
@@ -30,7 +30,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
 
             var tweet = await Page.QuerySelectorAsync(".tweet");
             var ex = Assert.Throws<ShouldException>(() => tweet.ShouldNotExist());
-            Assert.AreEqual("Expected element not to exist, but it did.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element not to exist, but it did."));
         }
 
         // Value
@@ -44,7 +44,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             await input.ShouldHaveValueAsync("input");
 
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await input.ShouldHaveValueAsync("button"));
-            Assert.AreEqual("Expected element to have value \"button\", but found \"input\".", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element to have value \"button\", but found \"input\"."));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldHaveValueAsync(""));
@@ -59,7 +59,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             await input.ShouldNotHaveValueAsync("button");
 
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await input.ShouldNotHaveValueAsync("input"));
-            Assert.AreEqual("Expected element not to have value \"input\".", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element not to have value \"input\"."));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldNotHaveValueAsync(""));
@@ -76,7 +76,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             await div.ShouldHaveAttributeAsync("class");
 
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await div.ShouldHaveAttributeAsync("id"));
-            Assert.AreEqual("Expected element to have attribute \"id\", but it did not.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element to have attribute \"id\", but it did not."));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldHaveAttributeAsync(""));
@@ -91,7 +91,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             await div.ShouldNotHaveAttributeAsync("id");
 
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await div.ShouldNotHaveAttributeAsync("class"));
-            Assert.AreEqual("Expected element not to have attribute \"class\", but it did.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element not to have attribute \"class\", but it did."));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldNotHaveAttributeAsync(""));
@@ -108,7 +108,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             await div.ShouldHaveAttributeValueAsync("class", "class");
 
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await div.ShouldHaveAttributeValueAsync("class", "id"));
-            Assert.AreEqual("Expected element to have attribute \"class\" with value \"/id/\", but it did not.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element to have attribute \"class\" with value \"/id/\", but it did not."));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldHaveAttributeValueAsync("", ""));
@@ -123,7 +123,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             await div.ShouldNotHaveAttributeValueAsync("class", "id");
 
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await div.ShouldNotHaveAttributeValueAsync("class", "class"));
-            Assert.AreEqual("Expected element not to have attribute \"class\" with value \"/class/\", but it did.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element not to have attribute \"class\" with value \"/class/\", but it did."));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldNotHaveAttributeValueAsync("", ""));
@@ -138,7 +138,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             await like.ShouldHaveContentAsync("100");
 
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await like.ShouldHaveContentAsync("200", "i"));
-            Assert.AreEqual("Expected element to have content \"/200/i\", but it did not.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element to have content \"/200/i\", but it did not."));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldHaveContentAsync(""));
@@ -151,7 +151,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             await like.ShouldNotHaveContentAsync("200");
 
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await like.ShouldNotHaveContentAsync("100", "i"));
-            Assert.AreEqual("Expected element not to have content \"/100/i\", but it did.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element not to have content \"/100/i\", but it did."));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldNotHaveContentAsync(""));
@@ -168,7 +168,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             await div.ShouldHaveClassAsync("foo");
 
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await div.ShouldHaveClassAsync("baz"));
-            Assert.AreEqual("Expected element to have class \"baz\", but it did not.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element to have class \"baz\", but it did not."));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldHaveClassAsync(""));
@@ -183,7 +183,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             await div.ShouldNotHaveClassAsync("baz");
 
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await div.ShouldNotHaveClassAsync("foo"));
-            Assert.AreEqual("Expected element not to have class \"foo\", but it did.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element not to have class \"foo\", but it did."));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldNotHaveClassAsync(""));
@@ -201,7 +201,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
 
             div = await Page.QuerySelectorAsync("#bar");
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await div.ShouldBeVisibleAsync());
-            Assert.AreEqual("Expected element to be visible, but it is not.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element to be visible, but it is not."));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldBeVisibleAsync());
@@ -217,7 +217,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
 
             div = await Page.QuerySelectorAsync("#foo");
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await div.ShouldBeHiddenAsync());
-            Assert.AreEqual("Expected element to be hidden, but it is not.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element to be hidden, but it is not."));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldBeHiddenAsync());
@@ -235,7 +235,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
 
             div = await Page.QuerySelectorAsync("#bar");
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await div.ShouldBeSelectedAsync());
-            Assert.AreEqual("Expected element to be selected, but it is not.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element to be selected, but it is not."));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldBeSelectedAsync());
@@ -251,7 +251,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
 
             div = await Page.QuerySelectorAsync("#foo");
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await div.ShouldNotBeSelectedAsync());
-            Assert.AreEqual("Expected element not to be selected, but it is.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element not to be selected, but it is."));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldNotBeSelectedAsync());
@@ -269,7 +269,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
 
             div = await Page.QuerySelectorAsync("#bar");
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await div.ShouldBeCheckedAsync());
-            Assert.AreEqual("Expected element to be checked, but it is not.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element to be checked, but it is not."));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldBeCheckedAsync());
@@ -285,7 +285,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
 
             div = await Page.QuerySelectorAsync("#foo");
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await div.ShouldNotBeCheckedAsync());
-            Assert.AreEqual("Expected element not to be checked, but it is.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element not to be checked, but it is."));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldNotBeCheckedAsync());
@@ -303,7 +303,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
 
             div = await Page.QuerySelectorAsync("#bar");
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await div.ShouldBeDisabledAsync());
-            Assert.AreEqual("Expected element to be disabled, but it is not.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element to be disabled, but it is not."));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldBeDisabledAsync());
@@ -319,7 +319,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
 
             div = await Page.QuerySelectorAsync("#foo");
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await div.ShouldBeEnabledAsync());
-            Assert.AreEqual("Expected element to be enabled, but it is not.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element to be enabled, but it is not."));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldBeEnabledAsync());
@@ -337,7 +337,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
 
             div = await Page.QuerySelectorAsync("#bar");
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await div.ShouldBeReadOnlyAsync());
-            Assert.AreEqual("Expected element to be read-only, but it is not.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element to be read-only, but it is not."));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldBeReadOnlyAsync());
@@ -353,7 +353,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
 
             div = await Page.QuerySelectorAsync("#foo");
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await div.ShouldNotBeReadOnlyAsync());
-            Assert.AreEqual("Expected element not to be read-only, but it is.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element not to be read-only, but it is."));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldNotBeReadOnlyAsync());
@@ -371,7 +371,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
 
             div = await Page.QuerySelectorAsync("#bar");
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await div.ShouldBeRequiredAsync());
-            Assert.AreEqual("Expected element to be required, but it is not.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element to be required, but it is not."));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldBeRequiredAsync());
@@ -387,7 +387,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
 
             div = await Page.QuerySelectorAsync("#foo");
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await div.ShouldNotBeRequiredAsync());
-            Assert.AreEqual("Expected element not to be required, but it is.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element not to be required, but it is."));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldNotBeRequiredAsync());
@@ -405,7 +405,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
 
             div = await Page.QuerySelectorAsync("#bar");
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await div.ShouldHaveFocusAsync());
-            Assert.AreEqual("Expected element to have focus, but it did not.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element to have focus, but it did not."));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldHaveFocusAsync());
@@ -421,7 +421,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
 
             div = await Page.QuerySelectorAsync("#foo");
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await div.ShouldNotHaveFocusAsync());
-            Assert.AreEqual("Expected element not to have focus, but it did.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element not to have focus, but it did."));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldNotHaveFocusAsync());
@@ -439,7 +439,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
 
             input = await Page.QuerySelectorAsync("#bar");
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await input.ShouldBeEmptyAsync());
-            Assert.AreEqual("Expected element to be empty, but it is not.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element to be empty, but it is not."));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldBeEmptyAsync());
@@ -451,7 +451,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
 
             div = await Page.QuerySelectorAsync("#bar");
             ex = Assert.ThrowsAsync<ShouldException>(async () => await div.ShouldBeEmptyAsync());
-            Assert.AreEqual("Expected element to be empty, but it is not.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element to be empty, but it is not."));
         }
 
         [Test]
@@ -464,7 +464,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
 
             input = await Page.QuerySelectorAsync("#foo");
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await input.ShouldNotBeEmptyAsync());
-            Assert.AreEqual("Expected element not to be empty, but it is.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element not to be empty, but it is."));
 
             var missing = await Page.QuerySelectorAsync(".missing");
             Assert.ThrowsAsync<ArgumentNullException>(async () => await missing.ShouldNotBeEmptyAsync());
@@ -476,7 +476,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
 
             div = await Page.QuerySelectorAsync("#foo");
             ex = Assert.ThrowsAsync<ShouldException>(async () => await div.ShouldNotBeEmptyAsync());
-            Assert.AreEqual("Expected element not to be empty, but it is.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected element not to be empty, but it is."));
         }
     }
 }

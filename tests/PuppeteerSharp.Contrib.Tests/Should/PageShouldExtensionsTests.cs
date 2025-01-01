@@ -15,7 +15,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             await Page.ShouldHaveContentAsync("10.");
 
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await Page.ShouldHaveContentAsync("20.", "i"));
-            Assert.AreEqual("Expected page to have content \"/20./i\", but it did not.", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected page to have content \"/20./i\", but it did not."));
         }
 
         [Test]
@@ -24,7 +24,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             await Page.ShouldNotHaveContentAsync("20.");
 
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await Page.ShouldNotHaveContentAsync("10.", "i"));
-            Assert.AreEqual("Expected page not to have content \"/10./i\".", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected page not to have content \"/10./i\"."));
         }
 
         [Test]
@@ -35,7 +35,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             await Page.ShouldHaveTitleAsync("10.");
 
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await Page.ShouldHaveTitleAsync("20.", "i"));
-            Assert.AreEqual("Expected page to have title \"/20./i\", but found \"100\".", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected page to have title \"/20./i\", but found \"100\"."));
         }
 
         [Test]
@@ -46,7 +46,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             await Page.ShouldNotHaveTitleAsync("20.");
 
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await Page.ShouldNotHaveTitleAsync("10.", "i"));
-            Assert.AreEqual("Expected page not to have title \"/10./i\".", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected page not to have title \"/10./i\"."));
         }
 
         [Test]
@@ -55,7 +55,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             await Page.ShouldHaveUrlAsync("bla.");
 
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await Page.ShouldHaveUrlAsync("Miss.", "i"));
-            Assert.AreEqual("Expected page to have URL \"/Miss./i\", but found \"about:blank\".", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected page to have URL \"/Miss./i\", but found \"about:blank\"."));
         }
 
         [Test]
@@ -64,7 +64,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             await Page.ShouldNotHaveUrlAsync("Miss.");
 
             var ex = Assert.ThrowsAsync<ShouldException>(async () => await Page.ShouldNotHaveUrlAsync("bla.", "i"));
-            Assert.AreEqual("Expected page not to have URL \"/bla./i\".", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected page not to have URL \"/bla./i\"."));
         }
     }
 }

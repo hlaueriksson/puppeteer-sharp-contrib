@@ -21,10 +21,10 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         {
             var element = await _elementHandle.QuerySelectorAsync(".tweet");
             var result = element.To<FakeElementObject>();
-            Assert.NotNull(result);
-            Assert.IsInstanceOf<FakeElementObject>(result);
-            Assert.NotNull(result.Page);
-            Assert.NotNull(result.Element);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<FakeElementObject>());
+            Assert.That(result.Page, Is.Not.Null);
+            Assert.That(result.Element, Is.Not.Null);
 
             Assert.Throws<ArgumentNullException>(() => ((IElementHandle)null).To<FakeElementObject>());
         }
@@ -33,45 +33,45 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         public async Task QuerySelectorAllAsync_returns_proxies_of_type()
         {
             var result = await _elementHandle.QuerySelectorAllAsync<FakeElementObject>("div");
-            Assert.IsNotEmpty(result);
-            CollectionAssert.AllItemsAreInstancesOfType(result, typeof(FakeElementObject));
-            CollectionAssert.AllItemsAreNotNull(result.Select(x => x.Page));
+            Assert.That(result, Is.Not.Empty);
+            Assert.That(result, Is.All.InstanceOf(typeof(FakeElementObject)));
+            Assert.That(result.Select(x => x.Page), Is.All.Not.Null);
 
             result = await _elementHandle.QuerySelectorAllAsync<FakeElementObject>(".missing");
-            Assert.IsEmpty(result);
+            Assert.That(result, Is.Empty);
         }
 
         [Test]
         public async Task QuerySelectorAsync_returns_proxy_of_type()
         {
             var result = await _elementHandle.QuerySelectorAsync<FakeElementObject>(".tweet");
-            Assert.NotNull(result);
-            Assert.IsInstanceOf<FakeElementObject>(result);
-            Assert.NotNull(result.Page);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<FakeElementObject>());
+            Assert.That(result.Page, Is.Not.Null);
 
             result = await _elementHandle.QuerySelectorAsync<FakeElementObject>(".missing");
-            Assert.Null(result);
+            Assert.That(result, Is.Null);
         }
 
         [Test]
         public async Task XPathAsync_returns_proxies_of_type()
         {
             var result = await _elementHandle.XPathAsync<FakeElementObject>("//div");
-            Assert.IsNotEmpty(result);
-            CollectionAssert.AllItemsAreInstancesOfType(result, typeof(FakeElementObject));
-            CollectionAssert.AllItemsAreNotNull(result.Select(x => x.Page));
+            Assert.That(result, Is.Not.Empty);
+            Assert.That(result, Is.All.InstanceOf(typeof(FakeElementObject)));
+            Assert.That(result.Select(x => x.Page), Is.All.Not.Null);
 
             result = await _elementHandle.XPathAsync<FakeElementObject>("//missing");
-            Assert.IsEmpty(result);
+            Assert.That(result, Is.Empty);
         }
 
         [Test]
         public async Task WaitForSelectorAsync_returns_proxy_of_type()
         {
             var result = await _elementHandle.WaitForSelectorAsync<FakeElementObject>(".tweet");
-            Assert.NotNull(result);
-            Assert.IsInstanceOf<FakeElementObject>(result);
-            Assert.NotNull(result.Page);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.InstanceOf<FakeElementObject>());
+            Assert.That(result.Page, Is.Not.Null);
 
             Assert.ThrowsAsync<WaitTaskTimeoutException>(async () => await _elementHandle.WaitForSelectorAsync<FakeElementObject>(".missing", new() { Timeout = 1 }));
         }

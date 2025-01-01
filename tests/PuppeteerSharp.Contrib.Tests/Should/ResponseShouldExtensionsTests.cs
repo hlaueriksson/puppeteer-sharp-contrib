@@ -16,7 +16,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             response.ShouldHaveUrl("pupp.");
 
             var ex = Assert.Throws<ShouldException>(() => response.ShouldHaveUrl("Miss.", RegexOptions.IgnoreCase));
-            Assert.AreEqual("Expected response to have URL \"Miss.\" (IgnoreCase), but found \"https://github.com/hardkoded/puppeteer-sharp\".", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected response to have URL \"Miss.\" (IgnoreCase), but found \"https://github.com/hardkoded/puppeteer-sharp\"."));
         }
 
         [Test]
@@ -27,7 +27,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             response.ShouldNotHaveUrl("Miss.");
 
             var ex = Assert.Throws<ShouldException>(() => response.ShouldNotHaveUrl("pupp.", RegexOptions.IgnoreCase));
-            Assert.AreEqual("Expected response not to have URL \"pupp.\" (IgnoreCase).", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected response not to have URL \"pupp.\" (IgnoreCase)."));
         }
 
         [Test]
@@ -38,7 +38,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             response.ShouldHaveStatusCode(HttpStatusCode.OK);
 
             var ex = Assert.Throws<ShouldException>(() => response.ShouldHaveStatusCode(HttpStatusCode.InternalServerError));
-            Assert.AreEqual("Expected response to have status code \"InternalServerError\", but found \"OK\".", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected response to have status code \"InternalServerError\", but found \"OK\"."));
         }
 
         [Test]
@@ -49,7 +49,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             response.ShouldNotHaveStatusCode(HttpStatusCode.InternalServerError);
 
             var ex = Assert.Throws<ShouldException>(() => response.ShouldNotHaveStatusCode(HttpStatusCode.OK));
-            Assert.AreEqual("Expected response not to have status code \"OK\".", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected response not to have status code \"OK\"."));
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             new FakeResponse { Ok = true }.ShouldBeSuccessful();
 
             var ex = Assert.Throws<ShouldException>(() => new FakeResponse { Ok = false, Status = HttpStatusCode.InternalServerError }.ShouldBeSuccessful());
-            Assert.AreEqual("Expected response status to be successful (2xx), but found \"InternalServerError\".", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected response status to be successful (2xx), but found \"InternalServerError\"."));
         }
 
         [Test]
@@ -67,7 +67,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             new FakeResponse { Status = HttpStatusCode.Moved }.ShouldBeRedirection();
 
             var ex = Assert.Throws<ShouldException>(() => new FakeResponse { Status = HttpStatusCode.OK }.ShouldBeRedirection());
-            Assert.AreEqual("Expected response status to be redirection (3xx), but found \"OK\".", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected response status to be redirection (3xx), but found \"OK\"."));
         }
 
         [Test]
@@ -76,7 +76,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             new FakeResponse { Status = HttpStatusCode.BadRequest }.ShouldHaveClientError();
 
             var ex = Assert.Throws<ShouldException>(() => new FakeResponse { Status = HttpStatusCode.OK }.ShouldHaveClientError());
-            Assert.AreEqual("Expected response status to be client error (4xx), but found \"OK\".", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected response status to be client error (4xx), but found \"OK\"."));
         }
 
         [Test]
@@ -85,7 +85,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             new FakeResponse { Status = HttpStatusCode.InternalServerError }.ShouldHaveServerError();
 
             var ex = Assert.Throws<ShouldException>(() => new FakeResponse { Status = HttpStatusCode.OK }.ShouldHaveServerError());
-            Assert.AreEqual("Expected response status to be server error (5xx), but found \"OK\".", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected response status to be server error (5xx), but found \"OK\"."));
         }
 
         [Test]
@@ -95,7 +95,7 @@ namespace PuppeteerSharp.Contrib.Tests.Should
             new FakeResponse { Status = HttpStatusCode.InternalServerError }.ShouldHaveError();
 
             var ex = Assert.Throws<ShouldException>(() => new FakeResponse { Status = HttpStatusCode.OK }.ShouldHaveError());
-            Assert.AreEqual("Expected response status to be an error, but found \"OK\".", ex.Message);
+            Assert.That(ex.Message, Is.EqualTo("Expected response status to be an error, but found \"OK\"."));
         }
     }
 }

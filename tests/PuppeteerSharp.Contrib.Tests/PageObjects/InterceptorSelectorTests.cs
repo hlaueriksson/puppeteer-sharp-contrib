@@ -17,29 +17,29 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             var methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.SelectorForElementHandle)).GetMethod;
             var result = subject.SelectInterceptors(null, methodInfo, interceptors);
-            Assert.IsInstanceOf<SelectorInterceptor>(result.Single());
+            Assert.That(result.Single(), Is.InstanceOf<SelectorInterceptor>());
 
             methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.SelectorForElementHandleArray)).GetMethod;
             result = subject.SelectInterceptors(null, methodInfo, interceptors);
-            Assert.IsInstanceOf<SelectorInterceptor>(result.Single());
+            Assert.That(result.Single(), Is.InstanceOf<SelectorInterceptor>());
 
             methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.SelectorForElementObject)).GetMethod;
             result = subject.SelectInterceptors(null, methodInfo, interceptors);
-            Assert.IsInstanceOf<SelectorInterceptor>(result.Single());
+            Assert.That(result.Single(), Is.InstanceOf<SelectorInterceptor>());
 
             // ElementObject
 
             methodInfo = typeof(FakeElementObject).GetProperty(nameof(FakeElementObject.SelectorForElementHandle)).GetMethod;
             result = subject.SelectInterceptors(null, methodInfo, interceptors);
-            Assert.IsInstanceOf<SelectorInterceptor>(result.Single());
+            Assert.That(result.Single(), Is.InstanceOf<SelectorInterceptor>());
 
             methodInfo = typeof(FakeElementObject).GetProperty(nameof(FakeElementObject.SelectorForElementHandleArray)).GetMethod;
             result = subject.SelectInterceptors(null, methodInfo, interceptors);
-            Assert.IsInstanceOf<SelectorInterceptor>(result.Single());
+            Assert.That(result.Single(), Is.InstanceOf<SelectorInterceptor>());
 
             methodInfo = typeof(FakeElementObject).GetProperty(nameof(FakeElementObject.SelectorForElementObject)).GetMethod;
             result = subject.SelectInterceptors(null, methodInfo, interceptors);
-            Assert.IsInstanceOf<SelectorInterceptor>(result.Single());
+            Assert.That(result.Single(), Is.InstanceOf<SelectorInterceptor>());
         }
 
         [Test]
@@ -50,11 +50,11 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             var methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.XPathForElementHandleArray)).GetMethod;
             var result = subject.SelectInterceptors(null, methodInfo, interceptors);
-            Assert.IsInstanceOf<XPathInterceptor>(result.Single());
+            Assert.That(result.Single(), Is.InstanceOf<XPathInterceptor>());
 
             methodInfo = typeof(FakeElementObject).GetProperty(nameof(FakeElementObject.XPathForElementHandleArray)).GetMethod;
             result = subject.SelectInterceptors(null, methodInfo, interceptors);
-            Assert.IsInstanceOf<XPathInterceptor>(result.Single());
+            Assert.That(result.Single(), Is.InstanceOf<XPathInterceptor>());
         }
 
         [Test]
@@ -65,7 +65,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
 
             var methodInfo = typeof(string).GetMethod(nameof(string.GetTypeCode));
             var result = subject.SelectInterceptors(null, methodInfo, interceptors);
-            Assert.AreSame(interceptors.Last(), result.Single());
+            Assert.That(result.Single(), Is.SameAs(interceptors.Last()));
         }
     }
 }

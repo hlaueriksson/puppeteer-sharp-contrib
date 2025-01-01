@@ -13,24 +13,24 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             // PageObject
 
             var methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.SelectorForElementHandle)).GetMethod;
-            Assert.True(subject.ShouldInterceptMethod(null, methodInfo));
+            Assert.That(subject.ShouldInterceptMethod(null, methodInfo));
 
             methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.SelectorForElementHandleArray)).GetMethod;
-            Assert.True(subject.ShouldInterceptMethod(null, methodInfo));
+            Assert.That(subject.ShouldInterceptMethod(null, methodInfo));
 
             methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.SelectorForElementObject)).GetMethod;
-            Assert.True(subject.ShouldInterceptMethod(null, methodInfo));
+            Assert.That(subject.ShouldInterceptMethod(null, methodInfo));
 
             // ElementObject
 
             methodInfo = typeof(FakeElementObject).GetProperty(nameof(FakeElementObject.SelectorForElementHandle)).GetMethod;
-            Assert.True(subject.ShouldInterceptMethod(null, methodInfo));
+            Assert.That(subject.ShouldInterceptMethod(null, methodInfo));
 
             methodInfo = typeof(FakeElementObject).GetProperty(nameof(FakeElementObject.SelectorForElementHandleArray)).GetMethod;
-            Assert.True(subject.ShouldInterceptMethod(null, methodInfo));
+            Assert.That(subject.ShouldInterceptMethod(null, methodInfo));
 
             methodInfo = typeof(FakeElementObject).GetProperty(nameof(FakeElementObject.SelectorForElementObject)).GetMethod;
-            Assert.True(subject.ShouldInterceptMethod(null, methodInfo));
+            Assert.That(subject.ShouldInterceptMethod(null, methodInfo));
         }
 
         [Test]
@@ -39,10 +39,10 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var subject = new ProxyGenerationHook();
 
             var methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.XPathForElementHandleArray)).GetMethod;
-            Assert.True(subject.ShouldInterceptMethod(null, methodInfo));
+            Assert.That(subject.ShouldInterceptMethod(null, methodInfo));
 
             methodInfo = typeof(FakeElementObject).GetProperty(nameof(FakeElementObject.XPathForElementHandleArray)).GetMethod;
-            Assert.True(subject.ShouldInterceptMethod(null, methodInfo));
+            Assert.That(subject.ShouldInterceptMethod(null, methodInfo));
         }
 
         [Test]
@@ -51,7 +51,7 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var subject = new ProxyGenerationHook();
 
             var methodInfo = typeof(string).GetProperty(nameof(string.Length)).GetMethod;
-            Assert.False(subject.ShouldInterceptMethod(null, methodInfo));
+            Assert.That(subject.ShouldInterceptMethod(null, methodInfo), Is.False);
         }
 
         [Test]
@@ -60,10 +60,10 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
             var subject = new ProxyGenerationHook();
 
             var methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.SelectorForNonTaskReturnType)).GetMethod;
-            Assert.False(subject.ShouldInterceptMethod(null, methodInfo));
+            Assert.That(subject.ShouldInterceptMethod(null, methodInfo), Is.False);
 
             methodInfo = typeof(FakePageObject).GetProperty(nameof(FakePageObject.XPathForNonTaskReturnType)).GetMethod;
-            Assert.False(subject.ShouldInterceptMethod(null, methodInfo));
+            Assert.That(subject.ShouldInterceptMethod(null, methodInfo), Is.False);
         }
 
         [Test]
@@ -71,11 +71,11 @@ namespace PuppeteerSharp.Contrib.Tests.PageObjects
         {
             var subject = new ProxyGenerationHook();
 
-            Assert.True(subject.Equals(new ProxyGenerationHook()));
+            Assert.That(subject.Equals(new ProxyGenerationHook()));
 
             var hashCode = subject.GetHashCode();
 
-            Assert.AreEqual(new ProxyGenerationHook().GetHashCode(), hashCode);
+            Assert.That(hashCode, Is.EqualTo(new ProxyGenerationHook().GetHashCode()));
         }
     }
 }
