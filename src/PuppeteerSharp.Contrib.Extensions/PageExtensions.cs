@@ -104,12 +104,15 @@ namespace PuppeteerSharp.Contrib.Extensions
         /// </summary>
         /// <param name="page">A <see cref="IPage"/>.</param>
         /// <param name="selector">An element's selector to query page for.</param>
+        /// <param name="timeout">Maximum time to wait for in milliseconds. Pass 0 to disable timeout. Pass null to use Page default timeout.</param>
         /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
-        public static async Task WaitForElementsRemovedFromDOMAsync(this IPage page, string selector)
+        public static async Task WaitForElementsRemovedFromDOMAsync(this IPage page, string selector, int? timeout = null)
         {
+            var options = new WaitForFunctionOptions { Polling = WaitForFunctionPollingOption.Mutation };
+            if (timeout.HasValue) options.Timeout = timeout;
             await page.GuardFromNull().WaitForFunctionAsync(
                 string.Format("async () => document.querySelector('{0}') === null", selector),
-                new WaitForFunctionOptions { Polling = WaitForFunctionPollingOption.Mutation })
+                options)
                 .ConfigureAwait(false);
         }
     }
