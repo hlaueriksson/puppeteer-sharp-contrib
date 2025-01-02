@@ -2,20 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>6.0.0</Version>
+    <Version>6.1.0</Version>
     <PackageReleaseNotes>
-⬆️ Bump PuppeteerSharp to 12.0.0
-👽️ Use PuppeteerSharp interfaces; IPage and IElementHandle
+New extension for IPage and IFrame:
+◼️ WaitForElementsRemovedFromDOMAsync (handy to wait for spinner to disappear etc)
 
-New extensions for IPage:
-◼️ HasUrlAsync
-
-New extensions for IElementHandle:
-◼️ HasAttributeValueAsync
-◼️ IsEmptyAsync
-
-Extensions for IResponse:
-◼️ HasUrl
+New extension for IElementHandle:
+◼️ ClickAtRandomPointAsync (useful in case of need to emulate a click in detailed manner)
     </PackageReleaseNotes>
     <Authors>Henrik Lau Eriksson</Authors>
     <Description>Contributions to the Headless Chrome .NET API 🌐🧪

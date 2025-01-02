@@ -15,6 +15,12 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
   <div id='baz'>Baz</div>
 </html>");
 
+        private async Task RemoveFoo() => await Page.SetContentAsync(@"
+<html>
+  <div id='bar'>Bar</div>
+  <div id='baz'>Baz</div>
+</html>");
+
         [Test]
         public async Task QuerySelectorWithContentAsync_should_return_the_first_element_that_match_the_selector_and_has_the_content()
         {
@@ -83,6 +89,27 @@ namespace PuppeteerSharp.Contrib.Tests.Extensions
             Assert.That(await Page.HasUrlAsync("Bla.", "i"));
             Assert.That(await Page.HasUrlAsync("Missing"), Is.False);
             Assert.ThrowsAsync<ArgumentNullException>(async () => await ((IPage)null).HasUrlAsync(""));
+        }
+
+        [Test]
+        public async Task WaitForElementsRemovedFromDOMAsync_should_throw_WaitTaskTimeoutException_if_element_is_present_in_DOM()
+        {
+            Assert.ThrowsAsync<WaitTaskTimeoutException>(async () => await Page.WaitForElementsRemovedFromDOMAsync("#foo", 1));
+        }
+
+        [Test]
+        public async Task WaitForElementsRemovedFromDOMAsync_should_return_if_page_has_no_elements_matching_the_selector()
+        {
+            await RemoveFoo();
+            await Page.WaitForElementsRemovedFromDOMAsync("#foo");
+            Assert.Null(await Page.QuerySelectorWithContentAsync("div", "Foo"));
+        }
+
+        [Test]
+        public async Task WaitForElementsRemovedFromDOMAsync_should_return_if_elements_matching_the_selector_are_removed_from_page()
+        {
+            Task.WaitAll(Page.WaitForElementsRemovedFromDOMAsync("#foo"), RemoveFoo());
+            Assert.Null(await Page.QuerySelectorWithContentAsync("div", "Foo"));
         }
     }
 }
