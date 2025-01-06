@@ -20,7 +20,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <seealso href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference"/>
         public static IResponse ShouldHaveUrl(this IResponse response, string regex, RegexOptions options = RegexOptions.None, string? because = null)
         {
-            if (!response.HasUrl(regex, options)) Throw.ResponseShouldHaveUrl(regex, options, response.Url, because);
+            if (!response.HasUrl(regex, options)) Throw.ResponseShouldHaveUrl(regex, options, response.GuardFromNull().Url, because);
 
             return response;
         }
@@ -50,7 +50,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="IResponse"/> for method chaining.</returns>
         public static IResponse ShouldHaveStatusCode(this IResponse response, HttpStatusCode status, string? because = null)
         {
-            if (response.Status != status) Throw.ResponseShouldHaveStatusCode(status, response.Status, because);
+            if (response.GuardFromNull().Status != status) Throw.ResponseShouldHaveStatusCode(status, response.GuardFromNull().Status, because);
 
             return response;
         }
@@ -64,7 +64,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="IResponse"/> for method chaining.</returns>
         public static IResponse ShouldNotHaveStatusCode(this IResponse response, HttpStatusCode status, string? because = null)
         {
-            if (response.Status == status) Throw.ResponseShouldNotHaveStatusCode(status, because);
+            if (response.GuardFromNull().Status == status) Throw.ResponseShouldNotHaveStatusCode(status, because);
 
             return response;
         }
@@ -77,7 +77,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="IResponse"/> for method chaining.</returns>
         public static IResponse ShouldBeSuccessful(this IResponse response, string? because = null)
         {
-            if (!response.Ok) Throw.ResponseShouldBeSuccessful(response.Status, because);
+            if (!response.GuardFromNull().Ok) Throw.ResponseShouldBeSuccessful(response.GuardFromNull().Status, because);
 
             return response;
         }
@@ -90,7 +90,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="IResponse"/> for method chaining.</returns>
         public static IResponse ShouldBeRedirection(this IResponse response, string? because = null)
         {
-            if ((int)response.Status is not (>= 300 and <= 399)) Throw.ResponseShouldBeRedirection(response.Status, because);
+            if ((int)response.GuardFromNull().Status is not (>= 300 and <= 399)) Throw.ResponseShouldBeRedirection(response.GuardFromNull().Status, because);
 
             return response;
         }
@@ -103,7 +103,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="IResponse"/> for method chaining.</returns>
         public static IResponse ShouldHaveClientError(this IResponse response, string? because = null)
         {
-            if ((int)response.Status is not (>= 400 and <= 499)) Throw.ResponseShouldHaveClientError(response.Status, because);
+            if ((int)response.GuardFromNull().Status is not (>= 400 and <= 499)) Throw.ResponseShouldHaveClientError(response.GuardFromNull().Status, because);
 
             return response;
         }
@@ -116,7 +116,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="IResponse"/> for method chaining.</returns>
         public static IResponse ShouldHaveServerError(this IResponse response, string? because = null)
         {
-            if ((int)response.Status is not (>= 500 and <= 599)) Throw.ResponseShouldHaveServerError(response.Status, because);
+            if ((int)response.GuardFromNull().Status is not (>= 500 and <= 599)) Throw.ResponseShouldHaveServerError(response.GuardFromNull().Status, because);
 
             return response;
         }
@@ -129,7 +129,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <returns>The <see cref="IResponse"/> for method chaining.</returns>
         public static IResponse ShouldHaveError(this IResponse response, string? because = null)
         {
-            if ((int)response.Status is not (>= 400 and <= 599)) Throw.ResponseShouldHaveError(response.Status, because);
+            if ((int)response.GuardFromNull().Status is not (>= 400 and <= 599)) Throw.ResponseShouldHaveError(response.GuardFromNull().Status, because);
 
             return response;
         }

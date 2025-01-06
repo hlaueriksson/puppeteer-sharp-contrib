@@ -24,7 +24,7 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
                     methodInfo.IsReturningAsyncResult();
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return obj != null && obj.GetType() == typeof(ProxyGenerationHook);
         }

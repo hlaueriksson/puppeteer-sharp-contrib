@@ -19,9 +19,10 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
             return proxy;
         }
 
-        public static T? ElementObject<T>(IPage page, IElementHandle elementHandle)
+        public static T? ElementObject<T>(IPage? page, IElementHandle elementHandle)
             where T : ElementObject
         {
+            if (page == null) return default;
             if (elementHandle == null) return default;
 
             var proxy = ProxyGenerator.CreateClassProxy<T>(Options, new SelectorInterceptor(), new XPathInterceptor());
@@ -40,8 +41,10 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
             return proxy;
         }
 
-        public static Array ElementObjectArray(Type proxyType, IPage page, IElementHandle[] elementHandles)
+        public static Array? ElementObjectArray(Type? proxyType, IPage page, IElementHandle[] elementHandles)
         {
+            if (proxyType == null) return default;
+
             var array = Array.CreateInstance(proxyType, elementHandles.Length);
             for (var i = 0; i < elementHandles.Length; i++)
             {
