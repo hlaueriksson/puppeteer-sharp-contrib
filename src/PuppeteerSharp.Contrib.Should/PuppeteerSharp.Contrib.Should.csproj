@@ -2,31 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Version>6.0.0</Version>
+    <Version>7.0.0</Version>
     <PackageReleaseNotes>
-⬆️ Bump PuppeteerSharp to 12.0.0
-👽️ Use PuppeteerSharp interfaces; IPage and IElementHandle
-
-New assertions for IPage:
-◼️ ShouldHaveUrlAsync
-◼️ ShouldNotHaveUrlAsync
-
-New assertions for IElementHandle:
-◼️ ShouldHaveAttributeValueAsync
-◼️ ShouldNotHaveAttributeValueAsync
-◼️ ShouldBeEmptyAsync
-◼️ ShouldNotBeEmptyAsync
-
-Assertions for IResponse:
-◼️ ShouldHaveUrl
-◼️ ShouldNotHaveUrl
-◼️ ShouldHaveStatusCode
-◼️ ShouldNotHaveStatusCode
-◼️ ShouldBeSuccessful
-◼️ ShouldBeRedirection
-◼️ ShouldHaveClientError
-◼️ ShouldHaveServerError
-◼️ ShouldHaveError
+🎯 Change TargetFramework to net8.0
+⬆️ Bump PuppeteerSharp to 20.0.0
     </PackageReleaseNotes>
     <Authors>Henrik Lau Eriksson</Authors>
     <Description>Contributions to the Headless Chrome .NET API 🌐🧪

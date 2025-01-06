@@ -2,20 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Version>6.0.0</Version>
+    <Version>7.0.0</Version>
     <PackageReleaseNotes>
-⬆️ Bump PuppeteerSharp to 12.0.0
-👽️ Use PuppeteerSharp interfaces; IPage and IElementHandle
+🎯 Change TargetFramework to net8.0
+⬆️ Bump PuppeteerSharp to 20.0.0
 
-New extensions for IPage:
-◼️ HasUrlAsync
-
-New extensions for IElementHandle:
-◼️ HasAttributeValueAsync
-◼️ IsEmptyAsync
-
-Extensions for IResponse:
-◼️ HasUrl
+Remove extensions for IElementHandle:
+◼️ IsHiddenAsync
+◼️ IsVisibleAsync
     </PackageReleaseNotes>
     <Authors>Henrik Lau Eriksson</Authors>
     <Description>Contributions to the Headless Chrome .NET API 🌐🧪
