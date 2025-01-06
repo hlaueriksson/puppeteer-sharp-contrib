@@ -33,7 +33,7 @@ namespace PuppeteerSharp.Contrib.Sample
 
             var startPage = await page.GoToAsync<GitHubStartPage>("https://github.com/");
             var heading = await startPage.Heading;
-            await heading.ShouldHaveContentAsync("Let’s build");
+            await heading.ShouldHaveContentAsync("Build and ship software on a single, collaborative platform");
 
             var searchPage = await startPage.SearchAsync("Puppeteer Sharp");
             var repositories = await searchPage.RepoListItems;
@@ -59,7 +59,7 @@ namespace PuppeteerSharp.Contrib.Sample
 
             var actionsPage = await repoPage.GotoActionsAsync();
             var status = await actionsPage.GetLatestWorkflowRunStatusAsync();
-            Assert.That(status, Is.EqualTo("completed successfully"));
+            Assert.That(status, Does.Contain("completed successfully"));
         }
 
         [Test]

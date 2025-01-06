@@ -94,20 +94,22 @@ namespace PuppeteerSharp.Contrib.Sample
 
             var tasks = new Task[]
             {
+                /*
+                page.WaitForDevicePromptAsync(new() { Timeout = timeout }),
+                */
                 page.WaitForExpressionAsync("1 + 1 === 2", new() { Timeout = timeout }),
                 /*
                 page.WaitForFileChooserAsync(new() { Timeout = timeout }),
                 */
                 page.WaitForFrameAsync("https://github.com/hardkoded/puppeteer-sharp", new() { Timeout = timeout }),
+                /*
                 page.WaitForFunctionAsync("() => window.location.href === 'https://github.com/hardkoded/puppeteer-sharp'", new WaitForFunctionOptions { Timeout = timeout }),
                 page.WaitForNavigationAsync(new() { Timeout = timeout }),
-                /*
                 page.WaitForNetworkIdleAsync(new() { Timeout = timeout }),
                 */
                 page.WaitForRequestAsync("https://github.com/hardkoded/puppeteer-sharp", new() { Timeout = timeout }),
                 page.WaitForResponseAsync("https://github.com/hardkoded/puppeteer-sharp", new() { Timeout = timeout }),
-                page.WaitForSelectorAsync("#readme", new() { Timeout = timeout }),
-                page.WaitForTimeoutAsync(timeout),
+                page.WaitForSelectorAsync("article", new() { Timeout = timeout }),
                 //page.WaitForXPathAsync(), // Obsolete
             };
             await page.GoToAsync("https://github.com/hardkoded/puppeteer-sharp");
@@ -118,11 +120,13 @@ namespace PuppeteerSharp.Contrib.Sample
 
             tasks =
             [
+                /*
+                frame.WaitForDevicePromptAsync(new() { Timeout = timeout }),
+                */
                 frame.WaitForExpressionAsync("1 + 1 === 2", new() { Timeout = timeout }),
                 frame.WaitForFunctionAsync("() => window.location.href === 'https://github.com/hardkoded/puppeteer-sharp'", new WaitForFunctionOptions { Timeout = timeout }),
                 frame.WaitForNavigationAsync(new() { Timeout = timeout }),
-                frame.WaitForSelectorAsync("#readme", new() { Timeout = timeout }),
-                frame.WaitForTimeoutAsync(timeout),
+                frame.WaitForSelectorAsync("article", new() { Timeout = timeout }),
                 //frame.WaitForXPathAsync(), // Obsolete
             ];
             await page.GoToAsync("https://github.com/hardkoded/puppeteer-sharp");
@@ -219,7 +223,7 @@ namespace PuppeteerSharp.Contrib.Sample
             var page = await Page();
             await page.GoToAsync("https://github.com/hardkoded/puppeteer-sharp");
 
-            var element = await page.QuerySelectorAsync("div#readme");
+            var element = await page.QuerySelectorAsync("article");
             var elements = await page.QuerySelectorAllAsync("div");
             Assert.That(element, Is.Not.Null);
             Assert.That(elements, Is.Not.Empty);
@@ -235,7 +239,7 @@ namespace PuppeteerSharp.Contrib.Sample
             Assert.That(elementsInElement, Is.Not.Empty);
 
             // other
-            var handle = await page.QuerySelectorAllHandleAsync("div#readme");
+            var handle = await page.QuerySelectorAllHandleAsync("article");
             await page.QueryObjectsAsync(handle);
             await element.QuerySelectorAllHandleAsync("h1");
         }
@@ -299,10 +303,12 @@ namespace PuppeteerSharp.Contrib.Sample
 
             await page.GoToAsync("https://github.com/hardkoded/puppeteer-sharp");
             Assert.That(page.IsClosed, Is.False);
+            Assert.That(page.IsJavaScriptEnabled, Is.True);
+            Assert.That(page.IsServiceWorkerBypassed, Is.False);
             //page.IsDragInterceptionEnabled // Obsolete
 
             var frame = page.MainFrame;
-            Assert.That(frame.IsOopFrame, Is.False);
+            Assert.That(frame.Detached, Is.False);
 
             var element = page.QuerySelectorAsync("#include_email");
             Assert.That(element.IsCompleted, Is.False);

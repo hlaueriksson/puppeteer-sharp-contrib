@@ -31,7 +31,7 @@ namespace PuppeteerSharp.Contrib.Sample
 
                 await page.GoToAsync("https://github.com/");
                 var heading = await page.QuerySelectorAsync("main h1");
-                await heading.ShouldHaveContentAsync("Let’s build");
+                await heading.ShouldHaveContentAsync("Build and ship software on a single, collaborative platform");
 
                 var input = await page.QuerySelectorAsync("#query-builder-test");
                 if (await input.IsHiddenAsync())
@@ -51,9 +51,9 @@ namespace PuppeteerSharp.Contrib.Sample
                 await text.ShouldHaveContentAsync("Headless Chrome .NET API");
                 var link = await repository.QuerySelectorAsync("a");
                 await link.ClickAsync();
-                await page.WaitForSelectorAsync("article > h1");
+                await page.WaitForSelectorAsync("article h1");
 
-                heading = await page.QuerySelectorAsync("article > h1");
+                heading = await page.QuerySelectorAsync("article h1");
                 await heading.ShouldHaveContentAsync("Puppeteer Sharp");
                 page.Url.ShouldEqual("https://github.com/hardkoded/puppeteer-sharp");
             };
@@ -70,9 +70,9 @@ namespace PuppeteerSharp.Contrib.Sample
                 await page.ClickAsync("#actions-tab");
                 await page.WaitForSelectorAsync("#partial-actions-workflow-runs");
 
-                var status = await page.QuerySelectorAsync(".checks-list-item-icon svg");
+                var status = await page.QuerySelectorAsync(".d-table svg");
                 var label = await status.GetAttributeAsync("aria-label");
-                label.ShouldEqual("completed successfully");
+                label.ShouldContain("completed successfully");
             };
 
             It should_be_up_to_date_with_the_Puppeteer_version = async () =>
@@ -89,7 +89,7 @@ namespace PuppeteerSharp.Contrib.Sample
 
                 async Task<string> GetLatestReleaseVersion()
                 {
-                    var latest = await page.QuerySelectorWithContentAsync("a[href*='releases'] span", @"v?\d+\.\d\.\d");
+                    var latest = await page.QuerySelectorWithContentAsync("a[href*='releases'] span", @"v\d+\.\d+\.\d+");
                     var version = await latest.TextContentAsync();
                     return version.Substring(version.LastIndexOf('v') + 1);
                 }

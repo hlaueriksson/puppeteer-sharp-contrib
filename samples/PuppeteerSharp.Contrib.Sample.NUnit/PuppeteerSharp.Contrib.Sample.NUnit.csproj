@@ -11,8 +11,8 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
     <PackageReference Include="NUnit" Version="4.3.2" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
-    <PackageReference Include="PuppeteerSharp.Contrib.PageObjects" Version="6.0.0" />
-    <PackageReference Include="PuppeteerSharp.Contrib.Should" Version="6.0.0" />
+    <PackageReference Include="PuppeteerSharp.Contrib.PageObjects" Version="7.0.0" />
+    <PackageReference Include="PuppeteerSharp.Contrib.Should" Version="7.0.0" />
   </ItemGroup>
 
 </Project>

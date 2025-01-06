@@ -49,7 +49,7 @@ namespace PuppeteerSharp.Contrib.Sample
         {
             var task = Page.WaitForNavigationAsync<GitHubRepoPage>();
             await (await repo.Link).ClickAsync();
-            await Page.WaitForSelectorAsync("article > h1");
+            await Page.WaitForSelectorAsync("article h1");
             return await task;
         }
     }
@@ -65,7 +65,7 @@ namespace PuppeteerSharp.Contrib.Sample
 
     public class GitHubRepoPage : PageObject
     {
-        [Selector("article > h1")]
+        [Selector("article h1")]
         public virtual Task<IElementHandle> Heading { get; }
 
         [Selector("#actions-tab")]
@@ -81,7 +81,7 @@ namespace PuppeteerSharp.Contrib.Sample
 
         public async Task<string> GetLatestReleaseVersionAsync()
         {
-            var latest = await Page.QuerySelectorWithContentAsync("a[href*='releases'] span", @"v?\d+\.\d\.\d");
+            var latest = await Page.QuerySelectorWithContentAsync("a[href*='releases'] span", @"v\d+\.\d+\.\d+");
             var version = await latest.TextContentAsync();
             return version.Substring(version.LastIndexOf('v') + 1);
         }
@@ -91,7 +91,7 @@ namespace PuppeteerSharp.Contrib.Sample
     {
         public async Task<string> GetLatestWorkflowRunStatusAsync()
         {
-            var status = await Page.QuerySelectorAsync(".checks-list-item-icon svg");
+            var status = await Page.QuerySelectorAsync(".d-table svg");
             return await status.GetAttributeAsync("aria-label");
         }
     }

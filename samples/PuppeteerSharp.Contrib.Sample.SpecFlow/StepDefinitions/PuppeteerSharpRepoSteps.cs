@@ -10,7 +10,7 @@ using TechTalk.SpecFlow;
 namespace PuppeteerSharp.Contrib.Sample.StepDefinitions
 {
     [Binding]
-    public class PuppeteerSharpRepoSteps(Browser browser)
+    public class PuppeteerSharpRepoSteps(IBrowser browser)
     {
         private IBrowser Browser { get; } = browser;
         private IPage Page { get; set; }
@@ -27,7 +27,7 @@ namespace PuppeteerSharp.Contrib.Sample.StepDefinitions
         {
             await Page.GoToAsync("https://github.com/");
             var heading = await Page.QuerySelectorAsync("main h1");
-            await heading.ShouldHaveContentAsync("Let’s build");
+            await heading.ShouldHaveContentAsync("Build and ship software on a single, collaborative platform");
         }
 
         [When(@"I search for ""(.*)""")]
@@ -55,9 +55,9 @@ namespace PuppeteerSharp.Contrib.Sample.StepDefinitions
             await text.ShouldHaveContentAsync("Headless Chrome .NET API");
             var link = await repository.QuerySelectorAsync("a");
             await link.ClickAsync();
-            await Page.WaitForSelectorAsync("article > h1");
+            await Page.WaitForSelectorAsync("article h1");
 
-            var heading = await Page.QuerySelectorAsync("article > h1");
+            var heading = await Page.QuerySelectorAsync("article h1");
             await heading.ShouldHaveContentAsync("Puppeteer Sharp");
             Page.Url.Should().Be("https://github.com/hardkoded/puppeteer-sharp");
         }
@@ -78,15 +78,15 @@ namespace PuppeteerSharp.Contrib.Sample.StepDefinitions
         [Then(@"the build status should be success")]
         public async Task ThenTheBuildStatusShouldBeSuccess()
         {
-            var status = await Page.QuerySelectorAsync(".checks-list-item-icon svg");
+            var status = await Page.QuerySelectorAsync(".d-table svg");
             var label = await status.GetAttributeAsync("aria-label");
-            label.Should().Be("completed successfully");
+            label.Should().Contain("completed successfully");
         }
 
         [Given(@"I check the latest release version")]
         public async Task GivenICheckTheLatestReleaseVersion()
         {
-            var latest = await Page.QuerySelectorWithContentAsync("a[href*='releases'] span", @"v?\d+\.\d\.\d");
+            var latest = await Page.QuerySelectorWithContentAsync("a[href*='releases'] span", @"v\d+\.\d+\.\d+");
             var version = await latest.TextContentAsync();
             LatestReleaseVersion.Add(Page.Url, version.Substring(version.LastIndexOf('v') + 1));
         }
