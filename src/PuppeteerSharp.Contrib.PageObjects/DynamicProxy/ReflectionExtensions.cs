@@ -13,9 +13,9 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
         {
             if (!methodInfo.IsGetter()) return false;
 
-            var property = methodInfo.DeclaringType.GetProperty(methodInfo);
+            var property = methodInfo.DeclaringType?.GetProperty(methodInfo);
 
-            return property.HasAttribute<T>();
+            return property?.HasAttribute<T>() ?? false;
         }
 
         public static bool IsGetter(this MethodInfo methodInfo)
@@ -29,7 +29,7 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
             return propertyInfo.GetCustomAttributes<T>().Any();
         }
 
-        public static T GetAttribute<T>(this PropertyInfo propertyInfo)
+        public static T? GetAttribute<T>(this PropertyInfo propertyInfo)
             where T : Attribute
         {
             return propertyInfo.GetCustomAttribute<T>();
@@ -40,7 +40,7 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
             return memberInfo.GetCustomAttributes<CompilerGeneratedAttribute>().Any();
         }
 
-        public static PropertyInfo GetProperty(this Type rootType, MethodInfo methodInfo)
+        public static PropertyInfo? GetProperty(this Type rootType, MethodInfo methodInfo)
         {
             return rootType.GetProperty(methodInfo.Name.Substring(4), BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
         }

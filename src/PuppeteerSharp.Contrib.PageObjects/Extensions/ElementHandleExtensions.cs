@@ -94,17 +94,17 @@ namespace PuppeteerSharp.Contrib.PageObjects
             return ProxyFactory.ElementObject<T>(elementHandle.GetPage(), result);
         }
 
-        private static IPage GetPage(this IElementHandle elementHandle)
+        private static IPage? GetPage(this IElementHandle elementHandle)
         {
             var propertyInfo = elementHandle.GetType().GetProperty("Page", BindingFlags.NonPublic | BindingFlags.Instance);
-            var methodInfo = propertyInfo.GetGetMethod(nonPublic: true);
+            var methodInfo = propertyInfo?.GetGetMethod(nonPublic: true);
 
-            return (IPage)methodInfo.Invoke(elementHandle, null);
+            return methodInfo?.Invoke(elementHandle, null) as IPage;
         }
 
         private static IElementHandle GuardFromNull(this IElementHandle elementHandle)
         {
-            if (elementHandle == null) throw new ArgumentNullException(nameof(elementHandle));
+            ArgumentNullException.ThrowIfNull(elementHandle);
 
             return elementHandle;
         }

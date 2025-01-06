@@ -17,11 +17,11 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
 
             var tcsType = typeof(TaskCompletionSource<>).MakeGenericType(invocation.Method.ReturnType.GetGenericArguments()[0]);
             var tcs = Activator.CreateInstance(tcsType);
-            invocation.ReturnValue = tcsType.GetProperty("Task").GetValue(tcs, null);
+            invocation.ReturnValue = tcsType?.GetProperty("Task")?.GetValue(tcs, null);
 
 #pragma warning disable VSTHRD105 // Avoid method overloads that assume TaskScheduler.Current
 #pragma warning disable VSTHRD110 // Observe result of async calls
-            InterceptAsync(invocation).ContinueWith(_ => tcsType.GetMethod("SetResult").Invoke(tcs, [invocation.ReturnValue]));
+            InterceptAsync(invocation).ContinueWith(_ => tcsType?.GetMethod("SetResult")?.Invoke(tcs, [invocation.ReturnValue]), TaskScheduler.Default);
 #pragma warning restore VSTHRD110 // Observe result of async calls
 #pragma warning restore VSTHRD105 // Avoid method overloads that assume TaskScheduler.Current
         }
@@ -36,17 +36,13 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
 
                 if (invocation.InvocationTarget is PageObject pageObject)
                 {
-                    var result = await invocation.GetReturnValueAsync(pageObject, attribute).ConfigureAwait(false);
-
-                    invocation.ReturnValue = result;
+                    invocation.ReturnValue = await invocation.GetReturnValueAsync(pageObject, attribute).ConfigureAwait(false);
                     return;
                 }
 
                 if (invocation.InvocationTarget is ElementObject elementObject)
                 {
-                    var result = await invocation.GetReturnValueAsync(elementObject, attribute).ConfigureAwait(false);
-
-                    invocation.ReturnValue = result;
+                    invocation.ReturnValue = await invocation.GetReturnValueAsync(elementObject, attribute).ConfigureAwait(false);
                     return;
                 }
             }

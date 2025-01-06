@@ -20,15 +20,15 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
 
             var property = invocation.TargetType.GetProperty(invocation.Method);
 
-            return property.HasAttribute<T>();
+            return property?.HasAttribute<T>() ?? false;
         }
 
-        public static T GetAttribute<T>(this IInvocation invocation)
+        public static T? GetAttribute<T>(this IInvocation invocation)
             where T : Attribute
         {
             var property = invocation.TargetType.GetProperty(invocation.Method);
 
-            return property.GetAttribute<T>();
+            return property?.GetAttribute<T>();
         }
 
         public static bool IsReturning<T>(this IInvocation invocation)
@@ -50,11 +50,13 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
                    typeof(ElementObject[]).IsAssignableFrom(invocation.Method.ReturnType.GetGenericArguments()[0]);
         }
 
-        public static async Task<object?> GetReturnValueAsync(this IInvocation invocation, PageObject pageObject, SelectorAttribute attribute)
+        public static async Task<object?> GetReturnValueAsync(this IInvocation invocation, PageObject pageObject, SelectorAttribute? attribute)
         {
             var page = pageObject.Page;
 
             if (page == null) return null;
+
+            if (attribute == null) return null;
 
             if (invocation.IsReturning<IElementHandle>())
             {
@@ -86,11 +88,13 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
             return null;
         }
 
-        public static async Task<object?> GetReturnValueAsync(this IInvocation invocation, ElementObject elementObject, SelectorAttribute attribute)
+        public static async Task<object?> GetReturnValueAsync(this IInvocation invocation, ElementObject elementObject, SelectorAttribute? attribute)
         {
             var element = elementObject.Element;
 
             if (element == null) return null;
+
+            if (attribute == null) return null;
 
             if (invocation.IsReturning<IElementHandle>())
             {
@@ -123,12 +127,14 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
         }
 
 #pragma warning disable CS0618 // Type or member is obsolete
-        public static async Task<object?> GetReturnValueAsync(this IInvocation invocation, PageObject pageObject, XPathAttribute attribute)
+        public static async Task<object?> GetReturnValueAsync(this IInvocation invocation, PageObject pageObject, XPathAttribute? attribute)
 #pragma warning restore CS0618 // Type or member is obsolete
         {
             var page = pageObject.Page;
 
             if (page == null) return null;
+
+            if (attribute == null) return null;
 
             if (invocation.IsReturning<IElementHandle[]>())
             {
@@ -152,12 +158,14 @@ namespace PuppeteerSharp.Contrib.PageObjects.DynamicProxy
         }
 
 #pragma warning disable CS0618 // Type or member is obsolete
-        public static async Task<object?> GetReturnValueAsync(this IInvocation invocation, ElementObject elementObject, XPathAttribute attribute)
+        public static async Task<object?> GetReturnValueAsync(this IInvocation invocation, ElementObject elementObject, XPathAttribute? attribute)
 #pragma warning restore CS0618 // Type or member is obsolete
         {
             var element = elementObject.Element;
 
             if (element == null) return null;
+
+            if (attribute == null) return null;
 
             if (invocation.IsReturning<IElementHandle[]>())
             {

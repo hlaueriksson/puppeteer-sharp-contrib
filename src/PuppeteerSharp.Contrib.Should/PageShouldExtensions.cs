@@ -47,7 +47,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
         public static async Task ShouldHaveTitleAsync(this IPage page, string regex, string flags = "", string? because = null)
         {
-            if (!await page.HasTitleAsync(regex, flags).ConfigureAwait(false)) Throw.PageShouldHaveTitle(regex, flags, await page.GetTitleAsync().ConfigureAwait(false), because);
+            if (!await page.HasTitleAsync(regex, flags).ConfigureAwait(false)) Throw.PageShouldHaveTitle(regex, flags, await page.GuardFromNull().GetTitleAsync().ConfigureAwait(false), because);
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace PuppeteerSharp.Contrib.Should
         /// <seealso href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"/>
         public static async Task ShouldHaveUrlAsync(this IPage page, string regex, string flags = "", string? because = null)
         {
-            if (!await page.HasUrlAsync(regex, flags).ConfigureAwait(false)) Throw.PageShouldHaveUrl(regex, flags, page.Url, because);
+            if (!await page.HasUrlAsync(regex, flags).ConfigureAwait(false)) Throw.PageShouldHaveUrl(regex, flags, page.GuardFromNull().Url, because);
         }
 
         /// <summary>
