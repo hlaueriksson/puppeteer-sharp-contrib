@@ -1,5 +1,16 @@
 # Puppeteer Sharp Contributions<!-- omit in toc -->
 
+TODO:
+ IFrame
+ IRequest
+ ta bort obsolete
+ clean DynamicProxy
+ PuppeteerSharp.Contrib.Sample.SpecFlow, NUnit
+ PuppeteerSharp.Contrib.FluentAssertions?
+
+https://www.fuget.org/packages/PuppeteerSharp/20.0.5/lib/netstandard2.0/diff/20.0.0/
+
+
 [![build](https://github.com/hlaueriksson/puppeteer-sharp-contrib/actions/workflows/build.yml/badge.svg)](https://github.com/hlaueriksson/puppeteer-sharp-contrib/actions/workflows/build.yml)
 [![CodeFactor](https://www.codefactor.io/repository/github/hlaueriksson/puppeteer-sharp-contrib/badge)](https://www.codefactor.io/repository/github/hlaueriksson/puppeteer-sharp-contrib)
 
