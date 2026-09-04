@@ -24,6 +24,13 @@ namespace PuppeteerSharp.Contrib.Extensions
             return response;
         }
 
+        internal static IFrame GuardFromNull(this IFrame frame)
+        {
+            ArgumentNullException.ThrowIfNull(frame);
+
+            return frame;
+        }
+
         internal static IElementHandle GuardFromNull(this IElementHandle elementHandle)
         {
             ArgumentNullException.ThrowIfNull(elementHandle);

@@ -1,6 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>6.1.0</Version>
+    <PackageReleaseNotes>
+New extension for IPage and IFrame:
+◼️ WaitForElementsRemovedFromDOMAsync (handy to wait for spinner to disappear etc)
+
+New extension for IElementHandle:
+◼️ ClickAtRandomPointAsync (useful in case of need to emulate a click in detailed manner)
+    </PackageReleaseNotes>
     <TargetFramework>net8.0</TargetFramework>
     <Version>7.0.0</Version>
     <PackageReleaseNotes>

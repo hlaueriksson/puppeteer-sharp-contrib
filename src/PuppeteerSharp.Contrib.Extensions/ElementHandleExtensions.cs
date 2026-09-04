@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using PuppeteerSharp.Input;
 
 namespace PuppeteerSharp.Contrib.Extensions
 {
@@ -58,7 +59,7 @@ namespace PuppeteerSharp.Contrib.Extensions
             var properties = await arrayHandle.GetPropertiesAsync().ConfigureAwait(false);
             await arrayHandle.DisposeAsync().ConfigureAwait(false);
 
-            return [.. properties.Values.OfType<IElementHandle>()];
+            return properties.Values.OfType<IElementHandle>().ToArray();
         }
 
         /// <summary>
@@ -164,6 +165,28 @@ namespace PuppeteerSharp.Contrib.Extensions
         }
 
         /// <summary>
+        /// Indicates whether the element is visible or not.
+        /// </summary>
+        /// <param name="elementHandle">An <see cref="IElementHandle"/>.</param>
+        /// <returns><c>true</c> if the element is visible.</returns>
+        /// <seealso href="https://blog.jquery.com/2009/02/20/jquery-1-3-2-released/#visible-hidden-overhauled"/>
+        public static async Task<bool> IsVisibleAsync(this IElementHandle elementHandle)
+        {
+            return await elementHandle.EvaluateFunctionWithGuardAsync<bool>("element => element.offsetWidth > 0 && element.offsetHeight > 0").ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Indicates whether the element is hidden or not. This is the logical negation of <see cref="IsVisibleAsync"/>.
+        /// </summary>
+        /// <param name="elementHandle">An <see cref="IElementHandle"/>.</param>
+        /// <returns><c>true</c> if the element is hidden.</returns>
+        public static async Task<bool> IsHiddenAsync(this IElementHandle elementHandle)
+        {
+            ArgumentNullException.ThrowIfNull(elementHandle);
+            return !await elementHandle.IsVisibleAsync().ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Indicates whether the element is selected or not.
         /// </summary>
         /// <param name="elementHandle">An <see cref="IElementHandle"/>.</param>
@@ -257,6 +280,158 @@ namespace PuppeteerSharp.Contrib.Extensions
                     else
                         return !element.textContent?.trim();
                 }").ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Clicks at random point of an element.
+        /// </summary>
+        /// <param name="elementHandle">An <see cref="IElementHandle"/>.</param>
+        /// <param name="isCircular"><c>true</c> if the element is circular.</param>
+        /// <param name="button">Mouse button to click with.</param>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
+        public static async Task ClickAtRandomPointAsync(this IElementHandle elementHandle, bool isCircular = false, MouseButton button = MouseButton.Left)
+        {
+            ArgumentNullException.ThrowIfNull(elementHandle);
+            Random rnd = new();
+            var box = await elementHandle.BoundingBoxAsync().ConfigureAwait(false);
+
+            if (box == null)
+            {
+                await elementHandle.ClickAsync().ConfigureAwait(false);
+            }
+            else
+            {
+#pragma warning disable CA5394
+                if (isCircular)
+                {
+                    double r = (double)Math.Min(box.Width, box.Height);
+                    r = rnd.NextDouble() * r;
+                    var a = rnd.NextDouble() * 2 * Math.PI;
+                    var sin = Math.Sin(a);
+                    var cos = Math.Cos(a);
+                    var x = ((double)box.Width / 2) + (cos * r);
+                    var y = ((double)box.Height / 2) + (sin * r);
+                    await elementHandle.ClickAsync(new PuppeteerSharp.Input.ClickOptions
+                    {
+                        OffSet = new Offset((decimal)x, (decimal)y),
+                        Button = button,
+                    }).ConfigureAwait(false);
+                }
+                else
+                {
+                    await elementHandle.ClickAsync(new PuppeteerSharp.Input.ClickOptions
+                    {
+                        OffSet = new Offset(rnd.Next((int)box.Width * 100) / 100, rnd.Next((int)box.Height * 100) / 100),
+                    }).ConfigureAwait(false);
+                }
+#pragma warning restore CA5394
+            }
+        }
+
+        /// <summary>
+        /// Scrolls the element to the top.
+        /// </summary>
+        /// <param name="elementHandle">The element.</param>
+        /// <param name="smooth">If true, uses smooth scrolling behavior.</param>
+        /// <param name="shake">If true, scrolls down slightly and back up to trigger lazy-loaded content.</param>
+        /// <param name="shakeDelayMs">Delay in ms between shake scroll-down and scroll-back-up.</param>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
+        public static async Task ScrollToTopAsync(
+            this IElementHandle elementHandle,
+            bool smooth = false,
+            bool shake = false,
+            int shakeDelayMs = 500)
+        {
+            ArgumentNullException.ThrowIfNull(elementHandle);
+
+            var behavior = smooth ? "smooth" : "auto";
+
+            await elementHandle.EvaluateFunctionAsync(
+                @"(el, behavior) => {
+                    if (el.scrollTo) { el.scrollTo({ top: 0, behavior }); }
+                    else { el.scrollTop = 0; }
+                }",
+                behavior).ConfigureAwait(false);
+
+            if (shake)
+            {
+                await elementHandle.EvaluateFunctionAsync(
+                    "(el) => { el.scrollTop = 100; }").ConfigureAwait(false);
+                await Task.Delay(shakeDelayMs).ConfigureAwait(false);
+                await elementHandle.EvaluateFunctionAsync(
+                    @"(el, behavior) => {
+                        if (el.scrollTo) { el.scrollTo({ top: 0, behavior }); }
+                        else { el.scrollTop = 0; }
+                    }",
+                    behavior).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary>
+        /// Scrolls the element to the bottom.
+        /// </summary>
+        /// <param name="elementHandle">The element.</param>
+        /// <param name="smooth">If true, uses smooth scrolling behavior.</param>
+        /// <param name="shake">If true, scrolls up slightly and back down to trigger lazy-loaded content.</param>
+        /// <param name="shakeDelayMs">Delay in ms between shake scroll-up and scroll-back-down.</param>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
+        public static async Task ScrollToBottomAsync(
+            this IElementHandle elementHandle,
+            bool smooth = false,
+            bool shake = false,
+            int shakeDelayMs = 500)
+        {
+            ArgumentNullException.ThrowIfNull(elementHandle);
+
+            var behavior = smooth ? "smooth" : "auto";
+
+            await elementHandle.EvaluateFunctionAsync(
+                @"(el, behavior) => {
+                    if (el.scrollTo) { el.scrollTo({ top: el.scrollHeight, behavior }); }
+                    else { el.scrollTop = el.scrollHeight; }
+                }",
+                behavior).ConfigureAwait(false);
+
+            if (shake)
+            {
+                await elementHandle.EvaluateFunctionAsync(
+                    "(el) => { el.scrollTop = el.scrollTop - 100; }").ConfigureAwait(false);
+                await Task.Delay(shakeDelayMs).ConfigureAwait(false);
+                await elementHandle.EvaluateFunctionAsync(
+                    @"(el, behavior) => {
+                        if (el.scrollTo) { el.scrollTo({ top: el.scrollHeight, behavior }); }
+                        else { el.scrollTop = el.scrollHeight; }
+                    }",
+                    behavior).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary>
+        /// Scrolls the element to a specific position.
+        /// </summary>
+        /// <param name="elementHandle">The element.</param>
+        /// <param name="x">Horizontal position in pixels.</param>
+        /// <param name="y">Vertical position in pixels.</param>
+        /// <param name="smooth">If true, uses smooth scrolling behavior.</param>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
+        public static async Task ScrollToAsync(
+            this IElementHandle elementHandle,
+            int x,
+            int y,
+            bool smooth = false)
+        {
+            ArgumentNullException.ThrowIfNull(elementHandle);
+
+            var behavior = smooth ? "smooth" : "auto";
+
+            await elementHandle.EvaluateFunctionAsync(
+                @"(el, x, y, behavior) => {
+                    if (el.scrollTo) { el.scrollTo({ left: x, top: y, behavior }); }
+                    else { el.scrollLeft = x; el.scrollTop = y; }
+                }",
+                x,
+                y,
+                behavior).ConfigureAwait(false);
         }
 
         private static async Task<string> GetPropertyValueAsync(this IElementHandle elementHandle, string propertyName)
